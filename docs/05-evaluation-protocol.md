@@ -2,6 +2,18 @@
 
 The evaluation must distinguish three possibilities: the method fixes more issues, it saves useful resources, or it merely changes which failures occur. Freeze this protocol before the final evaluation. No task-level experiments have been run in this planning round.
 
+## Joint-track evaluation added October 7
+
+Maintain two distinct acceptance decisions. The paper needs interpretable, frozen comparisons and bounded claims. The code champion needs strong estimated private-distribution performance and reliable completion within the official aggregate budget. A component can fail the paper's novelty test and still improve the code entry; it can generate an informative research result without belonging in the deployed agent.
+
+Before any leaderboard submission, replay the complete planned task workload on target-equivalent hardware with setup, startup, model, tool, and patch-finalization time recorded. Keep independent grading time separate because the overview excludes it from the agent budget, while also measuring total notebook wall time. Check long-tail runtime and timeout behavior rather than extrapolating from a median. Include all task failures in the denominator and log whole-run failures separately.
+
+The full-workload replay is a deployment gate, not an extra untouched test set. Before paper configuration freeze, construct a workload of the intended size from development tasks and independent authorized tasks; do not expose held-out repair outcomes to development. Repeated development episodes must start cold and be labeled a load test, not 129 independent issues or a faithful hidden-distribution simulation. A complete 129-task replay can occur after the paper's confirmatory outcomes and configuration are frozen; it then belongs to later development. Test transfer on external repositories with the same capped runtime policy; do not presume public score changes predict final rank.
+
+Keep a submission register with artifact hash, notebook/config/harness versions, local evidence, intended hypothesis, public score, failure class, runtime where exposed, and final-selection status. Submit within the current daily limit only after local packaging and replay checks. Do not use the public leaderboard as the confirmatory dataset for the paper.
+
+Freeze paper evidence before continuing code tuning. Once any formerly untouched cohort informs a new configuration or training set, it becomes development data for that later version. Additional code experiments and full-run qualifications are budgeted separately in [execution and resources](06-execution-and-resources.md).
+
 ## Data validity before model comparison
 
 The official development set and its base snapshots are described in [competition facts](01-competition-facts.md). Organizer comments indexed on [Ryan Holbrook's discussion page](https://www.kaggle.com/ryanholbrook/discussion) report public-task environment failures and reasoning-token handling changes. These are warnings to validate the local environment, not a claim that every current task is broken or every fix is deployed. Record the exact harness version and direct incident links in the next round.

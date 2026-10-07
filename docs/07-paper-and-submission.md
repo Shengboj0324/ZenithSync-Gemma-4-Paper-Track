@@ -2,6 +2,8 @@
 
 Write the eventual paper after the results establish which claim survives. The current package is a research plan, not a paper ready for submission. The paper's central sentence should state a tested finding about graph reliability, context allocation, and software repair—not a list of components.
 
+October 7 joint-track revision: freeze and identify the exact research artifact used in every paper result. The December code entry may improve after this freeze; do not retroactively attribute its later performance to the paper version. If graph selection does not produce a distinct finding, revise the title and argument around the strongest supported insight from the shared agent experiments. A Kaggle code submission and a paper Writeup remain separate deliverables, with separate status checks.
+
 ## Argument structure
 
 The introduction should create a precise technical tension: graph context can expose dependencies, but unreliable or redundant structural evidence can spend scarce inference budget without helping a patch. The methods section should explain the intervention that resolves that tension. The results must then test it against simpler explanations.

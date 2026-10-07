@@ -2,6 +2,8 @@
 
 The proposed system chooses source evidence before asking a fixed Gemma repair policy to edit code. The scientific question is whether reliable structural evidence improves the allocation of a limited context and execution budget. All algorithms here are specifications for a later implementation round, not implemented capabilities.
 
+October 7 scope: this remains the optional research component. The final code agent is selected by budget-compliant repair evidence. The aggregate twelve-hour feasibility model and permitted integration routes in [document 11](11-code-track-and-joint-strategy.md) supplement and constrain the per-task mathematics below. No static retrieval proof establishes whole-run deadline feasibility.
+
 ## Task and constraints
 
 For issue `x`, repository snapshot `R`, and graph `G=(V,E)`, let policy `π` produce a patch after a trajectory of retrieval, editing, and local testing. Let `Y(π,x)` be one if the independent evaluator accepts the final patch and zero otherwise. The practical objective is

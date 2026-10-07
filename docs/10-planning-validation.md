@@ -48,10 +48,31 @@ Calculations were independently recomputed with Python's standard library during
 
 ## Document integrity
 
-The repository contains an index and ten organized planning documents. Local Markdown links were checked for target existence, the document outline was reviewed, and Git whitespace/diff checks were performed. Unrelated `.idea/` files were left unchanged. Sources are linked next to factual claims and indexed with access limits.
+The initial repository package contained an index and ten planning documents. The October 7 joint-track revision adds document 11 and updates the original documents in place. Local Markdown links, math delimiters, whitespace, and the scope-sensitive outline were checked. Unrelated `.idea/` files were left unchanged. Sources are linked next to factual claims and indexed with access limits.
 
 The package deliberately distinguishes requirements, organizer interpretations, planning assumptions, hypothetical calculations, proposed mechanisms, and unperformed experiments. It makes no empirical improvement, deployment, or prize-probability claim. The unresolved harness, budget, eligibility, and novelty checks are assigned explicit next steps rather than silently treated as completed.
 
 ## Next acceptance gate
 
 Authorize a later implementation scope only after choosing the resource tier and obtaining permitted harness access. The first milestone should be a reproducible baseline and task-validity report. Do not begin with a fine-tuning run or a polished abstract containing expected results.
+
+## October 7 joint-track revision
+
+The user's scope expansion replaces the earlier paper-primary recommendation. Both tracks are planned; code implementation remains outside this revision. Main-track requirements were verified live, while prior paper findings retain their original research date.
+
+| New calculation or consistency check | Result |
+| --- | --- |
+| Dates from Oct 7 | 36 days to paper; 49 to code entry/merger; 56 to final code submission |
+| UTC to Los Angeles | Nov 25 and Dec 2 at 23:59 UTC become 15:59 PST |
+| Raw task average | `43,200/120=360` seconds, including charged overhead |
+| Active allowance illustration | `(43,200-3,600-120×30)/120=300` seconds |
+| Conservative-cap illustration | `120×(270+30)+3,600=39,600` seconds = 11 hours |
+| Unsafe cap illustration | `120×(360+30)=46,800` seconds = 13 hours |
+| Old research timing is not deployment timing | `120×12 minutes=24 hours` before setup |
+| Added local qualification envelope | `4×129×6/60×1.25=64.5` machine-hours |
+| Combined standard local envelope | `164+64.5=228.5` machine-hours; four-device allocation = 914 device-hours |
+| Eight hosted submissions | Up to 96 agent-hours under the published allowance, excluding validation/queue; quota billing unknown |
+| Hypothetical reliability-adjusted utility | `.95×.45=.4275`, lower than a stable `.44` |
+| Public score granularity example | `1/60≈1.67` percentage points, conditional on 60 public tasks |
+
+The shared-runtime objective is distinct from the paper rubric. The allocation derivative argument is conditional on concavity and known success curves; neither is asserted for real repair. Early load tests preserve the paper holdout by using development/independent episodes. Two selected final submissions are not an oracle ensemble. The published graph experiment is participant evidence and does not validate either our proposed method or a universal negative claim.

@@ -1,6 +1,6 @@
 # Competition facts and requirements
 
-The Paper Track rewards a research argument supported by evidence. Use the paper-specific requirements for the submission and the companion competition only as an experimental environment. Research date: October 6, 2026. All proposed operational choices below are separate from official rules.
+The project targets two companion competitions with distinct scoring and submissions. Paper-specific facts and clarifications below were researched October 6, 2026; the code overview, rules, and data page were rechecked October 7. The code track is now a target deliverable, not merely an experimental environment. Its complete contract and strategy are in [the joint plan](11-code-track-and-joint-strategy.md). Proposed operational choices are separate from official rules.
 
 ## Verified paper requirements
 
@@ -41,13 +41,13 @@ The data-use heading names Apache 2.0, but the data-security clause restricts re
 | AI assistance | In [discussion 745712](https://www.kaggle.com/competitions/gemma-4-developer-agent-paper/discussion/745712), Elan allows coding assistants while keeping responsibility with the entrant and cautions against purely machine-generated prose. Ashley Oldacre confirms individual prize eligibility without a company and reasonable likeness accommodations. |
 | Earlier pilot publication | [Discussion 745150](https://www.kaggle.com/competitions/gemma-4-developer-agent-paper/discussion/745150) accepts one specifically described substantially extended blog/benchmark pilot. This is not blanket permission for repackaging previously published research. |
 
-## Companion environment
+## Code competition environment
 
 The [main competition overview](https://www.kaggle.com/competitions/gemma-4-developer-agent/overview) currently names `gemma-4-31b-it-qat-w4a16-ct` for every submitted agent, permits LoRA adapters, and uses an ADK configuration archive. Its issue-resolution score is a pass fraction, with a twelve-hour aggregate execution allowance including setup. L4x4 sessions offer 96 GB aggregate GPU memory, require offline operation, and consume quota at twice the older-machine rate. Its entry/merger deadline is November 25 and final deadline December 2. These are companion-track constraints, not replacement paper deadlines or proof that every paper experiment must use that harness.
 
 The [data page](https://www.kaggle.com/competitions/gemma-4-developer-agent/data) describes 129 development tasks from FastAPI, Rich, Requests, and HTTPX; base-commit snapshots; reference patches and evaluator test patches; directed multigraphs; 256-dimensional embeddings; offline wheels; and a harness guide. It describes approximately 120 hidden tasks from private repositories. Development tasks therefore cannot establish performance on the hidden distribution.
 
-The full `HARNESS_README.md` requires accepted competition access and was not inspected. Its availability is the first implementation gate. The data-page inventory is not enough to certify tool schemas, budgets, adapter compatibility, or reproducibility.
+The full `HARNESS_README.md` still requires accepted competition access and was not inspected. Its availability is the first implementation gate. The overview now supplies tool names and signatures, but the data-page inventory and overview are not enough to certify restricted configuration schemas, budget accounting, adapter compatibility, or reproducibility. The code rules allow one daily submission, unlike the paper rules' five; see the joint plan for final-selection and packaging checks.
 
 ## Ambiguities to preserve
 

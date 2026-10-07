@@ -2,6 +2,8 @@
 
 The working title is **When to Trust Repository Graphs for Budgeted Software Repair**. ZenithSync is the project name, not evidence of novelty. The proposed contribution is a reliability-aware way to select compact bundles of source evidence, paired with experiments showing when structural evidence helps or harms repair.
 
+October 7 scope revision: this is a candidate paper question and agent component, not a committed final-agent architecture. The project first needs a valid, performant code baseline. [The joint strategy](11-code-track-and-joint-strategy.md) controls promotion into the code entry. A graph-free champion can remain the final agent even if graph failure analysis becomes the paper's contribution.
+
 ## Closest work and novelty boundaries
 
 This is a focused landscape review, not an exhaustive systematic review. Abstract-level evidence establishes broad overlap; detailed claims must be checked against full methods before implementation freezes.
@@ -34,13 +36,15 @@ Do not cite competitors' percentages as trusted comparative baselines. Reproduce
 
 | Direction | Potential contribution | Principal risk | Decision |
 | --- | --- | --- | --- |
-| Broad SFT plus RL coding agent | Policy improvement and training insight | Expensive rollouts, reward validity, crowded contribution | Defer unless the pilot identifies a clear policy bottleneck and ample compute |
+| Targeted SFT/LoRA, with RL as a separate escalation | Tool-use or repair-policy improvement | Training cost, licensing, reward validity | Evaluate after the baseline if failures justify it; full RL remains conditional |
 | Generic graph retrieval | Simple, feasible implementation | Weak novelty against existing systems | Baseline |
-| Reliability-aware evidence selection | Explainable intervention on structure and cost | Utility proxy may not predict repair | Recommended, with explicit kill criteria |
+| Reliability-aware evidence selection | Explainable intervention on structure and cost | Utility proxy may not predict repair | Candidate research direction; deploy only after net benefit is demonstrated |
 | Graph diagnostic resource | Reusable stress tests and validity checks | Existing audits; weak relevance without downstream evaluation | Companion contribution or evidence-driven fallback |
 | Novel application such as kernel synthesis | Distinct use case | New validation machinery and domain expertise | Do not pursue in the default schedule |
 
 This choice favors technical depth through a falsifiable mechanism. A large agent architecture is not intrinsically more advanced. A result explaining precisely why a tempting graph heuristic fails can be a stronger contribution than another unablated stack.
+
+A new [participant experiment report](https://www.kaggle.com/competitions/gemma-4-developer-agent/discussion/746250), read October 7, reports no benefit for its tested graph integration and nontrivial variation across repeat runs. It uses different hardware and generous local time limits. Treat it as a challenge to reproduce and an index-functionality warning, not a universal negative result. Prioritize graph-tool smoke tests and a matched graph-free baseline before investing in the selector.
 
 ## Three planned claims
 

@@ -1,6 +1,6 @@
 # Source register and verification boundaries
 
-Research cutoff: October 6, 2026, America/Los_Angeles. Competition pages and discussion replies were read through the rendered Kaggle site because the web text extractor returned empty content for several pages. Publication and repository pages were read through web retrieval. No competition data files or model weights were downloaded.
+Initial research cutoff: October 6, 2026, America/Los_Angeles. Code-track refresh: October 7. Competition pages and discussion replies were read through the rendered Kaggle site because the web text extractor returned empty content for several pages. Publication and repository pages were read through web retrieval. No competition data files or model weights were downloaded. Paper details remain dated October 6 unless explicitly rechecked.
 
 The register distinguishes official requirements, organizer clarifications, published work, and competitors' descriptions. Sources can change; refresh the competition requirements at the schedule's review dates. The linked primary pages are the source of record, rather than search-result summaries or this paraphrase.
 
@@ -17,10 +17,16 @@ The register distinguishes official requirements, organizer clarifications, publ
 | S07 | [Earlier pilot publication](https://www.kaggle.com/competitions/gemma-4-developer-agent-paper/discussion/745150) | Host approves the particular extended pilot described by that entrant; retain that scope. |
 | S08 | [Welcome](https://www.kaggle.com/competitions/gemma-4-developer-agent-paper/discussion/743012) | Host explains independent research and methodological scope. |
 | S09 | [Paper discussion index](https://www.kaggle.com/competitions/gemma-4-developer-agent-paper/discussion) | All 14 visible topic entries on the single index page inspected; relevant clarification threads opened. Not every participant comment or linked artifact was audited. |
-| S10 | [Companion competition overview](https://www.kaggle.com/competitions/gemma-4-developer-agent/overview) | Main-track model, budget, harness, and accelerator restrictions. Do not transfer them wholesale to independent paper research. |
-| S11 | [Companion data page](https://www.kaggle.com/competitions/gemma-4-developer-agent/data) | Rendered schema and asset inventory read; the harness file itself was access-gated. Inventory descriptions are not tested guarantees. |
+| S10 | [Agent competition overview](https://www.kaggle.com/competitions/gemma-4-developer-agent/overview) | Fully rendered text rechecked Oct 7: model, budget, tool signatures, archive, deadlines and accelerator restrictions. Now governs the planned code deliverable. |
+| S11 | [Agent data page](https://www.kaggle.com/competitions/gemma-4-developer-agent/data) | Rechecked Oct 7: schema, inventory, approximate hidden-task count and private-repository origin. Harness file still access-gated. |
 | S12 | [Official starter notebook inputs](https://www.kaggle.com/code/ryanholbrook/getting-started-gemma-4-developer-agent/input) | Discovery and corroborating inventory; notebook execution and implementation not audited. |
 | S13 | [Ryan Holbrook discussion activity](https://www.kaggle.com/ryanholbrook/discussion) | Search retrieval exposed organizer comments about public environment validity and reasoning-token handling. Direct incident threads, patch deployment, and current harness behavior remain unverified. Used only to motivate environment checks. |
+| S14 | [Agent competition rules](https://www.kaggle.com/competitions/gemma-4-developer-agent/rules) | Read Oct 7: one daily submission, two final selections, five-person team, private leaderboard, winner obligations. Do not confuse daily limit with paper rules. |
+| S15 | [Task count discussion 746008](https://www.kaggle.com/competitions/gemma-4-developer-agent/discussion/746008) | Visible participant replies read Oct 7; approximately 120 tasks interpreted as one evaluation workload. Not host confirmation; some nested replies were collapsed. |
+| S16 | [Timeout discussion 746169](https://www.kaggle.com/competitions/gemma-4-developer-agent/discussion/746169) | Participant confusion over task count and per-task allowance read Oct 7. Illustrates risk, not an authoritative runtime specification. |
+| S17 | [Public experiment report 746250](https://www.kaggle.com/competitions/gemma-4-developer-agent/discussion/746250) | Main post and visible comments read Oct 7. Author's local experiments, different hardware, single-run caveats; not independently reproduced. |
+| S18 | [Staff rerun notice 743683](https://www.kaggle.com/competitions/gemma-4-developer-agent/discussion/743683) | Main post, pinned pause notice, and visible replies read Oct 7. Supports ZIP-before-scoring workflow and queue risk; current resolution and hosted-quota impact unconfirmed. |
+| S19 | [Distillation clarification 742807](https://www.kaggle.com/competitions/gemma-4-developer-agent/discussion/742807) | Kaggle Staff's pinned answer read Oct 7. Permission conditional on model terms and submission-license compatibility; participant interpretations are not adopted. |
 
 ## Prior research
 
@@ -48,6 +54,6 @@ The register distinguishes official requirements, organizer clarifications, publ
 
 ## Coverage and limits
 
-This package covers the published paper rubric, submission rules, relevant public organizer answers, the currently listed judge, nearby research, publicly visible competing directions, and a concrete experiment/paper plan. It does not claim access to private judge deliberations, unpublished competitor work, hidden tasks, model-training data, or future rule changes.
+This package covers the published paper rubric, both tracks' submission rules, relevant public organizer answers, the listed paper judge, nearby research, publicly visible competing directions, and a joint agent/paper plan. It does not claim access to private judge deliberations, unpublished competitor work, hidden tasks, model-training data, or future rule changes. The Oct 7 main-track discussion review was focused, not an audit of all seven index pages.
 
 The research-gap judgment is provisional. Before making a novelty assertion in a paper, inspect the full closest-work methods and their recent citations. Before implementing against the harness, inspect the actual authorized file. Before claiming any benefit, run the planned experiments. These are distinct evidence gates.

@@ -1,5 +1,7 @@
 # Judging strategy and public judge information
 
+Scope updated October 7: this document concerns paper judging. The code competition is scored by validated repairs and private leaderboard rank, not these five criteria. Use [the joint strategy](11-code-track-and-joint-strategy.md) for code-selection decisions; judge-background analysis should not determine which agent is deployed.
+
 The strongest controllable strategy is to make each score easy to justify from a specific piece of evidence. More architectural components are useful only if they establish an additional claim. No available evidence supports a numerical probability of winning or a guaranteed score threshold.
 
 ## Equal weights and marginal effort
