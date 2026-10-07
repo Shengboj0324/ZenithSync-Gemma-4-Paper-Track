@@ -32,7 +32,7 @@ The plan succeeds only if it preserves enough time and budget to establish a def
 | D2 | One paper combines method and reusable evaluation contribution | Recommended; separate papers only for independently complete contributions |
 | D3 | Start with the official compatible baseline; treat graph selector and targeted tuning as competing interventions | Updated Oct 7; promote by measured net repair value under budget |
 | D4 | Main mathematical claim concerns the selection surrogate | Firm boundary; do not extend to patch correctness without new proof |
-| D5 | Standard tier assumes one person at 25 hours/week | Unconfirmed planning assumption; adapt to actual availability |
+| D5 | Codex owns implementation and validation in 8–14-hour cycles with documented acceptance | Updated Oct 7; document 12 governs cadence; compute and human review capacity remain variables |
 | D6 | No results or performance claims this round | Confirmed scope |
 | D7 | Core work remains in repository documentation | Implemented; no cloud document copies |
 | D8 | Freeze paper artifact, then continue code optimization through Dec 2 | Planned; preserve historical evaluation provenance |
@@ -41,7 +41,7 @@ The plan succeeds only if it preserves enough time and budget to establish a def
 
 | Question | Why it matters | Default until answered |
 | --- | --- | --- |
-| How many people and focused hours are available? | Determines feasible experiment and review coverage | Solo plan with reduced and standard tiers |
+| What cycle throughput and human review time are available? | Determines feasible experiment and independent review coverage | Measure initial cycles; keep reduced and standard compute scenarios provisional |
 | What GPU access, storage, and cash ceiling are available? | Determines whether baseline and external experiments fit | No purchases; use measured pilot before commitments |
 | Has the user joined and accepted the relevant rules? | Controls data access and eventual submission eligibility | No assumption of accepted access |
 | Is sponsor consent needed for eligibility? | May require lead time | Entrant checks privately |

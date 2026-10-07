@@ -10,6 +10,7 @@ Joint research and execution plan for the Google Gemma 4 Developer Agent Competi
 
 | Document | Purpose |
 | --- | --- |
+| [Continuous implementation plan](docs/12-continuous-implementation-plan.md) | Living 8–14-hour cycles, phase gates, mathematical and statistical assurance, mandatory cycle closeout |
 | [Joint strategy and code competition](docs/11-code-track-and-joint-strategy.md) | Start here: differences between tracks, aggregate runtime math, agent priorities, submission gates |
 | [Competition facts](docs/01-competition-facts.md) | Verified requirements, deadlines, organizer clarifications, unresolved questions |
 | [Judging strategy](docs/02-judging-strategy.md) | Criterion-by-criterion evidence and public judge information |
@@ -22,7 +23,7 @@ Joint research and execution plan for the Google Gemma 4 Developer Agent Competi
 | [Sources](docs/09-sources.md) | Linked source register with access and verification boundaries |
 | [Planning validation](docs/10-planning-validation.md) | Arithmetic checks and logical review of this package |
 
-Start with document 11, then documents 1–3. Documents 4–6 specify research and execution; document 7 governs the paper; document 11 governs the code artifact. Source IDs link to the source register or directly to primary pages.
+Start with document 12 for implementation cadence and document 11 for joint strategy, then documents 1–3. Documents 4–6 specify research and execution; document 7 governs the paper; document 11 governs the code artifact. Update document 12 after every implementation cycle. Source IDs link to the source register or directly to primary pages.
 
 ## Two deliverables and deadlines
 

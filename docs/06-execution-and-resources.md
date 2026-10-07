@@ -1,6 +1,6 @@
 # Execution schedule and resource plan
 
-The default plan assumes one researcher, approximately 25 focused hours per week, and access to a compatible GPU environment. Team size, available time, and spending limit remain unconfirmed. The dates below are targets for a later implementation round; no compute has been purchased or provisioned.
+Codex owns implementation and verification under the [living cycle plan](12-continuous-implementation-plan.md), using 8–14-hour engineering cycles with mandatory acceptance and closeout. The earlier one-researcher, 25-hours-per-week scenario below remains an illustrative capacity estimate, not the current execution commitment. Actual cycle throughput, human review availability, GPU access and spending limit remain unconfirmed. Reforecast milestones after each cycle; no compute has been purchased or provisioned.
 
 Updated October 7 for both tracks. The central dependency is: valid environment → packaged baseline → reliable budgeted agent → measured improvements → frozen paper evidence → continued code optimization. Research novelty governs the paper; repair performance and full-run feasibility govern the code champion. [Document 11](11-code-track-and-joint-strategy.md) defines the code gates.
 
@@ -73,11 +73,11 @@ Measure peak memory on each device. Aggregate 96 GB does not mean a single conti
 
 Graph preprocessing needs CPU, RAM, storage, and time even when supplied assets make development convenient. Report cold-start graph creation and amortized inference separately. For external repositories, inability to reproduce the supplied embedding model is a design issue: use a disclosed alternative or a lexical-only transfer variant, without pretending the representations match.
 
-## Person-hour priorities
+## Effort priorities
 
 Before the paper deadline, allocate approximately 25% to harness and baseline reliability, 25% to candidate improvements, 25% to evaluation, 20% to the paper/reproducibility, and 5% to submission checks. After the paper freezes, shift the majority to code evaluation, runtime qualification, and final selection. These are planning allocations; actual availability and pilot failures may force a smaller research matrix.
 
-For a real team, use distinct human ownership: experiment/harness owner, method owner, and analysis/paper owner. A second person should independently reproduce the headline table and challenge the novelty statement. More people do not justify more contributions by default. No agents or human collaborators were delegated work in this planning round.
+Codex owns harness, method, analysis and evidence preparation. Human review availability is a separate resource; independent reproduction and mathematical review strengthen assurance when available. Codex self-review must not be labeled independent human validation. More people do not justify more contributions by default. No agents or human collaborators were delegated work in this planning round.
 
 ## Stop and simplify rules
 
