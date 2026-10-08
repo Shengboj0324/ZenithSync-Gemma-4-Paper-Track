@@ -1,0 +1,30 @@
+{
+  "command": [
+    "codex",
+    "exec",
+    "--ignore-user-config",
+    "--ephemeral",
+    "--json",
+    "-s",
+    "workspace-write",
+    "-m",
+    "gpt-6.1-sol",
+    "-c",
+    "model_reasoning_effort=\"high\"",
+    "-c",
+    "project_doc_max_bytes=0",
+    "--disable",
+    "memories",
+    "Repair this repository bug: occasionally Raft.Shutdown().Error() never returns when shutdown overlaps snapshot activity. Preserve normal snapshot persistence and normal shutdown behavior, including useful errors to callers. Find and repair the cause rather than hiding the hang with an arbitrary timeout, disabling snapshots, or skipping worker shutdown. Add appropriate regression coverage and run relevant existing tests.\n\nThis is an isolated evaluation. Work only in the supplied repository. You may inspect all its source and existing tests, edit code, create tests, and run Go tooling. Do not use the internet, upstream repositories, external issue trackers, files outside this workspace other than installed tools and dependency caches, other agent sessions, memory, or external assistance. No external reference patch is supplied. Do not change dependencies or delete existing tests to obtain a pass. Report your changes, test commands, and any limitations. You have a 10-minute wall-clock budget.\n"
+  ],
+  "cwd": "/private/var/folders/y0/l9ns18ns5472mqrprmhhmsw00000gn/T/gemma-r1-baseline-nba_79uu",
+  "started_at": "2026-10-07T10:19:52.646260+00:00",
+  "wall_seconds": 321.028644334001,
+  "timeout_seconds": 600.0,
+  "timed_out": false,
+  "returncode": 0,
+  "sha256": {
+    "stdout.txt": "df900ac128369ebe06aadb90e8a5d78972d0d07331d406d8af0116dcef4f934b",
+    "stderr.txt": "65905842535f33cd0beb13ffefc90d35a94ede03e5f88fa39c32f71330205c46"
+  }
+}

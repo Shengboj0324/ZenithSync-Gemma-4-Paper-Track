@@ -1,0 +1,23 @@
+diff --git a/snapshot.go b/snapshot.go
+index f4c3945..2410f54 100644
+--- a/snapshot.go
++++ b/snapshot.go
+@@ -152,8 +152,16 @@ func (r *Raft) takeSnapshot() (string, error) {
+ 	case <-r.shutdownCh:
+ 		return "", ErrRaftShutdown
+ 	}
+-	if err := configReq.Error(); err != nil {
+-		return "", err
++	// The buffered request may be left unanswered if the main thread exits
++	// during shutdown. In that case we must also exit so shutdown can wait
++	// for the snapshot thread to finish.
++	select {
++	case err := <-configReq.errCh:
++		if err != nil {
++			return "", err
++		}
++	case <-r.shutdownCh:
++		return "", ErrRaftShutdown
+ 	}
+ 	committed := configReq.configurations.committed
+ 	committedIndex := configReq.configurations.committedIndex

@@ -1,0 +1,22 @@
+{
+  "classification": "bounded component-level liveness argument, not universal software correctness",
+  "state": "configuration request has been queued; main worker may exit without answering; snapshot worker awaits response; shutdown awaits worker termination",
+  "original": "Once no responder remains, receive from the unclosed response channel cannot complete. The snapshot worker cannot exit and the shutdown future remains pending.",
+  "repaired": "With shutdown channel closed and no response available, the shutdown case is the only ready case in the response-wait select. Under eventual goroutine scheduling and finite cleanup, the snapshot worker returns and releases the shutdown wait.",
+  "assumptions": [
+    "this request was successfully queued",
+    "no later response is produced",
+    "the shutdown channel closes",
+    "the snapshot worker is eventually scheduled",
+    "snapshot Release terminates",
+    "other shutdown workers eventually terminate"
+  ],
+  "excluded": [
+    "all cluster executions",
+    "all blocking snapshot implementations",
+    "arbitrary asynchronous schedules",
+    "global repository correctness",
+    "unseen agent task success"
+  ],
+  "fixture_sha256": "d1654121ef9bb0767d89e9b2aa5bc2866592929a939e65527670cefe9035351e"
+}

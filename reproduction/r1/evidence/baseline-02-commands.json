@@ -1,0 +1,90 @@
+[
+  {
+    "command": "/bin/zsh -lc \"pwd && rg --files -g 'AGENTS.md' -g 'go.mod' -g '*snapshot*' -g '*raft*' -g '*future*' -g '*fsm*'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"git status --short && rg -n 'func .*Shutdown|shutdownCh|snapshotCh|takeSnapshot|runSnapshots|runFSM' --glob '*.go'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'cat snapshot.go'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'cat fsm.go && cat future.go'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"sed -n '820,965p' api.go && cat state.go && cat go.mod && rg -n 'Snapshot|Shutdown' raft_test.go future_test.go testing.go\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n 'configurationsCh|fsmSnapshotCh|userSnapshotCh|func \\\\(r \\\\*Raft\\\\) run' api.go raft.go && sed -n '70,170p' raft.go && sed -n '180,240p' raft.go && sed -n '300,340p' raft.go && sed -n '740,780p' raft.go && sed -n '485,535p' api.go && sed -n '1,140p' testing.go && sed -n '1120,1245p' raft_test.go && cat future_test.go\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rg --files -g 'AGENTS.md' -g '*test.go' -g 'Makefile' && go version\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n 'skipStartup|MakeCluster|makeCluster' config.go api.go testing.go raft_test.go && cat inmem_snapshot.go && sed -n '1,75p' raft_test.go && cat Makefile\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"sed -n '548,567p' api.go && rg -n 'func NewInmemTransport|func getSnapshotVersion' inmem_transport.go raft.go && rg -n 'batchtest' --glob '*.go'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"gofmt -w snapshot.go snapshot_test.go && GOPROXY=off GOSUMDB=off go test -run 'TestRaft_SnapshotShutdown' -count=10 -timeout=60s .\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"python3 - <<'PY'\nfrom pathlib import Path\nimport os\nimport subprocess\npath = Path('snapshot.go')\nfixed = path.read_text()\nstart = fixed.index('\\\\t// The request may remain buffered')\nend = fixed.index('\\\\tcommitted :=', start)\noriginal = fixed[:start] + '\\\\tif err := configReq.Error(); err \"'!= nil {'\"\\\\n\\\\t\\\\treturn \\\"\\\", err\\\\n\\\\t}\\\\n' + fixed[end:]\ntry:\n    path.write_text(original)\n    result = subprocess.run(['go', 'test', '-run', '\"'^TestRaft_SnapshotShutdownWaitingForConfiguration/shutdown$'\"', '-count=1', '-timeout=20s', '.'], env=dict(os.environ, GOPROXY='off', GOSUMDB='off'))\n    print('Original implementation exit code:', result.returncode)\nfinally:\n    path.write_text(fixed)\nPY\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'git diff --check && git diff --stat && git diff -- snapshot.go && git status --short'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'gofmt -w snapshot_test.go && git diff --check'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-build\" GOPROXY=off GOSUMDB=off go test -race -timeout=60s .'",
+    "exit_code": 1
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-build\" GOPROXY=off GOSUMDB=off go test -race -tags batchtest -timeout=60s .'",
+    "exit_code": 1
+  },
+  {
+    "command": "/bin/zsh -lc \"sed -n '125,180p' snapshot.go && sed -n '1,260p' snapshot_test.go\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-build\" GOPROXY=off GOSUMDB=off go test -race -run '\"'TestRaft_(SnapshotShutdown|StartStop|AfterShutdown|AutoSnapshot|UserSnapshot|SnapshotRestore|SendSnapshot)' -count=3 -timeout=60s .\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"python3 - <<'PY'\nfrom pathlib import Path\nimport os\nimport subprocess\npath = Path('snapshot.go')\nfixed = path.read_text()\nstart = fixed.index('\\\\t// The request may remain buffered')\nend = fixed.index('\\\\tcommitted :=', start)\noriginal = fixed[:start] + '\\\\tif err := configReq.Error(); err \"'!= nil {'\"\\\\n\\\\t\\\\treturn \\\"\\\", err\\\\n\\\\t}\\\\n' + fixed[end:]\ntry:\n    path.write_text(original)\n    result = subprocess.run(['go', 'test', '-race', '-run', '\"'^TestRaft_(LeaderLeaseExpire|LeadershipTransferLeaderRejectsClientRequests)$'\"', '-count=1', '-timeout=20s', '.'], env=dict(os.environ, GOCACHE=str(Path('.go-build').resolve()), GOPROXY='off', GOSUMDB='off'))\n    print('Original implementation existing-test exit code:', result.returncode)\nfinally:\n    path.write_text(fixed)\nPY\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'git diff --check && git diff --numstat && wc -l snapshot_test.go'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-build\" GOPROXY=off GOSUMDB=off go test -race -run '\"'\"'^TestRaft_SnapshotShutdown'\"' -count=20 -timeout=60s .\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-build\" GOPROXY=off GOSUMDB=off go test -race -tags batchtest -run '\"'TestRaft_(SnapshotShutdown|StartStop|AfterShutdown|AutoSnapshot|UserSnapshot|SnapshotRestore|SendSnapshot)' -count=3 -timeout=60s .\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"python3 - <<'PY'\nfrom pathlib import Path\nimport shutil\ncache = Path('.go-build')\nif cache.is_dir():\n    shutil.rmtree(cache)\nPY\n\ngit diff --check\ngit status --short\"",
+    "exit_code": 0
+  }
+]

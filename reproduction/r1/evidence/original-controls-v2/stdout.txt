@@ -1,0 +1,43 @@
+{"Time":"2026-10-07T03:13:16.246261-07:00","Action":"start","Package":"github.com/hashicorp/raft"}
+{"Time":"2026-10-07T03:13:16.487012-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot"}
+{"Time":"2026-10-07T03:13:16.48707-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"=== RUN   TestR1ShutdownWithPendingSnapshot\n"}
+{"Time":"2026-10-07T03:13:16.738474-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"    r1_regression_test.go:87: R1_LIVENESS_FAILURE: shutdown waited for an abandoned snapshot request\n"}
+{"Time":"2026-10-07T03:13:16.738554-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"--- FAIL: TestR1ShutdownWithPendingSnapshot (0.25s)\n"}
+{"Time":"2026-10-07T03:13:16.738565-07:00","Action":"fail","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Elapsed":0.25}
+{"Time":"2026-10-07T03:13:16.73859-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData"}
+{"Time":"2026-10-07T03:13:16.738595-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"=== RUN   TestR1NormalSnapshotPreservesData\n"}
+{"Time":"2026-10-07T03:13:16.738691-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"--- PASS: TestR1NormalSnapshotPreservesData (0.00s)\n"}
+{"Time":"2026-10-07T03:13:16.7387-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Elapsed":0}
+{"Time":"2026-10-07T03:13:16.738787-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown"}
+{"Time":"2026-10-07T03:13:16.738793-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"=== RUN   TestR1SnapshotAfterShutdown\n"}
+{"Time":"2026-10-07T03:13:16.738804-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"--- PASS: TestR1SnapshotAfterShutdown (0.00s)\n"}
+{"Time":"2026-10-07T03:13:16.738809-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Elapsed":0}
+{"Time":"2026-10-07T03:13:16.738813-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot"}
+{"Time":"2026-10-07T03:13:16.738817-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"=== RUN   TestR1ShutdownWithPendingSnapshot\n"}
+{"Time":"2026-10-07T03:13:16.989875-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"    r1_regression_test.go:87: R1_LIVENESS_FAILURE: shutdown waited for an abandoned snapshot request\n"}
+{"Time":"2026-10-07T03:13:16.98993-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"--- FAIL: TestR1ShutdownWithPendingSnapshot (0.25s)\n"}
+{"Time":"2026-10-07T03:13:16.989947-07:00","Action":"fail","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Elapsed":0.25}
+{"Time":"2026-10-07T03:13:16.989964-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData"}
+{"Time":"2026-10-07T03:13:16.989978-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"=== RUN   TestR1NormalSnapshotPreservesData\n"}
+{"Time":"2026-10-07T03:13:16.989994-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"--- PASS: TestR1NormalSnapshotPreservesData (0.00s)\n"}
+{"Time":"2026-10-07T03:13:16.990004-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Elapsed":0}
+{"Time":"2026-10-07T03:13:16.990016-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown"}
+{"Time":"2026-10-07T03:13:16.990044-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"=== RUN   TestR1SnapshotAfterShutdown\n"}
+{"Time":"2026-10-07T03:13:16.990068-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"--- PASS: TestR1SnapshotAfterShutdown (0.00s)\n"}
+{"Time":"2026-10-07T03:13:16.990089-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Elapsed":0}
+{"Time":"2026-10-07T03:13:16.990098-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot"}
+{"Time":"2026-10-07T03:13:16.990102-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"=== RUN   TestR1ShutdownWithPendingSnapshot\n"}
+{"Time":"2026-10-07T03:13:17.240295-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"    r1_regression_test.go:87: R1_LIVENESS_FAILURE: shutdown waited for an abandoned snapshot request\n"}
+{"Time":"2026-10-07T03:13:17.240323-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"--- FAIL: TestR1ShutdownWithPendingSnapshot (0.25s)\n"}
+{"Time":"2026-10-07T03:13:17.240331-07:00","Action":"fail","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Elapsed":0.25}
+{"Time":"2026-10-07T03:13:17.240338-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData"}
+{"Time":"2026-10-07T03:13:17.240342-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"=== RUN   TestR1NormalSnapshotPreservesData\n"}
+{"Time":"2026-10-07T03:13:17.240349-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"--- PASS: TestR1NormalSnapshotPreservesData (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.240353-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.240358-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown"}
+{"Time":"2026-10-07T03:13:17.240361-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"=== RUN   TestR1SnapshotAfterShutdown\n"}
+{"Time":"2026-10-07T03:13:17.240365-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"--- PASS: TestR1SnapshotAfterShutdown (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.240368-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.240371-07:00","Action":"output","Package":"github.com/hashicorp/raft","Output":"FAIL\n"}
+{"Time":"2026-10-07T03:13:17.240896-07:00","Action":"output","Package":"github.com/hashicorp/raft","Output":"FAIL\tgithub.com/hashicorp/raft\t0.994s\n"}
+{"Time":"2026-10-07T03:13:17.240914-07:00","Action":"fail","Package":"github.com/hashicorp/raft","Elapsed":0.995}

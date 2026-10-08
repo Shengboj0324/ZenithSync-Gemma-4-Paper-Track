@@ -1,0 +1,130 @@
+[
+  {
+    "command": "/bin/zsh -lc \"pwd; rg --files -g 'AGENTS.md' -g 'go.mod' -g '*snapshot*' -g '*raft*' -g '*future*' -g '*shutdown*'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'git status --short'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'cat go.mod; cat snapshot.go; cat fsm.go'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n 'Shutdown|shutdown|snapshot|Snapshot' snapshot.go future.go api.go fsm.go raft.go\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n 'Shutdown|Snapshot|snapshot' raft_test.go future_test.go testing.go; rg --files -g 'AGENTS.md' -g '*test.go'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'cat future.go; cat snapshot.go; cat go.mod'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n 'configurationsCh|waitShutdown|goFunc' *.go; sed -n '80,240p' raft.go; sed -n '1,160p' future_test.go; sed -n '1,150p' testing.go; sed -n '1,90p' raft_test.go; sed -n '190,280p' testing.go\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n '\\\\.errCh|shutdownCh' future_test.go api.go snapshot.go; sed -n '130,160p' state.go; cat inmem_snapshot.go; sed -n '900,980p' raft_test.go; rg -n '\"'^func MakeCluster|''^type.*Opts|FSM'\"' testing.go | tail -35; go version\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"sed -n '485,530p' api.go; sed -n '650,680p' testing.go; rg -n 'func newTestLogger|func newTestLeveledLogger' testing.go; rg -n 'type ProtocolVersion|ProtocolVersionMax' config.go; rg --files | head -30\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n 't.Cleanup|t.Run' *_test.go | head -15; sed -n '60,85p' api.go; rg -n 'func \\\\(.*StoreLog|func \\\\(.*setLastLog' inmem_store.go state.go\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"gofmt -w snapshot.go snapshot_test.go; GOPROXY=off GOSUMDB=off go test -run 'TestRaft_Snapshot(Shutdown|ConfigurationError)' -count=1 -timeout=30s .\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"python3 - <<'PY'\nfrom pathlib import Path\nimport os\nimport subprocess\npath = Path('snapshot.go')\nfixed = path.read_text()\nstart = fixed.index('\\\\t// The main thread may exit without responding')\nend = fixed.index('\\\\tcommitted :=', start)\noriginal_wait = '\\\\tif err := configReq.Error(); err \"'!= nil {'\"\\\\n\\\\t\\\\treturn \\\"\\\", err\\\\n\\\\t}\\\\n'\ntry:\n    path.write_text(fixed[:start] + original_wait + fixed[end:])\n    env = dict(os.environ, GOPROXY='off', GOSUMDB='off')\n    result = subprocess.run(['go', 'test', '-run', '\"'^TestRaft_SnapshotShutdownPendingConfiguration$'\"', '-count=1', '-timeout=10s', '.'], env=env)\n    print('Regression test exit code without fix:', result.returncode)\nfinally:\n    path.write_text(fixed)\nPY\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'git diff --check; git diff --stat; git diff -- snapshot.go; git status --short'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"git diff --check; sed -n '1,280p' snapshot_test.go; rg -n '\"'^func Test'\"' fuzzy/*test.go integ_test.go | head -50\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-cache\" GOPROXY=off GOSUMDB=off go test -race -run '\"'TestRaft_(Snapshot|UserSnapshot|AutoSnapshot|StartStop|AfterShutdown)|TestDeferFuture' -count=5 -timeout=2m .\"",
+    "exit_code": 1
+  },
+  {
+    "command": "/bin/zsh -lc \"date '+%H:%M:%S'; rg -n 'longstopTimeout|LongstopTimeout' testing.go; sed -n '240,285p' testing.go\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-cache\" GOPROXY=off GOSUMDB=off go test -race -run '\"'TestRaft_Snapshot(Shutdown|ConfigurationError)' -count=50 -timeout=1m .\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'tail -45 race-tests.log'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-cache\" GOPROXY=off GOSUMDB=off go test -race -run '\"'TestRaft_(Snapshot|UserSnapshot|AutoSnapshot|StartStop|AfterShutdown)|TestDeferFuture' -count=1 -timeout=1m -v . > race-tests.log 2>&1\"",
+    "exit_code": 1
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n '\"'^=== RUN|''^--- (PASS|FAIL)|panic:|WARNING: DATA RACE'\"' race-tests.log; sed -n '1040,1130p' raft_test.go; sed -n '210,250p' integ_test.go; sed -n '1,60p' fuzzy/simple_test.go\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-cache\" GOPROXY=off GOSUMDB=off go test -run '\"'TestRaft_(Snapshot|UserSnapshot|AutoSnapshot|StartStop|AfterShutdown)|TestDeferFuture|Test(File|Inmem|Discard)Snapshot' -count=1 -timeout=1m . > snapshot-tests.log 2>&1\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n 'case r.fsmMutateCh|future.Error\\\\(' raft.go | tail -15; sed -n '1568,1605p' raft.go; sed -n '970,996p' raft.go\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-cache\" GOPROXY=off GOSUMDB=off go test -race -run '\"'\"'^TestRaft_SnapshotRestore_PeerChange$'\"' -count=1 -timeout=4s . > peerchange-test.log 2>&1\"",
+    "exit_code": 1
+  },
+  {
+    "command": "/bin/zsh -lc \"rg -n -A 14 -B 3 'raftState.*waitShutdown|raft.*installSnapshot|raft.*takeSnapshot|deferError.*Error|panic:|\"'^goroutine'\"' peerchange-test.log | head -160; cat snapshot-tests.log | tail -12\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'git status --short; git diff --check'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-cache\" GOPROXY=off GOSUMDB=off go test -race -run '\"'\"'^(TestRaft_(SnapshotShutdownPendingConfiguration|SnapshotConfigurationError|SnapshotShutdownDuringPersist|SnapshotRestore|UserSnapshot|AutoSnapshot|StartStop|AfterShutdown)|TestDeferFuture(Success|Error|Concurrent))$'\"' -count=5 -timeout=1m .\"",
+    "exit_code": 1
+  },
+  {
+    "command": "/bin/zsh -lc \"gofmt -w snapshot_test.go; date '+%H:%M:%S'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-cache\" GOPROXY=off GOSUMDB=off go test -race -run '\"'\"'^(TestRaft_(SnapshotShutdownPendingConfiguration|SnapshotConfigurationError|SnapshotShutdownDuringPersist|SnapshotRestore|UserSnapshot|StartStop|AfterShutdown)|TestDeferFuture(Success|Error|Concurrent))$'\"' -count=1 -timeout=30s .\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'GOCACHE=\"$PWD/.go-cache\" GOPROXY=off GOSUMDB=off go test ./... -count=1 -timeout=3m'",
+    "exit_code": 1
+  },
+  {
+    "command": "/bin/zsh -lc \"date '+%H:%M:%S'; git diff --check\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"python3 - <<'PY'\nfrom pathlib import Path\nimport shutil\ncache = Path('.go-cache')\nif cache.is_dir():\n    shutil.rmtree(cache)\nfor name in ('peerchange-test.log', 'race-tests.log', 'snapshot-tests.log'):\n    Path(name).unlink(missing_ok=True)\nPY\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'git diff --check; git status --short'",
+    "exit_code": 0
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "changes": [
+    {
+      "path": "snapshot.go",
+      "disposition": "applied",
+      "sha256": "e2cd0fc2aeeb1720dfa5a9ebfdacb6323fa6d7c5011934d727ce6e0bd349a9f0"
+    },
+    {
+      "path": "snapshot_test.go",
+      "disposition": "retained for audit; not applied to evaluator"
+    }
+  ],
+  "excluded_go_build_cache_files": 0
+}

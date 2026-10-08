@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/reproduction/r1/artifacts/raft-upstream" vcs="Git" />
   </component>
 </project>

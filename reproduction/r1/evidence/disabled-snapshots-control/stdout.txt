@@ -1,0 +1,9 @@
+{"Time":"2026-10-07T03:15:57.378317-07:00","Action":"start","Package":"github.com/hashicorp/raft"}
+{"Time":"2026-10-07T03:15:57.529309-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData"}
+{"Time":"2026-10-07T03:15:57.529381-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"=== RUN   TestR1NormalSnapshotPreservesData\n"}
+{"Time":"2026-10-07T03:15:59.531619-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"    r1_regression_test.go:102: fixture: snapshot worker did not request FSM snapshot\n"}
+{"Time":"2026-10-07T03:15:59.531912-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"--- FAIL: TestR1NormalSnapshotPreservesData (2.00s)\n"}
+{"Time":"2026-10-07T03:15:59.531926-07:00","Action":"fail","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Elapsed":2}
+{"Time":"2026-10-07T03:15:59.531949-07:00","Action":"output","Package":"github.com/hashicorp/raft","Output":"FAIL\n"}
+{"Time":"2026-10-07T03:15:59.532741-07:00","Action":"output","Package":"github.com/hashicorp/raft","Output":"FAIL\tgithub.com/hashicorp/raft\t2.154s\n"}
+{"Time":"2026-10-07T03:15:59.532768-07:00","Action":"fail","Package":"github.com/hashicorp/raft","Elapsed":2.154}

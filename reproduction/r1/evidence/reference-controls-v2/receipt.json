@@ -1,0 +1,22 @@
+{
+  "command": [
+    "go",
+    "test",
+    "-json",
+    "-run",
+    "^TestR1",
+    "-count=3",
+    "-timeout=90s",
+    "."
+  ],
+  "cwd": "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/reproduction/r1/workspaces/reference",
+  "started_at": "2026-10-07T10:13:16.918179+00:00",
+  "wall_seconds": 0.6611524159961846,
+  "timeout_seconds": 120.0,
+  "timed_out": false,
+  "returncode": 0,
+  "sha256": {
+    "stdout.txt": "9286931edc845a9b1fd8e092ca825cff271840cc89876489427d2d75389d4783",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

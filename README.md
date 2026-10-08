@@ -2,14 +2,21 @@
 
 Joint research and execution plan for the Google Gemma 4 Developer Agent Competition and Paper Track. Initially researched October 6; scope and code-track requirements updated October 7, 2026.
 
-**Recommended direction:** build a reliable, budget-compliant Gemma repair agent first; promote retrieval, reasoning, or training changes through matched experiments. Study graph reliability as one candidate contribution. Freeze the research version for the paper and continue improving the code entry afterward. The best paper method and best final agent need not be identical.
+**Adopted direction:** build a complete, trainable Gemma-powered repository engineering agent first, using the competition's supported runtime. Measure its failure profile, train targeted adapters, and add specialist capabilities only when their benefit is demonstrated. The discarded debugging/product hypotheses no longer gate core implementation. Research novelty remains unproved; documents 15–18 are historical evidence, not the current product mandate.
 
-**Status:** planning only. The proposed method is unimplemented, novelty remains conditional on a deeper prior-art check, and there are no experimental results. Mathematical examples are illustrative. This round adds documentation only.
+**Status:** foundation-first implementation plan adopted; Gemma execution and training have not started. The earlier reproduction pilot remains complete with no demonstrated mechanism advantage. The user reports model download access. Live checks confirmed Runpod authentication and an active DigitalOcean account; Cloudflare connection is unverified. See document 19 for the model handoff, exact verification scope, and service activation gates.
 
 ## Reading order
 
 | Document | Purpose |
 | --- | --- |
+| [Platform implementation and model handoff](docs/19-agent-platform-and-model-handoff.md) | Current architecture, staged implementation gates, mathematical specification, model intake, and live plugin verification |
+| [Reproduction cycle results](docs/18-reproduction-cycle-results.md) | Latest evidence: real defect, three baseline repairs, detailed performance analysis, and no product promotion |
+| [Failure-first research study](docs/15-failure-first-research-study.md) | Current conclusion: ranked failure families, competing systems, mathematical hypotheses, and rejection conditions |
+| [Task cards and source audit](docs/16-failure-evidence-and-source-ledger.md) | Concrete published attempts, reproduction gaps, source reading depth, and media access limitations |
+| [Replication and selection protocol](docs/17-replication-and-selection-protocol.md) | Next 8–14-hour cycles, fair baselines, statistical design, and the product adoption gate |
+| [Novelty audit and alternatives](docs/14-novelty-audit-and-alternative-directions.md) | Historical audit rejecting Change Compiler; alternatives are not adopted |
+| [Developer pain points and change synthesis](docs/13-user-painpoints-and-change-synthesis.md) | Historical candidate; novelty assessment superseded by document 14 |
 | [Continuous implementation plan](docs/12-continuous-implementation-plan.md) | Living 8–14-hour cycles, phase gates, mathematical and statistical assurance, mandatory cycle closeout |
 | [Joint strategy and code competition](docs/11-code-track-and-joint-strategy.md) | Start here: differences between tracks, aggregate runtime math, agent priorities, submission gates |
 | [Competition facts](docs/01-competition-facts.md) | Verified requirements, deadlines, organizer clarifications, unresolved questions |
@@ -23,7 +30,7 @@ Joint research and execution plan for the Google Gemma 4 Developer Agent Competi
 | [Sources](docs/09-sources.md) | Linked source register with access and verification boundaries |
 | [Planning validation](docs/10-planning-validation.md) | Arithmetic checks and logical review of this package |
 
-Start with document 12 for implementation cadence and document 11 for joint strategy, then documents 1–3. Documents 4–6 specify research and execution; document 7 governs the paper; document 11 governs the code artifact. Update document 12 after every implementation cycle. Source IDs link to the source register or directly to primary pages.
+Start with documents 19 and 12 for the adopted build, then document 11 for competition constraints. Documents 13–18 preserve prior investigations; their no-go decisions do not block the core agent. Update document 12 after every implementation cycle. Source IDs link to the source register or directly to primary pages.
 
 ## Two deliverables and deadlines
 
@@ -43,4 +50,4 @@ The code track currently allows one submission per day and two final selections.
 4. Freeze evaluation partitions before inspecting reference fixes for method development; complete the nearest-prior-art review before asserting novelty.
 5. Use measured failures to choose between reasoning, retrieval, recovery, and tuning interventions; keep a stable code champion throughout.
 
-The revised schedule starts October 7 and extends through December 2. Both submissions remain planned; no remote resources, model training, competition entry, or publication have been initiated.
+The revised schedule starts October 7 and extends through December 2. Both submissions remain planned. The reproduction pilot used hosted Codex inference; no GPU provisioning, model training, competition entry, or publication has been initiated.

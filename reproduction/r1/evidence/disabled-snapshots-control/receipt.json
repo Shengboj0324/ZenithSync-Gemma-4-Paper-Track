@@ -1,0 +1,22 @@
+{
+  "command": [
+    "go",
+    "test",
+    "-json",
+    "-run",
+    "^TestR1NormalSnapshotPreservesData$",
+    "-count=1",
+    "-timeout=10s",
+    "."
+  ],
+  "cwd": "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/reproduction/r1/workspaces/disabled-snapshots-control",
+  "started_at": "2026-10-07T10:15:56.950185+00:00",
+  "wall_seconds": 2.6245516660128487,
+  "timeout_seconds": 30.0,
+  "timed_out": false,
+  "returncode": 1,
+  "sha256": {
+    "stdout.txt": "a3de20fee5450a52acc3fe10f4decfb54c39d1245fd6c314a8692b05a6e47e65",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

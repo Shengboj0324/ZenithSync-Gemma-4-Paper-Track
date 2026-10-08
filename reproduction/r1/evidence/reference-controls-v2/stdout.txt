@@ -1,0 +1,40 @@
+{"Time":"2026-10-07T03:13:17.372064-07:00","Action":"start","Package":"github.com/hashicorp/raft"}
+{"Time":"2026-10-07T03:13:17.534279-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot"}
+{"Time":"2026-10-07T03:13:17.53432-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"=== RUN   TestR1ShutdownWithPendingSnapshot\n"}
+{"Time":"2026-10-07T03:13:17.534616-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"--- PASS: TestR1ShutdownWithPendingSnapshot (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.53463-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.53464-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData"}
+{"Time":"2026-10-07T03:13:17.534646-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"=== RUN   TestR1NormalSnapshotPreservesData\n"}
+{"Time":"2026-10-07T03:13:17.53472-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"--- PASS: TestR1NormalSnapshotPreservesData (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.53474-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.534753-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown"}
+{"Time":"2026-10-07T03:13:17.53476-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"=== RUN   TestR1SnapshotAfterShutdown\n"}
+{"Time":"2026-10-07T03:13:17.534776-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"--- PASS: TestR1SnapshotAfterShutdown (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.534782-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.534788-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot"}
+{"Time":"2026-10-07T03:13:17.534792-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"=== RUN   TestR1ShutdownWithPendingSnapshot\n"}
+{"Time":"2026-10-07T03:13:17.534797-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"--- PASS: TestR1ShutdownWithPendingSnapshot (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.534802-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.534808-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData"}
+{"Time":"2026-10-07T03:13:17.534813-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"=== RUN   TestR1NormalSnapshotPreservesData\n"}
+{"Time":"2026-10-07T03:13:17.534818-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"--- PASS: TestR1NormalSnapshotPreservesData (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.534827-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.534834-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown"}
+{"Time":"2026-10-07T03:13:17.534838-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"=== RUN   TestR1SnapshotAfterShutdown\n"}
+{"Time":"2026-10-07T03:13:17.534843-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"--- PASS: TestR1SnapshotAfterShutdown (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.534846-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.534858-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot"}
+{"Time":"2026-10-07T03:13:17.534861-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"=== RUN   TestR1ShutdownWithPendingSnapshot\n"}
+{"Time":"2026-10-07T03:13:17.534868-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Output":"--- PASS: TestR1ShutdownWithPendingSnapshot (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.534873-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1ShutdownWithPendingSnapshot","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.534877-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData"}
+{"Time":"2026-10-07T03:13:17.53488-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"=== RUN   TestR1NormalSnapshotPreservesData\n"}
+{"Time":"2026-10-07T03:13:17.534884-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Output":"--- PASS: TestR1NormalSnapshotPreservesData (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.534886-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1NormalSnapshotPreservesData","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.534889-07:00","Action":"run","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown"}
+{"Time":"2026-10-07T03:13:17.534892-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"=== RUN   TestR1SnapshotAfterShutdown\n"}
+{"Time":"2026-10-07T03:13:17.534896-07:00","Action":"output","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Output":"--- PASS: TestR1SnapshotAfterShutdown (0.00s)\n"}
+{"Time":"2026-10-07T03:13:17.5349-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Test":"TestR1SnapshotAfterShutdown","Elapsed":0}
+{"Time":"2026-10-07T03:13:17.534911-07:00","Action":"output","Package":"github.com/hashicorp/raft","Output":"PASS\n"}
+{"Time":"2026-10-07T03:13:17.535401-07:00","Action":"output","Package":"github.com/hashicorp/raft","Output":"ok  \tgithub.com/hashicorp/raft\t0.163s\n"}
+{"Time":"2026-10-07T03:13:17.535414-07:00","Action":"pass","Package":"github.com/hashicorp/raft","Elapsed":0.163}

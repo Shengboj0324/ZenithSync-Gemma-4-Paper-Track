@@ -1,10 +1,12 @@
 # Continuous implementation and acceptance plan
 
-Updated October 7, 2026. **Living plan; implementation has not started.** Codex owns implementation, mathematical design, engineering, tests, analysis, and evidence preparation. The entrant supplies account access, eligibility decisions, and resource authorization. This document governs cycle cadence; [joint strategy](11-code-track-and-joint-strategy.md) governs competition constraints and [evaluation protocol](05-evaluation-protocol.md) governs experiments.
+Updated October 7, 2026. **Living plan; user adopted a foundation-first, trainable Gemma agent. Platform implementation and Gemma training have not started.** Codex owns implementation, mathematical design, engineering, tests, analysis, and evidence preparation. The entrant supplies account access, eligibility decisions, and resource authorization. This document governs cycle cadence; [platform specification and handoff](19-agent-platform-and-model-handoff.md) governs the current build, [joint strategy](11-code-track-and-joint-strategy.md) governs competition constraints, and [evaluation protocol](05-evaluation-protocol.md) governs experiments.
 
 The objective is a reproducible, competitive repair agent with defensible research results. Mathematical sophistication must improve a justified objective or explain observed behavior. No fabricated results, task-specific answer lookup, leaked reference patches, or cosmetic chat interface presented as a working system. Explicit configuration constants and clearly labeled synthetic test fixtures are legitimate; hardcoded benchmark outcomes are not.
 
 ## Cycle structure
+
+**R1 closeout — October 7:** accepted as a bounded bug reproduction and baseline challenge; **revise the product hypothesis, no promotion**. The React artifact was inaccessible. The previously shortlisted real Raft shutdown defect was reproduced in a controlled component test. Three fresh `gpt-6.1-sol` high-reasoning attempts each passed 21 independent targeted race-enabled checks. Agent times were 314.606, 321.029 and 401.253 seconds. Broader suites retain two failures also present on the upstream reference repair. See [complete results and limits](18-reproduction-cycle-results.md). This does not establish Gemma performance or mechanism lift. Stop before R3: the required persistent baseline failure was not demonstrated. The next research input must be a different accessible failure set, not a product build around this solved example. This early gate did not consume or claim an 8–14-hour implementation phase; hands-on engineering time was not separately instrumented.
 
 Use **8–14 hours per engineering cycle**, including protected acceptance work. A nominal 12-hour cycle allocates one hour to design and scope, six to implementation, three to verification, one to comparison, and one to assessment and documentation. Reallocate after measurement; never omit validation to meet the timebox. A phase may require several cycles. Do not fill time with unnecessary work or declare unfinished work accepted when time expires.
 
@@ -12,18 +14,21 @@ At cycle start, select one bounded deliverable, baseline commit, hypothesis, res
 
 ## Phases and exit gates
 
+**October 7 scope replacement:** build the general agent now; do not wait for a new specialist product hypothesis. Earlier graph, synthesis, migration, undo, simulator and GPU-optimization proposals are not mandatory components. Failure-first comparisons remain the gate for claiming a novel advantage. The historical R1 instruction to stop before R3 applied to the discarded mechanism, not the platform phases below. This documentation update is not an implementation cycle.
+
 | Phase | Main work across one or more cycles | Required exit evidence |
 | --- | --- | --- |
-| 1. Establish contracts | Inspect authorized official harness; pin model, tool schemas and environment; isolate evaluator assets; freeze data manifests | Starter runs; gold and no-fix controls audited; valid archive; leakage checks; measured resource baseline |
-| 2. Build reliable execution | Implement bounded tool use, recoverable state, patch preservation, stopping, offline behavior and runtime accounting | Integration and failure-injection tests; timeout recovery; reproducible cold runs; budget reserve justified on measured workloads |
-| 3. Establish mathematical components | Specify selector/scheduler objectives, assumptions, invariants and numerical behavior; implement only compatible mechanisms | Proof or counterexample for each mathematical claim; exhaustive small-instance comparisons where feasible; implementation matches the specification |
-| 4. Compare interventions | Evaluate reasoning, retrieval, graph reliability, stopping or retries against the stable baseline; change one explanatory factor at a time | Matched development comparisons, ablations, uncertainty and full cost accounting; retain simple baseline when complexity is unhelpful |
-| 5. Train selectively | If evidence justifies it, validate trajectory provenance and adapter support; pilot targeted tuning | Licensed and isolated training data; reproducible training; frozen-checkpoint evaluation; measured net value after load/runtime costs. Skip if unjustified |
-| 6. Confirm results | Freeze candidate and analysis; evaluate untouched tasks and external generalization; inspect failure modes | Primary effect and interval, all-task denominator, reproducible tables and explicit limits; no test-set retuning disguised as confirmation |
-| 7. Qualify artifacts | Rebuild cleanly, test offline and adverse cases, replay realistic full workloads, audit dependencies and submission packaging | Exact artifact hash and manifest; target-compatible execution; measured runtime feasibility; recoverable stable champion |
-| 8. Freeze and refine | Freeze paper method/results; continue code improvements through the same gates; prepare final selections | Paper claims trace to frozen evidence; later code changes carry separate versions and results; actual submission state checked when submission is authorized |
+| P0. Contracts and skeleton | Obtain HARNESS_README.md and starter; pin schemas; design state/event records, packaging and dependency boundaries | Contract tests and archive validation; no fabricated model calls; fixtures explicitly synthetic. Can begin without weights |
+| P1. Model intake and inference | Confirm user's downloaded path/version; inspect and hash complete model package; run exact quantized model and multi-turn tool calls | GPU memory/latency receipt; parsed tool calls and tool-result continuation; real starter task and captured patch. Runpod first required here |
+| P2. Complete agent execution | Implement inspect/localize/edit/test/recover/submit; state transitions, bounded calls, checkpointing and offline behavior | Actual end-to-end tasks; interrupted/failed-tool tests; patch preservation and budget exhaustion checks. Linux worker needed here or earlier for harness smoke tests |
+| P3. Independent evaluation | Audit task images and test oracles; freeze splits; record untuned Gemma baseline across task families | All-task denominator, failure categories, repeats and resource metrics; evaluator assets isolated from agent |
+| P4. Core capability improvement | Compare repository context selection, reasoning settings, test selection, recovery and cost-aware stopping | Matched development comparisons and ablations; mathematical claim checks; simple baseline retained if stronger |
+| P5. Training pipeline and pilot | Curate licensed trajectories; prove compatible adapter training/export/load; run supervised LoRA pilot with train-only feedback | Loss-mask and gradient checks, checkpoint resume/reload, independent post-training repair evaluation; no automatic promotion from lower loss |
+| P6. Trained capability expansion | Tune data mixtures and difficult-task curriculum; evaluate preference/RL methods only with sound rewards and compute | Reproducible checkpoint and held-out gains under equal budgets; regression and contamination audit; unhelpful adapters rejected |
+| P7. Platform and submission qualification | CLI/batch interface, run inspection, artifact registry, restart/cancel controls; offline clean build and full-budget replay | Target-runtime compatibility, manifests/hashes, restore test, packaged champion. Cloud services remain outside scored execution |
+| P8. Research and releases | Identify a measured specialist gap, audit prior art, compare a novel intervention; freeze separate paper and code artifacts | Claims supported by frozen evidence; novelty optional for baseline completion but required for novelty claims; submission status checked separately |
 
-Phases 3–5 are selective and iterative. Return to phase 2 when infrastructure invalidates measurements. Engineering qualification begins early; final qualification repeats only after relevant changes. Deadline pressure reduces scope, never evidence standards.
+P4–P6 are iterative. Building and testing a training pipeline is part of the adopted platform; deploying a trained adapter requires evidence. Full RL and specialist mechanisms remain conditional. Return to P2 when infrastructure invalidates measurements. Every phase may take multiple 8–14-hour cycles. Deadline pressure reduces scope, never evidence standards.
 
 ## Acceptance and correctness
 
@@ -49,7 +54,7 @@ No finite test suite guarantees arbitrary patches or all future executions. Guar
 | Hardware and runtime reserve | Unmeasured; derive from the actual supported environment and stress runs |
 | Cohorts, seeds and evaluation budget | Provisional in document 5; freeze before relevant comparisons; log changes and lost holdout status |
 | Effect threshold, noninferiority margin, confidence level | Declare per comparison before outcomes; use document 5 as the starting protocol, not a post-hoc choice |
-| Candidate mechanism | Optional graph selection, reasoning, recovery or tuning; prioritize measured bottlenecks |
+| Candidate mechanism | Core Gemma agent adopted; specialist novelty undecided. Prioritize measured localization, editing, tool-use and budget failures |
 | Deadline allocation | Preserve separate paper/code freezes; revise the resource schedule after each cycle |
 
 ## Required closeout and next cycle
@@ -61,5 +66,6 @@ Each record includes: cycle ID; timestamps and three time measures; objective; b
 | Record | Status | Evidence and next action |
 | --- | --- | --- |
 | Planning, October 7 | Documentation only; no implementation cycle completed | Next cycle: phase 1, authorized harness inspection and smallest reproducible baseline. Resolve access and resource caps first; preserve protected evaluation tasks |
+| Foundation-first revision, October 7 | Plan updated; live overview/model/plugin checks completed; no GPU allocated | Next cycle P0: official harness/starter intake, contract fixtures, state schema and packaging. Model required at P1; ask for downloaded folder/version then. Runpod read succeeded, DigitalOcean account active, Cloudflare not discoverable in current plugin search. See document 19 |
 
 Once implementation begins, add detailed cycle records under this table or link them here from a dedicated cycle-log directory. Update this plan as evidence changes; retain the acceptance standards unless an explicitly justified revision improves their validity.

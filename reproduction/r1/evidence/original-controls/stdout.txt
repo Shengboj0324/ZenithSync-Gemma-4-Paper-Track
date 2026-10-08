@@ -1,0 +1,6 @@
+{"ImportPath":"github.com/hashicorp/raft [github.com/hashicorp/raft.test]","Action":"build-output","Output":"# github.com/hashicorp/raft [github.com/hashicorp/raft.test]\n"}
+{"ImportPath":"github.com/hashicorp/raft [github.com/hashicorp/raft.test]","Action":"build-output","Output":"./r1_regression_test.go:20:21: cannot use conf (variable of type *Config) as Config value in struct literal\n"}
+{"ImportPath":"github.com/hashicorp/raft [github.com/hashicorp/raft.test]","Action":"build-fail"}
+{"Time":"2026-10-07T03:12:42.617514-07:00","Action":"start","Package":"github.com/hashicorp/raft"}
+{"Time":"2026-10-07T03:12:42.617564-07:00","Action":"output","Package":"github.com/hashicorp/raft","Output":"FAIL\tgithub.com/hashicorp/raft [build failed]\n"}
+{"Time":"2026-10-07T03:12:42.617573-07:00","Action":"fail","Package":"github.com/hashicorp/raft","Elapsed":0,"FailedBuild":"github.com/hashicorp/raft [github.com/hashicorp/raft.test]"}

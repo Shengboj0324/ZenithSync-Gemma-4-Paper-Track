@@ -1,0 +1,9 @@
+{
+  "workspace": "/var/folders/y0/l9ns18ns5472mqrprmhhmsw00000gn/T/gemma-r1-baseline-b6d15ymc",
+  "model_requested": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "prompt_sha256": "19865fa4923148bccf6c0baaad102be5083e87632baa99d93393f066863c9393",
+  "source_archive_sha256": "2d2e17f25036a795946b042b0b069033108a9dc12b927ee4a550171b8ae82fe7",
+  "base_commit": "9a647f6c2bb9e057c49b85176086ab94a210c09d",
+  "limits": "600 seconds; no external diagnosis/reference materials; instruction-level read boundary"
+}

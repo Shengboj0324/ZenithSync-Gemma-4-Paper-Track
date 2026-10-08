@@ -1,0 +1,16 @@
+{
+  "frozen_at": "2026-10-07T10:14:59.220631+00:00",
+  "primary_task": "Raft shutdown overlapping snapshot activity",
+  "planned_baseline_trials": 3,
+  "model": "gpt-6.1-sol",
+  "reasoning": "high",
+  "budget_seconds_per_trial": 600,
+  "primary_gate": "Independently applied production patch passes controlled liveness, normal snapshot, shutdown, and existing relevant race-enabled tests. No task success from agent self-report.",
+  "decision": "If ordinary baseline repairs all three runs, this case does not support a required new mechanism. If failures occur, audit tools/harness/oracle before designing an intervention.",
+  "limitation": "One public historical bug; repeats do not estimate cross-task generalization. This record was saved after baseline 01 started but before its outcome was known.",
+  "sha256": {
+    "baseline-prompt.txt": "19865fa4923148bccf6c0baaad102be5083e87632baa99d93393f066863c9393",
+    "shutdown_regression_test.go": "d1654121ef9bb0767d89e9b2aa5bc2866592929a939e65527670cefe9035351e",
+    "run_baseline.py": "5bc7b0c3c3f5d4b8144039b0055f7f9c149e9d6a04f8a2494bb3723a458171a3"
+  }
+}

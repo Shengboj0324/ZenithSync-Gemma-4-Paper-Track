@@ -1,0 +1,2172 @@
+{
+  "scope": "One historical bug; three baseline attempts; no proposed-method comparison",
+  "trials": [
+    {
+      "trial": "baseline-01",
+      "targeted_repair_success": true,
+      "agent_wall_seconds": 314.60553412500303,
+      "usage": {
+        "input_tokens": 1026880,
+        "cached_input_tokens": 966400,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9248,
+        "reasoning_output_tokens": 4216
+      },
+      "completed_shell_commands": 21,
+      "nonzero_shell_commands": 3,
+      "evaluation": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_seconds": 4.243710749986349,
+        "tests": [
+          {
+            "name": "TestR1NormalSnapshotPreservesData",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestR1ShutdownWithPendingSnapshot",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestR1SnapshotAfterShutdown",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_AfterShutdown",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_AutoSnapshot",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_SnapshotRestore",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_UserSnapshot",
+            "action": "pass",
+            "count": 3
+          }
+        ]
+      }
+    },
+    {
+      "trial": "baseline-02",
+      "targeted_repair_success": true,
+      "agent_wall_seconds": 321.028644334001,
+      "usage": {
+        "input_tokens": 863259,
+        "cached_input_tokens": 806528,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9387,
+        "reasoning_output_tokens": 3932
+      },
+      "completed_shell_commands": 22,
+      "nonzero_shell_commands": 2,
+      "evaluation": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_seconds": 4.186364666005829,
+        "tests": [
+          {
+            "name": "TestR1NormalSnapshotPreservesData",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestR1ShutdownWithPendingSnapshot",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestR1SnapshotAfterShutdown",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_AfterShutdown",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_AutoSnapshot",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_SnapshotRestore",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_UserSnapshot",
+            "action": "pass",
+            "count": 3
+          }
+        ]
+      }
+    },
+    {
+      "trial": "baseline-03",
+      "targeted_repair_success": true,
+      "agent_wall_seconds": 401.2533212499984,
+      "usage": {
+        "input_tokens": 1473835,
+        "cached_input_tokens": 1395200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 11086,
+        "reasoning_output_tokens": 4602
+      },
+      "completed_shell_commands": 32,
+      "nonzero_shell_commands": 5,
+      "evaluation": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_seconds": 4.272499750004499,
+        "tests": [
+          {
+            "name": "TestR1NormalSnapshotPreservesData",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestR1ShutdownWithPendingSnapshot",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestR1SnapshotAfterShutdown",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_AfterShutdown",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_AutoSnapshot",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_SnapshotRestore",
+            "action": "pass",
+            "count": 3
+          },
+          {
+            "name": "TestRaft_UserSnapshot",
+            "action": "pass",
+            "count": 3
+          }
+        ]
+      }
+    }
+  ],
+  "controls": {
+    "original-race": {
+      "returncode": 1,
+      "timed_out": false,
+      "wall_seconds": 1.803463083007955,
+      "tests": [
+        {
+          "name": "TestR1NormalSnapshotPreservesData",
+          "action": "pass",
+          "count": 3
+        },
+        {
+          "name": "TestR1ShutdownWithPendingSnapshot",
+          "action": "fail",
+          "count": 3
+        },
+        {
+          "name": "TestR1SnapshotAfterShutdown",
+          "action": "pass",
+          "count": 3
+        }
+      ]
+    },
+    "reference-race": {
+      "returncode": 0,
+      "timed_out": false,
+      "wall_seconds": 8.69918866599619,
+      "tests": [
+        {
+          "name": "TestR1NormalSnapshotPreservesData",
+          "action": "pass",
+          "count": 3
+        },
+        {
+          "name": "TestR1ShutdownWithPendingSnapshot",
+          "action": "pass",
+          "count": 3
+        },
+        {
+          "name": "TestR1SnapshotAfterShutdown",
+          "action": "pass",
+          "count": 3
+        },
+        {
+          "name": "TestRaft_AfterShutdown",
+          "action": "pass",
+          "count": 3
+        },
+        {
+          "name": "TestRaft_AutoSnapshot",
+          "action": "pass",
+          "count": 3
+        },
+        {
+          "name": "TestRaft_SnapshotRestore",
+          "action": "pass",
+          "count": 3
+        },
+        {
+          "name": "TestRaft_UserSnapshot",
+          "action": "pass",
+          "count": 3
+        }
+      ]
+    },
+    "disabled-snapshots-control": {
+      "returncode": 1,
+      "timed_out": false,
+      "wall_seconds": 2.6245516660128487,
+      "tests": [
+        {
+          "name": "TestR1NormalSnapshotPreservesData",
+          "action": "fail",
+          "count": 1
+        }
+      ]
+    },
+    "reference-full": {
+      "returncode": 1,
+      "timed_out": false,
+      "wall_seconds": 31.299212083002203,
+      "tests": [
+        {
+          "name": "TestBackoff",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_match_max",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_match_nonVoting",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_noVoterSanity",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_recalculate",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_recalculate_startIndex",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_setVoters",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_singleVoter",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_Configuration_Clone",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_checkConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_configurations_Clone",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_encodeDecodeConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_encodeDecodePeers",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_hasVote",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_nextConfiguration_checkConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_nextConfiguration_prevIndex",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_nextConfiguration_table",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDeferFutureConcurrent",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDeferFutureError",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDeferFutureSuccess",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDiscardSnapshotSinkImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDiscardSnapshotStoreImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_BadPerm",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_CancelSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_CreateSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_CreateSnapshotMissingParentDir",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_MissingParentDir",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_Ordering",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_Retention",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSnapshotSinkImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSnapshotStoreImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestGenerateUUID",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSS_CreateSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSS_OpenSnapshotTwice",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSnapshotSinkImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSnapshotStoreImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemTransportImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemTransportWriteTimeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestLogCache",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestMax",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestMin",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_AppendEntries",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_AppendEntriesPipeline",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_AppendEntriesPipeline_CloseStreams",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_CloseStreams",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_EncodeDecode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_EncodeDecode_AddressProvider",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_Heartbeat_FastPath",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_InstallSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_ListenBackoff",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_PooledConn",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_RequestVote",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_StartStop",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNewSeed",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestOverrideNotifyBool",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestPeersJSON_BadConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestPeersJSON_ReadConfigJSON",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestPeersJSON_ReadPeersJSON",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestR1NormalSnapshotPreservesData",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestR1ShutdownWithPendingSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestR1SnapshotAfterShutdown",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_AddKnownPeer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_AfterShutdown",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ApplyConcurrent",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ApplyConcurrent_Timeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ApplyNonLeader",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_AutoSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_Barrier",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_BehindFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_GetConfigurationNoBootstrap",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_HasExistingState",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_Integ",
+          "action": "skip",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_JoinNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_JoinNode_ConfigStore",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeaderFail",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeaderLeaseExpire",
+          "action": "fail",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransfer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferInProgress",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferLeaderRejectsClientRequests",
+          "action": "fail",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferLeaderReplicationTimeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferPickServer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferStopRightAway",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToBehindServer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToInvalidAddress",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToInvalidID",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToItself",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferWithOneNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferWithSevenNodes",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LiveBootstrap",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_NoRestoreOnStart",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_NotifyCh",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ProtocolVersion_RejectRPC",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ProtocolVersion_Upgrade_1_2",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ProtocolVersion_Upgrade_2_3",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ReJoinFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RecoverCluster",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RecoverCluster_NoState",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveFollower_SplitCluster",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveLeader",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveLeader_NoShutdown",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveUnknownPeer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SendSnapshotAndLogsFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SendSnapshotFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SingleNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SnapshotRestore",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SnapshotRestore_PeerChange",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_StartStop",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_TripleNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_UserRestore",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_UserSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader_Fail",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader_PartialConnect",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader_Single",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_Voting",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRandomTimeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRandomTimeout_NoTime",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTCPTransport_BadAddr",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTCPTransport_WithAdvertise",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_AppendEntries",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_AppendEntriesPipeline",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_EncodeDecode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_InstallSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_RequestVote",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_StartStop",
+          "action": "pass",
+          "count": 1
+        }
+      ]
+    },
+    "baseline-01-full": {
+      "returncode": 1,
+      "timed_out": false,
+      "wall_seconds": 30.75660004200472,
+      "tests": [
+        {
+          "name": "TestBackoff",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_match_max",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_match_nonVoting",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_noVoterSanity",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_recalculate",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_recalculate_startIndex",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_setVoters",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_singleVoter",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_Configuration_Clone",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_checkConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_configurations_Clone",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_encodeDecodeConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_encodeDecodePeers",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_hasVote",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_nextConfiguration_checkConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_nextConfiguration_prevIndex",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_nextConfiguration_table",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDeferFutureConcurrent",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDeferFutureError",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDeferFutureSuccess",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDiscardSnapshotSinkImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDiscardSnapshotStoreImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_BadPerm",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_CancelSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_CreateSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_CreateSnapshotMissingParentDir",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_MissingParentDir",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_Ordering",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_Retention",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSnapshotSinkImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSnapshotStoreImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestGenerateUUID",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSS_CreateSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSS_OpenSnapshotTwice",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSnapshotSinkImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSnapshotStoreImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemTransportImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemTransportWriteTimeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestLogCache",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestMax",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestMin",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_AppendEntries",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_AppendEntriesPipeline",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_AppendEntriesPipeline_CloseStreams",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_CloseStreams",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_EncodeDecode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_EncodeDecode_AddressProvider",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_Heartbeat_FastPath",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_InstallSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_ListenBackoff",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_PooledConn",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_RequestVote",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_StartStop",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNewSeed",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestOverrideNotifyBool",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestPeersJSON_BadConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestPeersJSON_ReadConfigJSON",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestPeersJSON_ReadPeersJSON",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestR1NormalSnapshotPreservesData",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestR1ShutdownWithPendingSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestR1SnapshotAfterShutdown",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_AddKnownPeer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_AfterShutdown",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ApplyConcurrent",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ApplyConcurrent_Timeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ApplyNonLeader",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_AutoSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_Barrier",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_BehindFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_GetConfigurationNoBootstrap",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_HasExistingState",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_Integ",
+          "action": "skip",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_JoinNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_JoinNode_ConfigStore",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeaderFail",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeaderLeaseExpire",
+          "action": "fail",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransfer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferInProgress",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferLeaderRejectsClientRequests",
+          "action": "fail",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferLeaderReplicationTimeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferPickServer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferStopRightAway",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToBehindServer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToInvalidAddress",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToInvalidID",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToItself",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferWithOneNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferWithSevenNodes",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LiveBootstrap",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_NoRestoreOnStart",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_NotifyCh",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ProtocolVersion_RejectRPC",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ProtocolVersion_Upgrade_1_2",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ProtocolVersion_Upgrade_2_3",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ReJoinFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RecoverCluster",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RecoverCluster_NoState",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveFollower_SplitCluster",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveLeader",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveLeader_NoShutdown",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveUnknownPeer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SendSnapshotAndLogsFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SendSnapshotFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SingleNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SnapshotRestore",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SnapshotRestore_PeerChange",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_StartStop",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_TripleNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_UserRestore",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_UserSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader_Fail",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader_PartialConnect",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader_Single",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_Voting",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRandomTimeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRandomTimeout_NoTime",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTCPTransport_BadAddr",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTCPTransport_WithAdvertise",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_AppendEntries",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_AppendEntriesPipeline",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_EncodeDecode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_InstallSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_RequestVote",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_StartStop",
+          "action": "pass",
+          "count": 1
+        }
+      ]
+    },
+    "baseline-03-full": {
+      "returncode": 1,
+      "timed_out": false,
+      "wall_seconds": 30.577988874996663,
+      "tests": [
+        {
+          "name": "TestBackoff",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_match_max",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_match_nonVoting",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_noVoterSanity",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_recalculate",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_recalculate_startIndex",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_setVoters",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestCommitment_singleVoter",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_Configuration_Clone",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_checkConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_configurations_Clone",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_encodeDecodeConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_encodeDecodePeers",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_hasVote",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_nextConfiguration_checkConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_nextConfiguration_prevIndex",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestConfiguration_nextConfiguration_table",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDeferFutureConcurrent",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDeferFutureError",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDeferFutureSuccess",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDiscardSnapshotSinkImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestDiscardSnapshotStoreImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_BadPerm",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_CancelSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_CreateSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_CreateSnapshotMissingParentDir",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_MissingParentDir",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_Ordering",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSS_Retention",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSnapshotSinkImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestFileSnapshotStoreImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestGenerateUUID",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSS_CreateSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSS_OpenSnapshotTwice",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSnapshotSinkImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemSnapshotStoreImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemTransportImpl",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestInmemTransportWriteTimeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestLogCache",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestMax",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestMin",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_AppendEntries",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_AppendEntriesPipeline",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_AppendEntriesPipeline_CloseStreams",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_CloseStreams",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_EncodeDecode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_EncodeDecode_AddressProvider",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_Heartbeat_FastPath",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_InstallSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_ListenBackoff",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_PooledConn",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_RequestVote",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNetworkTransport_StartStop",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestNewSeed",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestOverrideNotifyBool",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestPeersJSON_BadConfiguration",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestPeersJSON_ReadConfigJSON",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestPeersJSON_ReadPeersJSON",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestR1NormalSnapshotPreservesData",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestR1ShutdownWithPendingSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestR1SnapshotAfterShutdown",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_AddKnownPeer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_AfterShutdown",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ApplyConcurrent",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ApplyConcurrent_Timeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ApplyNonLeader",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_AutoSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_Barrier",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_BehindFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_GetConfigurationNoBootstrap",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_HasExistingState",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_Integ",
+          "action": "skip",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_JoinNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_JoinNode_ConfigStore",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeaderFail",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeaderLeaseExpire",
+          "action": "fail",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransfer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferInProgress",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferLeaderRejectsClientRequests",
+          "action": "fail",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferLeaderReplicationTimeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferPickServer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferStopRightAway",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToBehindServer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToInvalidAddress",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToInvalidID",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferToItself",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferWithOneNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LeadershipTransferWithSevenNodes",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_LiveBootstrap",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_NoRestoreOnStart",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_NotifyCh",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ProtocolVersion_RejectRPC",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ProtocolVersion_Upgrade_1_2",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ProtocolVersion_Upgrade_2_3",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_ReJoinFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RecoverCluster",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RecoverCluster_NoState",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveFollower_SplitCluster",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveLeader",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveLeader_NoShutdown",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_RemoveUnknownPeer",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SendSnapshotAndLogsFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SendSnapshotFollower",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SingleNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SnapshotRestore",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_SnapshotRestore_PeerChange",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_StartStop",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_TripleNode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_UserRestore",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_UserSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader_Fail",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader_PartialConnect",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_VerifyLeader_Single",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRaft_Voting",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRandomTimeout",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestRandomTimeout_NoTime",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTCPTransport_BadAddr",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTCPTransport_WithAdvertise",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_AppendEntries",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_AppendEntriesPipeline",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_EncodeDecode",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_InstallSnapshot",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_RequestVote",
+          "action": "pass",
+          "count": 1
+        },
+        {
+          "name": "TestTransport_StartStop",
+          "action": "pass",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "targeted_successes": 3,
+  "attempts": 3,
+  "median_agent_seconds": 321.028644334001,
+  "min_agent_seconds": 314.60553412500303,
+  "max_agent_seconds": 401.2533212499984,
+  "total_agent_seconds": 1036.8874997090024,
+  "comparative_method_lift": null,
+  "gemma_performance": null,
+  "monetary_cost": null,
+  "uncertainty": "No cross-task inference from these repeats; service sampling and training exposure are uncontrolled."
+}

@@ -2,6 +2,8 @@
 
 Updated October 7, 2026. The project now targets both the agent competition and the paper track. Build one reproducible agent platform, preserve a frozen research version for the paper, and continue improving a separate competition version afterward. A research idea earns a place in the final agent only if it improves the relevant repair performance under the real execution constraints.
 
+**Foundation-first revision:** the user has adopted the general trainable Gemma agent build. Current implementation and model/provider gates are in [document 19](19-agent-platform-and-model-handoff.md) and the revised [cycle plan](12-continuous-implementation-plan.md). The overview was re-read in the rendered browser on October 7 and the model, packaging, tool restrictions, budget, offline L4×4 runtime and deadlines were reconfirmed. Gated HARNESS_README.md and loader details remain uninspected in this revision.
+
 ## What changes strategically
 
 The tracks share a problem domain, but not an objective. Code placement depends on private evaluation performance; paper selection depends on the quality of the research contribution. A conventional method can be an excellent code entry. A carefully explained negative result can be a useful paper while being inappropriate for the final agent. Do not manufacture a weighted average of leaderboard score and paper rubric: there is no official joint score.

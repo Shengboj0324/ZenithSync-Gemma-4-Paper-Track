@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-10-07T10:11:25.220890+00:00",
+  "case": "hashicorp/raft#268",
+  "upstream": "https://github.com/hashicorp/raft",
+  "base_commit": "9a647f6c2bb9e057c49b85176086ab94a210c09d",
+  "reference_commit": "2e997410f28efe8106fc606d21cb655be1b05dee",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "go": "go version go1.24.3 darwin/arm64",
+  "scope": "Original real repository snapshots; independent regression test pending. This is not a reproduction of the DDBench harness."
+}

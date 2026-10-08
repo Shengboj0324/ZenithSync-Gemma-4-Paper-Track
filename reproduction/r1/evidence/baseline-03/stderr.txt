@@ -1,0 +1,7 @@
+Reading additional input from stdin...
+2026-10-07T10:25:35.613866Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-07T10:25:35.615857Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-07T10:25:35.617488Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-07T10:28:22.185587Z  WARN codex_sandboxing::violation: recorded sandbox violation: resource=filesystem backend=seatbelt reason=operation_not_permitted path=unknown
+2026-10-07T10:28:22.188633Z  WARN codex_sandboxing::violation: recorded sandbox violation: resource=filesystem backend=seatbelt reason=operation_not_permitted path=unknown
+2026-10-07T10:31:49.675533Z ERROR codex_core::tools::router: error=exec_command failed: CreateProcess { message: "Rejected(\"`/bin/zsh -lc 'rm -rf .go-cache; rm -f peerchange-test.log race-tests.log snapshot-tests.log; git diff --check; git status --short'` rejected: rm -f style commands are not permitted. Use a safer approach\")" }

@@ -1,0 +1,21 @@
+{
+  "task_page": "https://web-debug-bench.replay.io/failures/56d9d255-2eec-4f37-9315-576f0607c30c",
+  "task_page_browser_access": "successful",
+  "published_artifact_checks": [
+    {
+      "url": "https://api.github.com/repos/replayio/app-building",
+      "checked_at": "2026-10-07T10:21:28.761749+00:00",
+      "status": 404
+    },
+    {
+      "url": "https://gxd99ovu4c.ufs.sh/f/7CiuUd6bGjfl7LLwaLb6bGjfl5WwVLaQCrusTUYPv2o60Xi7",
+      "checked_at": "2026-10-07T10:21:28.968651+00:00",
+      "status": 403
+    },
+    {
+      "url": "https://gxd99ovu4c.ufs.sh/f/7CiuUd6bGjflB4dCZ2hI5GB0gPajOCD2Aw6mQse7dvpxyVfU",
+      "checked_at": "2026-10-07T10:21:29.061106+00:00",
+      "status": 403
+    }
+  ]
+}
