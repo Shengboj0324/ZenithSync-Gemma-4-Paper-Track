@@ -1,0 +1,9 @@
+{
+  "weight_size_bytes": 23265352448,
+  "header_bytes": 266880,
+  "tensor_count": 2009,
+  "header_json_and_offset_bounds": "passed",
+  "native_safetensors_open": "interrupted_after_slow_local_import_or_open; not_verified",
+  "gpu_loading": "not_run",
+  "publisher_revision": "not_independently_verified"
+}

@@ -22,3 +22,20 @@ For Runpod, keep important checkpoints on storage whose lifecycle survives the i
 4. Make the provider credentials available through supported connectors or local secret storage; send only nonsecret paths and readiness status in chat. Keep provider credentials out of task sandboxes and submitted artifacts.
 
 Training starts after real inference, baseline evaluation and a small adapter compatibility round trip. A packed inference checkpoint and permission to submit LoRA do not establish that direct training on that file is supported. DigitalOcean serves CPU development/evaluation; Runpod serves GPU inference/training; R2 stores recoverable artifacts. Additional hosting is optional after the core agent works.
+
+
+## User handoff — October 7, 2026
+
+The user confirms the A100 Pod was deliberately stopped and will be restarted later. Do not restart it as part of intake. The earlier empty-Pod listing above is historical; the subsequent live read found the user-created Pod `ZenithSync-Gemma-Agentic-Solution` stopped, with no persistent mounts reported and no network volumes listed. Persistent storage still needs confirmation before transfer.
+
+R2 connection details supplied by the user (not yet authenticated or round-trip verified):
+
+- Bucket: `gemma4agenticdata`
+- Account ID: `e3d9647571bd8bb6027db63db3197fd0`
+- S3 endpoint: `https://e3d9647571bd8bb6027db63db3197fd0.r2.cloudflarestorage.com`
+- Pass the bucket separately to S3 operations; the endpoint does not include the bucket suffix.
+- Credentials must be stored outside Git and chat. The API token shared in chat should be rotated. An access key ID alone is insufficient for S3 requests; a corresponding secret access key is required. No credential values are retained here, and no bucket writes have occurred.
+
+The model was located outside the repository at `/Users/jiangshengbo/Desktop/gemma-4-other-gemma-4-31b-it-qat-w4a16-ct-v2`. Its eight files were inventoried with SHA-256 in [model intake manifest](../evidence/p1/model-intake-001/model-manifest.json). The revision label is inferred from the supplied folder name, not yet independently authenticated against Kaggle version metadata. Configuration declares Gemma4ForConditionalGeneration and compressed-tensors 4-bit group-32 weights. Local identity checks do not establish publisher authenticity or successful inference. Model weights remain outside Git.
+
+Next: finish intake validation, configure secure R2 credentials and verify a small round trip, confirm persistent Pod storage, then run P1 inference after the user restarts the Pod. DigitalOcean remains optional until remote task evaluation needs it.
