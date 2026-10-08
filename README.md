@@ -10,6 +10,7 @@ Joint research and execution plan for the Google Gemma 4 Developer Agent Competi
 
 | Document | Purpose |
 | --- | --- |
+| [Data requirements and acquisition](docs/23-data-requirements-and-acquisition-plan.md) | Specific source shortlist, schemas, 3×50M candidate mixtures, contamination controls and intake gates |
 | [R0 implementation and correctness](docs/20-r0-foundation.md) | Contracts, CLI, schemas, mathematical ledger, offline checks and bounded integration acceptance |
 | [Cloud preparation](docs/21-cloud-preparation.md) | Actions needed for Runpod, DigitalOcean, R2 and the model handoff |
 | [Platform implementation and model handoff](docs/19-agent-platform-and-model-handoff.md) | Current architecture, staged implementation gates, mathematical specification, model intake, and live plugin verification |

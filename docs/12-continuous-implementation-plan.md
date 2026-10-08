@@ -106,3 +106,8 @@ Status: **progress; Linux integration pending**. The asset-access blocker was re
 - Costs: no paid resource created; local compute, transfer and API costs unmeasured. Repair rate, latency, confidence intervals and training gains remain unmeasured.
 - Unresolved later-phase gates: actual checkpoint/loader, successful graph retrieval on real assets, full offline host installation, official Phase 2 grading, target GPU execution and comparative evaluation. Linux execution here uses AMD64 emulation on ARM64 macOS.
 - Next bounded objective P1: receive complete model folder and Kaggle revision, inventory and verify it, establish experiment/storage/runtime caps, then propose the exact GPU allocation and run real inference plus an adapter compatibility smoke test. Prepare provider access as described in document 21; DigitalOcean and R2 allocation is not needed to finish R0.
+
+
+### Data research update — October 8, 2026
+
+See [document 23](23-data-requirements-and-acquisition-plan.md) for the proposed data plan supporting the user-preferred three 50M-token candidates. This is a research/planning update, not an implementation cycle or permission to spend on teacher generation. External sources are shortlisted, not yet admitted. Mixtures are provisional and total 50M processed tokens per candidate; they do not imply 150M unique source tokens. P1 requires only a small development subset; freeze contamination groups before corpus ingestion. Official task assets total approximately 22.42GB in the saved download listing; expanded environments are extra. Next gate: authenticated source-rule check, task/environment intake and native baseline traces. No training gains or data-quality acceptance are claimed.

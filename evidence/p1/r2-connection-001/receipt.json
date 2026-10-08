@@ -1,0 +1,19 @@
+{
+  "checked_utc": "2026-10-08T06:51:34.279148+00:00",
+  "bucket": "gemma4agenticdata",
+  "operations": {
+    "head_bucket": {
+      "success": true,
+      "http_status": 200
+    },
+    "list_objects_v2": {
+      "success": true,
+      "http_status": 200,
+      "returned_count": 0,
+      "truncated": false
+    }
+  },
+  "credentials_logged": false,
+  "writes_performed": false,
+  "connected": true
+}
