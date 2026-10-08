@@ -1,0 +1,22 @@
+diff --git a/added.txt b/added.txt
+new file mode 100644
+index 0000000..a6c4655
+--- /dev/null
++++ b/added.txt
+@@ -0,0 +1 @@
++synthetic new file
+diff --git a/arithmetic.py b/arithmetic.py
+index 12ee743..4693ad3 100644
+--- a/arithmetic.py
++++ b/arithmetic.py
+@@ -1,2 +1,2 @@
+ def add(a, b):
+-    return a - b
++    return a + b
+diff --git a/obsolete.txt b/obsolete.txt
+deleted file mode 100644
+index d6682f2..0000000
+--- a/obsolete.txt
++++ /dev/null
+@@ -1 +0,0 @@
+-synthetic obsolete file

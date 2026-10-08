@@ -1,0 +1,31 @@
+test_charges_compose_without_losing_overruns (test_foundation.BudgetTests.test_charges_compose_without_losing_overruns) ... ok
+test_context_boundary (test_foundation.BudgetTests.test_context_boundary) ... ok
+test_exhaustive_admission_matches_discrete_capacity (test_foundation.BudgetTests.test_exhaustive_admission_matches_discrete_capacity) ... ok
+test_invalid_numeric_types (test_foundation.BudgetTests.test_invalid_numeric_types) ... ok
+test_all_official_root_aliases_and_ambiguity (test_foundation.FilesystemTests.test_all_official_root_aliases_and_ambiguity) ... ok
+test_archive_bad_paths (test_foundation.FilesystemTests.test_archive_bad_paths) ... ok
+test_archive_cannot_claim_official_compatibility (test_foundation.FilesystemTests.test_archive_cannot_claim_official_compatibility) ... ok
+test_archive_conflicts_and_missing_root (test_foundation.FilesystemTests.test_archive_conflicts_and_missing_root) ... ok
+test_archive_limits_and_symlinks (test_foundation.FilesystemTests.test_archive_limits_and_symlinks) ... ok
+test_changed_extra_missing_files (test_foundation.FilesystemTests.test_changed_extra_missing_files) ... ok
+test_cli_round_trip_and_fail_closed (test_foundation.FilesystemTests.test_cli_round_trip_and_fail_closed) ... ok
+test_known_digest_and_deterministic_inventory (test_foundation.FilesystemTests.test_known_digest_and_deterministic_inventory) ... ok
+test_manifest_schema_rejects_bad_inputs (test_foundation.FilesystemTests.test_manifest_schema_rejects_bad_inputs) ... ok
+test_special_file_rejected (test_foundation.FilesystemTests.test_special_file_rejected) ... ok
+test_strict_json (test_foundation.FilesystemTests.test_strict_json) ... ok
+test_symlink_file_and_directory_rejected (test_foundation.FilesystemTests.test_symlink_file_and_directory_rejected) ... ok
+test_distinct_splits_and_duplicate_id (test_foundation.SplitTests.test_distinct_splits_and_duplicate_id) ... ok
+test_each_leakage_dimension (test_foundation.SplitTests.test_each_leakage_dimension) ... ok
+test_empty_draft_is_not_frozen_evaluation (test_foundation.SplitTests.test_empty_draft_is_not_frozen_evaluation) ... ok
+test_all_event_kinds_at_ready_and_terminal_states (test_foundation.StateTests.test_all_event_kinds_at_ready_and_terminal_states) ... ok
+test_event_shapes (test_foundation.StateTests.test_event_shapes) ... ok
+test_invalid_state_cannot_be_restored (test_foundation.StateTests.test_invalid_state_cannot_be_restored) ... ok
+test_latest_check_can_fail (test_foundation.StateTests.test_latest_check_can_fail) ... ok
+test_replay_and_sequence_integrity (test_foundation.StateTests.test_replay_and_sequence_integrity) ... ok
+test_stale_checks_rejected_and_status_cleared (test_foundation.StateTests.test_stale_checks_rejected_and_status_cleared) ... ok
+test_submit_does_not_invent_success (test_foundation.StateTests.test_submit_does_not_invent_success) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.162s
+
+OK

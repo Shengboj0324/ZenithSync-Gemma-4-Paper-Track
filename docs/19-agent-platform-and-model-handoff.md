@@ -1,6 +1,6 @@
 # Gemma agent platform: implementation contract and model handoff
 
-Updated October 7, 2026. Status: user-adopted direction; implementation plan, not an implemented or trained platform. This document supersedes earlier specialist product proposals for build scope. [Document 12](12-continuous-implementation-plan.md) remains the living cycle and acceptance register.
+Updated October 7, 2026. Status: user-adopted direction; R0/P0 contracts and skeleton accepted with scoped Linux tool verification, not yet a running or trained agent. See document 20 for implementation evidence. This document supersedes earlier specialist product proposals for build scope. [Document 12](12-continuous-implementation-plan.md) remains the living cycle and acceptance register.
 
 ## Product and completion criteria
 
@@ -24,7 +24,7 @@ The user-supplied [model page](https://www.kaggle.com/models/google/gemma-4/othe
 
 The overview explicitly permits adapters. The model-page label is not proof that all LoRA workflows are impossible, nor does the adapter allowance prove that direct training on this packed file works. Resolve compatible training representation, target-module mapping, tokenizer/template identity and exact deployed quantized-base behavior through a small real pilot. Do not substitute another base model silently. A full-precision or other training representation is a separately versioned asset, if needed and permitted.
 
-Not yet inspected in this revision: authenticated dataset assets, `HARNESS_README.md`, starter internals, installed loader versions, actual downloaded model bytes, runtime LoRA constraints, or current account competition entry. The browser was signed out. Public overview access does not verify the user's registration. Earlier rules findings remain dated in document 11; refresh gated details at P0.
+Update: the guide, starter, Docker/setup files, official notebook and core host wheels have now been downloaded and inspected. CPU compilation and synthetic Linux tool integration succeeded. Actual model bytes, inference loader behavior, runtime LoRA compatibility and full starter execution remain unverified. The initial in-app browser was signed out. Later in this cycle, the user confirmed joining and accepting rules; authenticated Chrome visibly confirmed rule acceptance. Official asset retrieval subsequently succeeded via authenticated Kaggle CLI; see document 22. Earlier rules findings remain dated in document 11; refresh gated details at P0.
 
 ## Architecture and boundaries
 
@@ -97,4 +97,4 @@ P0 deliverables: official starter/harness inventory; supported tool/config matri
 
 Before calling P0 accepted, obtain the official harness or mark the dependent contract checks unresolved. Before P1, confirm the model handoff with the user. After every 8–14-hour cycle, update document 12 with actual hours, artifacts, tests, failure analysis, metrics, costs, mathematical claim status, acceptance/promotion decision and next scope. A phase can span multiple cycles; no promise of unattended execution is implied.
 
-Readiness now: planning and read-only checks complete; model access user-reported, model bytes pending; official runtime integration pending; provider compute not allocated; Cloudflare unverified; no Gemma training or measured repair performance yet.
+Readiness now: R0 contracts, compiler and synthetic Linux tool integration accepted; model access user-reported, model bytes pending; full inference and official task grading pending; provider compute not allocated; Cloudflare unverified; no Gemma training or measured repair performance yet.

@@ -4,12 +4,14 @@ Joint research and execution plan for the Google Gemma 4 Developer Agent Competi
 
 **Adopted direction:** build a complete, trainable Gemma-powered repository engineering agent first, using the competition's supported runtime. Measure its failure profile, train targeted adapters, and add specialist capabilities only when their benefit is demonstrated. The discarded debugging/product hypotheses no longer gate core implementation. Research novelty remains unproved; documents 15–18 are historical evidence, not the current product mandate.
 
-**Status:** foundation-first implementation plan adopted; Gemma execution and training have not started. The earlier reproduction pilot remains complete with no demonstrated mechanism advantage. The user reports model download access. Live checks confirmed Runpod authentication and an active DigitalOcean account; Cloudflare connection is unverified. See document 19 for the model handoff, exact verification scope, and service activation gates.
+**Status:** R0/P0 contracts and skeleton accepted: local/Linux foundation tests, released compiler checks and real sandbox tool integration pass. Gemma execution and training have not started. The earlier reproduction pilot remains complete with no demonstrated mechanism advantage. The user reports model download access. Live checks confirmed Runpod authentication and an active DigitalOcean account; Cloudflare connection is unverified. See document 19 for the model handoff, exact verification scope, and service activation gates.
 
 ## Reading order
 
 | Document | Purpose |
 | --- | --- |
+| [R0 implementation and correctness](docs/20-r0-foundation.md) | Contracts, CLI, schemas, mathematical ledger, offline checks and bounded integration acceptance |
+| [Cloud preparation](docs/21-cloud-preparation.md) | Actions needed for Runpod, DigitalOcean, R2 and the model handoff |
 | [Platform implementation and model handoff](docs/19-agent-platform-and-model-handoff.md) | Current architecture, staged implementation gates, mathematical specification, model intake, and live plugin verification |
 | [Reproduction cycle results](docs/18-reproduction-cycle-results.md) | Latest evidence: real defect, three baseline repairs, detailed performance analysis, and no product promotion |
 | [Failure-first research study](docs/15-failure-first-research-study.md) | Current conclusion: ranked failure families, competing systems, mathematical hypotheses, and rejection conditions |
@@ -45,9 +47,22 @@ The code track currently allows one submission per day and two final selections.
 ## First actions for the next round
 
 1. Resolve eligibility, team availability, GPU access, and the cost ceiling.
-2. Obtain the official harness through the user's authorized Kaggle access; freeze its version and audit development-task validity.
+2. Use the retrieved, hashed official harness; stage development tasks and audit their validity before baseline evaluation.
 3. Reproduce and package the official baseline; measure full-run time and graph-tool functionality on target-equivalent hardware.
 4. Freeze evaluation partitions before inspecting reference fixes for method development; complete the nearest-prior-art review before asserting novelty.
 5. Use measured failures to choose between reasoning, retrieval, recovery, and tuning interventions; keep a stable code champion throughout.
 
-The revised schedule starts October 7 and extends through December 2. Both submissions remain planned. The reproduction pilot used hosted Codex inference; no GPU provisioning, model training, competition entry, or publication has been initiated.
+The revised schedule starts October 7 and extends through December 2. Both submissions remain planned. The reproduction pilot used hosted Codex inference; no GPU provisioning, model training or publication has been initiated. Competition rule acceptance was confirmed in the authenticated Chrome session on October 7.
+
+## Run the foundation checks
+
+```sh
+python3 -m unittest discover -s tests -v
+python3 -m zenithsync --help
+```
+
+Python 3.13.7 was tested locally; no third-party dependencies are required. [Retained validation receipt](evidence/r0/local-004/receipt.json) records 26-test success in its linked test log and an isolated offline CLI smoke check. This is not an inference or repair benchmark. See [R0 acceptance audit](docs/20-r0-foundation.md).
+
+The official starter and harness assets are now downloaded into ignored local storage. The unchanged starter compiled with ADK submission 0.2.12 and Google ADK 1.36.1. See the [official contract audit](docs/22-official-contract-audit.md) for source discrepancies, compiler tests and remaining runtime gates.
+
+The [Linux integration receipt](evidence/r0/linux-002/receipt.json) records 25 checks using actual released tools; all 26 core tests also pass in the official sandbox image. This is local AMD64 emulation, not GPU qualification or official competition grading.

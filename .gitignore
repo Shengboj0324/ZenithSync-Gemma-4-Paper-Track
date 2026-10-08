@@ -2,3 +2,12 @@ reproduction/r1/artifacts/
 reproduction/r1/workspaces/
 reproduction/r1/cache/
 __pycache__/
+.venv/
+.env
+.env.*
+!.env.example
+*.safetensors
+*.gguf
+models/
+artifacts/official/
+.DS_Store

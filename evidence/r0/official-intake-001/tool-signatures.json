@@ -1,0 +1,101 @@
+[
+  {
+    "name": "run_command",
+    "arguments": "ctx: Any, command: str",
+    "returns": "str",
+    "source_file": "swegemma/tools/execution.py",
+    "source_sha256": "f2ce1cefb41edddaeffeacbff910a54bcd0174b548efa9c6c283320e5a509912",
+    "line": 21,
+    "decorators": [
+      "budget_gated"
+    ]
+  },
+  {
+    "name": "submit_patch",
+    "arguments": "ctx: Any",
+    "returns": "str",
+    "source_file": "swegemma/tools/execution.py",
+    "source_sha256": "f2ce1cefb41edddaeffeacbff910a54bcd0174b548efa9c6c283320e5a509912",
+    "line": 77,
+    "decorators": [
+      "budget_gated(count_tool_call=False)"
+    ]
+  },
+  {
+    "name": "get_status",
+    "arguments": "ctx: Any",
+    "returns": "str",
+    "source_file": "swegemma/tools/execution.py",
+    "source_sha256": "f2ce1cefb41edddaeffeacbff910a54bcd0174b548efa9c6c283320e5a509912",
+    "line": 107,
+    "decorators": [
+      "budget_gated(count_tool_call=False)"
+    ]
+  },
+  {
+    "name": "get_code_neighbors",
+    "arguments": "ctx: Any, node: str, edge_type: str | None=None, max_neighbors: int=50",
+    "returns": "str",
+    "source_file": "swegemma/tools/graph.py",
+    "source_sha256": "7f102bf348fe799b89cd8d614afea35c5a21d8141a29859582363086ce2b1173",
+    "line": 89,
+    "decorators": [
+      "budget_gated"
+    ]
+  },
+  {
+    "name": "search_similar_code",
+    "arguments": "ctx: Any, query: str, k: int=10",
+    "returns": "str",
+    "source_file": "swegemma/tools/graph.py",
+    "source_sha256": "7f102bf348fe799b89cd8d614afea35c5a21d8141a29859582363086ce2b1173",
+    "line": 198,
+    "decorators": [
+      "budget_gated"
+    ]
+  },
+  {
+    "name": "get_code_subgraph",
+    "arguments": "ctx: Any, nodes: list[str]",
+    "returns": "str",
+    "source_file": "swegemma/tools/graph.py",
+    "source_sha256": "7f102bf348fe799b89cd8d614afea35c5a21d8141a29859582363086ce2b1173",
+    "line": 292,
+    "decorators": [
+      "budget_gated"
+    ]
+  },
+  {
+    "name": "read_file",
+    "arguments": "ctx: Any, filepath: str, start_line: int | None=None, end_line: int | None=None",
+    "returns": "str",
+    "source_file": "swegemma/tools/workspace.py",
+    "source_sha256": "d38ba2f68636c5e33c9f607bd9e5401dbf81d77125b966ef87c799a1615b05c6",
+    "line": 88,
+    "decorators": [
+      "budget_gated"
+    ]
+  },
+  {
+    "name": "write_file",
+    "arguments": "ctx: Any, filepath: str, content: str",
+    "returns": "str",
+    "source_file": "swegemma/tools/workspace.py",
+    "source_sha256": "d38ba2f68636c5e33c9f607bd9e5401dbf81d77125b966ef87c799a1615b05c6",
+    "line": 181,
+    "decorators": [
+      "budget_gated"
+    ]
+  },
+  {
+    "name": "edit_file",
+    "arguments": "ctx: Any, filepath: str, old_string: str, new_string: str, allow_multiple: bool=False",
+    "returns": "str",
+    "source_file": "swegemma/tools/workspace.py",
+    "source_sha256": "d38ba2f68636c5e33c9f607bd9e5401dbf81d77125b966ef87c799a1615b05c6",
+    "line": 217,
+    "decorators": [
+      "budget_gated"
+    ]
+  }
+]

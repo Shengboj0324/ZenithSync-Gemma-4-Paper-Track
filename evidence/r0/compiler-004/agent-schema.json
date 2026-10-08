@@ -1,0 +1,711 @@
+{
+  "$defs": {
+    "AgentToolEntry": {
+      "additionalProperties": false,
+      "description": "A ``tools`` list entry that wraps an agent as a tool.\n\nAttributes:\n    agent_tool (AgentToolRef): The reference configuration for the agent being wrapped as a tool.\n\nYAML example::\n\n    tools:\n      - agent_tool:\n          config_path: sub_agents/summarizer.yaml\n          skip_summarization: true",
+      "properties": {
+        "agent_tool": {
+          "$ref": "#/$defs/AgentToolRef"
+        }
+      },
+      "required": [
+        "agent_tool"
+      ],
+      "title": "AgentToolEntry",
+      "type": "object"
+    },
+    "AgentToolRef": {
+      "additionalProperties": false,
+      "description": "Reference to an agent that should be wrapped and invoked as an ``AgentTool``.\n\nAllows an LLM agent to call another agent as a tool during its execution.\nThe ``config_path`` field is strictly validated to prevent path traversal attacks.\n\nAttributes:\n    skip_summarization (bool): If True, the raw output of the tool-agent is returned directly\n        to the calling LLM without intermediate summarization. Defaults to False.",
+      "properties": {
+        "config_path": {
+          "description": "Relative path to the agent's YAML config within the submission directory.",
+          "title": "Config Path",
+          "type": "string"
+        },
+        "skip_summarization": {
+          "default": false,
+          "title": "Skip Summarization",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "config_path"
+      ],
+      "title": "AgentToolRef",
+      "type": "object"
+    },
+    "GenerateContentConfig": {
+      "additionalProperties": false,
+      "description": "Generation parameters \u2014 validated against organizer constraints at compile time.\n\nThis schema is intentionally permissive: it defines the *universe* of parameters a submission\ncould set. Actual restrictions and bounding checks are applied by\n:class:`~adk_submission.limits.GenerationConstraints` during compilation.\n\nFields that are **never** settable by submissions (``safety_settings``, ``tools``,\n``system_instruction``, ``response_schema``) are hard-excluded from this schema.\n\nAttributes:\n    temperature (Optional[float]): Sampling temperature. Must be >= 0.0. Defaults to None.\n    top_p (Optional[float]): Nucleus sampling threshold. Must be between 0.0 and 1.0 inclusive. Defaults to None.\n    top_k (Optional[int]): Top-k sampling cutoff. Must be >= 1. Defaults to None.\n    max_output_tokens (Optional[int]): Maximum number of tokens to generate. Must be >= 1. Defaults to None.\n    stop_sequences (Optional[list[str]]): List of strings that stop generation when encountered. Defaults to None.\n    presence_penalty (Optional[float]): Penalty for repeated tokens based on presence. Defaults to None.\n    frequency_penalty (Optional[float]): Penalty for repeated tokens based on frequency. Defaults to None.\n    response_mime_type (Optional[str]): Expected MIME type for the model response (e.g., 'application/json'). Defaults to None.\n    seed (Optional[int]): Random seed for deterministic generation. Defaults to None.\n    thinking_config (Optional[ThinkingConfig]): Configuration for model reasoning/thinking. Defaults to None.",
+      "properties": {
+        "frequency_penalty": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Frequency Penalty"
+        },
+        "max_output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Output Tokens"
+        },
+        "presence_penalty": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Presence Penalty"
+        },
+        "response_mime_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Response Mime Type"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Seed"
+        },
+        "stop_sequences": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stop Sequences"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Temperature"
+        },
+        "thinking_config": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ThinkingConfig"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "top_k": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Top K"
+        },
+        "top_p": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Top P"
+        }
+      },
+      "title": "GenerateContentConfig",
+      "type": "object"
+    },
+    "SandboxedLlmAgentConfig": {
+      "additionalProperties": false,
+      "description": "Restricted ``LlmAgent`` configuration \u2014 replaces all code references with safe strings.\n\nAttributes:\n    agent_class (Literal[\"LlmAgent\"]): Literal identifier for the agent class. Defaults to \"LlmAgent\".\n    model (Optional[str]): The model alias or name to be used by the agent. Defaults to None.\n    adapter (Optional[str]): Name of a discovered adapter from adapters/ to attach to the base model. Defaults to None.\n    output_key (Optional[str]): Key under which the agent's output is stored in the state. Defaults to None.\n    include_contents (Literal[\"default\", \"none\"]): Controls whether input contents are included in the prompt. Defaults to \"default\".\n    disallow_transfer_to_parent (Optional[bool]): If True, prevents the agent from transferring control back to its parent. Defaults to None.\n    disallow_transfer_to_peers (Optional[bool]): If True, prevents the agent from transferring control to peer agents. Defaults to None.\n    tools (Optional[list[str | AgentToolEntry]]): List of tool names (strings) or wrapped agent tools (:class:`AgentToolEntry`). Defaults to None.\n    sub_agents (Optional[list[SubAgentRef]]): List of sub-agents managed by this LLM agent. Defaults to None.\n    generate_content_config (Optional[GenerateContentConfig]): Permissive generation parameters for the LLM. Defaults to None.\n    before_model_callbacks (Optional[list[str]]): List of callback names to execute before model generation. Defaults to None.\n    after_model_callbacks (Optional[list[str]]): List of callback names to execute after model generation. Defaults to None.\n    before_tool_callbacks (Optional[list[str]]): List of callback names to execute before a tool is called. Defaults to None.\n    after_tool_callbacks (Optional[list[str]]): List of callback names to execute after a tool completes. Defaults to None.",
+      "properties": {
+        "adapter": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adapter"
+        },
+        "after_agent_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "After Agent Callbacks"
+        },
+        "after_model_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "After Model Callbacks"
+        },
+        "after_tool_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "After Tool Callbacks"
+        },
+        "agent_class": {
+          "const": "LlmAgent",
+          "default": "LlmAgent",
+          "title": "Agent Class",
+          "type": "string"
+        },
+        "before_agent_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Before Agent Callbacks"
+        },
+        "before_model_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Before Model Callbacks"
+        },
+        "before_tool_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Before Tool Callbacks"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "disallow_transfer_to_parent": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Disallow Transfer To Parent"
+        },
+        "disallow_transfer_to_peers": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Disallow Transfer To Peers"
+        },
+        "generate_content_config": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GenerateContentConfig"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "include_contents": {
+          "default": "default",
+          "enum": [
+            "default",
+            "none"
+          ],
+          "title": "Include Contents",
+          "type": "string"
+        },
+        "instruction": {
+          "description": "Agent instruction text \u2014 inline or resolved from !include.",
+          "title": "Instruction",
+          "type": "string"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "output_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Key"
+        },
+        "skills": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "List of relative paths to skill directories within the submission archive.",
+          "title": "Skills"
+        },
+        "sub_agents": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/SubAgentRef"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sub Agents"
+        },
+        "tools": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/$defs/AgentToolEntry"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tools"
+        }
+      },
+      "required": [
+        "name",
+        "instruction"
+      ],
+      "title": "SandboxedLlmAgentConfig",
+      "type": "object"
+    },
+    "SandboxedLoopAgentConfig": {
+      "additionalProperties": false,
+      "description": "Restricted ``LoopAgent`` configuration for executing sub-agents in an iterative loop.\n\nAttributes:\n    agent_class (Literal[\"LoopAgent\"]): Literal identifier for the agent class.\n    sub_agents (list[SubAgentRef]): List of sub-agent references to execute in each loop iteration.\n    max_iterations (Optional[int]): Maximum number of loop iterations allowed. Must be >= 1. Defaults to None.",
+      "properties": {
+        "after_agent_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "After Agent Callbacks"
+        },
+        "agent_class": {
+          "const": "LoopAgent",
+          "title": "Agent Class",
+          "type": "string"
+        },
+        "before_agent_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Before Agent Callbacks"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "max_iterations": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Iterations"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "sub_agents": {
+          "items": {
+            "$ref": "#/$defs/SubAgentRef"
+          },
+          "title": "Sub Agents",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "agent_class",
+        "sub_agents"
+      ],
+      "title": "SandboxedLoopAgentConfig",
+      "type": "object"
+    },
+    "SandboxedParallelAgentConfig": {
+      "additionalProperties": false,
+      "description": "Restricted ``ParallelAgent`` configuration for running sub-agents concurrently.\n\nAttributes:\n    agent_class (Literal[\"ParallelAgent\"]): Literal identifier for the agent class.\n    sub_agents (list[SubAgentRef]): List of sub-agent references to execute in parallel.",
+      "properties": {
+        "after_agent_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "After Agent Callbacks"
+        },
+        "agent_class": {
+          "const": "ParallelAgent",
+          "title": "Agent Class",
+          "type": "string"
+        },
+        "before_agent_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Before Agent Callbacks"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "sub_agents": {
+          "items": {
+            "$ref": "#/$defs/SubAgentRef"
+          },
+          "title": "Sub Agents",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "agent_class",
+        "sub_agents"
+      ],
+      "title": "SandboxedParallelAgentConfig",
+      "type": "object"
+    },
+    "SandboxedSequentialAgentConfig": {
+      "additionalProperties": false,
+      "description": "Restricted ``SequentialAgent`` configuration for running sub-agents in sequential order.\n\nAttributes:\n    agent_class (Literal[\"SequentialAgent\"]): Literal identifier for the agent class.\n    sub_agents (list[SubAgentRef]): Ordered list of sub-agent references to execute sequentially.",
+      "properties": {
+        "after_agent_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "After Agent Callbacks"
+        },
+        "agent_class": {
+          "const": "SequentialAgent",
+          "title": "Agent Class",
+          "type": "string"
+        },
+        "before_agent_callbacks": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Before Agent Callbacks"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "sub_agents": {
+          "items": {
+            "$ref": "#/$defs/SubAgentRef"
+          },
+          "title": "Sub Agents",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "agent_class",
+        "sub_agents"
+      ],
+      "title": "SandboxedSequentialAgentConfig",
+      "type": "object"
+    },
+    "SubAgentRef": {
+      "additionalProperties": false,
+      "description": "Reference to a sub-agent's YAML configuration file.\n\nThis model is used within multi-agent workflows (Sequential, Parallel, Loop, and LLM sub-agents)\nto reference child agents. Only ``config_path`` is supported; the standard ADK ``code`` field\n(which resolves arbitrary Python imports) is intentionally excluded to prevent unsandboxed code execution.\nThe ``config_path`` field is strictly validated to prevent path traversal attacks.",
+      "properties": {
+        "config_path": {
+          "description": "Relative path to the sub-agent's YAML config within the submission directory.",
+          "title": "Config Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "config_path"
+      ],
+      "title": "SubAgentRef",
+      "type": "object"
+    },
+    "ThinkingConfig": {
+      "additionalProperties": false,
+      "description": "Thinking configuration for supported LLMs (e.g., reasoning models).\n\nAttributes:\n    thinking_budget (Optional[int]): The token budget allocated for the model's internal\n        reasoning/thinking process. Must be greater than or equal to 0 (0 disables thinking).\n        Defaults to None.\n    include_thoughts (Optional[bool]): Whether to include the raw reasoning thoughts in the\n        final model output. Defaults to None.\n    thinking_level (Optional[str]): Presets for model thinking level (e.g., 'MINIMAL', 'LOW', 'MEDIUM', 'HIGH'). Defaults to None.",
+      "properties": {
+        "include_thoughts": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Include Thoughts"
+        },
+        "thinking_budget": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Thinking Budget"
+        },
+        "thinking_level": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Thinking Level"
+        }
+      },
+      "title": "ThinkingConfig",
+      "type": "object"
+    }
+  },
+  "description": "Root model for parsing a sandboxed agent YAML configuration.\n\nActs as a discriminated union over :class:`SandboxedLlmAgentConfig`,\n:class:`SandboxedSequentialAgentConfig`, :class:`SandboxedParallelAgentConfig`,\nand :class:`SandboxedLoopAgentConfig`. The concrete model is dynamically selected\nbased on the ``agent_class`` field in the input data.\n\nExample::\n\n    config = SandboxedAgentConfig.model_validate(yaml_dict)\n    agent_config = config.root  # Instance of SandboxedLlmAgentConfig, etc.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/SandboxedLlmAgentConfig"
+    },
+    {
+      "$ref": "#/$defs/SandboxedSequentialAgentConfig"
+    },
+    {
+      "$ref": "#/$defs/SandboxedParallelAgentConfig"
+    },
+    {
+      "$ref": "#/$defs/SandboxedLoopAgentConfig"
+    }
+  ],
+  "title": "SandboxedAgentConfig"
+}

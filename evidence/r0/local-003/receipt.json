@@ -1,0 +1,28 @@
+{
+  "elapsed_ns": 341357917,
+  "evidence_kind": "synthetic_foundation_validation",
+  "finished_utc": "2026-10-08T00:49:18.152531+00:00",
+  "gemma_inference": "not_run",
+  "official_harness_compatibility": "unverified",
+  "offline_rejection_returncode": 2,
+  "offline_smoke_passed": true,
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.13.7 (main, Aug 14 2025, 11:12:11) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "repair_performance": "not_measured",
+  "schema_version": 1,
+  "source_sha256": {
+    "examples/splits.draft.json": "a02026be35a5e76c5f74c25a5787fae4a02a975400be0a20a1b8a57d1112ce09",
+    "scripts/verify_official_r0.py": "8edd350dce24540a6e9c4f8017c33de0717119be46e6a60bd4eb8d7f4edcae06",
+    "scripts/verify_r0.py": "14ce489f3d7627f5698affbfc92fa86f58f434e6e452295613f16eb16e1b69d8",
+    "tests/test_foundation.py": "01b5d4e142d73634778033e67334ff0b75ded8cc5eef06a8caeaaf23e29243f8",
+    "zenithsync/__init__.py": "3f5c74efe764f9d13f7f5d8bac4a2f5969f30dc189ca4c587f0ea3730fb7a6c5",
+    "zenithsync/__main__.py": "0a38cd78624161b049c8965f820835ac1ae23508e98b9fd2f2c201e576aff3e3",
+    "zenithsync/archive.py": "61279d8a467974def4f6cbd18a461fa25d796deda01541ed0c6c7d330494d4e3",
+    "zenithsync/artifacts.py": "a0a031550fd8cda158b6faeb1e2d2d31846c40ca5ce60d8bed2fffc7a7b3b3cd",
+    "zenithsync/contracts.py": "fc407957a78424aa32909e8b817fb3d6149e8e9fe3082bc55ee901c797b1e8bf",
+    "zenithsync/splits.py": "345315e3cdf2bbc789ba0b12b748e89d8e645d10cb1bc54e95e4d2216474a093"
+  },
+  "started_utc": "2026-10-08T00:49:17.810935+00:00",
+  "tests_log_sha256": "b6b91499aacbae9303f3e167511c2bcc33b1dace774cff7af10bdc03c2267c03",
+  "tests_returncode": 0
+}

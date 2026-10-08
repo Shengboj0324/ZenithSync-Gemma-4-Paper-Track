@@ -1,0 +1,20 @@
+{
+  "architecture": "linux/amd64 emulated on ARM64 macOS Docker Desktop",
+  "core_tests_count": 26,
+  "core_tests_exit_code": 0,
+  "cpu_limit": 2,
+  "files_sha256": {
+    "core-tests.log": "50a8007d3fd7c73a15c9240185476d6cefb5207324b1203d0fc761ef4d85e1d3",
+    "host-environment.txt": "f561e9c0a53a4432ba95852bc0c24f2da9b57363d367d170ab135dce085354f9",
+    "image-build.log": "cd3aadceac9343497662d87666134e35828fcdbe181cab8f38efca6dcad5f236",
+    "receipt.json": "83efc5042213cdabcf4cbb7ad73ac60e09bee0e84b492fc90d6d5bf6f9105b97",
+    "synthetic.patch": "2298e41be10974f518b24ecb1a0b518b77f2616461a9f0283a96d595b9946463"
+  },
+  "host_mounts": "zenithsync and tests source directories only, read-only",
+  "image_id": "sha256:14d857d591be7d1a7efc83ff1dcc87f83c96c764895b0986a45db0d8af5a8a46",
+  "memory_bytes": 4294967296,
+  "network": "none",
+  "pip_check": "No broken requirements found.",
+  "schema_version": 1,
+  "scope": "Synthetic infrastructure validation, no official task grading or model inference"
+}

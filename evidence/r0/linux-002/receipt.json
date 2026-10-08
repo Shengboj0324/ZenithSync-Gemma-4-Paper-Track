@@ -1,0 +1,427 @@
+{
+  "competition_repair_performance": "not_measured",
+  "elapsed_ns": 10222385958,
+  "evidence_kind": "synthetic_real_tool_linux_integration",
+  "failure": null,
+  "finished_utc": "2026-10-08T00:57:42.257523+00:00",
+  "image_architecture": "amd64",
+  "image_id": "sha256:14d857d591be7d1a7efc83ff1dcc87f83c96c764895b0986a45db0d8af5a8a46",
+  "model_inference": "not_run",
+  "official_phase_two_grading": "not_run",
+  "packages": {
+    "adk-eval-core": "0.1.0",
+    "adk-submission": "0.2.12",
+    "google-adk": "1.36.1",
+    "swegemma": "0.2.7"
+  },
+  "records": [
+    {
+      "check": "network_and_resource_limits",
+      "detail": {
+        "CpuQuota": 200000,
+        "Memory": 4294967296,
+        "NetworkMode": "none"
+      },
+      "passed": true
+    },
+    {
+      "check": "seed_initialized",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "check": "nine_actual_bound_tools",
+      "detail": [
+        "edit_file",
+        "get_code_neighbors",
+        "get_code_subgraph",
+        "get_status",
+        "read_file",
+        "run_command",
+        "search_similar_code",
+        "submit_patch",
+        "write_file"
+      ],
+      "passed": true
+    },
+    {
+      "check": "starter_compiles_with_real_bound_tools",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "arguments": {},
+      "response": {
+        "agent_elapsed_seconds": 0.02039645799959544,
+        "command_timeout_seconds": 30,
+        "max_time_minutes": 5,
+        "max_tool_calls": 40,
+        "patch_size": 0,
+        "patch_submitted": false,
+        "status": "ok",
+        "time_seconds_remaining": 299.97960424999474,
+        "tool_calls_remaining": 40,
+        "tool_calls_used": 0
+      },
+      "tool": "get_status"
+    },
+    {
+      "check": "status_does_not_consume_call",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "arguments": {
+        "command": "python -m pytest -q test_arithmetic.py"
+      },
+      "response": {
+        "details": {
+          "exit_code": 1,
+          "stderr": "",
+          "stdout": "F                                                                        [100%]\n=================================== FAILURES ===================================\n___________________________________ test_add ___________________________________\n\n    def test_add():\n>       assert add(7, 3) == 10\nE       assert 4 == 10\nE        +  where 4 = add(7, 3)\n\ntest_arithmetic.py:4: AssertionError\n=========================== short test summary info ============================\nFAILED test_arithmetic.py::test_add - assert 4 == 10\n1 failed in 0.02s\n"
+        },
+        "error_message": "F                                                                        [100%]\n=================================== FAILURES ===================================\n___________________________________ test_add ___________________________________\n\n    def test_add():\n>       assert add(7, 3) == 10\nE       assert 4 == 10\nE        +  where 4 = add(7, 3)\n\ntest_arithmetic.py:4: AssertionError\n=========================== short test summary info ============================\nFAILED test_arithmetic.py::test_add - assert 4 == 10\n1 failed in 0.02s\n",
+        "error_type": "CommandError",
+        "status": "error"
+      },
+      "tool": "run_command"
+    },
+    {
+      "check": "unfixed_fixture_fails",
+      "detail": {
+        "details": {
+          "exit_code": 1,
+          "stderr": "",
+          "stdout": "F                                                                        [100%]\n=================================== FAILURES ===================================\n___________________________________ test_add ___________________________________\n\n    def test_add():\n>       assert add(7, 3) == 10\nE       assert 4 == 10\nE        +  where 4 = add(7, 3)\n\ntest_arithmetic.py:4: AssertionError\n=========================== short test summary info ============================\nFAILED test_arithmetic.py::test_add - assert 4 == 10\n1 failed in 0.02s\n"
+        },
+        "error_message": "F                                                                        [100%]\n=================================== FAILURES ===================================\n___________________________________ test_add ___________________________________\n\n    def test_add():\n>       assert add(7, 3) == 10\nE       assert 4 == 10\nE        +  where 4 = add(7, 3)\n\ntest_arithmetic.py:4: AssertionError\n=========================== short test summary info ============================\nFAILED test_arithmetic.py::test_add - assert 4 == 10\n1 failed in 0.02s\n",
+        "error_type": "CommandError",
+        "status": "error"
+      },
+      "passed": true
+    },
+    {
+      "arguments": {
+        "end_line": 1,
+        "filepath": "arithmetic.py",
+        "start_line": 1
+      },
+      "response": {
+        "content": "def add(a, b):",
+        "end_line": 1,
+        "filepath": "arithmetic.py",
+        "is_truncated": false,
+        "start_line": 1,
+        "status": "ok",
+        "total_lines": 2
+      },
+      "tool": "read_file"
+    },
+    {
+      "check": "inclusive_line_read",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "arguments": {
+        "content": "synthetic",
+        "filepath": "../escape.txt"
+      },
+      "response": {
+        "error_message": "Path traversal detected: '../escape.txt' escapes workspace root.",
+        "error_type": "FileWriteError",
+        "status": "error"
+      },
+      "tool": "write_file"
+    },
+    {
+      "check": "path_escape_rejected",
+      "detail": {
+        "error_message": "Path traversal detected: '../escape.txt' escapes workspace root.",
+        "error_type": "FileWriteError",
+        "status": "error"
+      },
+      "passed": true
+    },
+    {
+      "arguments": {
+        "content": "same same\n",
+        "filepath": "ambiguous.txt"
+      },
+      "response": {
+        "filepath": "ambiguous.txt",
+        "size": 10,
+        "status": "ok"
+      },
+      "tool": "write_file"
+    },
+    {
+      "arguments": {
+        "filepath": "ambiguous.txt",
+        "new_string": "different",
+        "old_string": "same"
+      },
+      "response": {
+        "error_message": "Target string occurs 2 times in ambiguous.txt. Please provide more surrounding context.",
+        "error_type": "FileEditError",
+        "status": "error"
+      },
+      "tool": "edit_file"
+    },
+    {
+      "check": "ambiguous_edit_rejected",
+      "detail": {
+        "error_message": "Target string occurs 2 times in ambiguous.txt. Please provide more surrounding context.",
+        "error_type": "FileEditError",
+        "status": "error"
+      },
+      "passed": true
+    },
+    {
+      "arguments": {
+        "filepath": "ambiguous.txt"
+      },
+      "response": {
+        "content": "same same",
+        "end_line": 1,
+        "filepath": "ambiguous.txt",
+        "is_truncated": false,
+        "start_line": 1,
+        "status": "ok",
+        "total_lines": 1
+      },
+      "tool": "read_file"
+    },
+    {
+      "check": "failed_edit_is_unchanged",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "arguments": {
+        "filepath": "arithmetic.py",
+        "new_string": "return a + b",
+        "old_string": "return a - b"
+      },
+      "response": {
+        "diff": "--- a/arithmetic.py\n+++ b/arithmetic.py\n@@ -1,2 +1,2 @@\n def add(a, b):\n-    return a - b\n+    return a + b\n",
+        "filepath": "arithmetic.py",
+        "is_truncated": false,
+        "occurrences": 1,
+        "status": "ok",
+        "strategy": "exact"
+      },
+      "tool": "edit_file"
+    },
+    {
+      "check": "exact_edit",
+      "detail": {
+        "diff": "--- a/arithmetic.py\n+++ b/arithmetic.py\n@@ -1,2 +1,2 @@\n def add(a, b):\n-    return a - b\n+    return a + b\n",
+        "filepath": "arithmetic.py",
+        "is_truncated": false,
+        "occurrences": 1,
+        "status": "ok",
+        "strategy": "exact"
+      },
+      "passed": true
+    },
+    {
+      "arguments": {
+        "content": "synthetic new file\n",
+        "filepath": "added.txt"
+      },
+      "response": {
+        "filepath": "added.txt",
+        "size": 19,
+        "status": "ok"
+      },
+      "tool": "write_file"
+    },
+    {
+      "check": "new_file_written",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "arguments": {
+        "command": "rm obsolete.txt ambiguous.txt && python -m pytest -q test_arithmetic.py"
+      },
+      "response": {
+        "exit_code": 0,
+        "status": "ok",
+        "stderr": "",
+        "stdout": ".                                                                        [100%]\n1 passed in 0.01s\n"
+      },
+      "tool": "run_command"
+    },
+    {
+      "check": "fixed_fixture_passes",
+      "detail": {
+        "exit_code": 0,
+        "status": "ok",
+        "stderr": "",
+        "stdout": ".                                                                        [100%]\n1 passed in 0.01s\n"
+      },
+      "passed": true
+    },
+    {
+      "arguments": {
+        "node": "add"
+      },
+      "response": {
+        "error_message": "'Repository synthetic/r0 not found in local files at /nonexistent-r0-graphs/synthetic/r0.json'",
+        "error_type": "GraphLookupError",
+        "status": "error"
+      },
+      "tool": "get_code_neighbors"
+    },
+    {
+      "check": "get_code_neighbors_missing_assets",
+      "detail": {
+        "error_message": "'Repository synthetic/r0 not found in local files at /nonexistent-r0-graphs/synthetic/r0.json'",
+        "error_type": "GraphLookupError",
+        "status": "error"
+      },
+      "passed": true
+    },
+    {
+      "arguments": {
+        "query": "add"
+      },
+      "response": {
+        "error_message": "'Repository synthetic/r0 not found in local files at /nonexistent-r0-graphs/synthetic/r0.json'",
+        "error_type": "SimilaritySearchError",
+        "status": "error"
+      },
+      "tool": "search_similar_code"
+    },
+    {
+      "check": "search_similar_code_missing_assets",
+      "detail": {
+        "error_message": "'Repository synthetic/r0 not found in local files at /nonexistent-r0-graphs/synthetic/r0.json'",
+        "error_type": "SimilaritySearchError",
+        "status": "error"
+      },
+      "passed": true
+    },
+    {
+      "arguments": {
+        "nodes": [
+          "add"
+        ]
+      },
+      "response": {
+        "error_message": "'Repository synthetic/r0 not found in local files at /nonexistent-r0-graphs/synthetic/r0.json'",
+        "error_type": "SubgraphExtractionError",
+        "status": "error"
+      },
+      "tool": "get_code_subgraph"
+    },
+    {
+      "check": "get_code_subgraph_missing_assets",
+      "detail": {
+        "error_message": "'Repository synthetic/r0 not found in local files at /nonexistent-r0-graphs/synthetic/r0.json'",
+        "error_type": "SubgraphExtractionError",
+        "status": "error"
+      },
+      "passed": true
+    },
+    {
+      "arguments": {
+        "command": "python -c 'import time; time.sleep(3)'"
+      },
+      "response": {
+        "error_message": "Command timed out after 1 seconds",
+        "error_type": "TimeoutExceeded",
+        "status": "error"
+      },
+      "tool": "run_command"
+    },
+    {
+      "check": "command_timeout",
+      "detail": {
+        "error_message": "Command timed out after 1 seconds",
+        "error_type": "TimeoutExceeded",
+        "status": "error"
+      },
+      "passed": true
+    },
+    {
+      "arguments": {
+        "content": "must not exist",
+        "filepath": "denied.txt"
+      },
+      "response": {
+        "error_message": "Tool call budget exhausted (0 calls)",
+        "error_type": "BudgetExceeded",
+        "status": "error"
+      },
+      "tool": "write_file"
+    },
+    {
+      "check": "exhausted_budget_denies_mutation",
+      "detail": {
+        "error_message": "Tool call budget exhausted (0 calls)",
+        "error_type": "BudgetExceeded",
+        "status": "error"
+      },
+      "passed": true
+    },
+    {
+      "check": "denied_file_absent",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "arguments": {},
+      "response": {
+        "files_changed": 3,
+        "patch_size": 485,
+        "status": "ok"
+      },
+      "tool": "submit_patch"
+    },
+    {
+      "check": "submit_survives_call_exhaustion",
+      "detail": {
+        "files_changed": 3,
+        "patch_size": 485,
+        "status": "ok"
+      },
+      "passed": true
+    },
+    {
+      "check": "modified_added_deleted_files_captured",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "network_and_resource_limits",
+      "detail": {
+        "CpuQuota": 200000,
+        "Memory": 4294967296,
+        "NetworkMode": "none"
+      },
+      "passed": true
+    },
+    {
+      "check": "seed_initialized",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "check": "fresh_container_still_unfixed",
+      "detail": "F                                                                        [100%]\n=================================== FAILURES ===================================\n___________________________________ test_add ___________________________________\n\n    def test_add():\n>       assert add(7, 3) == 10\nE       assert 4 == 10\nE        +  where 4 = add(7, 3)\n\ntest_arithmetic.py:4: AssertionError\n=========================== short test summary info ============================\nFAILED test_arithmetic.py::test_add - assert 4 == 10\n1 failed in 0.01s\n",
+      "passed": true
+    },
+    {
+      "check": "captured_patch_passes_in_fresh_container",
+      "detail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+      "passed": true
+    }
+  ],
+  "remaining_containers": [],
+  "schema_version": 1,
+  "script_sha256": "5dd32e93b65ae572c7a89cf4d4688b8d9696727367a791c69c2d28e622fe3ae2",
+  "started_utc": "2026-10-08T00:57:32.035081+00:00"
+}
