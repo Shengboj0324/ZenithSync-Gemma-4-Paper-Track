@@ -7,6 +7,7 @@ from zenithsync.source_snapshot import git, sanitize
 
 class SourceSnapshotTests(unittest.TestCase):
     def fixture(self, root):
+        root = root.resolve()
         repo = root / 'repo'
         repo.mkdir()
         git(repo, '-c', 'init.templateDir=', 'init')

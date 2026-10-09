@@ -1,0 +1,2 @@
+Previous HEAD position was 2ad426fdb Add a bandaid; provide correct rationale of using easy_install over pip, for now
+HEAD is now at 88fcdc4e6 Fix Pyramid against WebOb >=1.5.0

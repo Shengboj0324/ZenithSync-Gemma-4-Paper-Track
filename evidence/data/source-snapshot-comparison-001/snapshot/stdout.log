@@ -1,0 +1,2384 @@
+........................................................................ [  2%]
+........................................................................ [  5%]
+........................................................................ [  8%]
+........................................................................ [ 11%]
+........................................................................ [ 14%]
+.................................F...................................... [ 17%]
+........................................................................ [ 20%]
+........................................................................ [ 23%]
+........................................................................ [ 26%]
+........................................................................ [ 29%]
+........................................................................ [ 32%]
+........................................................................ [ 34%]
+........................................................................ [ 37%]
+........................................................................ [ 40%]
+....................................FF..FFFFFFFF...F..F..FFF..FF.FF..... [ 43%]
+........................................................................ [ 46%]
+........................................................................ [ 49%]
+........................................................................ [ 52%]
+........................................................................ [ 55%]
+........................................................................ [ 58%]
+........................................................................ [ 61%]
+........................................................................ [ 64%]
+..........................................F.FFF.FFFFFF.F.FFF....FFF..... [ 67%]
+........................................................................ [ 69%]
+........................................................................ [ 72%]
+........................................................................ [ 75%]
+........................................................................ [ 78%]
+........................................................................ [ 81%]
+........................................................................ [ 84%]
+........................................................................ [ 87%]
+........................................................................ [ 90%]
+........................................................................ [ 93%]
+........................................................................ [ 96%]
+........................................................................ [ 99%]
+......................                                                   [100%]
+=================================== FAILURES ===================================
+_______________ ConfiguratorTests.test_scan_integration_conflict _______________
+
+self = <pyramid.tests.test_config.test_init.ConfiguratorTests testMethod=test_scan_integration_conflict>
+
+    def test_scan_integration_conflict(self):
+        from pyramid.tests.test_config.pkgs import selfscan
+        from pyramid.config import Configurator
+        c = Configurator()
+        c.scan(selfscan)
+        c.scan(selfscan)
+        try:
+>           c.commit()
+
+pyramid/tests/test_config/test_init.py:1039: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/config/__init__.py:652: in commit
+    self.action_state.execute_actions(introspector=self.introspector)
+pyramid/config/__init__.py:1161: in execute_actions
+    action = next(pending_actions, None)
+pyramid/config/__init__.py:1119: in resume
+    for a, b in zip_longest(actions, executed_actions):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actions = [{'args': (), 'callable': <function ViewsConfiguratorMixin.add_view.<locals>.register at 0x7ffffbc471f0>, 'discriminat...fffbc47790>, 'discriminator': ('view', None, 'two', None, 'd41d8cd98f00b204e9800998ecf8427e'), 'includepath': (), ...}]
+
+    def resolveConflicts(actions):
+        """Resolve conflicting actions
+    
+        Given an actions list, identify and try to resolve conflicting actions.
+        Actions conflict if they have the same non-None discriminator.
+        Conflicting actions can be resolved if the include path of one of
+        the actions is a prefix of the includepaths of the other
+        conflicting actions and is unequal to the include paths in the
+        other conflicting actions.
+        """
+    
+        def orderandpos(v):
+            n, v = v
+            if not isinstance(v, dict):
+                # old-style tuple action
+                v = expand_action(*v)
+            return (v['order'] or 0, n)
+    
+        sactions = sorted(enumerate(actions), key=orderandpos)
+    
+        def orderonly(v):
+            n, v = v
+            if not isinstance(v, dict):
+                # old-style tuple action
+                v = expand_action(*v)
+            return v['order'] or 0
+    
+        for order, actiongroup in itertools.groupby(sactions, orderonly):
+            # "order" is an integer grouping. Actions in a lower order will be
+            # executed before actions in a higher order.  All of the actions in
+            # one grouping will be executed (its callable, if any will be called)
+            # before any of the actions in the next.
+    
+            unique = {}
+            output = []
+    
+            for i, action in actiongroup:
+                # Within an order, actions are executed sequentially based on
+                # original action ordering ("i").
+    
+                if not isinstance(action, dict):
+                    # old-style tuple action
+                    action = expand_action(*action)
+    
+                # "ainfo" is a tuple of (order, i, action) where "order" is a
+                # user-supplied grouping, "i" is an integer expressing the relative
+                # position of this action in the action list being resolved, and
+                # "action" is an action dictionary.  The purpose of an ainfo is to
+                # associate an "order" and an "i" with a particular action; "order"
+                # and "i" exist for sorting purposes after conflict resolution.
+                ainfo = (order, i, action)
+    
+                discriminator = undefer(action['discriminator'])
+                action['discriminator'] = discriminator
+    
+                if discriminator is None:
+                    # The discriminator is None, so this action can never conflict.
+                    # We can add it directly to the result.
+                    output.append(ainfo)
+                    continue
+    
+                L = unique.setdefault(discriminator, [])
+                L.append(ainfo)
+    
+            # Check for conflicts
+            conflicts = {}
+    
+            for discriminator, ainfos in unique.items():
+                # We use (includepath, order, i) as a sort key because we need to
+                # sort the actions by the paths so that the shortest path with a
+                # given prefix comes first.  The "first" action is the one with the
+                # shortest include path.  We break sorting ties using "order", then
+                # "i".
+                def bypath(ainfo):
+                    path, order, i = ainfo[2]['includepath'], ainfo[0], ainfo[1]
+                    return path, order, i
+    
+                ainfos.sort(key=bypath)
+                ainfo, rest = ainfos[0], ainfos[1:]
+                output.append(ainfo)
+                _, _, action = ainfo
+                basepath, baseinfo, discriminator = (
+                    action['includepath'],
+                    action['info'],
+                    action['discriminator'],
+                    )
+    
+                for _, _, action in rest:
+                    includepath = action['includepath']
+                    # Test whether path is a prefix of opath
+                    if (includepath[:len(basepath)] != basepath or  # not a prefix
+                            includepath == basepath):
+                        L = conflicts.setdefault(discriminator, [baseinfo])
+                        L.append(action['info'])
+    
+            if conflicts:
+>               raise ConfigurationConflictError(conflicts)
+E               pyramid.exceptions.ConfigurationConflictError: Conflicting configuration actions
+E                 For: ('view', None, '', None, 'd41d8cd98f00b204e9800998ecf8427e')
+E                   Line 4 of file /testbed/pyramid/tests/test_config/pkgs/selfscan/__init__.py:
+E                       def abc(request):
+E                   Line 4 of file /testbed/pyramid/tests/test_config/pkgs/selfscan/__init__.py:
+E                       def abc(request):
+E                 For: ('view', None, 'two', None, 'd41d8cd98f00b204e9800998ecf8427e')
+E                   Line 4 of file /testbed/pyramid/tests/test_config/pkgs/selfscan/another.py:
+E                       def two(request):
+E                   Line 4 of file /testbed/pyramid/tests/test_config/pkgs/selfscan/another.py:
+E                       def two(request):
+
+pyramid/config/__init__.py:1297: ConfigurationConflictError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_config.test_init.ConfiguratorTests testMethod=test_scan_integration_conflict>
+
+    def test_scan_integration_conflict(self):
+        from pyramid.tests.test_config.pkgs import selfscan
+        from pyramid.config import Configurator
+        c = Configurator()
+        c.scan(selfscan)
+        c.scan(selfscan)
+        try:
+            c.commit()
+        except ConfigurationConflictError as why:
+            def scanconflicts(e):
+                conflicts = e._conflicts.values()
+                for conflict in conflicts:
+                    for confinst in conflict:
+                        yield confinst.src
+            which = list(scanconflicts(why))
+            self.assertEqual(len(which), 4)
+>           self.assertTrue("@view_config(renderer='string')" in which)
+E           AssertionError: False is not true
+
+pyramid/tests/test_config/test_init.py:1048: AssertionError
+_____________________ TestHTTPException.test__str__detail ______________________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbad6160>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test__str__detail>
+
+    def test__str__detail(self):
+>       exc = self._makeOne()
+
+pyramid/tests/test_httpexceptions.py:173: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbad6160>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+___________________ TestHTTPException.test__str__explanation ___________________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffb6fbee0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test__str__explanation>
+
+    def test__str__explanation(self):
+>       exc = self._makeOne()
+
+pyramid/tests/test_httpexceptions.py:178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffb6fbee0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+_______________ TestHTTPException.test_ctor_calls_Exception_ctor _______________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffb747520>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_ctor_calls_Exception_ctor>
+
+    def test_ctor_calls_Exception_ctor(self):
+>       exc = self._makeOne('message')
+
+pyramid/tests/test_httpexceptions.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffb747520>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+_______________ TestHTTPException.test_ctor_calls_Response_ctor ________________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffb71fdc0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_ctor_calls_Response_ctor>
+
+    def test_ctor_calls_Response_ctor(self):
+>       exc = self._makeOne('message')
+
+pyramid/tests/test_httpexceptions.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffb71fdc0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+_________________ TestHTTPException.test_ctor_extends_headers __________________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbab61c0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_ctor_extends_headers>
+
+    def test_ctor_extends_headers(self):
+>       exc = self._makeOne(headers=[('X-Foo', 'foo')])
+
+pyramid/tests/test_httpexceptions.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbab61c0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+______________ TestHTTPException.test_ctor_sets_body_template_obj ______________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffd0cd520>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_ctor_sets_body_template_obj>
+
+    def test_ctor_sets_body_template_obj(self):
+>       exc = self._makeOne(body_template='${foo}')
+
+pyramid/tests/test_httpexceptions.py:130: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffd0cd520>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+___________________ TestHTTPException.test_ctor_sets_comment ___________________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffb747460>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_ctor_sets_comment>
+
+    def test_ctor_sets_comment(self):
+>       exc = self._makeOne(comment='comment')
+
+pyramid/tests/test_httpexceptions.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffb747460>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+___________________ TestHTTPException.test_ctor_sets_detail ____________________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbb39b20>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_ctor_sets_detail>
+
+    def test_ctor_sets_detail(self):
+>       exc = self._makeOne('message')
+
+pyramid/tests/test_httpexceptions.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbb39b20>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+____ TestHTTPException.test_ctor_with_app_iter_doesnt_set_default_app_iter _____
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbabed60>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_ctor_with_app_iter_doesnt_set_default_app_iter>
+
+    def test_ctor_with_app_iter_doesnt_set_default_app_iter(self):
+>       exc = self._makeOne(app_iter=[b'123'])
+
+pyramid/tests/test_httpexceptions.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbabed60>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+______ TestHTTPException.test_ctor_with_body_doesnt_set_default_app_iter _______
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffba11b80>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_ctor_with_body_doesnt_set_default_app_iter>
+
+    def test_ctor_with_body_doesnt_set_default_app_iter(self):
+>       exc = self._makeOne(body=b'123')
+
+pyramid/tests/test_httpexceptions.py:141: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffba11b80>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+__ TestHTTPException.test_ctor_with_unicode_body_doesnt_set_default_app_iter ___
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffba5fbe0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_ctor_with_unicode_body_doesnt_set_default_app_iter>
+
+    def test_ctor_with_unicode_body_doesnt_set_default_app_iter(self):
+>       exc = self._makeOne(unicode_body=text_('123'))
+
+pyramid/tests/test_httpexceptions.py:145: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffba5fbe0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+_______________________ TestHTTPException.test_exception _______________________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbaae100>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_exception>
+
+    def test_exception(self):
+>       exc = self._makeOne()
+
+pyramid/tests/test_httpexceptions.py:187: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbaae100>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+______________ TestHTTPException.test_provides_IExceptionResponse ______________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffd0cd4c0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_provides_IExceptionResponse>
+
+    def test_provides_IExceptionResponse(self):
+        from pyramid.interfaces import IExceptionResponse
+>       inst = self._getTargetClass()()
+
+pyramid/tests/test_httpexceptions.py:106: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffd0cd4c0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+__________________ TestHTTPException.test_provides_IResponse ___________________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbab61c0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_provides_IResponse>
+
+    def test_provides_IResponse(self):
+        from pyramid.interfaces import IResponse
+>       inst = self._getTargetClass()()
+
+pyramid/tests/test_httpexceptions.py:96: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbab61c0>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+_____________________ TestHTTPException.test_wsgi_response _____________________
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbaae100>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.TestHTTPException testMethod=test_wsgi_response>
+
+    def test_wsgi_response(self):
+>       exc = self._makeOne()
+
+pyramid/tests/test_httpexceptions.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:87: in _makeOne
+    return cls(*arg, **kw)
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'HTTPException' object has no attribute '_status'") raised in repr()] HTTPException object at 0x7ffffbaae100>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+______________ Test_HTTPMove.test_it_call_with_default_body_tmpl _______________
+
+self = <[AttributeError("'_HTTPMove' object has no attribute '_status'") raised in repr()] _HTTPMove object at 0x7ffffba11b20>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.Test_HTTPMove testMethod=test_it_call_with_default_body_tmpl>
+
+    def test_it_call_with_default_body_tmpl(self):
+>       exc = self._makeOne(location='foo')
+
+pyramid/tests/test_httpexceptions.py:327: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:306: in _makeOne
+    return _HTTPMove(*arg, **kw)
+pyramid/httpexceptions.py:450: in __init__
+    super(_HTTPMove, self).__init__(
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'_HTTPMove' object has no attribute '_status'") raised in repr()] _HTTPMove object at 0x7ffffba11b20>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+___________________ Test_HTTPMove.test_it_location_firstarg ____________________
+
+self = <[AttributeError("'_HTTPMove' object has no attribute '_status'") raised in repr()] _HTTPMove object at 0x7ffffb6cff40>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.Test_HTTPMove testMethod=test_it_location_firstarg>
+
+    def test_it_location_firstarg(self):
+>       exc = self._makeOne('foo')
+
+pyramid/tests/test_httpexceptions.py:323: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:306: in _makeOne
+    return _HTTPMove(*arg, **kw)
+pyramid/httpexceptions.py:450: in __init__
+    super(_HTTPMove, self).__init__(
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'_HTTPMove' object has no attribute '_status'") raised in repr()] _HTTPMove object at 0x7ffffb6cff40>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+__________________ Test_HTTPMove.test_it_location_not_passed ___________________
+
+self = <[AttributeError("'_HTTPMove' object has no attribute '_status'") raised in repr()] _HTTPMove object at 0x7ffffb6cfd00>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.Test_HTTPMove testMethod=test_it_location_not_passed>
+
+    def test_it_location_not_passed(self):
+>       exc = self._makeOne()
+
+pyramid/tests/test_httpexceptions.py:315: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:306: in _makeOne
+    return _HTTPMove(*arg, **kw)
+pyramid/httpexceptions.py:450: in __init__
+    super(_HTTPMove, self).__init__(
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'_HTTPMove' object has no attribute '_status'") raised in repr()] _HTTPMove object at 0x7ffffb6cfd00>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+____________________ Test_HTTPMove.test_it_location_passed _____________________
+
+self = <[AttributeError("'_HTTPMove' object has no attribute '_status'") raised in repr()] _HTTPMove object at 0x7ffffb6d8a60>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+>           int(value.split()[0])
+E           ValueError: invalid literal for int() with base 10: 'None'
+
+.venv/lib/python3.8/site-packages/webob/response.py:439: ValueError
+
+During handling of the above exception, another exception occurred:
+
+self = <pyramid.tests.test_httpexceptions.Test_HTTPMove testMethod=test_it_location_passed>
+
+    def test_it_location_passed(self):
+>       exc = self._makeOne(location='foo')
+
+pyramid/tests/test_httpexceptions.py:319: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+pyramid/tests/test_httpexceptions.py:306: in _makeOne
+    return _HTTPMove(*arg, **kw)
+pyramid/httpexceptions.py:450: in __init__
+    super(_HTTPMove, self).__init__(
+pyramid/httpexceptions.py:212: in __init__
+    Response.__init__(self, status=status, **kw)
+.venv/lib/python3.8/site-packages/webob/response.py:192: in __init__
+    self.status = status
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'_HTTPMove' object has no attribute '_status'") raised in repr()] _HTTPMove object at 0x7ffffb6d8a60>
+value = 'None None'
+
+    def _status__set(self, value):
+        try:
+            code = int(value)
+        except (ValueError, TypeError):
+            pass
+        else:
+            self.status_code = code
+            return
+        if not PY2:
+            if isinstance(value, bytes):
+                value = value.decode('ascii')
+        elif isinstance(value, text_type):
+            value = value.encode('ascii')
+        if not isinstance(value, str):
+            raise TypeError(
+                "You must set status to a string or integer (not %s)"
+                % type(value))
+    
+        # Attempt to get the status code itself, if this fails we should fail
+        try:
+            # We don't need this value anywhere, we just want to validate it's
+            # an integer. So we are using the side-effect of int() raises a
+            # ValueError as a test
+            int(value.split()[0])
+        except ValueError:
+>           raise ValueError('Invalid status code, integer required.')
+E           ValueError: Invalid status code, integer required.
+
+.venv/lib/python3.8/site-packages/webob/response.py:441: ValueError
+_______________ TestPRequestCommand.test_command_display_headers _______________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_display_headers>
+
+    def test_command_display_headers(self):
+        command = self._makeOne(
+            ['', '--display-headers', 'development.ini', '/'])
+        command.run()
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(
+            self._out,
+            ['200 OK', 'Content-Type: text/html; charset=UTF-8', 'abc'])
+E       AssertionError: Lists differ: ['200 OK', b'abc'] != ['200 OK', 'Content-Type: text/html; charset=UTF-8', 'abc']
+E       
+E       First differing element 1:
+E       b'abc'
+E       'Content-Type: text/html; charset=UTF-8'
+E       
+E       Second list contains 1 additional elements.
+E       First extra element 2:
+E       'abc'
+E       
+E       - ['200 OK', b'abc']
+E       + ['200 OK', 'Content-Type: text/html; charset=UTF-8', 'abc']
+
+pyramid/tests/test_scripts/test_prequest.py:202: AssertionError
+_________ TestPRequestCommand.test_command_has_content_type_header_var _________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_has_content_type_header_var>
+
+    def test_command_has_content_type_header_var(self):
+        command = self._makeOne(
+            ['', '--header=content-type:app/foo','development.ini', '/'])
+        command.run()
+        self.assertEqual(self._environ['CONTENT_TYPE'], 'app/foo')
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:92: AssertionError
+_____________ TestPRequestCommand.test_command_has_good_header_var _____________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_has_good_header_var>
+
+    def test_command_has_good_header_var(self):
+        command = self._makeOne(
+            ['', '--header=name:value','development.ini', '/'])
+        command.run()
+        self.assertEqual(self._environ['HTTP_NAME'], 'value')
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:69: AssertionError
+__________ TestPRequestCommand.test_command_has_multiple_header_vars ___________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_has_multiple_header_vars>
+
+    def test_command_has_multiple_header_vars(self):
+        command = self._makeOne(
+            ['',
+             '--header=name:value',
+             '--header=name2:value2',
+             'development.ini',
+             '/'])
+        command.run()
+        self.assertEqual(self._environ['HTTP_NAME'], 'value')
+        self.assertEqual(self._environ['HTTP_NAME2'], 'value2')
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:107: AssertionError
+_________________ TestPRequestCommand.test_command_method_get __________________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_method_get>
+
+    def test_command_method_get(self):
+        command = self._makeOne(['', '--method=GET', 'development.ini', '/'])
+        command.run()
+        self.assertEqual(self._environ['REQUEST_METHOD'], 'GET')
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:116: AssertionError
+_______________ TestPRequestCommand.test_command_method_options ________________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_method_options>
+
+    def test_command_method_options(self):
+        from pyramid.compat import NativeIO
+        command = self._makeOne(['', '--method=OPTIONS', 'development.ini',
+                                '/'])
+        stdin = NativeIO()
+        command.stdin = stdin
+        command.run()
+        self.assertEqual(self._environ['REQUEST_METHOD'], 'OPTIONS')
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:184: AssertionError
+________________ TestPRequestCommand.test_command_method_patch _________________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_method_patch>
+
+    def test_command_method_patch(self):
+        from pyramid.compat import NativeIO
+        command = self._makeOne(['', '--method=PATCH', 'development.ini', '/'])
+        stdin = NativeIO()
+        command.stdin = stdin
+        command.run()
+        self.assertEqual(self._environ['REQUEST_METHOD'], 'PATCH')
+        self.assertEqual(self._environ['CONTENT_LENGTH'], '-1')
+        self.assertEqual(self._environ['wsgi.input'], stdin)
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:158: AssertionError
+_________________ TestPRequestCommand.test_command_method_post _________________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_method_post>
+
+    def test_command_method_post(self):
+        from pyramid.compat import NativeIO
+        command = self._makeOne(['', '--method=POST', 'development.ini', '/'])
+        stdin = NativeIO()
+        command.stdin = stdin
+        command.run()
+        self.assertEqual(self._environ['REQUEST_METHOD'], 'POST')
+        self.assertEqual(self._environ['CONTENT_LENGTH'], '-1')
+        self.assertEqual(self._environ['wsgi.input'], stdin)
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:130: AssertionError
+_______________ TestPRequestCommand.test_command_method_propfind _______________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_method_propfind>
+
+    def test_command_method_propfind(self):
+        from pyramid.compat import NativeIO
+        command = self._makeOne(['', '--method=PROPFIND', 'development.ini',
+                                '/'])
+        stdin = NativeIO()
+        command.stdin = stdin
+        command.run()
+        self.assertEqual(self._environ['REQUEST_METHOD'], 'PROPFIND')
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:171: AssertionError
+_________________ TestPRequestCommand.test_command_method_put __________________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_method_put>
+
+    def test_command_method_put(self):
+        from pyramid.compat import NativeIO
+        command = self._makeOne(['', '--method=PUT', 'development.ini', '/'])
+        stdin = NativeIO()
+        command.stdin = stdin
+        command.run()
+        self.assertEqual(self._environ['REQUEST_METHOD'], 'PUT')
+        self.assertEqual(self._environ['CONTENT_LENGTH'], '-1')
+        self.assertEqual(self._environ['wsgi.input'], stdin)
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:144: AssertionError
+________ TestPRequestCommand.test_command_path_doesnt_start_with_slash _________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_path_doesnt_start_with_slash>
+
+    def test_command_path_doesnt_start_with_slash(self):
+        command = self._makeOne(['', 'development.ini', 'abc'])
+        command.run()
+        self.assertEqual(self._path_info, '/abc')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:50: AssertionError
+__________________ TestPRequestCommand.test_command_two_args ___________________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_two_args>
+
+    def test_command_two_args(self):
+        command = self._makeOne(['', 'development.ini', '/'])
+        command.run()
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:42: AssertionError
+________________ TestPRequestCommand.test_command_w_basic_auth _________________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_w_basic_auth>
+
+    def test_command_w_basic_auth(self):
+        command = self._makeOne(
+            ['', '--login=user:password',
+                 '--header=name:value','development.ini', '/'])
+        command.run()
+        self.assertEqual(self._environ['HTTP_NAME'], 'value')
+        self.assertEqual(self._environ['HTTP_AUTHORIZATION'],
+                        'Basic dXNlcjpwYXNzd29yZA==')
+        self.assertEqual(self._path_info, '/')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:82: AssertionError
+______________ TestPRequestCommand.test_command_with_query_string ______________
+
+self = <pyramid.tests.test_scripts.test_prequest.TestPRequestCommand testMethod=test_command_with_query_string>
+
+    def test_command_with_query_string(self):
+        command = self._makeOne(['', 'development.ini', '/abc?a=1&b=2&c'])
+        command.run()
+        self.assertEqual(self._environ['QUERY_STRING'], 'a=1&b=2&c')
+        self.assertEqual(self._path_info, '/abc')
+        self.assertEqual(self._spec, 'development.ini')
+        self.assertEqual(self._app_name, None)
+>       self.assertEqual(self._out, ['abc'])
+E       AssertionError: Lists differ: [b'abc'] != ['abc']
+E       
+E       First differing element 0:
+E       b'abc'
+E       'abc'
+E       
+E       - [b'abc']
+E       ?  -
+E       
+E       + ['abc']
+
+pyramid/tests/test_scripts/test_prequest.py:193: AssertionError
+_______________ TestPRoutesCommand.test_config_format_ini_commas _______________
+
+self = <pyramid.tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_config_format_ini_commas>
+
+    def test_config_format_ini_commas(self):
+        from pyramid.renderers import null_renderer as nr
+        from pyramid.config import not_
+    
+        def view1(context, request): return 'view1'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b')
+        config.add_view(
+            route_name='foo',
+            view=view1,
+            renderer=nr,
+            request_method=not_('POST')
+        )
+    
+        command = self._makeOne()
+    
+        L = []
+        command.out = L.append
+        command.bootstrap = (dummy.DummyBootstrap(registry=config.registry),)
+        config_factory = dummy.DummyConfigParserFactory()
+        command.ConfigParser = config_factory
+        config_factory.items = [('format', 'method,name')]
+    
+        result = command.run()
+>       self.assertEqual(result, 0)
+E       AssertionError: 2 != 0
+
+pyramid/tests/test_scripts/test_proutes.py:726: AssertionError
+______________ TestPRoutesCommand.test_config_format_ini_newlines ______________
+
+self = <pyramid.tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_config_format_ini_newlines>
+
+    def test_config_format_ini_newlines(self):
+        from pyramid.renderers import null_renderer as nr
+        from pyramid.config import not_
+    
+        def view1(context, request): return 'view1'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b')
+        config.add_view(
+            route_name='foo',
+            view=view1,
+            renderer=nr,
+            request_method=not_('POST')
+        )
+    
+        command = self._makeOne()
+    
+        L = []
+        command.out = L.append
+        command.bootstrap = (dummy.DummyBootstrap(registry=config.registry),)
+        config_factory = dummy.DummyConfigParserFactory()
+        command.ConfigParser = config_factory
+        config_factory.items = [('format', 'method\nname')]
+    
+        result = command.run()
+>       self.assertEqual(result, 0)
+E       AssertionError: 2 != 0
+
+pyramid/tests/test_scripts/test_proutes.py:660: AssertionError
+_______________ TestPRoutesCommand.test_config_format_ini_spaces _______________
+
+self = <pyramid.tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_config_format_ini_spaces>
+
+    def test_config_format_ini_spaces(self):
+        from pyramid.renderers import null_renderer as nr
+        from pyramid.config import not_
+    
+        def view1(context, request): return 'view1'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b')
+        config.add_view(
+            route_name='foo',
+            view=view1,
+            renderer=nr,
+            request_method=not_('POST')
+        )
+    
+        command = self._makeOne()
+    
+        L = []
+        command.out = L.append
+        command.bootstrap = (dummy.DummyBootstrap(registry=config.registry),)
+        config_factory = dummy.DummyConfigParserFactory()
+        command.ConfigParser = config_factory
+        config_factory.items = [('format', 'method name')]
+    
+        result = command.run()
+>       self.assertEqual(result, 0)
+E       AssertionError: 2 != 0
+
+pyramid/tests/test_scripts/test_proutes.py:693: AssertionError
+=============================== warnings summary ===============================
+pyramid/asset.py:2
+  /testbed/pyramid/asset.py:2: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+    import pkg_resources
+
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+  /testbed/.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('paste')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+  /testbed/.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('repoze')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+  /testbed/.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('zope')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+pyramid/path.py:4
+  /testbed/pyramid/path.py:4: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+    import imp
+
+pyramid/tests/test_scaffolds/test_template.py:42
+  /testbed/pyramid/tests/test_scaffolds/test_template.py:42: DeprecationWarning: invalid escape sequence \{
+    result = inst.render_template('{{a}} {{b}} \{\{a\}\} \{\{c\}\}', {'a':'1', 'b':'2'})
+
+pyramid/tests/test_scaffolds/test_template.py:47
+  /testbed/pyramid/tests/test_scaffolds/test_template.py:47: DeprecationWarning: invalid escape sequence \{
+    result = inst.render_template('{{a}} {{b}} \{\{a\} \{b\}\}', {'a':'1', 'b':'2'})
+
+pyramid/tests/test_scaffolds/test_template.py:48
+  /testbed/pyramid/tests/test_scaffolds/test_template.py:48: DeprecationWarning: invalid escape sequence \{
+    self.assertEqual(result, bytes_('1 2 \{\{a\} \{b\}\}'))
+
+pyramid/tests/test_scaffolds/test_template.py:52
+  /testbed/pyramid/tests/test_scaffolds/test_template.py:52: DeprecationWarning: invalid escape sequence \{
+    result = inst.render_template('{{a}} {{b}} \{a\} \{b', {'a':'1', 'b':'2'})
+
+pyramid/tests/test_scaffolds/test_template.py:53
+  /testbed/pyramid/tests/test_scaffolds/test_template.py:53: DeprecationWarning: invalid escape sequence \{
+    self.assertEqual(result, bytes_('1 2 \{a\} \{b'))
+
+pyramid/tests/test_urldispatch.py:308
+  /testbed/pyramid/tests/test_urldispatch.py:308: DeprecationWarning: invalid escape sequence \.
+    matcher, generator = self._callFUT('foo/{baz}/biz/{buz:[^/\.]+}.{bar}')
+
+pyramid/tests/test_urldispatch.py:316
+  /testbed/pyramid/tests/test_urldispatch.py:316: DeprecationWarning: invalid escape sequence \.
+    matcher, generator = self._callFUT('foo/{baz}/biz/{buz:(?:[^/\.]+)}.{bar}')
+
+pyramid/tests/test_urldispatch.py:332
+  /testbed/pyramid/tests/test_urldispatch.py:332: DeprecationWarning: invalid escape sequence \d
+    matcher, generator = self._callFUT('/{buz:\d{4}}')
+
+pyramid/tests/test_urldispatch.py:338
+  /testbed/pyramid/tests/test_urldispatch.py:338: DeprecationWarning: invalid escape sequence \d
+    matcher, generator = self._callFUT('/{buz:\d{3,4}}')
+
+pyramid/tests/test_urldispatch.py:346
+  /testbed/pyramid/tests/test_urldispatch.py:346: DeprecationWarning: invalid escape sequence \d
+    '/{buz:(\d{2}|\d{4})-[a-zA-Z]{3,4}-\d{2}}')
+
+pyramid/tests/test_authentication.py::TestAuthTktCookieHelper::test_remember_insane_userid
+  /testbed/.venv/lib/python3.8/site-packages/webob/cookies.py:418: RuntimeWarning: Cookie value contains invalid bytes: (b'   '). Future versions will raise ValueError upon encountering invalid bytes.
+    __warn_or_raise(
+
+pyramid/tests/test_i18n.py::TestTranslations::test_ldgettext
+pyramid/tests/test_i18n.py::TestTranslations::test_ldgettext
+  /testbed/pyramid/i18n.py:329: DeprecationWarning: lgettext() is deprecated, use gettext() instead
+    return self._domains.get(domain, self).lgettext(message)
+
+pyramid/tests/test_i18n.py::TestTranslations::test_ldngettext
+pyramid/tests/test_i18n.py::TestTranslations::test_ldngettext
+  /testbed/pyramid/i18n.py:350: DeprecationWarning: lngettext() is deprecated, use ngettext() instead
+    return self._domains.get(domain, self).lngettext(singular, plural, num)
+
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_ordering
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_ordering
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_ordering
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_ordering
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_wildcards
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_wildcards
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_wildcards
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_wildcards
+  /testbed/.venv/lib/python3.8/site-packages/webob/acceptparse.py:1047: DeprecationWarning: The behavior of AcceptValidHeader.best_match is currently being maintained for backward compatibility, but it will be deprecated in the future, as it does not conform to the RFC.
+    warnings.warn(
+
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_ordering
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_ordering
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_wildcards
+pyramid/tests/test_integration.py::AcceptContentTypeTest::test_wildcards
+  /testbed/.venv/lib/python3.8/site-packages/webob/acceptparse.py:645: DeprecationWarning: The behavior of AcceptValidHeader.__contains__ is currently being maintained for backward compatibility, but it will change in the future to better conform to the RFC.
+    warnings.warn(
+
+pyramid/tests/test_session.py::TestBaseCookieSession::test__set_cookie_on_exception_no_request_exception
+  /testbed/.venv/lib/python3.8/site-packages/webob/cookies.py:418: RuntimeWarning: Cookie value contains invalid bytes: (b', , '). Future versions will raise ValueError upon encountering invalid bytes.
+    __warn_or_raise(
+
+pyramid/tests/test_session.py::TestBaseCookieSession::test__set_cookie_options
+pyramid/tests/test_session.py::TestBaseCookieSession::test__set_cookie_real_webob_response
+  /testbed/.venv/lib/python3.8/site-packages/webob/cookies.py:418: RuntimeWarning: Cookie value contains invalid bytes: (b', , "" ""'). Future versions will raise ValueError upon encountering invalid bytes.
+    __warn_or_raise(
+
+pyramid/tests/test_session.py::TestBaseCookieSession::test_cookie_is_set
+pyramid/tests/test_session.py::TestBaseCookieSession::test_set_cookie_with_exception
+  /testbed/.venv/lib/python3.8/site-packages/webob/cookies.py:418: RuntimeWarning: Cookie value contains invalid bytes: (b', , "" '). Future versions will raise ValueError upon encountering invalid bytes.
+    __warn_or_raise(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+--------------------- generated xml file: /audit/junit.xml ---------------------
+=========================== short test summary info ============================
+FAILED pyramid/tests/test_config/test_init.py::ConfiguratorTests::test_scan_integration_conflict
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test__str__detail
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test__str__explanation
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_ctor_calls_Exception_ctor
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_ctor_calls_Response_ctor
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_ctor_extends_headers
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_ctor_sets_body_template_obj
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_ctor_sets_comment
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_ctor_sets_detail
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_ctor_with_app_iter_doesnt_set_default_app_iter
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_ctor_with_body_doesnt_set_default_app_iter
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_ctor_with_unicode_body_doesnt_set_default_app_iter
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_exception
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_provides_IExceptionResponse
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_provides_IResponse
+FAILED pyramid/tests/test_httpexceptions.py::TestHTTPException::test_wsgi_response
+FAILED pyramid/tests/test_httpexceptions.py::Test_HTTPMove::test_it_call_with_default_body_tmpl
+FAILED pyramid/tests/test_httpexceptions.py::Test_HTTPMove::test_it_location_firstarg
+FAILED pyramid/tests/test_httpexceptions.py::Test_HTTPMove::test_it_location_not_passed
+FAILED pyramid/tests/test_httpexceptions.py::Test_HTTPMove::test_it_location_passed
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_display_headers
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_has_content_type_header_var
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_has_good_header_var
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_has_multiple_header_vars
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_method_get
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_method_options
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_method_patch
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_method_post
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_method_propfind
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_method_put
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_path_doesnt_start_with_slash
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_two_args
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_w_basic_auth
+FAILED pyramid/tests/test_scripts/test_prequest.py::TestPRequestCommand::test_command_with_query_string
+FAILED pyramid/tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_config_format_ini_commas
+FAILED pyramid/tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_config_format_ini_newlines
+FAILED pyramid/tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_config_format_ini_spaces
+37 failed, 2433 passed, 38 warnings in 4.24s

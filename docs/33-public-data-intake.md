@@ -506,3 +506,55 @@ redundant blank lines from JSONL while preserving the same 2,500 records; output
 
 API references: https://docs.github.com/en/rest/git/commits and
 https://distribution.github.io/distribution/spec/api/ .
+
+### Sanitized snapshot and evaluator controls: Pyramid only
+
+Built a local sanitized image from the pinned Pyramid source image. The builder
+replaces `.git` with one new baseline commit, removes declared grading artifacts,
+and rebuilds Git blobs/index/tree directly without content filters. All 891
+tracked paths (6,024,509 bytes) retain the exact original tree identity
+`8a23c23faec496b81df0517237d7ed8d77e03b59`. The new baseline commit is
+`dee40c5a59ed5d457c7143d476c1b17263845777`; its fixed timestamp is deliberate
+snapshot metadata, not an assertion about historical authorship. Fresh-container
+checks reject access to the solution commit and find `/r2e_tests` absent.
+
+Local image ID:
+`sha256:397c5e0c8991ee3d2ab594052f66e9fd2cf2d9df45a67fd1a6445e00caf6fea1`.
+Its exact build input is `artifacts/official/source-snapshot-build-001`, including
+the qualified sanitizer copy. Subsequent source preflight hardening is tested
+locally but does not retroactively change this built image's code identity.
+The original image remains the independent evaluator source. Docker lower layers
+still contain original data; isolation assumes no container-engine access, host
+mounts, or network access from the agent. This is not a scrubbed public image
+distribution and must not be described as one.
+
+`compare_source_snapshot.py` ran all collected original repository tests in two
+separate local containers: 2,470 case identities, 2,433 passed and 37 failed on
+each side, zero changed outcomes. Both import Pyramid from `/testbed/pyramid`
+and leave tracked source unchanged. The 37 shared failures remain unresolved;
+paired equality demonstrates only observed preservation under this environment.
+No generated grading tests or agent ran during that comparison.
+
+`qualify_source_evaluator.py` then ran separate evaluator controls at the actual
+base and solution commits. It collected 994 cases from the source grading suite:
+base 911 passed/83 failed; reference 930 passed/64 failed. A blanket all-pass rule
+would misclassify this dataset. The pinned publisher expects 924 passed and 64
+failed under 988 shortened Class.method keys. Seven distinct module-qualified
+tests share `Test_main.test_it`, accounting for the six-case difference.
+
+`source_evaluator.py` keeps full case identities and requires every member of a
+publisher group to equal its expected status, with exactly matching group sets.
+This avoids last-write-wins masking of a failure. Under this stronger predicate,
+the base has 19 disagreements and the reference has none. All seven colliding
+cases pass. This qualifies the positive/negative controls for this single task;
+it does not establish exact upstream log-parser parity, test completeness, or
+agent success. Expected failures are preserved as part of the source contract,
+never recoded as passing tests.
+
+`audit_source_expectations.py` verifies all source shard hashes, finds exactly one
+matching task, records shard/row provenance, and checks control source revisions
+before comparison. Evidence directories: `source-snapshot-build-001`,
+`source-snapshot-comparison-001`, `source-evaluator-controls-001`, and
+`source-expectations-001`. All owned test containers were removed. No Runpod
+compute was used. Next integrate native agent tools with the sanitized workspace
+and evaluate exported patches only in the separate evaluator environment.

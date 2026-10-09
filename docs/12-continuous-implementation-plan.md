@@ -535,3 +535,19 @@ Next implement a sanitized agent snapshot with an independent evaluator, verify
 that intended source/dependencies still execute, and then qualify native replay.
 Do not promote these trajectories based on metadata joins or publisher labels.
 Evidence: `source-environment-resolution-001`, `source-image-probe-001`.
+
+### Sanitized source snapshot and reference-control qualification
+
+For the fixed Pyramid task, built a fresh one-commit workspace that preserves
+the exact original Git tree (891 paths) while removing known grading artifacts
+and original solution history from the agent-visible filesystem. Original versus
+sanitized repository tests match on all 2,470 cases: 2,433 passed/37 failed each.
+Shared failures remain unresolved; this is preservation evidence, not a green
+repository or general isolation guarantee.
+
+Separate evaluator controls reveal a lossy upstream test-name convention. Added
+an all-members comparison that preserves full case identities and the publisher's
+expected failures. The reference matches all 994 actual cases; the buggy base has
+19 mismatches. No learned agent ran and no trajectory was admitted to training.
+Next connect native tools and patch export to this sanitized/evaluator split,
+then expand qualification across the preselected repositories. Continue locally.

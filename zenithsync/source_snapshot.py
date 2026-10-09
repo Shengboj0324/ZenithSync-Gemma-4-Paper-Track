@@ -62,7 +62,11 @@ def tracked_snapshot(repo):
 
 
 def sanitize(repo, *, expected_base, solution, oracle_paths):
-    """Destructively sanitize an owned disposable filesystem; fail before deletion."""
+    """Sanitize an owned disposable filesystem; discard it on any failure.
+
+    Preflight checks precede deletion. Post-mutation integrity failures cannot
+    roll back removed history and must never be treated as successful output.
+    """
     repo = Path(repo).resolve(strict=True)
     if any(re.fullmatch('[0-9a-f]{40}', value) is None for value in (expected_base, solution)):
         raise ValueError('Expected full Git commit identities')
@@ -81,7 +85,10 @@ def sanitize(repo, *, expected_base, solution, oracle_paths):
     before = tracked_snapshot(repo)
     paths = [Path(path).absolute() for path in oracle_paths]
     tracked = [repo / row['path'] for row in before]
+    tracked += [path.resolve(strict=True) for path in tracked if path.is_symlink()]
     for path in paths:
+        if '..' in path.parts:
+            raise ValueError('Parent traversal in oracle path')
         if path == repo or path == metadata or repo.is_relative_to(path):
             raise ValueError('Oracle removal would remove repository or metadata')
         if any(file == path or file.is_relative_to(path) for file in tracked):
