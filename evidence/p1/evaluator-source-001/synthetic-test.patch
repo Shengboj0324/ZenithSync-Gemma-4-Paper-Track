@@ -1,0 +1,11 @@
+diff --git a/tests/test_zenith_source_probe.py b/tests/test_zenith_source_probe.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_zenith_source_probe.py
+@@ -0,0 +1,6 @@
++from pathlib import Path
++
++def test_workspace_source_origin():
++    import requests
++    origin = str(Path(requests.__file__).resolve())
++    assert origin.startswith("/workspace/src/requests/"), origin

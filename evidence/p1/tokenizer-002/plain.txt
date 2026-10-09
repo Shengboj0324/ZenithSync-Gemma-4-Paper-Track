@@ -1,0 +1,5 @@
+<bos><|turn>user
+Inspect src/example.py before editing.<turn|>
+<|turn>model
+<|channel>thought
+<channel|>

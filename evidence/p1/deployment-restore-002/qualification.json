@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "restored_bundle_72_tests_passed",
+  "tests": {
+    "size_bytes": 8986,
+    "sha256": "eb3d06def2f2b1fca5af0e5a380756432bab9c709613ba1bee737a4bca28086a"
+  },
+  "manifest": {
+    "size_bytes": 8788,
+    "sha256": "4c2d502620e1b2ae1b1e99162c92e53da84a2c0815f145729e1cb4a6ebdd6adb"
+  },
+  "restoration_receipt": {
+    "size_bytes": 818,
+    "sha256": "d6b3a51dec1cd7c66f64b7ea1f85e0c1418d3fb2e656b013a748201a58916de1"
+  },
+  "bytecode_writes_disabled": true,
+  "scope": "Restored updated deployment code CPU tests; no inference or repair outcome"
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "restored_bundle_70_tests_passed",
+  "tests": {
+    "size_bytes": 8664,
+    "sha256": "0f258f02638779e29bd01293d67b9b581fab67e2f65d726ffbcbe937f00c8739"
+  },
+  "manifest": {
+    "size_bytes": 7539,
+    "sha256": "fb08ab4c21bce0fc25d93a84ed58117cbb747ab256d56a3ef41ab2e529dbbc02"
+  },
+  "restoration_receipt": {
+    "size_bytes": 818,
+    "sha256": "22dde8db63bf32a1a818bb0470f1a99acaeef32ba8c5d4ede712f5a196a4564b"
+  },
+  "bytecode_writes_disabled": true,
+  "scope": "Restored code functional CPU tests, not model inference"
+}

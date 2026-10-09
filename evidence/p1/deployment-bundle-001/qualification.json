@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "packaged_copy_tests_and_reproducible_archive_passed",
+  "test_count": 70,
+  "test_log": {
+    "size_bytes": 8664,
+    "sha256": "0d37a16e192d9223fc57feb51b3e8c90f2813f22d96a745f20416460bdad9bab"
+  },
+  "archive": {
+    "size_bytes": 17126978,
+    "sha256": "4c404cdd912946892bc7529f5c47200708f0d7dc7112cd637282e4b49d58c48b"
+  },
+  "manifest": {
+    "size_bytes": 7539,
+    "sha256": "fb08ab4c21bce0fc25d93a84ed58117cbb747ab256d56a3ef41ab2e529dbbc02"
+  },
+  "independent_rebuild_identical": true,
+  "scope": "CPU packaged-copy tests and exact archive bytes; no GPU execution"
+}

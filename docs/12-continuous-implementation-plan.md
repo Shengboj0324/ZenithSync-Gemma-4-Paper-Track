@@ -14,6 +14,8 @@ At cycle start, select one bounded deliverable, baseline commit, hypothesis, res
 
 ## Phases and exit gates
 
+P1 implementation evidence is tracked in [document 24](24-p1-implementation-status.md). The October 8 checkpoint storage gate passed; GPU inference and P1 acceptance remain pending.
+
 **October 7 scope replacement:** build the general agent now; do not wait for a new specialist product hypothesis. Earlier graph, synthesis, migration, undo, simulator and GPU-optimization proposals are not mandatory components. Failure-first comparisons remain the gate for claiming a novel advantage. The historical R1 instruction to stop before R3 applied to the discarded mechanism, not the platform phases below. This documentation update is not an implementation cycle.
 
 | Phase | Main work across one or more cycles | Required exit evidence |

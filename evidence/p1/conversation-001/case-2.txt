@@ -1,0 +1,4 @@
+<bos><|turn>user
+Read the specified file.<turn|>
+<|turn>model
+<|tool_call>call:read_file{end_line:3,path:<|"|>src/file.py<|"|>,start_line:1}<tool_call|><|tool_response>response:read_file{value:<|"|>synthetic result<|"|>}<tool_response|>

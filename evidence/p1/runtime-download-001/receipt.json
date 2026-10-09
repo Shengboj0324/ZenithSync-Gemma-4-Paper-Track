@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "status": "hash_mismatch_rejected",
+  "exit_code": 1,
+  "reason": "pip selected PyPI vllm despite --find-links; same name/version differs from official wheel bytes",
+  "expected_official_sha256": "6b29fdc200966eda4d0cc4d10b8c338ec32620bb069ad3629d8a78e3b35fd3fa",
+  "observed_pypi_sha256": "71a87f46cafab4489c69a5c5c83b870d0235e5694d8222303d460576293dc719",
+  "downloaded_wheels_committed": 0,
+  "log_sha256": "8e3a30bdca23252dc80edab06daba7d1fc18e5437f18f8a8f8bd5f9ae59830db"
+}

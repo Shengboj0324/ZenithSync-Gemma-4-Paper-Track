@@ -1,0 +1,44 @@
+[
+  {
+    "step": "install",
+    "command": [
+      "/usr/local/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "--no-cache-dir",
+      "--no-index",
+      "--find-links",
+      "/wheels",
+      "--require-hashes",
+      "-r",
+      "/inputs/requirements.lock"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 113.45399946900034
+  },
+  {
+    "step": "dependency_check",
+    "command": [
+      "/usr/local/bin/python",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.6795070420002958
+  },
+  {
+    "step": "runtime_probe",
+    "command": [
+      "/usr/local/bin/python",
+      "/inputs/probe.py",
+      "--report",
+      "/inputs/report.json",
+      "--output",
+      "/out/probe"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 33.28067722300011
+  }
+]

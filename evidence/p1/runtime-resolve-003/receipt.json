@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "dependency_conflict",
+  "exit_code": 1,
+  "log": {
+    "sha256": "b0b1a38ca56e03f5fdacecd7db7cf1c9b74a4731f09ef48e9d64a77d68f3d1db",
+    "size_bytes": 95513
+  },
+  "requirements": {
+    "sha256": "9de3605747d992fca630fbef0f00991d068e0d6c39d659266d3179a1e7fd84f3",
+    "size_bytes": 615
+  },
+  "constraints": {
+    "sha256": "7ca43e46596e9031dd21371b05197cd114cdd9212b2b7da3c16d44d4ffa6c374",
+    "size_bytes": 1152
+  },
+  "conflict": [
+    "google-adk 1.36.1 requires starlette >=0.49.1,<1",
+    "prometheus-fastapi-instrumentator 8.1.0 requires starlette >=1.0.0,<2.0.0"
+  ],
+  "scope": "CPU Linux resolution failed; no installation or GPU execution"
+}

@@ -1,0 +1,8 @@
+<bos><|turn>system
+<|tool>declaration:read_file{description:<|"|>Read a repository file<|"|>,parameters:{properties:{path:{description:<|"|>Repository-relative path<|"|>,type:<|"|>STRING<|"|>}},required:[<|"|>path<|"|>],type:<|"|>OBJECT<|"|>}}<tool|><turn|>
+<|turn>user
+Inspect src/example.py before editing.<turn|>
+<|turn>model
+<|tool_call>call:read_file{path:<|"|>src/example.py<|"|>}<tool_call|><|tool_response>response:read_file{value:<|"|>def example():
+    return 'α'
+<|"|>}<tool_response|>

@@ -1,0 +1,12 @@
+Looking in links: /bootstrap/wheels
+Processing /bootstrap/wheels/boto3-1.43.110-py3-none-any.whl (from -r /bootstrap/requirements.lock (line 1))
+Processing /bootstrap/wheels/botocore-1.43.110-py3-none-any.whl (from -r /bootstrap/requirements.lock (line 2))
+Processing /bootstrap/wheels/jmespath-1.1.0-py3-none-any.whl (from -r /bootstrap/requirements.lock (line 3))
+Processing /bootstrap/wheels/python_dateutil-2.9.0.post0-py2.py3-none-any.whl (from -r /bootstrap/requirements.lock (line 4))
+Processing /bootstrap/wheels/python_dotenv-1.2.4-py3-none-any.whl (from -r /bootstrap/requirements.lock (line 5))
+Processing /bootstrap/wheels/s3transfer-0.19.2-py3-none-any.whl (from -r /bootstrap/requirements.lock (line 6))
+Processing /bootstrap/wheels/six-1.17.0-py2.py3-none-any.whl (from -r /bootstrap/requirements.lock (line 7))
+Processing /bootstrap/wheels/urllib3-2.8.0-py3-none-any.whl (from -r /bootstrap/requirements.lock (line 8))
+Installing collected packages: urllib3, six, python-dotenv, jmespath, python-dateutil, botocore, s3transfer, boto3
+Successfully installed boto3-1.43.110 botocore-1.43.110 jmespath-1.1.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.4 s3transfer-0.19.2 six-1.17.0 urllib3-2.8.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.

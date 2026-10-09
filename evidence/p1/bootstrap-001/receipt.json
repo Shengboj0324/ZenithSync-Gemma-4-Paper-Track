@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "offline_bootstrap_install_and_import_passed",
+  "network": "none",
+  "image": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+  "platform": "linux/amd64",
+  "exit_code": 0,
+  "boto3_version": "1.43.110",
+  "manifest": {
+    "size_bytes": 1457,
+    "sha256": "b9d035621064a0da5af34fb83b4fc9457a87ef0ccba4eb71b3f9223379bdfa47"
+  },
+  "logs": {
+    "install.log": {
+      "size_bytes": 1576,
+      "sha256": "bc90d037a91c22e1a52411faa4a0e5c9a86cde7ddb306dcee1c460a5f8765587"
+    },
+    "dependency-check.log": {
+      "size_bytes": 30,
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+    },
+    "import.log": {
+      "size_bytes": 9,
+      "sha256": "8582a470050f11236ca42a2e39a0d8c2d47a618b0c0da642988e69f369edd0e7"
+    }
+  },
+  "limitations": [
+    "No authenticated R2 transfer from this bootstrap environment yet",
+    "No Pod restart or GPU execution"
+  ]
+}

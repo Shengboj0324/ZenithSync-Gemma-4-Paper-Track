@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "local_candidate_resolution_passed",
+  "package_count": 250,
+  "environment": {
+    "implementation_name": "cpython",
+    "implementation_version": "3.12.15",
+    "os_name": "posix",
+    "platform_machine": "x86_64",
+    "platform_release": "7.0.12-linuxkit",
+    "platform_system": "Linux",
+    "platform_version": "#1 SMP PREEMPT Thu Aug 27 14:02:21 UTC 2026",
+    "python_full_version": "3.12.15",
+    "platform_python_implementation": "CPython",
+    "python_version": "3.12",
+    "sys_platform": "linux"
+  },
+  "inputs": {
+    "sha256": "080cea9ee842d351970e01762d270479090e440bc4d827af7a50349c06d1e841",
+    "size_bytes": 1344
+  },
+  "requirements": {
+    "sha256": "9de3605747d992fca630fbef0f00991d068e0d6c39d659266d3179a1e7fd84f3",
+    "size_bytes": 615
+  },
+  "constraints": {
+    "sha256": "8da82e89f10156dc170e293ee7e2c89da861f27c1b0564688030921b0bd10a07",
+    "size_bytes": 1283
+  },
+  "report": {
+    "sha256": "7d06759d77df5a524d22b7c7e4d21b565300d2a758aee944834f54fa5dbcd5b9",
+    "size_bytes": 2875764
+  },
+  "log": {
+    "sha256": "52b580e598f17c9bac64344757cbd4e680c0957d123ffab2f51cb9a0520b145b",
+    "size_bytes": 106013
+  },
+  "lock": {
+    "sha256": "5df15d60c531fdbb87410011b965bad297db72eed42ed3db9c2acc9d1bce308f",
+    "size_bytes": 25432
+  },
+  "local_wheel_hashes_verified": [
+    "adk_eval_core-0.1.0-py3-none-any.whl",
+    "adk_submission-0.2.13-py3-none-any.whl",
+    "swegemma-0.2.10-py3-none-any.whl",
+    "vllm-0.19.1-cp38-abi3-manylinux_2_31_x86_64.whl"
+  ],
+  "exceptions": {
+    "opentelemetry-exporter-otlp": [
+      "1.44.0",
+      "1.41.1"
+    ],
+    "prometheus-fastapi-instrumentator": [
+      "8.1.0",
+      "7.1.0"
+    ],
+    "xgrammar": [
+      "0.2.5.post1",
+      "0.2.8"
+    ]
+  },
+  "limitations": [
+    "No clean installation, imports, GPU execution or official environment parity",
+    "Official pydantic-extra-types 2.11.2 is yanked; pip reports prematurely merged features, no known security risks. Runtime validation still required."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-08T23:31:09.656191+00:00",
+  "status": "cpu_runtime_probe_passed",
+  "python": "3.12.15 (main, Oct  6 2026, 02:02:31) [GCC 12.2.0]",
+  "platform": "Linux-7.0.12-linuxkit-x86_64-with-glibc2.36",
+  "report_sha256": "7d06759d77df5a524d22b7c7e4d21b565300d2a758aee944834f54fa5dbcd5b9",
+  "probe_sha256": "d25477c0eb48eb04e6c97de5ec870d0ab2b5e70f9236cada82176d9dd0d9da37",
+  "package_count": 250,
+  "version_mismatches": [],
+  "imports": [
+    {
+      "module": "torch",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_seconds": 3.1590684180000608,
+      "log": "torch.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "module": "transformers",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_seconds": 1.5345990840000923,
+      "log": "transformers.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "module": "compressed_tensors",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_seconds": 5.619129835999956,
+      "log": "compressed_tensors.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "module": "xgrammar",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_seconds": 3.6507932919998893,
+      "log": "xgrammar.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "module": "swegemma",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_seconds": 4.307131918999858,
+      "log": "swegemma.log",
+      "log_sha256": "de0d2e19d63fe1e378b190bcb60b507a606ec65b24b008028f6059f7f9765882"
+    },
+    {
+      "module": "adk_submission",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_seconds": 1.44491541699972,
+      "log": "adk_submission.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "module": "google.adk",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_seconds": 1.3416915839998182,
+      "log": "google_adk.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "module": "vllm.tool_parsers.gemma4_tool_parser",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_seconds": 6.175624669000172,
+      "log": "vllm_tool_parsers_gemma4_tool_parser.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "module": "vllm.reasoning.gemma4_reasoning_parser",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_seconds": 5.76478337799972,
+      "log": "vllm_reasoning_gemma4_reasoning_parser.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "limitations": [
+    "No model loading or CUDA kernel execution",
+    "No real generated tool calls or repair evaluation",
+    "CPU-only container may expose GPU-dependent import failures"
+  ]
+}

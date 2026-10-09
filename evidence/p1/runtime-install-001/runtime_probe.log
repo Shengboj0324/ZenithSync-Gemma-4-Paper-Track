@@ -1,0 +1,9 @@
+torch passed
+transformers passed
+compressed_tensors passed
+xgrammar passed
+swegemma passed
+adk_submission passed
+google.adk passed
+vllm.tool_parsers.gemma4_tool_parser passed
+vllm.reasoning.gemma4_reasoning_parser passed

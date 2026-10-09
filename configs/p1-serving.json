@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "cpu_offline_runtime_qualified_gpu_validation_pending",
+  "model_alias": "gemma-4-31b-it-qat-w4a16-ct",
+  "publisher_version": 2,
+  "python": "3.12",
+  "platform": "linux_x86_64",
+  "host": "127.0.0.1",
+  "port": 8000,
+  "max_model_len": 32768,
+  "dtype": "bfloat16",
+  "tool_call_parser": "gemma4",
+  "reasoning_parser": "gemma4",
+  "gpu_memory_utilization": 0.8,
+  "tensor_parallel_size": 1,
+  "startup_timeout_seconds": 1200,
+  "max_num_seqs": 1,
+  "adapters": [],
+  "qualification_scope": "Single-A100 base-model P1 smoke tests; not training or official four-L4 qualification"
+}

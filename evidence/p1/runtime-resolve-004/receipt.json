@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "dependency_conflict",
+  "exit_code": 1,
+  "log": {
+    "sha256": "3a003014c8741da1b89b7b46eff40e51e01d5f13d8a0d6bd63b6ab44098ec755",
+    "size_bytes": 54273
+  },
+  "requirements": {
+    "sha256": "9de3605747d992fca630fbef0f00991d068e0d6c39d659266d3179a1e7fd84f3",
+    "size_bytes": 615
+  },
+  "constraints": {
+    "sha256": "c57f4075ebb58cc9e95d4b188887b88395812b3b5e66743426b47479ee36fdd3",
+    "size_bytes": 1224
+  },
+  "conflict": [
+    "official transformers pin is 5.13.1",
+    "official xgrammar 0.2.5.post1 requires transformers >=4.38.0,<5"
+  ],
+  "scope": "CPU Linux resolution failed; no installation or GPU execution"
+}

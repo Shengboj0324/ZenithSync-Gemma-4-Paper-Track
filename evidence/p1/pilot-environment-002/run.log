@@ -1,0 +1,21 @@
+Exception ignored in: <http.client.HTTPResponse object at 0x122b0a470>
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 432, in close
+    super().close() # set "closed" flag
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 445, in flush
+    self.fp.flush()
+ValueError: I/O operation on closed file.
+Exception ignored in: <http.client.HTTPResponse object at 0x122b0b250>
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 432, in close
+    super().close() # set "closed" flag
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 445, in flush
+    self.fp.flush()
+ValueError: I/O operation on closed file.
+Traceback (most recent call last):
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/scripts/verify_pilot_environment.py", line 93, in <module>
+    main()
+    ~~~~^^
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/scripts/verify_pilot_environment.py", line 64, in main
+    raise RuntimeError("workspace package import failed or resolved outside snapshot")
+RuntimeError: workspace package import failed or resolved outside snapshot

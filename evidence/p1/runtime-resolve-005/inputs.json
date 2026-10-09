@@ -1,0 +1,35 @@
+{
+  "image": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+  "local_wheels": {
+    "adk_eval_core-0.1.0-py3-none-any.whl": {
+      "sha256": "194dd8f9aab154857bfa0db9d9ec382db856ee124529e072509634d3071d8643",
+      "size_bytes": 90060
+    },
+    "adk_submission-0.2.13-py3-none-any.whl": {
+      "sha256": "8a19afc752aa6cec4e98e25b09aa1fe4b020ad902af8f014d294c85d70247d5d",
+      "size_bytes": 66528
+    },
+    "swegemma-0.2.10-py3-none-any.whl": {
+      "sha256": "13261f9d5581840f7600d0d66aea10d6a3e4b53661409e072e55f253436c1252",
+      "size_bytes": 122775
+    },
+    "vllm-0.19.1-cp38-abi3-manylinux_2_31_x86_64.whl": {
+      "sha256": "6b29fdc200966eda4d0cc4d10b8c338ec32620bb069ad3629d8a78e3b35fd3fa",
+      "size_bytes": 433132506
+    }
+  },
+  "note": "Three explicit local compatibility exceptions: exporter, instrumentator, xgrammar. Not exact official environment parity.",
+  "platform": "linux/amd64",
+  "source_requirements": {
+    "sha256": "830e676da7b19757238db4f1400bcae57534a4ca26bb05547d1c8b2fd28d21d4",
+    "size_bytes": 421
+  },
+  "requirements": {
+    "sha256": "9de3605747d992fca630fbef0f00991d068e0d6c39d659266d3179a1e7fd84f3",
+    "size_bytes": 615
+  },
+  "constraints": {
+    "sha256": "8da82e89f10156dc170e293ee7e2c89da861f27c1b0564688030921b0bd10a07",
+    "size_bytes": 1283
+  }
+}

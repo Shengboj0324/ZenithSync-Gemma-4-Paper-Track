@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "status": "parser_fixture_checks_passed",
+  "vllm": "0.19.1",
+  "transformers": "5.13.1",
+  "implementation_sha256": "682b2152b76c031df9c58c3ffbb5b243945be5d8957ebdce00faef1b9de6b889",
+  "probe_sha256": "b45fd26f52e1b86fddf9eb51e405083cbdcabc4b4797bccc167e0772c23dae8d",
+  "fixtures": [
+    {
+      "name": "plain_text",
+      "synthetic_input": "Completed.",
+      "expected": [],
+      "actual": [],
+      "matched": true
+    },
+    {
+      "name": "read_file",
+      "synthetic_input": "<|tool_call>call:read_file{path:<|\"|>probe.txt<|\"|>}<tool_call|>",
+      "expected": [
+        [
+          "read_file",
+          {
+            "path": "probe.txt"
+          }
+        ]
+      ],
+      "actual": [
+        [
+          "read_file",
+          {
+            "path": "probe.txt"
+          }
+        ]
+      ],
+      "matched": true
+    },
+    {
+      "name": "unicode_punctuation",
+      "synthetic_input": "<|tool_call>call:read_file{path:<|\"|>src/数据,{x}.py<|\"|>}<tool_call|>",
+      "expected": [
+        [
+          "read_file",
+          {
+            "path": "src/数据,{x}.py"
+          }
+        ]
+      ],
+      "actual": [
+        [
+          "read_file",
+          {
+            "path": "src/数据,{x}.py"
+          }
+        ]
+      ],
+      "matched": true
+    },
+    {
+      "name": "parallel",
+      "synthetic_input": "<|tool_call>call:first{count:2}<tool_call|><|tool_call>call:second{enabled:false}<tool_call|>",
+      "expected": [
+        [
+          "first",
+          {
+            "count": 2
+          }
+        ],
+        [
+          "second",
+          {
+            "enabled": false
+          }
+        ]
+      ],
+      "actual": [
+        [
+          "first",
+          {
+            "count": 2
+          }
+        ],
+        [
+          "second",
+          {
+            "enabled": false
+          }
+        ]
+      ],
+      "matched": true
+    },
+    {
+      "name": "nested",
+      "synthetic_input": "<|tool_call>call:inspect{options:{rate:0.25,enabled:true},items:[1,<|\"|>two<|\"|>],empty:null}<tool_call|>",
+      "expected": [
+        [
+          "inspect",
+          {
+            "options": {
+              "rate": 0.25,
+              "enabled": true
+            },
+            "items": [
+              1,
+              "two"
+            ],
+            "empty": null
+          }
+        ]
+      ],
+      "actual": [
+        [
+          "inspect",
+          {
+            "options": {
+              "rate": 0.25,
+              "enabled": true
+            },
+            "items": [
+              1,
+              "two"
+            ],
+            "empty": null
+          }
+        ]
+      ],
+      "matched": true
+    },
+    {
+      "name": "truncated_outer_call",
+      "synthetic_input": "<|tool_call>call:read_file{path:<|\"|>probe.txt",
+      "expected": [],
+      "actual": [],
+      "matched": true
+    }
+  ],
+  "boundary_observations": [
+    {
+      "name": "duplicate_key",
+      "synthetic_input": "<|tool_call>call:read_file{path:<|\"|>first<|\"|>,path:<|\"|>second<|\"|>}<tool_call|>",
+      "actual": [
+        [
+          "read_file",
+          {
+            "path": "second"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "scientific_notation",
+      "synthetic_input": "<|tool_call>call:inspect{tolerance:1e-6}<tool_call|>",
+      "actual": [
+        [
+          "inspect",
+          {
+            "tolerance": "1e-6"
+          }
+        ]
+      ]
+    }
+  ],
+  "limitations": [
+    "Synthetic strings, no model-generated outputs",
+    "No streaming qualification",
+    "Duplicate raw keys may be lost before application JSON validation",
+    "Tool-specific schema validation remains required"
+  ]
+}

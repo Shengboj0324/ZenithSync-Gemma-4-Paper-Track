@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "status": "exact_source_download_passed",
+  "exit_code": 0,
+  "log": {
+    "sha256": "bf794010cb0d0b06f5ff5e57a58c6b759f14e6fc99b62f5cdfd1908d7d7483b9",
+    "size_bytes": 106407
+  },
+  "acquisition_lock": {
+    "sha256": "c9ad5e0cf171cc33d3f2b668ac0827413080eefa798f5c904e3090007a045b55",
+    "size_bytes": 63115
+  },
+  "independent_verification": {
+    "sha256": "54190661b5974cf82a6ce4376283240f6dd6b9433a061e3462b68007e9068103",
+    "size_bytes": 818
+  }
+}

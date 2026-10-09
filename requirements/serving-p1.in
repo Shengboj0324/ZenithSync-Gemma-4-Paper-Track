@@ -1,0 +1,13 @@
+# Direct pins observed in the official wheelhouse and vLLM METADATA.
+# This is NOT a fully resolved offline lock. Resolve Linux x86_64 / Python 3.12
+# transitives, CUDA libraries and wheel hashes before declaring deployable.
+vllm==0.19.1
+torch==2.10.0
+torchaudio==2.10.0
+torchvision==0.25.0
+compressed-tensors==0.15.0.1
+transformers==5.13.1
+tokenizers==0.22.2
+swegemma==0.2.10
+adk-submission==0.2.13
+adk-eval-core==0.1.0

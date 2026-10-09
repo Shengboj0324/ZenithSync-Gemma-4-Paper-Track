@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "status": "offline_install_and_cpu_imports_passed",
+  "inputs": {
+    "sha256": "0df2457439c3eb0141fc4fd6d211c193e26bab6c0a132af6037a11bf390ec9cc",
+    "size_bytes": 810
+  },
+  "steps": {
+    "sha256": "8b333c7c17badd17185766598cda828f3f6740a9593dcbd6254a4cdfc73de290",
+    "size_bytes": 810
+  },
+  "probe": {
+    "sha256": "34be3f80ec7ca4e6d33a11d1df25193542b56dcc5a5eef15e02d43f9ce031531",
+    "size_bytes": 3094
+  },
+  "logs": {
+    "install.log": {
+      "sha256": "4d4309bd20b8035b521ed7158871b9a81347f935b18ac4ef81275dfc2a5231a3",
+      "size_bytes": 38586
+    },
+    "dependency_check.log": {
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+      "size_bytes": 30
+    },
+    "runtime_probe.log": {
+      "sha256": "cd570656cc2b17586a104bba7f3f31b663d2d821e9a01c9d778fbdc76fe4a345",
+      "size_bytes": 221
+    }
+  },
+  "package_count": 250,
+  "network": "none",
+  "limitations": [
+    "Three documented local version exceptions; not exact official environment parity",
+    "CPU imports do not verify GPU kernels, model loading, generated calls or training"
+  ]
+}

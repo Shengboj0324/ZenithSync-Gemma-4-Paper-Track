@@ -1,0 +1,1 @@
+{"files":[{"path":"empty.bin","sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","size_bytes":0},{"path":"multipart.bin","sha256":"b019413f9bcf00cb5552fa81fe4d3ca5370ed16ba10296e442c323ef8ce7f8a6","size_bytes":10485777}],"kind":"fixture","revision":"transport-v1","schema_version":1,"source":"zenithsync synthetic R2 test"}

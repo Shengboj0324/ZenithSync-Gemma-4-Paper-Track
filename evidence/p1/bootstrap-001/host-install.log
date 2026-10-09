@@ -1,0 +1,12 @@
+Looking in links: artifacts/official/p1-bootstrap/wheels
+Processing ./artifacts/official/p1-bootstrap/wheels/boto3-1.43.110-py3-none-any.whl (from -r artifacts/official/p1-bootstrap/requirements.lock (line 1))
+Processing ./artifacts/official/p1-bootstrap/wheels/botocore-1.43.110-py3-none-any.whl (from -r artifacts/official/p1-bootstrap/requirements.lock (line 2))
+Processing ./artifacts/official/p1-bootstrap/wheels/jmespath-1.1.0-py3-none-any.whl (from -r artifacts/official/p1-bootstrap/requirements.lock (line 3))
+Processing ./artifacts/official/p1-bootstrap/wheels/python_dateutil-2.9.0.post0-py2.py3-none-any.whl (from -r artifacts/official/p1-bootstrap/requirements.lock (line 4))
+Processing ./artifacts/official/p1-bootstrap/wheels/python_dotenv-1.2.4-py3-none-any.whl (from -r artifacts/official/p1-bootstrap/requirements.lock (line 5))
+Processing ./artifacts/official/p1-bootstrap/wheels/s3transfer-0.19.2-py3-none-any.whl (from -r artifacts/official/p1-bootstrap/requirements.lock (line 6))
+Processing ./artifacts/official/p1-bootstrap/wheels/six-1.17.0-py2.py3-none-any.whl (from -r artifacts/official/p1-bootstrap/requirements.lock (line 7))
+Processing ./artifacts/official/p1-bootstrap/wheels/urllib3-2.8.0-py3-none-any.whl (from -r artifacts/official/p1-bootstrap/requirements.lock (line 8))
+Installing collected packages: urllib3, six, python-dotenv, jmespath, python-dateutil, botocore, s3transfer, boto3
+
+Successfully installed boto3-1.43.110 botocore-1.43.110 jmespath-1.1.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.4 s3transfer-0.19.2 six-1.17.0 urllib3-2.8.0

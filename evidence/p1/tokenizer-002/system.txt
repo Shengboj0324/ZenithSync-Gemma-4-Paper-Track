@@ -1,0 +1,7 @@
+<bos><|turn>system
+Inspect before editing.<|tool>declaration:read_file{description:<|"|>Read a repository file<|"|>,parameters:{properties:{path:{description:<|"|>Repository-relative path<|"|>,type:<|"|>STRING<|"|>}},required:[<|"|>path<|"|>],type:<|"|>OBJECT<|"|>}}<tool|><turn|>
+<|turn>user
+Inspect src/example.py before editing.<turn|>
+<|turn>model
+<|channel>thought
+<channel|>

@@ -1,0 +1,191 @@
+{
+  "source": "https://pypi.org/pypi/xgrammar/0.2.8/json",
+  "version": "0.2.8",
+  "requires_dist": [
+    "apache-tvm-ffi>=0.1.11",
+    "pydantic",
+    "torch>=1.10.0",
+    "transformers>=4.38.0",
+    "triton; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "numpy",
+    "typing-extensions>=4.9.0",
+    "cohere_melody==0.13.0; python_version >= \"3.10\" and extra == \"test\"",
+    "huggingface-hub[cli]; extra == \"test\"",
+    "protobuf; extra == \"test\"",
+    "pytest; extra == \"test\"",
+    "sentencepiece<0.2.2; python_version < \"3.10\" and extra == \"test\"",
+    "sentencepiece; python_version >= \"3.10\" and extra == \"test\"",
+    "tiktoken; extra == \"test\"",
+    "mlx-lm; platform_system == \"Darwin\" and platform_machine == \"arm64\" and extra == \"metal\""
+  ],
+  "files": [
+    {
+      "filename": "xgrammar-0.2.8-cp310-cp310-macosx_10_14_x86_64.whl",
+      "sha256": "9c04f0dafb88b7f55559463a40ad7147f7d62c0a547f7c807054627dc6ed992b"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp310-cp310-macosx_11_0_arm64.whl",
+      "sha256": "467533c9998566b9bda6889834a7e200cd75228e6b453d8a42abd3aa86158512"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp310-cp310-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+      "sha256": "ae437044b736797a3a0ad03a06ab5d156903b350f7f0809591f47e0571e27e51"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "d6576539ade4b2404c38f606f4d04a1d6d22023fa03f9cab98bf894877696024"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp310-cp310-win_amd64.whl",
+      "sha256": "1a1dba06ff9f8436163ccc688ea0b24e790d99262f628ac4fc46c4fc09e18630"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp310-cp310-win_arm64.whl",
+      "sha256": "1fe8b3889a9079bc3fbe9187941c7d902da7b9cb2dd915b2a004fa5a5922bcc5"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp311-cp311-macosx_10_14_x86_64.whl",
+      "sha256": "f56156ca0abdaf089c3f87fcfa7bafeab47df3374f221b67b2e4b4be8c819125"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp311-cp311-macosx_11_0_arm64.whl",
+      "sha256": "d125a174b609d9d540dcf12dadf9030422597c175f0493ea9ff27dfeae025664"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp311-cp311-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+      "sha256": "738d967f874dd916ddb73b39e533caf7254b5b81d579f44eddbe205cc59dcee1"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "885d7468636a8ca829513b9740fef21cbb438239fa3f91cce06e95e31973b8c6"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp311-cp311-win_amd64.whl",
+      "sha256": "155091c54e3cd5cde6c29e69339a74e5c95da83bb0294acd2abb9a70f85f674e"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp311-cp311-win_arm64.whl",
+      "sha256": "50f8bc56adc2fccfe008281435ebef30d066977b611652cf51d0b57b16f48ec5"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp312-cp312-macosx_10_14_x86_64.whl",
+      "sha256": "9b4fb0907e2ae7b32e908e9da97e5410ee1f792d802031a46e4292f2ebe46c33"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp312-cp312-macosx_11_0_arm64.whl",
+      "sha256": "e01f70fbb788d5a95e6a2ac686b746c2dd03bffc07c7d94f10ec3ca2a95c4447"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp312-cp312-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+      "sha256": "97732b6e5f11f21fd98a6cd9525241fc5f9d92f415329200a9adf8fc7453d8ec"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "4045b096735bb2523e0d874039a55994c1b390620d547c4a0d4f43b9a106177b"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp312-cp312-win_amd64.whl",
+      "sha256": "dbcf6718e049cbe429742cdb05f85c48135c2e389d45daeafb884af6994bb4a7"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp312-cp312-win_arm64.whl",
+      "sha256": "2d4a9446b1b3e53fe4efcc5f40fafff0f79407c6b6fbd54a254909978808585e"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp313-cp313-macosx_11_0_arm64.whl",
+      "sha256": "cb6fec998e8416f3079dcc29c39c5cfded0866ee2433016c4f1170f2fc8d440f"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp313-cp313-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+      "sha256": "dec7222c239668cbe23fe84bf5faf035b9308983fed03907b6a1837fdad9e9f1"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "5d24c79b88b3a6aba20d76d15119892f326f7fec85882946d6666b482cf45de4"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp313-cp313-win_amd64.whl",
+      "sha256": "08c80f20e18402397c11af6cee3c965da41f5116fa033115297bcbdaa877e07a"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp313-cp313-win_arm64.whl",
+      "sha256": "ec85db49c8a48f2ee9dd8abb10eb09ee1f22d60b79348aefc5f23824e87791f0"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314-macosx_10_15_x86_64.whl",
+      "sha256": "67ceb409708ba95479f833f58e6de963a95d29bf96d9114adcdf246e90afca06"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314-macosx_11_0_arm64.whl",
+      "sha256": "6236c482f9f34f1ce709cc67eff07363e0514b0bcc841210d4cc3b18b26e30f2"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+      "sha256": "45d242227001175bacd70031017ddef80e0c9c5141d11fd04bca5f08abee5417"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "dadcff0ecab59ffbc782e9db6d16f84f7b8df87bd2f28b9470136fcb4837f098"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314t-macosx_10_15_x86_64.whl",
+      "sha256": "4ae12599a1f8ddbf0ca0ab94b620f7e489de31f90c06b8396a9bd29adf22d784"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314t-macosx_11_0_arm64.whl",
+      "sha256": "6b2749c2ce1b73e7367569abd45c21aa359f5d6e7d8d88307b14cf5a8b716072"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314t-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+      "sha256": "47a041d9cb10f6c9da0d33db4aaa7b81163f677500278c4eab3e61b7ede5b2d3"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "71bf243b0a7eec297857e8fd8abd0b7ea499968c3748568d5576ccf864ce29bc"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314t-win_amd64.whl",
+      "sha256": "9837e7948212fae1c12abc2b992305a9e333a266a1ae5150504738e1b9327c06"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314t-win_arm64.whl",
+      "sha256": "0c6125fa3dc27b46adde83329571c1dac2ab2474779daee207428ce2e9c6e9b5"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314-win_amd64.whl",
+      "sha256": "a9d917bfb075106f54533ee9e21c3791590c9277033ec0719d807a641987ddb0"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp314-cp314-win_arm64.whl",
+      "sha256": "924626681e106933e90f9790b5d05b7c380acf17317d580d53c364cb4d19eee5"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp39-cp39-macosx_10_14_x86_64.whl",
+      "sha256": "1ddfd9b0a74201b263ba4079cd3b1cd4cdfa3406e3a42953c1c645c3a9463b0d"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp39-cp39-macosx_11_0_arm64.whl",
+      "sha256": "1c98a832aa28b5c2d1180383f535e8fb6df9524fbbddab705d7a044bdd53111c"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp39-cp39-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl",
+      "sha256": "ffb6f7cd6e5393ef09d1a4395833e0dfbe359c07c48c2cfb028a9645702079c3"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "f5a0c18908fd0433f03602bedac21c746ac41ac5a28927f927456ac740ae8b8f"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp39-cp39-win_amd64.whl",
+      "sha256": "841872a76e56bc442d34d5a62768317e325058503b7bd3870466baf309b44f4f"
+    },
+    {
+      "filename": "xgrammar-0.2.8-cp39-cp39-win_arm64.whl",
+      "sha256": "5a61e65b5c2afc065c771d173e3ed76697325fabea5b76efcea251998e9475de"
+    },
+    {
+      "filename": "xgrammar-0.2.8.tar.gz",
+      "sha256": "8305646fd2b319d6c3003f51a1665e54cbbe9cba1fb636bc41d0b46434ccbb80"
+    }
+  ]
+}

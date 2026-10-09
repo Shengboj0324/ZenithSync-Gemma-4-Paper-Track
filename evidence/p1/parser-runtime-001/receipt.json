@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "offline_parser_fixture_checks_completed",
+  "exit_code": 0,
+  "image": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+  "platform": "linux/amd64",
+  "network": "none",
+  "probe": {
+    "size_bytes": 3695,
+    "sha256": "aca8747e1202eca031cb02fb8b32951ba116e5d2b6cdcf304dbf934e1d7713fc"
+  },
+  "script": {
+    "size_bytes": 4141,
+    "sha256": "b45fd26f52e1b86fddf9eb51e405083cbdcabc4b4797bccc167e0772c23dae8d"
+  },
+  "install_log": {
+    "size_bytes": 36836,
+    "sha256": "981a602c33e696fa5df1e2f9b8c9f2659bf6c68be9d5b9d0d188007ba8c08348"
+  },
+  "probe_log": {
+    "size_bytes": 30,
+    "sha256": "abb1e80d526e16162c2bff6f63e4b25be2fd39993943e754b1c2b45dea89c601"
+  },
+  "requirements": {
+    "size_bytes": 25432,
+    "sha256": "5df15d60c531fdbb87410011b965bad297db72eed42ed3db9c2acc9d1bce308f"
+  },
+  "limitations": [
+    "Six synthetic nonstreaming fixtures; no real generated calls",
+    "Duplicate raw keys overwritten by official parser",
+    "Scientific notation parsed as a string",
+    "No claim of complete argument-language coverage"
+  ]
+}

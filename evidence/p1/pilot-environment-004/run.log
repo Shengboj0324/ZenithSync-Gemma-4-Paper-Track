@@ -1,0 +1,15 @@
+Exception ignored in: <http.client.HTTPResponse object at 0x122a9b4c0>
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 432, in close
+    super().close() # set "closed" flag
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 445, in flush
+    self.fp.flush()
+ValueError: I/O operation on closed file.
+Exception ignored in: <http.client.HTTPResponse object at 0x122a9bd90>
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 432, in close
+    super().close() # set "closed" flag
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/client.py", line 445, in flush
+    self.fp.flush()
+ValueError: I/O operation on closed file.
+Recorded 23 passing and 1 nonpassing cases; source override=False; source probe=True.

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "status": "72_tests_passed",
+  "log": {
+    "size_bytes": 8986,
+    "sha256": "711c6098fb97509e790c9916269dc8526db4c068984125a6cfa4b5860f55fafd"
+  },
+  "test_source": {
+    "size_bytes": 6144,
+    "sha256": "88b6d281160acc44939a2536e178416e8a64ec4a48c02203b2043dd9d850580f"
+  },
+  "transport_source": {
+    "size_bytes": 6053,
+    "sha256": "f70fa30a15415669bb6e9be5e0c91cdb76dacbe1a95e9ff08e61e5f7b783a7da"
+  },
+  "scope": "Fault-injected completed-object interruption and lost manifest acknowledgement; not a killed live multipart worker"
+}

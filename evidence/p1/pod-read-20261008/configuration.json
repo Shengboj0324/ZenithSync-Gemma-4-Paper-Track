@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "source": "Runpod get_pod authenticated read; credentials and environment omitted",
+  "pod": {
+    "id": "ywpfgef6yvnr9m",
+    "name": "ZenithSync-Gemma-Agentic-Solution",
+    "status": "EXITED",
+    "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+    "disk": 80,
+    "mounts": {},
+    "gpu": {
+      "count": 1,
+      "id": "NVIDIA A100-SXM4-80GB",
+      "memory": 117,
+      "vcpuCount": 24
+    },
+    "cost": 1.59,
+    "cudaVersion": "12.8"
+  }
+}

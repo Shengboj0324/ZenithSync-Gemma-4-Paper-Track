@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "status": "64_tests_passed",
+  "python_scope": "tokenizer-pinned CPU environment with NumPy; zero skips",
+  "tests_log": {
+    "sha256": "fc51fba3157189a622b20588ee536241c8b538f531abdada02db22e749d69388",
+    "size_bytes": 7758
+  },
+  "test_source": {
+    "sha256": "477d46a447741cdf4c78116a6a082479fd2f44cf89bb4a5bcfa581b7d0fbfc7e",
+    "size_bytes": 2720
+  },
+  "scanner_source": {
+    "sha256": "558ed997ca7cd610b311f8dd05be32fb01b9c3f86c08c01d429b502f0bdad7c0",
+    "size_bytes": 6380
+  },
+  "scan_receipt": {
+    "sha256": "0457bb958076f218d8e22dc9de2914d72110b51b986172a7e58f3a297690719f",
+    "size_bytes": 310494
+  }
+}

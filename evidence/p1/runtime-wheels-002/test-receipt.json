@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "70_tests_passed",
+  "test_log": {
+    "sha256": "fdad76dd53af9043f77e3a477d7090719232ae6de863eca6bd8dd07e1aed7914",
+    "size_bytes": 8664
+  },
+  "tests": {
+    "sha256": "f2cea614b87fd800a6b7f5f261b1f2669464b2c69cc2d714f79673174d6c0d89",
+    "size_bytes": 2542
+  },
+  "scanner": {
+    "sha256": "13f82c4067f68833a48f2338b4a577f6b46178613e6f7c3644d496c434df1614",
+    "size_bytes": 4314
+  }
+}
