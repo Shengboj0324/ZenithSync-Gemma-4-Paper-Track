@@ -6,6 +6,7 @@ It records an attempt only. Independent grading and training admission follow.
 
 import argparse
 import asyncio
+from contextlib import ExitStack
 from datetime import datetime, timezone
 from importlib.metadata import version
 import os
@@ -32,6 +33,7 @@ def main():
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument('--execute', action='store_true')
     mode.add_argument('--fixture', choices=['success', 'submit-then-fail', 'timeout', 'turn-limit', 'tool-limit', 'slow-tool'])
+    mode.add_argument('--http-fixture', choices=['success', 'server-error'])
     parser.add_argument('--session', type=Path)
     parser.add_argument('--port', type=int, default=18000)
     args = parser.parse_args()
@@ -88,11 +90,12 @@ def main():
             'endpoint': f'http://127.0.0.1:{args.port}/v1',
             'runner_mode': 'Single ADK invocation; no official outer-loop nudges or retry plugins',
             'execution_path_qualified': False,
-            'fixture': args.fixture, 'training_approved': False,
+            'fixture': args.fixture or ('http-' + args.http_fixture if args.http_fixture else None),
+            'training_approved': False,
             'scope': 'One external development task; evaluator files excluded from model input'}
     (args.output / 'prompt.txt').write_text(prompt)
     (args.output / 'plan.json').write_bytes(canonical_json(plan))
-    if not args.execute and not args.fixture:
+    if not args.execute and not args.fixture and not args.http_fixture:
         print('Task prompt and bounded rollout plan verified; no container or model started')
         return
     from adk_submission import compile_submission
@@ -111,6 +114,7 @@ def main():
     manager.client.images.get(workspace['image'])
     cid = None
     ctx = None
+    resources = ExitStack()
     async def attempt():
         if args.fixture:
             from zenithsync.source_runner_fixture import SourceRunnerFixture
@@ -132,7 +136,7 @@ def main():
         runner = Runner(app=app, session_service=service)
         session = await service.create_session(app_name=app.name, user_id='development',
                                               state={'problem_description': task.problem_statement})
-        remaining = (1.0 if args.fixture == 'timeout' else 600) if args.fixture else (
+        remaining = (1.0 if args.fixture == 'timeout' else 600) if args.fixture or args.http_fixture else (
             deadline - datetime.now(timezone.utc)).total_seconds() - 30
         plan['effective_timeout_seconds'] = min(600, remaining)
         if remaining <= 0:
@@ -148,6 +152,10 @@ def main():
                     stream.flush()
         return ctx.submitted_patch or ''
     try:
+        if args.http_fixture:
+            from zenithsync.source_http_fixture import source_http_fixture
+            plan['endpoint'] = resources.enter_context(source_http_fixture(args.http_fixture, args.output / 'http-fixture'))
+            plan['http_fixture_implementation'] = file_record(ROOT / 'zenithsync/source_http_fixture.py')
         cid = manager.start()
         attrs = manager.client.containers.get(cid).attrs
         if attrs['Mounts'] or attrs['HostConfig']['NetworkMode'] != 'none':
@@ -176,7 +184,10 @@ def main():
             plan['container_removed'] = plan['cleanup']['removed']
             if plan['container_removed'] is not True:
                 plan['status'] = 'cleanup_unverified_not_graded'
-        (args.output / 'receipt.json').write_bytes(canonical_json(plan))
+        try:
+            resources.close()
+        finally:
+            (args.output / 'receipt.json').write_bytes(canonical_json(plan))
         if cid is not None and plan.get('container_removed') is not True:
             raise RuntimeError('Owned source-task container cleanup is unverified; receipt retained')
     verify(args.package, manifest)

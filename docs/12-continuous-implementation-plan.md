@@ -599,3 +599,32 @@ controlled API-failure tests and a live successful cleanup pass.
 Core suite: 151 passed, 15 skipped. No model inference or GPU work occurred.
 Next qualify the real HTTP client path locally, then broaden task qualification
 and corpus preparation before requesting a GPU session.
+
+### Production-client loopback HTTP qualification
+
+Exercised the real registered HTTP client against explicit local scripted
+responses. Native tool calls/results round-trip and produce a saved patch;
+503 fails after one request without retries. Both paths clean up their servers
+and containers. Independent grading preserves the fixture label and reports
+the expected unsolved baseline, not model success. No GPU was used.
+Evidence: `source-http-client-audit-001`. Next expand source data/environment
+coverage and admission; Gemma execution and training remain separate gates.
+
+### Source contract census update
+
+The complete pinned R2E source census now covers 4,578 tasks / ten repository
+basenames. One Orange3 contract has a blank test identity; 2,203 otherwise valid
+contracts include expected failures/errors. All remain unapproved for training
+until runtime controls establish a reproducible repair signal. Expand repository
+qualification before scaling native rollouts. See `34-source-task-runtime.md`
+and `evidence/data/source-expectation-corpus-001`. Pod remains stopped; this work
+and the 170-test local suite require no GPU.
+
+### Tornado runtime qualification update
+
+Two independent base/reference runs now qualify one Tornado evaluator task:
+29/30 passes at the buggy base, 30/30 at the reference, with exact publisher
+expectation agreement only for the reference. Both repeats match, and source
+integrity and cleanup checks passed. This expands evaluator coverage beyond
+Pyramid; source snapshot isolation and native trajectory execution remain next.
+No training examples were admitted and no Pod restart was needed.

@@ -1,0 +1,38 @@
+============================= test session starts =============================
+platform linux -- Python 3.9.21
+rootdir: /testbed
+..............................
+collected 30 items
+
+==================== short test summary info ====================
+PASSED r2e_tests.test_1::GenTest::test_arguments
+PASSED r2e_tests.test_1::GenTest::test_bogus_yield
+PASSED r2e_tests.test_1::GenTest::test_exception_in_task_phase1
+PASSED r2e_tests.test_1::GenTest::test_exception_in_task_phase2
+PASSED r2e_tests.test_1::GenTest::test_exception_in_yield
+PASSED r2e_tests.test_1::GenTest::test_exception_phase1
+PASSED r2e_tests.test_1::GenTest::test_exception_phase2
+PASSED r2e_tests.test_1::GenTest::test_future
+PASSED r2e_tests.test_1::GenTest::test_inline_cb
+PASSED r2e_tests.test_1::GenTest::test_ioloop_cb
+PASSED r2e_tests.test_1::GenTest::test_key_mismatch
+PASSED r2e_tests.test_1::GenTest::test_key_reuse
+PASSED r2e_tests.test_1::GenTest::test_leaked_callback
+PASSED r2e_tests.test_1::GenTest::test_multi
+PASSED r2e_tests.test_1::GenTest::test_multi_delayed
+PASSED r2e_tests.test_1::GenTest::test_multi_future
+PASSED r2e_tests.test_1::GenTest::test_no_yield
+PASSED r2e_tests.test_1::GenTest::test_orphaned_callback
+PASSED r2e_tests.test_1::GenTest::test_parallel_callback
+PASSED r2e_tests.test_1::GenTest::test_resume_after_exception_in_yield
+PASSED r2e_tests.test_1::GenTest::test_reuse
+PASSED r2e_tests.test_1::GenTest::test_stack_context_leak
+PASSED r2e_tests.test_1::GenTest::test_stack_context_leak_exception
+PASSED r2e_tests.test_1::GenTest::test_task
+PASSED r2e_tests.test_1::GenTest::test_wait_all
+PASSED r2e_tests.test_1::GenTest::test_with_arg
+PASSED r2e_tests.test_1::GenWebTest::test_exception_handler
+PASSED r2e_tests.test_1::GenWebTest::test_sequence_handler
+PASSED r2e_tests.test_1::GenWebTest::test_task_handler
+PASSED r2e_tests.test_1::GenWebTest::test_yield_exception_handler
+=================== 30 passed in 0.03s ===================

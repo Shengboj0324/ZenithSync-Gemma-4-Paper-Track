@@ -1,0 +1,7 @@
+diff --git a/diagnostic.txt b/diagnostic.txt
+new file mode 100644
+index 0000000..082500a
+--- /dev/null
++++ b/diagnostic.txt
+@@ -0,0 +1 @@
++OFFLINE HTTP FIXTURE; NOT A REPAIR

@@ -1,0 +1,47 @@
+You are evaluating a software engineering task for repository Pylons/pyramid.
+
+Problem Statement:
+**Title:** HTTPException Initialization Without Override Results in Invalid 'None None' Status
+
+**Description:**
+When initializing a top-level `HTTPException` without properly overriding it in a subclass, Pyramid attempts to create a `Response` object with an invalid status `'None None'`. This change in behavior is due to stricter status code validation in WebOb versions >=1.5.0, which now rejects such invalid statuses.
+
+**Example Buggy Code:**
+```python
+from pyramid.httpexceptions import HTTPException
+
+# Initializing HTTPException without overriding status
+exc = HTTPException('message')
+print(exc.status)  # Outputs: 'None None'
+```
+
+**Expected Behavior:**
+A valid `HTTPException` should have a proper status code. If not overridden in a subclass, it should default to a standard error status like `'520 Unknown Error'` to ensure compatibility and prevent invalid status values.
+
+**Actual Behavior:**
+Initializing `HTTPException` without overriding leads to a `Response` with status `'None None'`, causing a `ValueError` due to invalid status code formatting.
+
+**Error Message:**
+```
+ValueError: Invalid status code, integer required.
+```
+
+## Task Budget (Session terminates when any budget is exhausted)
+- Time allowance: 10 minutes
+- Tool calls allowance: 40 calls
+- Max loop iterations: 40 turns
+
+## Execution Environment Rules
+- Single command timeout: 120 seconds (commands exceeding this fail without ending the session)
+- Command output limit: 5000 characters
+- File view limit: 150 lines per read_file call
+- File character limit: 10000 characters per read_file call
+- Environment is offline (no network/PyPI access). All repository and test dependencies are ALREADY pre-installed. Do NOT attempt to run pip install or download packages.
+
+## Instructions:
+0. All source code is under `/workspace`. Do NOT search outside `/workspace` (e.g. `/usr/`, `/wheels/`, system site-packages). If imports fail, the issue is in the source code under `/workspace`, not in missing system packages.
+1. Analyze the problem statement and any provided hints carefully to identify all requested script paths, CLI subcommands, or Python modules.
+2. Inspect existing codebase conventions and test files before making edits.
+3. Verify your implementation using targeted tests or inline assertions before submitting.
+4. Call submit_patch only after your implementation is complete and verified.
+5. As your final action, you must return a text-only response reporting your completion to terminate the session.

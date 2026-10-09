@@ -1,0 +1,3 @@
+Previous HEAD position was 8a9179f2 Add decorator for @gen.engine-like tests.
+HEAD is now at 34edd2e8 Support lists of futures in @gen.engine.
+ERROR:tornado.access:500 GET /exception (127.0.0.1) 1.26ms

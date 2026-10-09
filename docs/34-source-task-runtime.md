@@ -119,3 +119,82 @@ stop error, an unavailable absence query, and confirmed absence despite a stop
 error. These are simulated API failures, not injected outages in Docker itself.
 Core suite: 166 run, 151 passed, 15 skipped. Real Gemma HTTP execution, broader
 repository coverage, and training admission remain unqualified.
+
+## Production-client HTTP transport check
+
+`--http-fixture` is mutually exclusive with model execution and in-process fixtures.
+It starts a private loopback HTTP server on an ephemeral port, then uses the same
+`setup_gemma_model_registry`/LiteLLM client path as real execution. It cannot route
+to an external model endpoint. Both the server receipt and attempt carry explicit
+fixture labels and synthetic-usage flags.
+
+The success case used three non-streaming chat-completion requests with all nine
+compiled tool schemas. Native write/submission result IDs returned correctly in
+subsequent HTTP requests, and the submitted fixture patch was retained. An
+intentional 503 produced one request, no retries, no submission, and an explicit
+`ServiceUnavailableError`. Agent containers and fixture servers stopped in both
+cases. No headers or credentials are retained in HTTP records.
+
+Independent grading of the success fixture collected all 994 cases and retained
+the expected 19 mismatches. The artifact's `http-success` label survives grading;
+no repair credit is inferred. `verify_source_http_client.py` checks the exchanges,
+cleanup, task separation, tool results and grading linkage. Evidence:
+`source-http-client-001`, `source-http-grade-001`, `source-http-client-audit-001`.
+
+This qualifies the tested local non-streaming HTTP protocol and error path. It
+does not qualify Gemma generation, native tokenizer/serving behavior, streaming,
+network outages, or arbitrary server responses. With local plumbing established,
+the next data priority is broader task/environment coverage and native trajectory
+admission; keep integration fixtures out of the training corpus.
+
+## Full source grading-contract census
+
+`audit_source_expectation_corpus.py` verifies all eight pinned R2E shards before
+and after reading and exports only task identities and aggregate expectation
+counts. Across 4,578 tasks in ten repository basenames, 4,577 contracts have
+nonempty test identities and supported statuses. One Orange3 task
+(`f813020a9c0a0450df07ba20529b117665426249`, shard 0, row 157) contains a blank
+test identity and remains excluded from this contract gate.
+
+Of valid contracts, 2,374 expect only passes and 2,203 also expect failures or
+errors. All 189 Pyramid contracts include expected failures. Pandas alone has
+62,215 expected ERROR occurrences across its task contracts. These counts are
+not unique tests, observed runtime errors, or evidence that a reference fix is
+correct. The census does not resolve publisher identity collisions or establish
+which outcomes discriminate the buggy base from the reference repair.
+
+Consequently, metadata-valid tasks are not admitted to training. Next expand
+independent base/reference controls to other repositories, preserve expected
+failure states, and reject environments without a reproducible discriminating
+signal. This census also identifies two source repositories absent from the
+first acquired Hero trajectory shard (Orange3 and Pillow); source task coverage
+must not be confused with available teacher trajectory coverage.
+
+Evidence: `evidence/data/source-expectation-corpus-001`. Four new contract tests
+cover duplicate keys, malformed/empty mappings, retained failure states, and
+failure-only contracts. Full local suite: 170 run, 155 passed, 15 skipped.
+
+## Second repository: Tornado evaluator controls
+
+The pinned Tornado source task
+`34edd2e8020b42cd16c3dc9a8c0417b9fae1e6d4` now has two independent pairs of
+base/reference controls. Its image uses a custom unittest runner, so
+`qualify_tornado_evaluator.py` invokes that runner's loader and result class,
+retains fully qualified identities, and exports JUnit outcomes. Missing,
+duplicate, or unrepresentable outcome identities reject the run. This profile
+is separate from Pyramid's pytest profile and is not a universal adapter.
+
+Both runs gave identical outcomes: base 29 passed / one failed; reference all
+30 passed. The sole differing case is `GenTest.test_multi_future`. The reference
+matches every pinned publisher expectation, while the base disagrees on that
+case. Git first-parent checks, source import paths, unchanged tracked files,
+non-OOM execution, and container cleanup passed. The tests ran offline in
+separate disposable evaluator containers; reference code was never presented
+to an agent.
+
+Evidence: `tornado-evaluator-controls-001` and `002`, `tornado-expectations-001`
+and `002`, and `tornado-evaluator-audit-001` under `evidence/data`. This establishes
+a reproducible discriminating signal for one additional task. It does not
+establish general Tornado coverage, hidden-test completeness, trajectory replay,
+or agent success. Next sanitize this source snapshot and qualify native tool
+execution before evaluating teacher or model patches. No GPU was required.

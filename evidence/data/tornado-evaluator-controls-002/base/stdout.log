@@ -1,0 +1,55 @@
+============================= test session starts =============================
+platform linux -- Python 3.9.21
+rootdir: /testbed
+..............................
+collected 30 items
+
+=================================== FAILURES ===================================
+__________ GenTest.test_multi_future __________
+Traceback (most recent call last):
+  File "/root/.local/share/uv/python/cpython-3.9.21-linux-x86_64-gnu/lib/python3.9/unittest/case.py", line 59, in testPartExecutor
+    yield
+  File "/root/.local/share/uv/python/cpython-3.9.21-linux-x86_64-gnu/lib/python3.9/unittest/case.py", line 592, in run
+    self._callTestMethod(testMethod)
+  File "/root/.local/share/uv/python/cpython-3.9.21-linux-x86_64-gnu/lib/python3.9/unittest/case.py", line 550, in _callTestMethod
+    method()
+  File "/testbed/tornado/testing.py", line 383, in wrapper
+    runner.run()
+  File "/testbed/tornado/gen.py", line 385, in run
+    yielded = Multi(yielded)
+  File "/testbed/tornado/gen.py", line 279, in __init__
+    assert all(isinstance(i, YieldPoint) for i in children)
+AssertionError
+
+==================== short test summary info ====================
+PASSED r2e_tests.test_1::GenTest::test_arguments
+PASSED r2e_tests.test_1::GenTest::test_bogus_yield
+PASSED r2e_tests.test_1::GenTest::test_exception_in_task_phase1
+PASSED r2e_tests.test_1::GenTest::test_exception_in_task_phase2
+PASSED r2e_tests.test_1::GenTest::test_exception_in_yield
+PASSED r2e_tests.test_1::GenTest::test_exception_phase1
+PASSED r2e_tests.test_1::GenTest::test_exception_phase2
+PASSED r2e_tests.test_1::GenTest::test_future
+PASSED r2e_tests.test_1::GenTest::test_inline_cb
+PASSED r2e_tests.test_1::GenTest::test_ioloop_cb
+PASSED r2e_tests.test_1::GenTest::test_key_mismatch
+PASSED r2e_tests.test_1::GenTest::test_key_reuse
+PASSED r2e_tests.test_1::GenTest::test_leaked_callback
+PASSED r2e_tests.test_1::GenTest::test_multi
+PASSED r2e_tests.test_1::GenTest::test_multi_delayed
+FAILED r2e_tests.test_1::GenTest::test_multi_future
+PASSED r2e_tests.test_1::GenTest::test_no_yield
+PASSED r2e_tests.test_1::GenTest::test_orphaned_callback
+PASSED r2e_tests.test_1::GenTest::test_parallel_callback
+PASSED r2e_tests.test_1::GenTest::test_resume_after_exception_in_yield
+PASSED r2e_tests.test_1::GenTest::test_reuse
+PASSED r2e_tests.test_1::GenTest::test_stack_context_leak
+PASSED r2e_tests.test_1::GenTest::test_stack_context_leak_exception
+PASSED r2e_tests.test_1::GenTest::test_task
+PASSED r2e_tests.test_1::GenTest::test_wait_all
+PASSED r2e_tests.test_1::GenTest::test_with_arg
+PASSED r2e_tests.test_1::GenWebTest::test_exception_handler
+PASSED r2e_tests.test_1::GenWebTest::test_sequence_handler
+PASSED r2e_tests.test_1::GenWebTest::test_task_handler
+PASSED r2e_tests.test_1::GenWebTest::test_yield_exception_handler
+=================== 1 failed, 29 passed in 0.03s ===================
