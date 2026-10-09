@@ -1,0 +1,12 @@
+/tmp/submitted.patch:15: trailing whitespace.
+class GenTest(AsyncTestCase): 
+/tmp/submitted.patch:17: trailing whitespace.
+    def async_future(self, result, callback): 
+/tmp/submitted.patch:20: trailing whitespace.
+    def test_multi_future(self): 
+/tmp/submitted.patch:22: trailing whitespace.
+        def f(): 
+/tmp/submitted.patch:27: trailing whitespace.
+        
+warning: 5 lines add whitespace errors.
+ERROR:tornado.access:500 GET /exception (127.0.0.1) 1.53ms

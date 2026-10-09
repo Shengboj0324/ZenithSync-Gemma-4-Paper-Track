@@ -1,0 +1,62 @@
+============================= test session starts =============================
+platform linux -- Python 3.9.21
+rootdir: /testbed
+.......................................
+collected 39 items
+
+=================================== ERRORS =====================================
+__________ TestUrlConcat.test_url_concat_none_params __________
+Traceback (most recent call last):
+  File "/root/.local/share/uv/python/cpython-3.9.21-linux-x86_64-gnu/lib/python3.9/unittest/case.py", line 59, in testPartExecutor
+    yield
+  File "/root/.local/share/uv/python/cpython-3.9.21-linux-x86_64-gnu/lib/python3.9/unittest/case.py", line 592, in run
+    self._callTestMethod(testMethod)
+  File "/root/.local/share/uv/python/cpython-3.9.21-linux-x86_64-gnu/lib/python3.9/unittest/case.py", line 550, in _callTestMethod
+    method()
+  File "/testbed/r2e_tests/test_1.py", line 70, in test_url_concat_none_params
+    url = url_concat(
+  File "/testbed/tornado/httputil.py", line 616, in url_concat
+    raise TypeError(err)
+TypeError: 'args' parameter should be dict, list or tuple. Not <class 'NoneType'>
+
+==================== short test summary info ====================
+PASSED r2e_tests.test_1::FormatTimestampTest::test_datetime
+PASSED r2e_tests.test_1::FormatTimestampTest::test_struct_time
+PASSED r2e_tests.test_1::FormatTimestampTest::test_time_tuple
+PASSED r2e_tests.test_1::FormatTimestampTest::test_unix_time_float
+PASSED r2e_tests.test_1::FormatTimestampTest::test_unix_time_int
+PASSED r2e_tests.test_1::HTTPHeadersTest::test_copy
+PASSED r2e_tests.test_1::HTTPHeadersTest::test_multi_line
+PASSED r2e_tests.test_1::HTTPHeadersTest::test_optional_cr
+PASSED r2e_tests.test_1::HTTPHeadersTest::test_pickle_roundtrip
+PASSED r2e_tests.test_1::HTTPHeadersTest::test_setdefault
+PASSED r2e_tests.test_1::HTTPHeadersTest::test_string
+PASSED r2e_tests.test_1::HTTPHeadersTest::test_unicode_newlines
+PASSED r2e_tests.test_1::HTTPServerRequestTest::test_body_is_a_byte_string
+PASSED r2e_tests.test_1::HTTPServerRequestTest::test_default_constructor
+PASSED r2e_tests.test_1::MultipartFormDataTest::test_boundary_starts_and_ends_with_quotes
+PASSED r2e_tests.test_1::MultipartFormDataTest::test_content_disposition_header_without_name_parameter
+PASSED r2e_tests.test_1::MultipartFormDataTest::test_data_after_final_boundary
+PASSED r2e_tests.test_1::MultipartFormDataTest::test_file_upload
+PASSED r2e_tests.test_1::MultipartFormDataTest::test_invalid_content_disposition
+PASSED r2e_tests.test_1::MultipartFormDataTest::test_line_does_not_end_with_correct_line_break
+PASSED r2e_tests.test_1::MultipartFormDataTest::test_missing_headers
+PASSED r2e_tests.test_1::MultipartFormDataTest::test_special_filenames
+PASSED r2e_tests.test_1::MultipartFormDataTest::test_unquoted_names
+PASSED r2e_tests.test_1::ParseCookieTest::test_cookie_edgecases
+PASSED r2e_tests.test_1::ParseCookieTest::test_invalid_cookies
+PASSED r2e_tests.test_1::ParseCookieTest::test_python_cookies
+PASSED r2e_tests.test_1::ParseRequestStartLineTest::test_parse_request_start_line
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_dict_params
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_encode_args
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_mult_params
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_multi_same_params
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_multi_same_query_params
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_no_params
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_no_query_params
+ERROR r2e_tests.test_1::TestUrlConcat::test_url_concat_none_params
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_q_with_no_trailing_amp
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_trailing_amp
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_trailing_q
+PASSED r2e_tests.test_1::TestUrlConcat::test_url_concat_with_frag
+=================== 1 error, 38 passed in 0.01s ===================

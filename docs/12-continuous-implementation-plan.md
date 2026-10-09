@@ -628,3 +628,175 @@ expectation agreement only for the reference. Both repeats match, and source
 integrity and cleanup checks passed. This expands evaluator coverage beyond
 Pyramid; source snapshot isolation and native trajectory execution remain next.
 No training examples were admitted and no Pod restart was needed.
+
+### Tornado workspace update
+
+The exact-tree sanitized Tornado snapshot now passes native import/read/empty-
+submission checks. All 28 original gen_test cases give identical passing outcomes
+before/after sanitization. The shared workspace probe also passes on Pyramid.
+Next: native patch transfer and teacher trajectory replay, with independent
+Tornado grading. Preserve the distinction between 28 original repository tests
+and 30 generated evaluator tests. GPU remains unnecessary for these checks.
+
+### First independently graded teacher replay
+
+One pinned Tornado Hero trace now executes through adapted native tools and its
+saved patch passes all 30 independent grading cases. The replay has 58 charged
+calls and exceeds the 40-call competition profile. It is explicitly not admitted
+to training. Next qualify fresh-observation trajectory construction and context/
+mask limits, then expand replay coverage without treating this single success as
+population-level evidence. All work was local; no GPU or new model generation.
+
+### Native training representation update
+
+The twice-graded Tornado replay now has a fresh-observation, action-only native
+history: 59 exchanges, 28,933 input tokens, 6,764 supervised targets, exact native
+Gemma token/mask checks passing with nine tool schemas and no truncation.
+This is diagnostic data, not admitted training data: the reconstructed prompt
+and 58-call trajectory require explicit policy and fidelity checks. Next expand
+budget-compatible source replay coverage and qualify training memory using
+measured sequence lengths before requesting another GPU session.
+
+### Corpus-scale replay selection
+
+The 2,500-trace census yields 417 histories within the estimated 40-call budget,
+including 136 joint source-context/call-budget candidates without known adapter
+flags. A deterministic eight-repository shortlist has pinned image/revision
+metadata ready for qualification. Prioritize these new candidates before more
+long-trace demonstrations. Use fresh native lengths and independently graded
+patches for admission; source metadata is only a replay-cost screen. Local suite:
+180 tests run, 165 passed, 15 skipped.
+
+### Budget-compatible replay milestone
+
+The selected shorter Tornado trace now replays in 33 calls under the enforced
+40-call ceiling, passes all 39 independent grading cases, and renders into
+14,884 native input tokens with 3,890 supervised targets. Source build/replay
+configuration is reusable and validated. This is evidence for one teacher repair,
+not trained Gemma performance or corpus admission. Next extend the same pathway
+to the selected Pyramid candidate, then other repositories, while maintaining
+rights/contamination and fresh-observation admission gates. No Pod needed yet.
+
+### Cross-repository budget-compatible replay
+
+The selected Pyramid trace now replays in 29 calls, produces a patch matching
+all 835 independent case expectations (80 remain expected failures), and renders
+into 18,924 input / 3,868 supervised tokens without truncation. Together with
+Tornado, two repositories now have budget-compatible graded teacher histories.
+Shared replay/grading entry points replace task-specific implementation names;
+compatibility wrappers preserve earlier commands. Next expand to additional
+selected repositories and resolve admission gates; these two traces do not form
+an abundant training corpus or prove Gemma performance. No GPU was used.
+
+### Admission evidence and source-license correction
+
+Live rules review confirms conditional external-data/model allowance. Current
+GitHub repository-ID/fork-network metadata shows no overlap between the eight
+source repositories and four reserved official repositories. This is a limited
+identity screen, not semantic contamination clearance. Exact source notices
+revealed that Pyramid's MIT row label does not describe its mixed-license tree;
+keep it quarantined pending file-level review. Preserve Tornado's Apache notice
+and all transformation attribution. See `35-data-rights-and-evaluation-isolation.md`.
+Do not scale acquisition based on unverified publisher license labels alone.
+
+### P1 local follow-up — 2026-10-09: replay source provenance
+
+- Verified the admission-review R2 upload: 23 files, 116,081 bytes, remote hash
+  readback complete (`admission-review-publish-001`).
+- Exported the short Pyramid replay's three directly observed source files from
+  its immutable snapshot; matched the recorded reads and final edited read with
+  explicit terminal-newline normalization. Accounted for all 19 shell outputs.
+- Narrowed the rights finding: this trace does not show rendered docs bodies,
+  but its source is not MIT-only; dependency warning snippets and derived
+  redistribution notices still require coverage. Kept training approval false.
+- Recorded a concrete quality hazard: a teacher-written test prints failure while
+  exiting zero. Independent grading, not exit status or success prose, controls
+  outcome labels. No GPU work was started; P1 remains incomplete.
+
+### P1 local follow-up — linked replay preflight
+
+Added `assess_replay_admission.py` and its consistency-checking module. Saved
+patches, grades, native history, event mappings, schemas and token audit now have
+an executable cross-artifact check. Reconstructed histories and charged-call
+counts are independently compared; no training approval is issued by this tool.
+The two short traces pass these mechanical checks. The long Tornado trace fails
+both the 40-call limit and the 32,768 context limit with an 8,192 output reserve.
+Local suite: 190 run, 175 passed, 15 skipped. Rights/split/runtime gates remain;
+no Pod restart or training campaign was performed.
+
+### P1 local follow-up — full pinned trajectory acquisition
+
+Expanded acquisition from one to all 14 SWE-Hero shards at the same immutable
+revision. Publisher size and SHA-256 checks passed. The full metadata census has
+34,269 trajectories, 1,695 repository names and 11,766 repository–issue pairs,
+with no duplicate trajectory IDs. It found 73 encode/httpx rows overlapping a
+reserved repository; these are explicitly flagged for exclusion. No trajectory
+or patch bodies were read by the census. See `36-full-trajectory-corpus-intake.md`.
+
+This materially broadens the raw supply, but 22,503 trajectories repeat existing
+issues, and 24,048 rows come from source datasets outside the currently qualified
+R2E task adapter. Do not extrapolate the two successful native replay examples to
+this corpus. Raw R2 transfers are underway; use each verified publish receipt
+before claiming a shard is stored remotely. Training admission remains false.
+
+### P1 local follow-up — verified R2 corpus and expanded task join
+
+All 14 pinned raw shard bundles are now verified in R2 (2,402,170,043 bytes,
+including cards/metadata), with manifest-linked receipts. A separate 151,559,597
+byte shard restore passed destination checksum validation. The full census bundle
+is also remotely verified. No GPU was used.
+
+Expanded the task join to consume the verified full metadata index. Exclusion
+runs before source selection: 73 reserved-repository rows excluded, 10,221 R2E
+traces joined to 3,442 unique tasks, zero unmatched R2E traces, 23,975 other-source
+rows left outside this adapter. This joins identities only; broad environment,
+rights, native token/mask and replay admission remain incomplete. Local suite:
+194 run, 178 passed, 16 skipped; separate PyArrow census integration passed.
+
+### P1 local follow-up — SWE-rebench filtered source join
+
+Implemented a metadata-only adapter for the largest remaining trajectory source.
+The pinned 6,542-task filtered table joins 17,798 traces to 6,125 tasks across
+1,686 repositories. All 73 reserved-repository rows are excluded first. There
+are 318 unmatched traces across 111 tasks; investigate the larger source release
+rather than guessing mappings. Nine matched rows lack publisher license terms,
+and 103 declare ZPL 2.1; rights remain unresolved despite simplified trajectory
+labels. Image strings exist for all matched rows but are not digest-resolved or
+runtime-qualified. See `37-swe-rebench-source-adapter.md`.
+
+Validation for this adapter: 198 tests run, 182 passed, 16 skipped. The raw
+filtered table is remotely checksum-verified in R2. Missing terms, unmatched
+identities, unresolved images and evaluator qualification remain explicit gates;
+no training or GPU work was performed.
+
+### P1 local follow-up — full SWE-rebench task identity coverage
+
+Acquired both full-release task shards at the pinned revision and extended the
+join command with an explicit source split. All 18,116 nonreserved SWE-rebench
+traces now match 6,236 tasks across 1,687 repositories. The previously unresolved
+318 traces map to 111 tasks without image references: do not substitute guessed
+images. Filtered results reproduce exactly, and all common task metadata agrees.
+Source shard hashes and row positions are retained for controlled retrieval.
+Suite: 198 run, 182 passed, 16 skipped. No GPU work or training approval.
+
+### P1 local follow-up — SWE-rebench images
+
+Pinned all eight images in a reproducible cross-repository metadata sample. Pulled
+only the smallest (1.27 GB compressed) locally and inspected it in a read-only,
+networkless container. Its Git HEAD matches the task base and tracked files are
+clean, but 624 commits and extra root files remain accessible. This is not yet
+an isolated agent image. Next: source sanitization and independent evaluator
+controls. The probe container was removed; no task tests, agent or GPU ran.
+Suite: 200 run, 184 passed, 16 skipped. See the source-adapter document for scope.
+
+### P1 local follow-up — SWE-rebench source snapshot
+
+Built and independently verified a parentless exact-tree snapshot for the first
+SWE-rebench image: 30 files/290,019 bytes preserved; old base/head/merge commits
+inaccessible via Git; root issue/env artifacts removed. An initial first-parent
+assumption failed and was retained as evidence. Explicit ancestor validation now
+supports multi-commit SWE-rebench PRs; R2E retains its strict first-parent default.
+Task evaluator and runtime compatibility remain unverified. Docker lower layers
+retain original bytes and must not be agent-accessible. Latest suite: 204 run,
+188 passed, 16 skipped. Improved file-mutation diagnostics without weakening the
+guard; intermittent source-metadata changes remain an open local reliability issue.

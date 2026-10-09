@@ -1,0 +1,47 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 369B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/namanjain12/tornado_final@sha256:580652c1f15d3df42c6bca238ef65f035feee739e190c2a215070b88e990dd0a
+#2 ...
+
+#3 [auth] namanjain12/tornado_final:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/namanjain12/tornado_final@sha256:580652c1f15d3df42c6bca238ef65f035feee739e190c2a215070b88e990dd0a
+#2 DONE 0.8s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 8.42kB done
+#5 DONE 0.0s
+
+#6 [1/4] FROM docker.io/namanjain12/tornado_final@sha256:580652c1f15d3df42c6bca238ef65f035feee739e190c2a215070b88e990dd0a
+#6 resolve docker.io/namanjain12/tornado_final@sha256:580652c1f15d3df42c6bca238ef65f035feee739e190c2a215070b88e990dd0a done
+#6 DONE 0.1s
+
+#7 [2/4] COPY source_snapshot.py config.json build_snapshot.py /tmp/
+#7 DONE 0.0s
+
+#8 [3/4] RUN PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 /tmp/build_snapshot.py && rm /tmp/source_snapshot.py /tmp/config.json /tmp/build_snapshot.py
+#8 22.74 {"base_commit": "c9d2a3fa573987629ad576e991c2f3b65f4daab4", "exact_tree_preserved": true, "known_oracles_removed": ["/r2e_tests", "/testbed/run_tests.sh"], "schema_version": 1, "scope": "Exact tracked tree and declared oracle paths only; broader image audit pending", "snapshot_commit": "a8333ff2546d5a2d00064a70aa264192cbb11ec4", "solution_commit_accessible": false, "source_tree": "d90ba9e8d1042b30a172f319c69e3ff2337d1199", "tracked_bytes": 1944904, "tracked_files": 308, "tracked_manifest_sha256": "29473772ba7de8c7d1015ff0d40d3f2fa64cffc889b99811e26769dde76e15b6", "training_approved": false}
+#8 DONE 22.8s
+
+#9 [4/4] WORKDIR /testbed
+#9 DONE 0.0s
+
+#10 exporting to image
+#10 exporting layers 0.1s done
+#10 exporting manifest sha256:19ce011a82179e96c619dfb211b7f5dce4f07c38b5ac44f8a98aefa96a4c2f64 done
+#10 exporting config sha256:ef63549632ba6360496a6f40e6de94d9c6056e214f57dd3715908a763f374d90 done
+#10 exporting attestation manifest sha256:9c37ea92f717b21708f421c73928f4acb2b0c17c165f1cd8a85c0f9c5f3a8559 done
+#10 exporting manifest list sha256:64a0f37742f30f8f22b778d2590191bcc94b72b7e196566386b4c45915887ef1 done
+#10 naming to moby-dangling@sha256:64a0f37742f30f8f22b778d2590191bcc94b72b7e196566386b4c45915887ef1 done
+#10 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/qtzs35uaimuwkd39vjpg6e6j0

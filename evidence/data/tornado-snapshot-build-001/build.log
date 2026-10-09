@@ -1,0 +1,47 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 369B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/namanjain12/tornado_final@sha256:0f284a1c04befdee05261af36528a60ea8e1bdfbfc07de42f8df3f5aa61967e6
+#2 ...
+
+#3 [auth] namanjain12/tornado_final:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/namanjain12/tornado_final@sha256:0f284a1c04befdee05261af36528a60ea8e1bdfbfc07de42f8df3f5aa61967e6
+#2 DONE 0.7s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 8.42kB done
+#5 DONE 0.0s
+
+#6 [1/4] FROM docker.io/namanjain12/tornado_final@sha256:0f284a1c04befdee05261af36528a60ea8e1bdfbfc07de42f8df3f5aa61967e6
+#6 resolve docker.io/namanjain12/tornado_final@sha256:0f284a1c04befdee05261af36528a60ea8e1bdfbfc07de42f8df3f5aa61967e6 done
+#6 DONE 0.1s
+
+#7 [2/4] COPY source_snapshot.py config.json build_snapshot.py /tmp/
+#7 DONE 0.0s
+
+#8 [3/4] RUN PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 /tmp/build_snapshot.py && rm /tmp/source_snapshot.py /tmp/config.json /tmp/build_snapshot.py
+#8 18.06 {"base_commit": "8a9179f2d35e353782aa3611dbdd79c29a5e8185", "exact_tree_preserved": true, "known_oracles_removed": ["/r2e_tests", "/testbed/run_tests.sh"], "schema_version": 1, "scope": "Exact tracked tree and declared oracle paths only; broader image audit pending", "snapshot_commit": "5ec6301c67bd26b1f8fd31502e461c5898467aa5", "solution_commit_accessible": false, "source_tree": "e627f17e3506c04190c6019e18bd4a80db0027b8", "tracked_bytes": 1455510, "tracked_files": 225, "tracked_manifest_sha256": "08babc57cc96a573fba401304a5388d45ef180c3b8a75e1489fc12483a43ad7b", "training_approved": false}
+#8 DONE 18.1s
+
+#9 [4/4] WORKDIR /testbed
+#9 DONE 0.0s
+
+#10 exporting to image
+#10 exporting layers 0.1s done
+#10 exporting manifest sha256:896c21e3a747adb441a30e28a53cb74f517dfd1d8b199f92ca44127a1836e68f done
+#10 exporting config sha256:ca2ae7aae52eb538c1dad9d2dafc11bae2135110361e8fac15a1b2b8cd038ae2 done
+#10 exporting attestation manifest sha256:dd6ef1e5b2421eb95d859ba013e6038b510dd54f35924234dcaa9eba121a09f6 done
+#10 exporting manifest list sha256:365c831bea95c20c3907b2a2f473876884dfe753a7fe6c5ac8526eaffa8701b1 done
+#10 naming to docker.io/zenithsync/p1-source-tornado:snapshot-001 done
+#10 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/ffjif5ac7wa0lcqlxzg7lfn0h

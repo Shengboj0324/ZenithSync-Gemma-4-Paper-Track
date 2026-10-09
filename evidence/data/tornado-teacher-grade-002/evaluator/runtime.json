@@ -1,0 +1,1 @@
+{"base": "8a9179f2d35e353782aa3611dbdd79c29a5e8185", "patch_sha256": "f05a5b96ef72e8820454c167584af4b4201f6478e8e3b399d03e03688efb5811", "test_exit": 0, "source_import": "/testbed/tornado/__init__.py", "tracked_patch_unchanged": true}

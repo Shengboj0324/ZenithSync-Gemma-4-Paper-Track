@@ -1,0 +1,56 @@
+diff --git a/reproduce_issue.py b/reproduce_issue.py
+new file mode 100644
+index 0000000..5baa1fa
+--- /dev/null
++++ b/reproduce_issue.py
+@@ -0,0 +1,36 @@
++#!/usr/bin/env python
++"""Script to reproduce the issue with yielding a list of futures in @gen.engine"""
++
++from tornado import gen
++from tornado.concurrent import return_future
++from tornado.testing import AsyncTestCase
++
++
++class GenTest(AsyncTestCase): 
++    @return_future
++    def async_future(self, result, callback): 
++        self.io_loop.add_callback(callback, result)
++
++    def test_multi_future(self): 
++        @gen.engine
++        def f(): 
++            # This should work but currently raises AssertionError
++            results = yield [self.async_future(1), self.async_future(2)]
++            print("Results:", results)
++            self.stop()
++        
++        f()
++        self.wait()
++
++
++if __name__ == "__main__":
++    import unittest
++    test = GenTest()
++    test.setUp()
++    try:
++        test.test_multi_future()
++        print("SUCCESS: Test passed!")
++    except Exception as e:
++        print(f"ERROR: {type(e).__name__}: {e}")
++        import traceback
++        traceback.print_exc()
+\ No newline at end of file
+diff --git a/tornado/gen.py b/tornado/gen.py
+index 320f7da..3f2d0a0 100644
+--- a/tornado/gen.py
++++ b/tornado/gen.py
+@@ -382,6 +382,8 @@ class Runner(object):
+                     self.finished = True
+                     raise
+                 if isinstance(yielded, list):
++                    # Convert any Future objects in the list to YieldFuture objects
++                    yielded = [YieldFuture(f) if isinstance(f, Future) else f for f in yielded]
+                     yielded = Multi(yielded)
+                 if isinstance(yielded, Future):
+                     # TODO: lists of futures

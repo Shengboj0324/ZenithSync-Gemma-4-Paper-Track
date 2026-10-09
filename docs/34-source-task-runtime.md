@@ -198,3 +198,202 @@ a reproducible discriminating signal for one additional task. It does not
 establish general Tornado coverage, hidden-test completeness, trajectory replay,
 or agent success. Next sanitize this source snapshot and qualify native tool
 execution before evaluating teacher or model patches. No GPU was required.
+
+## Tornado source snapshot and native workspace
+
+The Tornado snapshot build preserves the exact original Git tree, all 225
+tracked files (1,455,510 bytes), file modes, and per-file content hashes. It
+replaces history with one parentless commit and removes the known generated
+grading directory and test launcher. The reusable native workspace probe verifies
+that the solution commit is inaccessible, imports resolve under `/workspace`,
+source reads work, and an untouched submission exports an empty patch. That probe
+also passed against the previously qualified Pyramid snapshot.
+
+The original repository's `tornado.test.gen_test` module has 28 cases, all passing
+in both original and sanitized images with identical fully qualified outcomes.
+These are distinct from the 30 generated grading cases used in the evaluator
+controls. An initial text-parser attempt rejected an interleaved logging message;
+the successful comparison uses structured unittest result callbacks, rejects
+missing/duplicate outcomes, and retains the original failure evidence.
+
+Evidence: `tornado-snapshot-build-001`, `tornado-workspace-probe-001`,
+`pyramid-workspace-probe-001`, and `tornado-snapshot-comparison-001` / `002`.
+The build context is `artifacts/official/tornado-snapshot-build-001`.
+Original oracle data remains in Docker lower layers, so the snapshot must only be
+used in the offline, unmounted agent sandbox without Docker-engine access. It is
+not a scrubbed distributable image or an exhaustive image-content audit. These
+checks qualify workspace transport and a relevant source test module; they admit
+no training examples. Next qualify native patch transport and replay on this
+second repository before any real-model rollout.
+
+## First adapted native teacher replay: Tornado
+
+`replay_tornado_teacher.py` verifies the pinned Hero shard and selects trajectory
+`4d152574-6d53-4924-b9a6-c58d47a5d6d8` by exact task identity. It preflights the
+reviewed tool profile, maps its repository root to `/workspace`, and executes
+its actions in order through native tools in the sanitized offline container.
+Editor directory views become bounded listings; file views use native read
+limits, creates refuse overwrites, and replacements use native edit semantics.
+Three teacher `think` actions are recorded as not executed. Recorded teacher
+observations are not reused as evidence, and source `finish` becomes native patch
+submission. This is action replay with adapted observations, not proof of full
+OpenHands semantic equivalence or a newly generated Gemma trajectory.
+
+The 62 source actions produced 58 charged native tool calls. Four shell commands
+returned errors, which are retained in the event record. All mutations and the
+submission succeeded. The native submitted patch contains changes to
+`tornado/gen.py` and an added `reproduce_issue.py`; native submission filtering
+omits the teacher's test-named scratch files. Cleanup was verified.
+
+`grade_tornado_teacher.py` applied those saved patch bytes to a fresh original
+base image and ran the qualified publisher test runner. All 30 cases passed,
+with no missing groups, unexpected groups, or expectation disagreements. The
+tracked patch remained unchanged during grading. The evaluator's generated tests
+were never mounted in the replay container. Evidence:
+`tornado-teacher-replay-001`, `tornado-teacher-grade-001`.
+
+The replay uses a 100-call data-qualification ceiling and 30-second command
+limits. Its 58-call trace exceeds the current 40-call competition profile and
+must not be counted as a competition-budget success. Training admission remains
+false pending context/mask qualification, rights and contamination review, and a
+policy for budget-compatible trajectories. No source observations can be paired
+with the adapted native calls without reconciliation. Four profile tests cover
+path escape rejection, shell-root mapping, interactive/unknown action rejection,
+and exclusion of teacher thought content from executable actions.
+
+## Fresh native history and exact tokenizer qualification
+
+The second Tornado replay records the exact native function name, arguments,
+and returned result for each executed action. `native_replay_history` requires
+strict source-event ordering, exactly one matching native exchange per executed
+action, and a final submission exchange; it does not infer missing results.
+Three teacher thought actions are omitted. Stable synthetic call IDs are linkage
+metadata, not evidence of additional tool execution.
+
+`build_replay_history.py` combines these 59 native exchanges with the pinned source
+issue and an explicitly reconstructed base-candidate system prompt. It reuses
+the nine-tool schema snapshot from the qualified pinned HTTP-client fixture and
+checks the tool-name set. The resulting 120-message history contains no copied
+teacher reasoning or final success narrative. This is diagnostic action-only
+supervision, not a claim that the teacher was conditioned on the reconstructed
+prompt or that original observations equal replay observations.
+
+`audit_replay_history_tokens.py` verifies the pinned tokenizer assets and exact
+native rendering/token identity, then checks assistant-only masks against
+character spans and token offsets. With all nine tool schemas included, the full
+history has **28,933 input tokens** and **6,764 supervised next-token targets**.
+No truncation or packing is applied. It fits a 32,768 input-token cap, leaving
+3,835 tokens; this is not an 8,192-token generation reserve or a demonstrated GPU
+training fit. Training targets cover assistant actions, never tool results.
+
+The second saved replay patch independently passes all 30 grading cases.
+Evidence: `tornado-teacher-replay-002`, `tornado-teacher-grade-002`,
+`tornado-native-history-001`, `tornado-native-tokens-001`. Four additional
+projection tests reject missing, inconsistent, parallel, and reordered exchanges
+and verify fresh-result linkage. Core suite: 178 run, 163 passed, 15 skipped.
+Training approval remains false: 58 charged calls exceed the current competition
+profile; prompt/observation adaptation, rights/contamination, corpus-level
+coverage, and long-context GPU qualification remain unresolved admission gates.
+
+## Corpus replay priorities
+
+`plan_trajectory_replays.py` joins the pinned 2,500-trace source shard to its exact
+context census. It estimates one charged native call per shell/editor action,
+excluding reasoning and terminal submission, while retaining interactive-shell,
+empty-command, and unsupported-editor flags. The estimate is a screening measure,
+not a measured runtime count or complete semantic-adaptation check.
+
+417 source histories have at most 40 estimated charged calls. Of these, 136 also
+fit the earlier 32,768 source-token cap and have no known adapter flags. The
+per-repository joint counts are Pyramid 7, aiohttp 4, datalad 6, coveragepy 5,
+NumPy 58, pandas 42, Scrapy 9, Tornado 5. Source token counts omit tool schemas
+and output reserve and differ from fresh native replay lengths, so this screen
+must not be used as final context admission.
+
+One candidate per repository is selected by minimum SHA256(revision + NUL +
+trajectory ID) within the joint-fit pool, with a documented call-budget fallback
+if needed. All eight selected tasks have successfully resolved GitHub first
+parents and content-addressed Linux amd64 registry images. Selection artifacts
+retain full task linkage. This cost/coverage-driven set is not a representative
+performance sample, and failures must not be replaced silently.
+
+Evidence: `replay-selection-001` / `002` and
+`replay-environment-resolution-001`. Longer teacher traces are not automatically
+invalid SFT material; the deployment budget and the training sequence policy are
+separate decisions. No source trace receives training approval from this screen.
+
+The selected budget-priority Tornado task
+`86cc31f52992fb9d11f92de6fd5496842fea2265` (33 estimated source calls) now has
+its own base/reference controls: base 38 passed / one error; reference 39 passed.
+The reference matches every publisher expectation and the base does not.
+Evidence: `tornado-budget-controls-001`, `tornado-budget-expectations-001`.
+Its source isolation and native replay remain pending; the earlier task's
+successful replay cannot be transferred as evidence for this task.
+
+## First replay within the 40-call profile
+
+The selected Tornado task `86cc31f52992fb9d11f92de6fd5496842fea2265` now has a
+sanitized source snapshot and a native teacher replay under an enforced 40-call
+ceiling. `build_source_snapshot.py` provides a reusable offline build procedure
+for already-local pinned source images; `replay_tornado_teacher.py --profile`
+accepts validated task, image, source-root, and budget identities. The original
+reviewed task remains the default compatibility profile. A profile is configuration,
+not an assertion that an arbitrary task's tool semantics are qualified.
+
+The replay used **33 charged native calls**, retained 34 full exchanges including
+submission, and produced a 495-byte patch. The missing sanitized `run_tests.sh`
+view and an unsuccessful grep are retained as errors; neither is rewritten into
+a successful observation. The saved patch passed **39/39** independent grading
+cases and exactly matched the publisher contract. The grader now re-reads the
+hash-verified source Parquet row to check exported expectations before execution.
+All owned containers were removed.
+
+The fresh action-only history has 70 messages and, including all nine schemas,
+**14,884 input tokens** / **3,890 supervised next-token targets**. Native template
+rendering, token equality, and assistant-only span masks pass without truncation.
+Its input length plus an 8,192-token reserve is 23,076, below 32,768. This is
+arithmetic context capacity, not measured long-context GPU training memory or a
+claim that the original teacher saw the reconstructed native observations/prompt.
+
+Evidence: `tornado-budget-snapshot-build-001`, `tornado-budget-workspace-probe-001`,
+`tornado-budget-replay-001`, `tornado-budget-grade-001`,
+`tornado-budget-history-001`, and `tornado-budget-tokens-001`.
+Three new profile tests reject invalid budgets/identity/root configurations and
+verify alternate-root mapping. Core suite: 183 run, 168 passed, 15 skipped.
+This is the first locally qualified teacher patch/history fitting both current
+runtime-call and context screens. Training approval remains false pending rights,
+contamination, observation/prompt policy, dataset-level coverage and GPU-fit gates.
+
+## Second budget-compatible repository: Pyramid
+
+The selected Pyramid task `48a04855ad4f1f1ae6af934090f35a4ad035ed67` uses a
+`src/pyramid` layout and a merge solution commit. Source sanitization verifies the
+publisher's first-parent base locally and preserves its exact tracked tree.
+The qualified workspace probe explicitly checks the src-layout import path.
+Base/reference controls collect 835 cases: base 753 passed / 82 failed,
+reference 755 passed / 80 failed. The reference exactly satisfies the 830
+publisher groups, retaining every colliding fully qualified case.
+
+Its pinned Hero trajectory `476ee9ff-2fdc-4d32-8a27-20c378f37744` replayed with
+**29 charged calls** under the 40-call ceiling and produced a 520-byte patch.
+Independent grading matches all **835 case expectations**, including the 80
+expected failures; this is not an all-tests-passing suite. Fresh native history
+contains 30 exchanges / 62 messages, **18,924 input tokens**, and **3,868
+supervised targets**, including nine schemas and without truncation. Adding an
+8,192-token reserve gives 27,116 tokens, within 32,768. This does not establish
+training memory fit. Both recorded read/grep errors remain visible in the history.
+
+Generic entry points are now `replay_source_teacher.py` and
+`grade_replayed_patch.py`, with compatibility wrappers at the original Tornado
+names. The shared grader supports only the two qualified repository profiles;
+it does not treat arbitrary pytest/unittest environments as equivalent. A new
+Tornado regression grading run still matches all 39 expectations. Core suite
+remains 183 run / 168 passed / 15 skipped, and live checks cover both grader profiles.
+
+Evidence: `pyramid-budget-controls-001`, `pyramid-budget-expectations-001`,
+`pyramid-budget-snapshot-build-001`, `pyramid-budget-workspace-probe-001`,
+`pyramid-budget-replay-001`, `pyramid-budget-grade-001`,
+`pyramid-budget-history-001`, `pyramid-budget-tokens-001`, and
+`tornado-budget-grade-002`. All work used local offline containers; cleanup was
+verified. Training approval remains false. The two selected successes are
+mechanism checks, not an unbiased repair-rate estimate or new Gemma performance.
