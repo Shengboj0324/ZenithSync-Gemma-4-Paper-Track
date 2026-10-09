@@ -1,0 +1,2 @@
+Previous HEAD position was 0ea23784b Merge pull request #3593 from ztane/feature/pserve-write-to-stderr
+HEAD is now at 48a04855a Merge pull request #3594 from raverat/fix/handle_non_string_object_aslist_method

@@ -1,0 +1,16 @@
+diff --git a/src/pyramid/settings.py b/src/pyramid/settings.py
+index d1eb4ff..b5df79d 100644
+--- a/src/pyramid/settings.py
++++ b/src/pyramid/settings.py
+@@ -29,6 +29,9 @@ def aslist(value, flatten=True):
+         return values
+     result = []
+     for value in values:
+-        subvalues = value.split()
+-        result.extend(subvalues)
++        if isinstance(value, str):
++            subvalues = value.split()
++            result.extend(subvalues)
++        else:
++            result.append(value)
+     return result

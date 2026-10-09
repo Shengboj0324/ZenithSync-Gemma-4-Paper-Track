@@ -1,0 +1,1 @@
+{"command":"PYTHONDONTWRITEBYTECODE=1 /tmp/zenithsync-tokenizer-pinned-p1/bin/python -m unittest discover -s tests -q","errors":0,"failures":0,"gpu_used":false,"passed":175,"skipped":15,"tests_run":190}

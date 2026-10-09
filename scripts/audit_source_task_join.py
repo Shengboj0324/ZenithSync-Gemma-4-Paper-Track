@@ -8,13 +8,14 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from zenithsync.artifacts import canonical_json, file_record
-from zenithsync.source_task_metadata import match_trajectory, project_r2e_task
+from zenithsync.artifacts import canonical_json, file_record, load_json
+from zenithsync.source_task_metadata import match_trajectory, project_r2e_task, select_r2e_metadata
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--census-directory', type=Path, help='Verified full-corpus metadata census')
     args = parser.parse_args()
     import pyarrow.parquet as pq
     revision = '2e8108ff942f24fcb5686badfaf7f9a8808566d5'
@@ -43,26 +44,46 @@ def main():
                 tasks[key] = task
         if file_record(path) != identity:
             raise ValueError('Source task shard changed during audit')
-    source = ROOT / 'artifacts/data/quarantine/swe-hero-001/data/train-00000-of-00014.parquet'
-    receipt = json.loads((ROOT / 'evidence/data/swe-hero-intake-001/receipt.json').read_text())
-    identity = file_record(source)
-    if identity != receipt['downloaded']['data/train-00000-of-00014.parquet']:
-        raise ValueError('Trajectory shard identity mismatch')
+    selection = None
+    if args.census_directory is not None:
+        args.census_directory = args.census_directory.resolve(strict=True)
+        if not args.census_directory.is_relative_to(ROOT):
+            raise ValueError('Census must be in this repository for portable evidence paths')
+        source = args.census_directory / 'index.jsonl'
+        report_path = args.census_directory / 'report.json'
+        census = load_json(report_path)
+        identity = file_record(source)
+        official_path = ROOT / 'evidence/p1/task-index-001/receipt.json'
+        if identity != census['index'] or file_record(official_path) != census['official_index']:
+            raise ValueError('Census or reserved index identity mismatch')
+        with source.open() as stream:
+            rows, selection = select_r2e_metadata((json.loads(line) for line in stream),
+                reserved_repositories=load_json(official_path)['repo_counts'])
+        if selection['input_rows'] != census['rows']:
+            raise ValueError('Census row count mismatch')
+        inputs.append({'path': str(report_path.relative_to(ROOT)), **file_record(report_path)})
+    else:
+        source = ROOT / 'artifacts/data/quarantine/swe-hero-001/data/train-00000-of-00014.parquet'
+        receipt = load_json(ROOT / 'evidence/data/swe-hero-intake-001/receipt.json')
+        identity = file_record(source)
+        if identity != receipt['downloaded']['data/train-00000-of-00014.parquet']:
+            raise ValueError('Trajectory shard identity mismatch')
+        rows = (row for batch in pq.ParquetFile(source).iter_batches(batch_size=128,
+            columns=['repo', 'instance_id', 'trajectory_id']) for row in batch.to_pylist())
     inputs.append({'path': str(source.relative_to(ROOT)), **identity})
     joined = []
     unmatched = []
     seen = set()
-    for batch in pq.ParquetFile(source).iter_batches(batch_size=128, columns=['repo', 'instance_id', 'trajectory_id']):
-        for row in batch.to_pylist():
-            if row['trajectory_id'] in seen:
-                raise ValueError('Duplicate trajectory identity')
-            seen.add(row['trajectory_id'])
-            suffix = row['instance_id'].rsplit('-', 1)[-1]
-            task = tasks.get((row['repo'].split('/')[-1], suffix))
-            if task is None or not match_trajectory(task, repo=row['repo'], instance_id=row['instance_id']):
-                unmatched.append(row)
-            else:
-                joined.append({**row, **task})
+    for row in rows:
+        if row['trajectory_id'] in seen:
+            raise ValueError('Duplicate trajectory identity')
+        seen.add(row['trajectory_id'])
+        suffix = row['instance_id'].rsplit('-', 1)[-1]
+        task = tasks.get((row['repo'].split('/')[-1], suffix))
+        if task is None or not match_trajectory(task, repo=row['repo'], instance_id=row['instance_id']):
+            unmatched.append(row)
+        else:
+            joined.append({**row, **task})
     if file_record(source) != identity:
         raise ValueError('Trajectory shard changed during audit')
     args.output.mkdir(parents=True, exist_ok=False)
@@ -70,7 +91,8 @@ def main():
     (args.output / 'unmatched.json').write_bytes(canonical_json(unmatched))
     report = {
         'schema_version': 1, 'task_revision': revision, 'inputs': inputs,
-        'task_count': len(tasks), 'trajectory_count': len(seen),
+        'task_count': len(tasks), 'trajectory_count': len(seen), 'corpus_selection': selection,
+        'unique_joined_tasks': len({(row['repo'], row['instance_id']) for row in joined}),
         'joined_count': len(joined), 'unmatched_count': len(unmatched),
         'unresolved_base_refs': sum(row['base_commit'] is None for row in joined),
         'joined_repositories': dict(sorted(Counter(row['repo'] for row in joined).items())),

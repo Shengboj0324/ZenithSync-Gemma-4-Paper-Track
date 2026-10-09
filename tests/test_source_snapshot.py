@@ -56,5 +56,35 @@ class SourceSnapshotTests(unittest.TestCase):
             self.assertEqual(git(repo, 'cat-file', '-e', solution).returncode, 0)
 
 
+    def test_explicit_ancestor_mode_preserves_r2e_default(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, base, intermediate, oracle = self.fixture(Path(tmp))
+            git(repo, 'checkout', intermediate)
+            (repo / 'module.py').write_text('value = 3\n')
+            git(repo, 'add', 'module.py')
+            git(repo, 'commit', '-m', 'second PR commit')
+            solution = git(repo, 'rev-parse', 'HEAD').stdout.strip().decode()
+            git(repo, 'checkout', base)
+            with self.assertRaisesRegex(ValueError, 'first parent'):
+                sanitize(repo, expected_base=base, solution=solution, oracle_paths=[oracle])
+            self.assertTrue(oracle.exists())
+            receipt = sanitize(repo, expected_base=base, solution=solution,
+                               oracle_paths=[oracle], solution_relation='ancestor')
+            self.assertEqual(receipt['solution_relation'], 'ancestor')
+            self.assertEqual((repo / 'module.py').read_text(), 'value = 1\n')
+            for commit in (base, intermediate, solution):
+                self.assertNotEqual(git(repo, 'cat-file', '-e', commit, check=False).returncode, 0)
+
+    def test_invalid_ancestry_fails_before_mutation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, base, solution, oracle = self.fixture(Path(tmp))
+            git(repo, 'checkout', solution)
+            with self.assertRaisesRegex(ValueError, 'not an ancestor'):
+                sanitize(repo, expected_base=solution, solution=base,
+                         oracle_paths=[oracle], solution_relation='ancestor')
+            self.assertTrue(oracle.exists())
+            self.assertEqual(git(repo, 'cat-file', '-e', base).returncode, 0)
+
+
 if __name__ == '__main__':
     unittest.main()

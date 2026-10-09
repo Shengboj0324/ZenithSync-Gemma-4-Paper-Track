@@ -1,0 +1,41 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 410B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 8.95kB done
+#4 DONE 0.0s
+
+#5 [1/4] FROM docker.io/swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148
+#5 resolve docker.io/swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148 done
+#5 CACHED
+
+#6 [2/4] COPY source_snapshot.py config.json build_snapshot.py /tmp/
+#6 DONE 0.0s
+
+#7 [3/4] RUN PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 /tmp/build_snapshot.py && rm /tmp/source_snapshot.py /tmp/config.json /tmp/build_snapshot.py
+#7 2.440 {"base_commit": "e421af4ebb7e33ce43a7d9de2e5a6ab4b9e94e5c", "exact_tree_preserved": true, "known_oracles_removed": ["/issue.md", "/.env"], "schema_version": 1, "scope": "Exact tracked tree and declared oracle paths only; broader image audit pending", "snapshot_commit": "5091df8d1e6c2046cc48ba2c82f5b282aaac4a62", "solution_commit_accessible": false, "solution_relation": "ancestor", "source_tree": "84432be06201642e7439bfa397d3f2b11355898f", "tracked_bytes": 290019, "tracked_files": 30, "tracked_manifest_sha256": "dade2502ccc6e07fda342f2f611a97e6279784099750abaa9ec843db61620a6b", "training_approved": false}
+#7 DONE 2.5s
+
+#8 [4/4] WORKDIR /testbed
+#8 DONE 0.0s
+
+#9 exporting to image
+#9 exporting layers 0.0s done
+#9 exporting manifest sha256:b7ac2b4919d2623ca4fabbef67e7923ee3df2064ce0a6cd6b13eb31090c70353 done
+#9 exporting config sha256:9f671bf7cad24086a38a97af0b4d7c3807f4f33da757eb2c0cf389efc0c39be4 done
+#9 exporting attestation manifest sha256:d0d1baada5a36ced7079b349479ed3963ba270e6b7cf6d9d350be2fb25f869d6 done
+#9 exporting manifest list sha256:842aa0fa3d3a6f21a8c42e0922f3582d12e3a3fe71a415e572d105eacaf83439 done
+#9 naming to moby-dangling@sha256:842aa0fa3d3a6f21a8c42e0922f3582d12e3a3fe71a415e572d105eacaf83439 done
+#9 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/nzcuim3ifz7dokohzigl6ud77

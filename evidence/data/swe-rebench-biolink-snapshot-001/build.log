@@ -1,0 +1,60 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 410B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148
+#2 ...
+
+#3 [auth] swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148
+#2 DONE 0.7s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 8.44kB done
+#5 DONE 0.0s
+
+#6 [1/4] FROM docker.io/swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148
+#6 resolve docker.io/swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148 done
+#6 DONE 0.0s
+
+#7 [2/4] COPY source_snapshot.py config.json build_snapshot.py /tmp/
+#7 DONE 0.0s
+
+#8 [3/4] RUN PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 /tmp/build_snapshot.py && rm /tmp/source_snapshot.py /tmp/config.json /tmp/build_snapshot.py
+#8 0.226 Traceback (most recent call last):
+#8 0.226   File "/tmp/build_snapshot.py", line 5, in <module>
+#8 0.227     r=sanitize('/testbed',**c)
+#8 0.227       ^^^^^^^^^^^^^^^^^^^^^^^^
+#8 0.227   File "/tmp/source_snapshot.py", line 81, in sanitize
+#8 0.227     raise ValueError('Solution first parent differs from declared base')
+#8 0.227 ValueError: Solution first parent differs from declared base
+#8 ERROR: process "/bin/bash -c PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 /tmp/build_snapshot.py && rm /tmp/source_snapshot.py /tmp/config.json /tmp/build_snapshot.py" did not complete successfully: exit code: 1
+------
+ > [3/4] RUN PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 /tmp/build_snapshot.py && rm /tmp/source_snapshot.py /tmp/config.json /tmp/build_snapshot.py:
+0.226 Traceback (most recent call last):
+0.226   File "/tmp/build_snapshot.py", line 5, in <module>
+0.227     r=sanitize('/testbed',**c)
+0.227       ^^^^^^^^^^^^^^^^^^^^^^^^
+0.227   File "/tmp/source_snapshot.py", line 81, in sanitize
+0.227     raise ValueError('Solution first parent differs from declared base')
+0.227 ValueError: Solution first parent differs from declared base
+------
+Dockerfile:4
+--------------------
+   2 |     USER root
+   3 |     COPY source_snapshot.py config.json build_snapshot.py /tmp/
+   4 | >>> RUN PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 /tmp/build_snapshot.py && rm /tmp/source_snapshot.py /tmp/config.json /tmp/build_snapshot.py
+   5 |     WORKDIR /testbed
+   6 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 /tmp/build_snapshot.py && rm /tmp/source_snapshot.py /tmp/config.json /tmp/build_snapshot.py" did not complete successfully: exit code: 1
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/wnpfeqgj1wlnw7gv4m8cgckrr

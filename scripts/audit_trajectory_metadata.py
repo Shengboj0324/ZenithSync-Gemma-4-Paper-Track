@@ -58,9 +58,11 @@ def main():
         'overlap_scope': 'Case-insensitive exact repository IDs only; no fork, semantic or broader benchmark audit',
         'message_schema_fields': message_fields, 'explicit_tool_call_id_field': 'tool_call_id' in message_fields,
         'training_approval': False, 'replay_verified': False,
-        'selection': 'First published shard by filename; not a random or representative sample',
+        'selection': 'Explicit input shard; not a random or representative sample',
         'source': file_record(args.intake), 'official_index_receipt': file_record(ROOT / 'evidence/p1/task-index-001/receipt.json'),
         'verifier': file_record(Path(__file__))}
+    if file_record(args.shard) != identity:
+        raise ValueError('Shard changed during metadata audit')
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output / 'receipt.json').write_bytes(canonical_json(result))
     (args.output / 'schema.txt').write_text(str(parquet.schema_arrow))

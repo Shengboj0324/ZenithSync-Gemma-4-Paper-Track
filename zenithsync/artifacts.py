@@ -58,7 +58,14 @@ def file_record(path: Path) -> dict:
         after = os.fstat(stream.fileno())
     signature = lambda s: (s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns)
     if signature(before) != signature(after) or size != before.st_size:
-        raise ValueError("file changed during inventory")
+        fields = ("st_dev", "st_ino", "st_size", "st_mtime_ns", "st_ctime_ns")
+        changed = {name: [getattr(before, name), getattr(after, name)]
+                   for name in fields if getattr(before, name) != getattr(after, name)}
+        details = {"changed": changed, "read_bytes": size,
+                   "flags_before": getattr(before, "st_flags", None),
+                   "flags_after": getattr(after, "st_flags", None)}
+        raise ValueError("file changed during inventory: " + path.name + "; "
+                         + json.dumps(details, sort_keys=True))
     return {"size_bytes": size, "sha256": hasher.hexdigest()}
 
 

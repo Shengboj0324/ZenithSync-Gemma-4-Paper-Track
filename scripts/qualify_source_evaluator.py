@@ -25,7 +25,7 @@ if head != COMMIT:
     raise RuntimeError('Evaluator source identity mismatch')
 origin = subprocess.run(['/testbed/.venv/bin/python', '-c',
     'import pyramid; print(pyramid.__file__)'], capture_output=True, text=True, timeout=30)
-if origin.returncode != 0 or origin.stdout.strip() != '/testbed/pyramid/__init__.py':
+if origin.returncode != 0 or origin.stdout.strip() != IMPORT_PATH:
     raise RuntimeError('Pyramid must import from evaluator task source')
 test = subprocess.run(['/testbed/.venv/bin/python', '-m', 'pytest', '-q',
     '-p', 'no:cacheprovider', '/r2e_tests', '--junitxml=/audit/junit.xml'],
@@ -43,6 +43,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--resolution', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--import-path', choices=['/testbed/pyramid/__init__.py','/testbed/src/pyramid/__init__.py'], default='/testbed/pyramid/__init__.py')
     args = parser.parse_args()
     source = json.loads(args.resolution.read_text())
     if source['repo'] != 'Pylons/pyramid':
@@ -53,7 +54,7 @@ def main():
         raise ValueError('Invalid commit identities')
     args.output.mkdir(parents=True, exist_ok=False)
     for role, commit in [('base', base), ('reference', solution)]:
-        probe = 'COMMIT = ' + repr(commit) + '\n' + PROBE
+        probe = 'COMMIT = ' + repr(commit) + '\nIMPORT_PATH = '+repr(args.import_path)+'\n' + PROBE
         result = run_image(source['registry']['pinned_image'], args.output / role,
                            probe=probe, generated_grading_tests=True)
         print({'control': role, 'exit': result['returncode']}, flush=True)

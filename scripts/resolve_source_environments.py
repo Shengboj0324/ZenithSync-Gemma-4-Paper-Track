@@ -61,6 +61,14 @@ def parent_identity(task, response):
 def image_identity(session, tag, directory):
     if re.fullmatch(r'[a-z0-9_-]+/[a-z0-9_.-]+:[0-9a-f]{40}', tag) is None:
         raise ValueError('Expected Docker Hub repository and full commit tag')
+    return dockerhub_tag_identity(session, tag, directory)
+
+
+def dockerhub_tag_identity(session, tag, directory):
+    """Resolve an explicit Docker Hub tag; never treat the tag itself as immutable."""
+    if not isinstance(tag, str) or re.fullmatch(
+            r'[a-z0-9_-]+/[a-z0-9_.-]+:[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}', tag) is None:
+        raise ValueError('Expected an explicit Docker Hub repository:tag')
     repository, reference = tag.split(':')
     raw, _ = fetch(session, 'https://auth.docker.io/token', params={
         'service': 'registry.docker.io', 'scope': f'repository:{repository}:pull'})

@@ -1,0 +1,2751 @@
+..................................................................FF.... [  8%]
+..........F.......F.F...F...FF.FF....................................... [ 17%]
+..............F.F..........................................F.F..F.FFFFF. [ 25%]
+.FF.FFF.F.............................F..F........F......F.............. [ 34%]
+.....F................F..F.FF...FFF..................................... [ 43%]
+.................F...................................................... [ 51%]
+....F.......F.........F..F.............................F.........F...... [ 60%]
+......F..F.........F....................F....................F.......... [ 68%]
+...................................FF.....FFF........................... [ 77%]
+......................................................................F. [ 86%]
+......F...........................F.......FFFF.F.FF.F..F..FF..F......... [ 94%]
+..............................FFFF..FFFFFF.                              [100%]
+=================================== FAILURES ===================================
+__ AdaptersConfiguratorMixinTests.test_add_resource_url_adapter_dotted_names ___
+
+self = <r2e_tests.test_config.test_adapters.AdaptersConfiguratorMixinTests testMethod=test_add_resource_url_adapter_dotted_names>
+
+    def test_add_resource_url_adapter_dotted_names(self):
+        from pyramid.interfaces import IResourceURL
+    
+        config = self._makeOne(autocommit=True)
+        config.add_resource_url_adapter(
+            'tests.test_config.test_adapters.DummyResourceURL',
+            'tests.test_config.test_adapters.DummyIface',
+        )
+        iface = DummyIface()
+>       adapter = config.registry.getMultiAdapter((iface, iface), IResourceURL)
+
+/r2e_tests/test_config/test_adapters.py:332: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Registry r2e_tests.test_config>
+objects = (<r2e_tests.test_config.test_adapters.DummyIface object at 0x7ffffc4198e0>, <r2e_tests.test_config.test_adapters.DummyIface object at 0x7ffffc4198e0>)
+interface = <InterfaceClass pyramid.interfaces.IResourceURL>, name = ''
+
+    def getMultiAdapter(self, objects, interface, name=''):
+        adapter = self.adapters.queryMultiAdapter(objects, interface, name)
+        if adapter is None:
+>           raise ComponentLookupError(objects, interface, name)
+E           zope.interface.interfaces.ComponentLookupError: ((<r2e_tests.test_config.test_adapters.DummyIface object at 0x7ffffc4198e0>, <r2e_tests.test_config.test_adapters.DummyIface object at 0x7ffffc4198e0>), <InterfaceClass pyramid.interfaces.IResourceURL>, '')
+
+.venv/lib/python3.8/site-packages/zope/interface/registry.py:379: ComponentLookupError
+_ AdaptersConfiguratorMixinTests.test_add_resource_url_adapter_introspectables _
+
+self = <r2e_tests.test_config.test_adapters.AdaptersConfiguratorMixinTests testMethod=test_add_resource_url_adapter_introspectables>
+
+    def test_add_resource_url_adapter_introspectables(self):
+        config = self._makeOne()
+        config.add_resource_url_adapter(DummyResourceURL, DummyIface)
+        actions = config.action_state.actions
+        self.assertEqual(len(actions), 1)
+        intrs = actions[0]['introspectables']
+        self.assertEqual(len(intrs), 1)
+        intr = intrs[0]
+        self.assertEqual(intr.type_name, 'resource url adapter')
+        self.assertEqual(
+            intr.discriminator, ('resource url adapter', DummyIface)
+        )
+        self.assertEqual(intr.category_name, 'resource url adapters')
+>       self.assertEqual(
+            intr.title,
+            "resource url adapter for resource iface "
+            "<class 'tests.test_config.test_adapters.DummyIface'>",
+        )
+E       AssertionError: "reso[30 chars]iface <class 'r2e_tests.test_config.test_adapters.DummyIface'>" != "reso[30 chars]iface <class 'tests.test_config.test_adapters.DummyIface'>"
+E       - resource url adapter for resource iface <class 'r2e_tests.test_config.test_adapters.DummyIface'>
+E       ?                                                 ----
+E       + resource url adapter for resource iface <class 'tests.test_config.test_adapters.DummyIface'>
+
+/r2e_tests/test_config/test_adapters.py:377: AssertionError
+________ AdaptersConfiguratorMixinTests.test_add_traverser_dotted_names ________
+
+self = <r2e_tests.test_config.test_adapters.AdaptersConfiguratorMixinTests testMethod=test_add_traverser_dotted_names>
+
+    def test_add_traverser_dotted_names(self):
+        from pyramid.interfaces import ITraverser
+    
+        config = self._makeOne(autocommit=True)
+        config.add_traverser(
+            'tests.test_config.test_adapters.DummyTraverser',
+            'tests.test_config.test_adapters.DummyIface',
+        )
+        iface = DummyIface()
+>       traverser = config.registry.getAdapter(iface, ITraverser)
+
+/r2e_tests/test_config/test_adapters.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Registry r2e_tests.test_config>
+object = <r2e_tests.test_config.test_adapters.DummyIface object at 0x7ffffc3e0850>
+interface = <InterfaceClass pyramid.interfaces.ITraverser>, name = ''
+
+    def getAdapter(self, object, interface, name=''):
+        adapter = self.adapters.queryAdapter(object, interface, name)
+        if adapter is None:
+>           raise ComponentLookupError(object, interface, name)
+E           zope.interface.interfaces.ComponentLookupError: (<r2e_tests.test_config.test_adapters.DummyIface object at 0x7ffffc3e0850>, <InterfaceClass pyramid.interfaces.ITraverser>, '')
+
+.venv/lib/python3.8/site-packages/zope/interface/registry.py:368: ComponentLookupError
+___ TestAssetsConfiguratorMixin.test_override_asset_directory_with_directory ___
+
+self = <r2e_tests.test_config.test_assets.TestAssetsConfiguratorMixin testMethod=test_override_asset_directory_with_directory>
+
+    def test_override_asset_directory_with_directory(self):
+        from pyramid.config.assets import PackageAssetSource
+    
+        config = self._makeOne(autocommit=True)
+        override = DummyUnderOverride()
+        config.override_asset(
+            'tests.test_config.pkgs.asset:templates/',
+            'tests.test_config.pkgs.asset.subpackage:templates/',
+            _override=override,
+        )
+        from tests.test_config.pkgs import asset
+        from tests.test_config.pkgs.asset import subpackage
+    
+        self.assertEqual(override.package, asset)
+        self.assertEqual(override.path, 'templates/')
+        source = override.source
+        self.assertTrue(isinstance(source, PackageAssetSource))
+        self.assertEqual(source.package, subpackage)
+        self.assertEqual(source.prefix, 'templates/')
+    
+        resource_name = 'bar.pt'
+        expected = os.path.join(
+            here, 'pkgs', 'asset', 'subpackage', 'templates', 'bar.pt'
+        )
+>       self.assertEqual(override.source.get_filename(resource_name), expected)
+E       AssertionError: '/testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt' != '/r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt'
+E       - /testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^ ^^^^^^
+E       + /r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^^ ^
+
+/r2e_tests/test_config/test_assets.py:132: AssertionError
+____ TestAssetsConfiguratorMixin.test_override_asset_directory_with_package ____
+
+self = <r2e_tests.test_config.test_assets.TestAssetsConfiguratorMixin testMethod=test_override_asset_directory_with_package>
+
+    def test_override_asset_directory_with_package(self):
+        from pyramid.config.assets import PackageAssetSource
+    
+        config = self._makeOne(autocommit=True)
+        override = DummyUnderOverride()
+        config.override_asset(
+            'tests.test_config.pkgs.asset:templates/',
+            'tests.test_config.pkgs.asset.subpackage',
+            _override=override,
+        )
+        from tests.test_config.pkgs import asset
+        from tests.test_config.pkgs.asset import subpackage
+    
+        self.assertEqual(override.package, asset)
+        self.assertEqual(override.path, 'templates/')
+        source = override.source
+        self.assertTrue(isinstance(source, PackageAssetSource))
+        self.assertEqual(source.package, subpackage)
+        self.assertEqual(source.prefix, '')
+    
+        resource_name = 'templates/bar.pt'
+        expected = os.path.join(
+            here, 'pkgs', 'asset', 'subpackage', 'templates', 'bar.pt'
+        )
+>       self.assertEqual(override.source.get_filename(resource_name), expected)
+E       AssertionError: '/testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt' != '/r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt'
+E       - /testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^ ^^^^^^
+E       + /r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^^ ^
+
+/r2e_tests/test_config/test_assets.py:158: AssertionError
+________ TestAssetsConfiguratorMixin.test_override_asset_file_with_file ________
+
+self = <r2e_tests.test_config.test_assets.TestAssetsConfiguratorMixin testMethod=test_override_asset_file_with_file>
+
+    def test_override_asset_file_with_file(self):
+        from pyramid.config.assets import PackageAssetSource
+    
+        config = self._makeOne(autocommit=True)
+        override = DummyUnderOverride()
+        config.override_asset(
+            'tests.test_config.pkgs.asset:templates/foo.pt',
+            'tests.test_config.pkgs.asset.subpackage:templates/bar.pt',
+            _override=override,
+        )
+        from tests.test_config.pkgs import asset
+        from tests.test_config.pkgs.asset import subpackage
+    
+        self.assertEqual(override.package, asset)
+        self.assertEqual(override.path, 'templates/foo.pt')
+        source = override.source
+        self.assertTrue(isinstance(source, PackageAssetSource))
+        self.assertEqual(source.package, subpackage)
+        self.assertEqual(source.prefix, 'templates/bar.pt')
+    
+        resource_name = ''
+        expected = os.path.join(
+            here, 'pkgs', 'asset', 'subpackage', 'templates', 'bar.pt'
+        )
+>       self.assertEqual(override.source.get_filename(resource_name), expected)
+E       AssertionError: '/testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt' != '/r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt'
+E       - /testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^ ^^^^^^
+E       + /r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^^ ^
+
+/r2e_tests/test_config/test_assets.py:80: AssertionError
+____ TestAssetsConfiguratorMixin.test_override_asset_package_with_directory ____
+
+self = <r2e_tests.test_config.test_assets.TestAssetsConfiguratorMixin testMethod=test_override_asset_package_with_directory>
+
+    def test_override_asset_package_with_directory(self):
+        from pyramid.config.assets import PackageAssetSource
+    
+        config = self._makeOne(autocommit=True)
+        override = DummyUnderOverride()
+        config.override_asset(
+            'tests.test_config.pkgs.asset',
+            'tests.test_config.pkgs.asset.subpackage:templates/',
+            _override=override,
+        )
+        from tests.test_config.pkgs import asset
+        from tests.test_config.pkgs.asset import subpackage
+    
+        self.assertEqual(override.package, asset)
+        self.assertEqual(override.path, '')
+        source = override.source
+        self.assertTrue(isinstance(source, PackageAssetSource))
+        self.assertEqual(source.package, subpackage)
+        self.assertEqual(source.prefix, 'templates/')
+    
+        resource_name = 'bar.pt'
+        expected = os.path.join(
+            here, 'pkgs', 'asset', 'subpackage', 'templates', 'bar.pt'
+        )
+>       self.assertEqual(override.source.get_filename(resource_name), expected)
+E       AssertionError: '/testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt' != '/r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt'
+E       - /testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^ ^^^^^^
+E       + /r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^^ ^
+
+/r2e_tests/test_config/test_assets.py:184: AssertionError
+_____ TestAssetsConfiguratorMixin.test_override_asset_package_with_package _____
+
+self = <r2e_tests.test_config.test_assets.TestAssetsConfiguratorMixin testMethod=test_override_asset_package_with_package>
+
+    def test_override_asset_package_with_package(self):
+        from pyramid.config.assets import PackageAssetSource
+    
+        config = self._makeOne(autocommit=True)
+        override = DummyUnderOverride()
+        config.override_asset(
+            'tests.test_config.pkgs.asset',
+            'tests.test_config.pkgs.asset.subpackage',
+            _override=override,
+        )
+        from tests.test_config.pkgs import asset
+        from tests.test_config.pkgs.asset import subpackage
+    
+        self.assertEqual(override.package, asset)
+        self.assertEqual(override.path, '')
+        source = override.source
+        self.assertTrue(isinstance(source, PackageAssetSource))
+        self.assertEqual(source.package, subpackage)
+        self.assertEqual(source.prefix, '')
+    
+        resource_name = 'templates/bar.pt'
+        expected = os.path.join(
+            here, 'pkgs', 'asset', 'subpackage', 'templates', 'bar.pt'
+        )
+>       self.assertEqual(override.source.get_filename(resource_name), expected)
+E       AssertionError: '/testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt' != '/r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt'
+E       - /testbed/tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^ ^^^^^^
+E       + /r2e_tests/test_config/pkgs/asset/subpackage/templates/bar.pt
+E       ?  ^^ ^
+
+/r2e_tests/test_config/test_assets.py:106: AssertionError
+_________ TestOverrideProvider.test_get_resource_filename_no_overrides _________
+
+self = <r2e_tests.test_config.test_assets.TestOverrideProvider testMethod=test_get_resource_filename_no_overrides>
+
+    def test_get_resource_filename_no_overrides(self):
+        resource_name = 'test_assets.py'
+        import tests.test_config
+    
+        provider = self._makeOne(tests.test_config)
+        expected = os.path.join(here, resource_name)
+        result = provider.get_resource_filename(None, resource_name)
+>       self.assertEqual(result, expected)
+E       AssertionError: '/testbed/tests/test_config/test_assets.py' != '/r2e_tests/test_config/test_assets.py'
+E       - /testbed/tests/test_config/test_assets.py
+E       ?  ^ ^^^^^^
+E       + /r2e_tests/test_config/test_assets.py
+E       ?  ^^ ^
+
+/r2e_tests/test_config/test_assets.py:360: AssertionError
+____ TestOverrideProvider.test_get_resource_filename_override_returns_None _____
+
+self = <r2e_tests.test_config.test_assets.TestOverrideProvider testMethod=test_get_resource_filename_override_returns_None>
+
+    def test_get_resource_filename_override_returns_None(self):
+        overrides = DummyOverrides(None)
+        self._registerOverrides(overrides)
+        resource_name = 'test_assets.py'
+        import tests.test_config
+    
+        provider = self._makeOne(tests.test_config)
+        expected = os.path.join(here, resource_name)
+        result = provider.get_resource_filename(None, resource_name)
+>       self.assertEqual(result, expected)
+E       AssertionError: '/testbed/tests/test_config/test_assets.py' != '/r2e_tests/test_config/test_assets.py'
+E       - /testbed/tests/test_config/test_assets.py
+E       ?  ^ ^^^^^^
+E       + /r2e_tests/test_config/test_assets.py
+E       ?  ^^ ^
+
+/r2e_tests/test_config/test_assets.py:414: AssertionError
+___________________ TestPackageAssetSource.test_get_filename ___________________
+
+self = <r2e_tests.test_config.test_assets.TestPackageAssetSource testMethod=test_get_filename>
+
+    def test_get_filename(self):
+        source = self._makeOne('')
+>       self.assertEqual(
+            source.get_filename('test_assets.py'),
+            os.path.join(here, 'test_assets.py'),
+        )
+E       AssertionError: '/testbed/tests/test_config/test_assets.py' != '/r2e_tests/test_config/test_assets.py'
+E       - /testbed/tests/test_config/test_assets.py
+E       ?  ^ ^^^^^^
+E       + /r2e_tests/test_config/test_assets.py
+E       ?  ^^ ^
+
+/r2e_tests/test_config/test_assets.py:826: AssertionError
+_____________ TestPackageAssetSource.test_get_filename_with_prefix _____________
+
+self = <r2e_tests.test_config.test_assets.TestPackageAssetSource testMethod=test_get_filename_with_prefix>
+
+    def test_get_filename_with_prefix(self):
+        source = self._makeOne('test_assets.py')
+>       self.assertEqual(
+            source.get_filename(''), os.path.join(here, 'test_assets.py')
+        )
+E       AssertionError: '/testbed/tests/test_config/test_assets.py' != '/r2e_tests/test_config/test_assets.py'
+E       - /testbed/tests/test_config/test_assets.py
+E       ?  ^ ^^^^^^
+E       + /r2e_tests/test_config/test_assets.py
+E       ?  ^^ ^
+
+/r2e_tests/test_config/test_assets.py:833: AssertionError
+____________ TestFactoriesMixin.test_set_request_factory_dottedname ____________
+
+self = <r2e_tests.test_config.test_factories.TestFactoriesMixin testMethod=test_set_request_factory_dottedname>
+
+    def test_set_request_factory_dottedname(self):
+        from pyramid.interfaces import IRequestFactory
+    
+        config = self._makeOne(autocommit=True)
+        config.set_request_factory('tests.test_config.dummyfactory')
+>       self.assertEqual(
+            config.registry.getUtility(IRequestFactory), dummyfactory
+        )
+E       AssertionError: <function dummyfactory at 0x7ffffc6205e0> != <function dummyfactory at 0x7ffffcf23d30>
+
+/r2e_tests/test_config/test_factories.py:26: AssertionError
+___________ TestFactoriesMixin.test_set_response_factory_dottedname ____________
+
+self = <r2e_tests.test_config.test_factories.TestFactoriesMixin testMethod=test_set_response_factory_dottedname>
+
+    def test_set_response_factory_dottedname(self):
+        from pyramid.interfaces import IResponseFactory
+    
+        config = self._makeOne(autocommit=True)
+        config.set_response_factory('tests.test_config.dummyfactory')
+>       self.assertEqual(
+            config.registry.getUtility(IResponseFactory), dummyfactory
+        )
+E       AssertionError: <function dummyfactory at 0x7ffffc6205e0> != <function dummyfactory at 0x7ffffcf23d30>
+
+/r2e_tests/test_config/test_factories.py:43: AssertionError
+_____________ TestFactoriesMixin.test_set_root_factory_dottedname ______________
+
+self = <r2e_tests.test_config.test_factories.TestFactoriesMixin testMethod=test_set_root_factory_dottedname>
+
+    def test_set_root_factory_dottedname(self):
+        from pyramid.interfaces import IRootFactory
+    
+        config = self._makeOne()
+        config.set_root_factory('tests.test_config.dummyfactory')
+        self.assertEqual(config.registry.queryUtility(IRootFactory), None)
+        config.commit()
+>       self.assertEqual(
+            config.registry.getUtility(IRootFactory), dummyfactory
+        )
+E       AssertionError: <function dummyfactory at 0x7ffffc6205e0> != <function dummyfactory at 0x7ffffcf23d30>
+
+/r2e_tests/test_config/test_factories.py:77: AssertionError
+____________ TestFactoriesMixin.test_set_session_factory_dottedname ____________
+
+self = <r2e_tests.test_config.test_factories.TestFactoriesMixin testMethod=test_set_session_factory_dottedname>
+
+    def test_set_session_factory_dottedname(self):
+        from pyramid.interfaces import ISessionFactory
+    
+        config = self._makeOne()
+        config.set_session_factory('tests.test_config.dummyfactory')
+        self.assertEqual(config.registry.queryUtility(ISessionFactory), None)
+        config.commit()
+>       self.assertEqual(
+            config.registry.getUtility(ISessionFactory), dummyfactory
+        )
+E       AssertionError: <function dummyfactory at 0x7ffffc6205e0> != <function dummyfactory at 0x7ffffcf23d30>
+
+/r2e_tests/test_config/test_factories.py:99: AssertionError
+_________ TestI18NConfiguratorMixin.test_add_translation_dirs_abspath __________
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_add_translation_dirs_abspath>
+
+    def test_add_translation_dirs_abspath(self):
+        from pyramid.interfaces import ITranslationDirectories
+    
+        config = self._makeOne(autocommit=True)
+>       config.add_translation_dirs(locale)
+
+/r2e_tests/test_config/test_i18n.py:131: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/pyramid/config/actions.py:572: in wrapper
+    result = wrapped(self, *arg, **kw)
+src/pyramid/config/i18n.py:125: in add_translation_dirs
+    self.action(None, register, introspectables=introspectables)
+src/pyramid/config/actions.py:94: in action
+    callable(*args, **kw)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def register():
+        directories = []
+        resolver = AssetResolver(self.package_name)
+    
+        # defer spec resolution until register to allow for asset
+        # overrides to take place in an earlier config phase
+        for spec in specs:
+            # the trailing slash helps match asset overrides for folders
+            if not spec.endswith('/'):
+                spec += '/'
+            asset = resolver.resolve(spec)
+            directory = asset.abspath()
+            if not asset.isdir():
+>               raise ConfigurationError(
+                    '"%s" is not a directory' % directory
+                )
+E               pyramid.exceptions.ConfigurationError: "/r2e_tests/pkgs/localeapp/locale" is not a directory
+
+src/pyramid/config/i18n.py:101: ConfigurationError
+________ TestI18NConfiguratorMixin.test_add_translation_dirs_asset_spec ________
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_add_translation_dirs_asset_spec>
+
+    def test_add_translation_dirs_asset_spec(self):
+        from pyramid.interfaces import ITranslationDirectories
+    
+        config = self._makeOne(autocommit=True)
+        config.add_translation_dirs('tests.pkgs.localeapp:locale')
+>       self.assertEqual(
+            config.registry.getUtility(ITranslationDirectories), [locale]
+        )
+E       AssertionError: Lists differ: ['/testbed/tests/pkgs/localeapp/locale'] != ['/r2e_tests/pkgs/localeapp/locale']
+E       
+E       First differing element 0:
+E       '/testbed/tests/pkgs/localeapp/locale'
+E       '/r2e_tests/pkgs/localeapp/locale'
+E       
+E       - ['/testbed/tests/pkgs/localeapp/locale']
+E       ?    ^ ^^^^^^
+E       
+E       + ['/r2e_tests/pkgs/localeapp/locale']
+E       ?    ^^ ^
+
+/r2e_tests/test_config/test_i18n.py:68: AssertionError
+_ TestI18NConfiguratorMixin.test_add_translation_dirs_asset_spec_existing_translation_dirs _
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_add_translation_dirs_asset_spec_existing_translation_dirs>
+
+    def test_add_translation_dirs_asset_spec_existing_translation_dirs(self):
+        from pyramid.interfaces import ITranslationDirectories
+    
+        config = self._makeOne(autocommit=True)
+        directories = ['abc']
+        config.registry.registerUtility(directories, ITranslationDirectories)
+        config.add_translation_dirs('tests.pkgs.localeapp:locale')
+        result = config.registry.getUtility(ITranslationDirectories)
+>       self.assertEqual(result, [locale, 'abc'])
+E       AssertionError: Lists differ: ['/testbed/tests/pkgs/localeapp/locale', 'abc'] != ['/r2e_tests/pkgs/localeapp/locale', 'abc']
+E       
+E       First differing element 0:
+E       '/testbed/tests/pkgs/localeapp/locale'
+E       '/r2e_tests/pkgs/localeapp/locale'
+E       
+E       - ['/testbed/tests/pkgs/localeapp/locale', 'abc']
+E       ?    ^ ^^^^^^
+E       
+E       + ['/r2e_tests/pkgs/localeapp/locale', 'abc']
+E       ?    ^^ ^
+
+/r2e_tests/test_config/test_i18n.py:80: AssertionError
+_ TestI18NConfiguratorMixin.test_add_translation_dirs_doesnt_use_override_w_autocommit _
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_add_translation_dirs_doesnt_use_override_w_autocommit>
+
+    def test_add_translation_dirs_doesnt_use_override_w_autocommit(self):
+        from pyramid.interfaces import ITranslationDirectories
+    
+        config = self._makeOne(autocommit=True)
+        config.add_translation_dirs('tests.pkgs.localeapp:locale')
+        config.override_asset(
+            'tests.pkgs.localeapp:locale/', 'tests.pkgs.localeapp:locale2/'
+        )
+>       self.assertEqual(
+            config.registry.getUtility(ITranslationDirectories), [locale]
+        )
+E       AssertionError: Lists differ: ['/testbed/tests/pkgs/localeapp/locale'] != ['/r2e_tests/pkgs/localeapp/locale']
+E       
+E       First differing element 0:
+E       '/testbed/tests/pkgs/localeapp/locale'
+E       '/r2e_tests/pkgs/localeapp/locale'
+E       
+E       - ['/testbed/tests/pkgs/localeapp/locale']
+E       ?    ^ ^^^^^^
+E       
+E       + ['/r2e_tests/pkgs/localeapp/locale']
+E       ?    ^^ ^
+
+/r2e_tests/test_config/test_i18n.py:157: AssertionError
+______ TestI18NConfiguratorMixin.test_add_translation_dirs_multiple_specs ______
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_add_translation_dirs_multiple_specs>
+
+    def test_add_translation_dirs_multiple_specs(self):
+        from pyramid.interfaces import ITranslationDirectories
+    
+        config = self._makeOne(autocommit=True)
+        config.add_translation_dirs(
+            'tests.pkgs.localeapp:locale', 'tests.pkgs.localeapp:locale2'
+        )
+>       self.assertEqual(
+            config.registry.getUtility(ITranslationDirectories),
+            [locale, locale2],
+        )
+E       AssertionError: Lists differ: ['/testbed/tests/pkgs/localeapp/locale', '/t[32 chars]le2'] != ['/r2e_tests/pkgs/localeapp/locale', '/r2e_t[24 chars]le2']
+E       
+E       First differing element 0:
+E       '/testbed/tests/pkgs/localeapp/locale'
+E       '/r2e_tests/pkgs/localeapp/locale'
+E       
+E       + ['/r2e_tests/pkgs/localeapp/locale', '/r2e_tests/pkgs/localeapp/locale2']
+E       - ['/testbed/tests/pkgs/localeapp/locale',
+E       -  '/testbed/tests/pkgs/localeapp/locale2']
+
+/r2e_tests/test_config/test_i18n.py:89: AssertionError
+_ TestI18NConfiguratorMixin.test_add_translation_dirs_multiple_specs_multiple_calls _
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_add_translation_dirs_multiple_specs_multiple_calls>
+
+    def test_add_translation_dirs_multiple_specs_multiple_calls(self):
+        from pyramid.interfaces import ITranslationDirectories
+    
+        config = self._makeOne(autocommit=True)
+        config.add_translation_dirs(
+            'tests.pkgs.localeapp:locale', 'tests.pkgs.localeapp:locale2'
+        )
+        config.add_translation_dirs('tests.pkgs.localeapp:locale3')
+>       self.assertEqual(
+            config.registry.getUtility(ITranslationDirectories),
+            [locale3, locale, locale2],
+        )
+E       AssertionError: Lists differ: ['/testbed/tests/pkgs/localeapp/locale3', '/[73 chars]le2'] != ['/r2e_tests/pkgs/localeapp/locale3', '/r2e_[61 chars]le2']
+E       
+E       First differing element 0:
+E       '/testbed/tests/pkgs/localeapp/locale3'
+E       '/r2e_tests/pkgs/localeapp/locale3'
+E       
+E       - ['/testbed/tests/pkgs/localeapp/locale3',
+E       ?    ^ ^^^^^^
+E       
+E       + ['/r2e_tests/pkgs/localeapp/locale3',
+E       ?    ^^ ^
+E       
+E       -  '/testbed/tests/pkgs/localeapp/locale',
+E       ?    ^ ^^^^^^
+E       
+E       +  '/r2e_tests/pkgs/localeapp/locale',
+E       ?    ^^ ^
+E       
+E       -  '/testbed/tests/pkgs/localeapp/locale2']
+E       ?    ^ ^^^^^^
+E       
+E       +  '/r2e_tests/pkgs/localeapp/locale2']
+E       ?    ^^ ^
+
+/r2e_tests/test_config/test_i18n.py:102: AssertionError
+_ TestI18NConfiguratorMixin.test_add_translation_dirs_override_multiple_specs_multiple_calls _
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_add_translation_dirs_override_multiple_specs_multiple_calls>
+
+    def test_add_translation_dirs_override_multiple_specs_multiple_calls(self):
+        from pyramid.interfaces import ITranslationDirectories
+    
+        config = self._makeOne(autocommit=True)
+        config.add_translation_dirs(
+            'tests.pkgs.localeapp:locale', 'tests.pkgs.localeapp:locale2'
+        )
+        config.add_translation_dirs(
+            'tests.pkgs.localeapp:locale3', override=True
+        )
+>       self.assertEqual(
+            config.registry.getUtility(ITranslationDirectories),
+            [locale, locale2, locale3],
+        )
+E       AssertionError: Lists differ: ['/testbed/tests/pkgs/localeapp/locale', '/t[73 chars]le3'] != ['/r2e_tests/pkgs/localeapp/locale', '/r2e_t[61 chars]le3']
+E       
+E       First differing element 0:
+E       '/testbed/tests/pkgs/localeapp/locale'
+E       '/r2e_tests/pkgs/localeapp/locale'
+E       
+E       - ['/testbed/tests/pkgs/localeapp/locale',
+E       ?    ^ ^^^^^^
+E       
+E       + ['/r2e_tests/pkgs/localeapp/locale',
+E       ?    ^^ ^
+E       
+E       -  '/testbed/tests/pkgs/localeapp/locale2',
+E       ?    ^ ^^^^^^
+E       
+E       +  '/r2e_tests/pkgs/localeapp/locale2',
+E       ?    ^^ ^
+E       
+E       -  '/testbed/tests/pkgs/localeapp/locale3']
+E       ?    ^ ^^^^^^
+E       
+E       +  '/r2e_tests/pkgs/localeapp/locale3']
+E       ?    ^^ ^
+
+/r2e_tests/test_config/test_i18n.py:117: AssertionError
+_ TestI18NConfiguratorMixin.test_add_translation_dirs_uses_override_out_of_order _
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_add_translation_dirs_uses_override_out_of_order>
+
+    def test_add_translation_dirs_uses_override_out_of_order(self):
+        from pyramid.interfaces import ITranslationDirectories
+    
+        config = self._makeOne()
+        config.add_translation_dirs('tests.pkgs.localeapp:locale')
+        config.override_asset(
+            'tests.pkgs.localeapp:locale/', 'tests.pkgs.localeapp:locale2/'
+        )
+        config.commit()
+>       self.assertEqual(
+            config.registry.getUtility(ITranslationDirectories), [locale2]
+        )
+E       AssertionError: Lists differ: ['/testbed/tests/pkgs/localeapp/locale2'] != ['/r2e_tests/pkgs/localeapp/locale2']
+E       
+E       First differing element 0:
+E       '/testbed/tests/pkgs/localeapp/locale2'
+E       '/r2e_tests/pkgs/localeapp/locale2'
+E       
+E       - ['/testbed/tests/pkgs/localeapp/locale2']
+E       ?    ^ ^^^^^^
+E       
+E       + ['/r2e_tests/pkgs/localeapp/locale2']
+E       ?    ^^ ^
+
+/r2e_tests/test_config/test_i18n.py:145: AssertionError
+_ TestI18NConfiguratorMixin.test_add_translation_dirs_uses_override_w_autocommit _
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_add_translation_dirs_uses_override_w_autocommit>
+
+    def test_add_translation_dirs_uses_override_w_autocommit(self):
+        from pyramid.interfaces import ITranslationDirectories
+    
+        config = self._makeOne(autocommit=True)
+        config.override_asset(
+            'tests.pkgs.localeapp:locale/', 'tests.pkgs.localeapp:locale2/'
+        )
+        config.add_translation_dirs('tests.pkgs.localeapp:locale')
+>       self.assertEqual(
+            config.registry.getUtility(ITranslationDirectories), [locale2]
+        )
+E       AssertionError: Lists differ: ['/testbed/tests/pkgs/localeapp/locale2'] != ['/r2e_tests/pkgs/localeapp/locale2']
+E       
+E       First differing element 0:
+E       '/testbed/tests/pkgs/localeapp/locale2'
+E       '/r2e_tests/pkgs/localeapp/locale2'
+E       
+E       - ['/testbed/tests/pkgs/localeapp/locale2']
+E       ?    ^ ^^^^^^
+E       
+E       + ['/r2e_tests/pkgs/localeapp/locale2']
+E       ?    ^^ ^
+
+/r2e_tests/test_config/test_i18n.py:169: AssertionError
+_______ TestI18NConfiguratorMixin.test_set_locale_negotiator_dottedname ________
+
+self = <r2e_tests.test_config.test_i18n.TestI18NConfiguratorMixin testMethod=test_set_locale_negotiator_dottedname>
+
+    def test_set_locale_negotiator_dottedname(self):
+        from pyramid.interfaces import ILocaleNegotiator
+    
+        config = self._makeOne(autocommit=True)
+        config.set_locale_negotiator('tests.test_config.dummyfactory')
+>       self.assertEqual(
+            config.registry.getUtility(ILocaleNegotiator), dummyfactory
+        )
+E       AssertionError: <function dummyfactory at 0x7ffffc6205e0> != <function dummyfactory at 0x7ffffcf23d30>
+
+/r2e_tests/test_config/test_i18n.py:43: AssertionError
+___________________ ConfiguratorTests.test_ctor_no_registry ____________________
+
+self = <r2e_tests.test_config.test_init.ConfiguratorTests testMethod=test_ctor_no_registry>
+
+    def test_ctor_no_registry(self):
+        import sys
+        from pyramid.interfaces import ISettings
+        from pyramid.config import Configurator
+        from pyramid.interfaces import IRendererFactory
+    
+        config = Configurator()
+        this_pkg = sys.modules['tests.test_config']
+        self.assertTrue(config.registry.getUtility(ISettings))
+>       self.assertEqual(config.package, this_pkg)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_init.py:76: AssertionError
+_________ ConfiguratorTests.test_ctor_noreg_debug_logger_None_default __________
+
+self = <r2e_tests.test_config.test_init.ConfiguratorTests testMethod=test_ctor_noreg_debug_logger_None_default>
+
+    def test_ctor_noreg_debug_logger_None_default(self):
+        from pyramid.interfaces import IDebugLogger
+    
+        config = self._makeOne()
+        logger = config.registry.getUtility(IDebugLogger)
+>       self.assertEqual(logger.name, 'tests.test_config')
+E       AssertionError: 'r2e_tests.test_config' != 'tests.test_config'
+E       - r2e_tests.test_config
+E       ? ----
+E       + tests.test_config
+
+/r2e_tests/test_config/test_init.py:201: AssertionError
+_____________ ConfiguratorTests.test_include_constant_root_package _____________
+
+self = <r2e_tests.test_config.test_init.ConfiguratorTests testMethod=test_include_constant_root_package>
+
+    def test_include_constant_root_package(self):
+        import tests
+        from tests import test_config
+    
+        config = self._makeOne(root_package=tests)
+        results = {}
+    
+        def include(config):
+            results['package'] = config.package
+            results['root_package'] = config.root_package
+    
+        config.include(include)
+        self.assertEqual(results['root_package'], tests)
+>       self.assertEqual(results['package'], test_config)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_init.py:960: AssertionError
+_____________ ConfiguratorTests.test_include_with_python_callable ______________
+
+self = <r2e_tests.test_config.test_init.ConfiguratorTests testMethod=test_include_with_python_callable>
+
+    def test_include_with_python_callable(self):
+        from tests import test_config
+    
+        config = self._makeOne()
+        config.include(dummy_include)
+        after = config.action_state
+        actions = after.actions
+        self.assertEqual(len(actions), 1)
+        action = actions[0]
+        self.assertEqual(action['discriminator'], 'discrim')
+        self.assertEqual(action['callable'], None)
+>       self.assertEqual(action['args'], test_config)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_init.py:873: AssertionError
+_______ ConfiguratorTests.test_setup_registry_debug_logger_None_default ________
+
+self = <r2e_tests.test_config.test_init.ConfiguratorTests testMethod=test_setup_registry_debug_logger_None_default>
+
+    def test_setup_registry_debug_logger_None_default(self):
+        from pyramid.registry import Registry
+        from pyramid.interfaces import IDebugLogger
+    
+        reg = Registry()
+        config = self._makeOne(reg)
+        config.setup_registry()
+        logger = reg.getUtility(IDebugLogger)
+>       self.assertEqual(logger.name, 'tests.test_config')
+E       AssertionError: 'r2e_tests.test_config' != 'tests.test_config'
+E       - r2e_tests.test_config
+E       ? ----
+E       + tests.test_config
+
+/r2e_tests/test_config/test_init.py:589: AssertionError
+_________________ ConfiguratorTests.test_setup_registry_tweens _________________
+
+self = <r2e_tests.test_config.test_init.ConfiguratorTests testMethod=test_setup_registry_tweens>
+
+    def test_setup_registry_tweens(self):
+        from pyramid.interfaces import ITweens
+        from pyramid.registry import Registry
+    
+        reg = Registry()
+        config = self._makeOne(reg)
+        settings = {'pyramid.tweens': 'tests.test_config.dummy_tween_factory'}
+        config.setup_registry(settings=settings)
+        config.commit()
+        tweens = config.registry.getUtility(ITweens)
+>       self.assertEqual(
+            tweens.explicit,
+            [('tests.test_config.dummy_tween_factory', dummy_tween_factory)],
+        )
+E       AssertionError: Lists differ: [('te[25 chars]en_factory', <function dummy_tween_factory at 0x7ffffc43b1f0>)] != [('te[25 chars]en_factory', <function dummy_tween_factory at 0x7ffffce34a60>)]
+E       
+E       First differing element 0:
+E       ('tes[23 chars]een_factory', <function dummy_tween_factory at 0x7ffffc43b1f0>)
+E       ('tes[23 chars]een_factory', <function dummy_tween_factory at 0x7ffffce34a60>)
+E       
+E         [('tests.test_config.dummy_tween_factory',
+E       -   <function dummy_tween_factory at 0x7ffffc43b1f0>)]
+E       ?                                             ^^^^
+E       
+E       +   <function dummy_tween_factory at 0x7ffffce34a60>)]
+E       ?                                            ++ ^^
+
+/r2e_tests/test_config/test_init.py:810: AssertionError
+__________________ ConfiguratorTests.test_with_package_module __________________
+
+self = <r2e_tests.test_config.test_init.ConfiguratorTests testMethod=test_with_package_module>
+
+    def test_with_package_module(self):
+        from . import test_init
+    
+        config = self._makeOne()
+        newconfig = config.with_package(test_init)
+        import tests.test_config
+    
+>       self.assertEqual(newconfig.package, tests.test_config)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_init.py:351: AssertionError
+____ TestConfigurator_add_directive.test_add_directive_with_custom_callable ____
+
+self = <r2e_tests.test_config.test_init.TestConfigurator_add_directive testMethod=test_add_directive_with_custom_callable>
+
+    def test_add_directive_with_custom_callable(self):
+        from tests import test_config
+    
+        config = self.config
+        config.add_directive(
+            'dummy_callable', 'tests.test_config.dummy_callable'
+        )
+        self.assertTrue(hasattr(config, 'dummy_callable'))
+        config.dummy_callable('discrim')
+        after = config.action_state
+        action = after.actions[-1]
+        self.assertEqual(action['discriminator'], 'discrim')
+        self.assertEqual(action['callable'], None)
+>       self.assertEqual(action['args'], test_config)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_init.py:1279: AssertionError
+________ TestConfigurator_add_directive.test_add_directive_with_partial ________
+
+self = <r2e_tests.test_config.test_init.TestConfigurator_add_directive testMethod=test_add_directive_with_partial>
+
+    def test_add_directive_with_partial(self):
+        from tests import test_config
+    
+        config = self.config
+        config.add_directive(
+            'dummy_partial', 'tests.test_config.dummy_partial'
+        )
+        self.assertTrue(hasattr(config, 'dummy_partial'))
+        config.dummy_partial()
+        after = config.action_state
+        action = after.actions[-1]
+        self.assertEqual(action['discriminator'], 'partial')
+        self.assertEqual(action['callable'], None)
+>       self.assertEqual(action['args'], test_config)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_init.py:1264: AssertionError
+_________ TestConfigurator_add_directive.test_extend_with_dotted_name __________
+
+self = <r2e_tests.test_config.test_init.TestConfigurator_add_directive testMethod=test_extend_with_dotted_name>
+
+    def test_extend_with_dotted_name(self):
+        from tests import test_config
+    
+        config = self.config
+        config.add_directive('dummy_extend', 'tests.test_config.dummy_extend')
+        self.assertTrue(hasattr(config, 'dummy_extend'))
+        config.dummy_extend('discrim')
+        after = config.action_state
+        action = after.actions[-1]
+        self.assertEqual(action['discriminator'], 'discrim')
+        self.assertEqual(action['callable'], None)
+>       self.assertEqual(action['args'], test_config)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_init.py:1249: AssertionError
+_______ TestConfigurator_add_directive.test_extend_with_python_callable ________
+
+self = <r2e_tests.test_config.test_init.TestConfigurator_add_directive testMethod=test_extend_with_python_callable>
+
+    def test_extend_with_python_callable(self):
+        from tests import test_config
+    
+        config = self.config
+        config.add_directive('dummy_extend', dummy_extend)
+        self.assertTrue(hasattr(config, 'dummy_extend'))
+        config.dummy_extend('discrim')
+        after = config.action_state
+        action = after.actions[-1]
+        self.assertEqual(action['discriminator'], 'discrim')
+        self.assertEqual(action['callable'], None)
+>       self.assertEqual(action['args'], test_config)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_init.py:1292: AssertionError
+_________ TestConfigurator__add_predicate.test_factory_as_dotted_name __________
+
+self = <r2e_tests.test_config.test_init.TestConfigurator__add_predicate testMethod=test_factory_as_dotted_name>
+
+    def test_factory_as_dotted_name(self):
+        config = self._makeOne()
+    
+        def _fakeAction(
+            discriminator,
+            callable=None,
+            args=(),
+            kw=None,
+            order=0,
+            introspectables=(),
+            **extra
+        ):
+            self.assertEqual(len(introspectables), 1)
+            self.assertEqual(introspectables[0]['name'], 'testing')
+            self.assertEqual(introspectables[0]['factory'], DummyPredicate)
+    
+        config.action = _fakeAction
+>       config._add_predicate(
+            'route', 'testing', 'tests.test_config.test_init.DummyPredicate'
+        )
+
+/r2e_tests/test_config/test_init.py:1369: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/pyramid/config/predicates.py:47: in _add_predicate
+    self.action(
+/r2e_tests/test_config/test_init.py:1366: in _fakeAction
+    self.assertEqual(introspectables[0]['factory'], DummyPredicate)
+E   AssertionError: <class 'tests.test_config.test_init.DummyPredicate'> != <class 'r2e_tests.test_config.test_init.DummyPredicate'>
+_____ RoutesConfiguratorMixinTests.test_add_route_with_factory_dottedname ______
+
+self = <r2e_tests.test_config.test_routes.RoutesConfiguratorMixinTests testMethod=test_add_route_with_factory_dottedname>
+
+    def test_add_route_with_factory_dottedname(self):
+        config = self._makeOne(autocommit=True)
+        config.add_route(
+            'name', 'path', factory='tests.test_config.dummyfactory'
+        )
+        route = self._assertRoute(config, 'name', 'path')
+>       self.assertEqual(route.factory, dummyfactory)
+E       AssertionError: <function dummyfactory at 0x7ffffc6205e0> != <function dummyfactory at 0x7ffffcf23d30>
+
+/r2e_tests/test_config/test_routes.py:109: AssertionError
+_____ TestingConfiguratorMixinTests.test_testing_add_subscriber_dottedname _____
+
+self = <r2e_tests.test_config.test_testing.TestingConfiguratorMixinTests testMethod=test_testing_add_subscriber_dottedname>
+
+    def test_testing_add_subscriber_dottedname(self):
+        config = self._makeOne(autocommit=True)
+        L = config.testing_add_subscriber('tests.test_config.IDummy')
+        event = DummyEvent()
+        config.registry.notify(event)
+>       self.assertEqual(len(L), 1)
+E       AssertionError: 0 != 1
+
+/r2e_tests/test_config/test_testing.py:108: AssertionError
+____________ TestTweensConfiguratorMixin.test_add_tween_dottedname _____________
+
+self = <r2e_tests.test_config.test_tweens.TestTweensConfiguratorMixin testMethod=test_add_tween_dottedname>
+
+    def test_add_tween_dottedname(self):
+        from pyramid.interfaces import ITweens
+        from pyramid.tweens import excview_tween_factory
+    
+        config = self._makeOne()
+        config.add_tween('tests.test_config.dummy_tween_factory')
+        config.commit()
+        tweens = config.registry.queryUtility(ITweens)
+>       self.assertEqual(
+            tweens.implicit(),
+            [
+                ('tests.test_config.dummy_tween_factory', dummy_tween_factory),
+                (
+                    'pyramid.tweens.excview_tween_factory',
+                    excview_tween_factory,
+                ),
+            ],
+        )
+E       AssertionError: Lists differ: [('te[74 chars]ffffc43b1f0>), ('pyramid.tweens.excview_tween_[57 chars]40>)] != [('te[74 chars]ffffce34a60>), ('pyramid.tweens.excview_tween_[57 chars]40>)]
+E       
+E       First differing element 0:
+E       ('tes[23 chars]een_factory', <function dummy_tween_factory at 0x7ffffc43b1f0>)
+E       ('tes[23 chars]een_factory', <function dummy_tween_factory at 0x7ffffce34a60>)
+E       
+E         [('tests.test_config.dummy_tween_factory',
+E       -   <function dummy_tween_factory at 0x7ffffc43b1f0>),
+E       ?                                             ^^^^
+E       
+E       +   <function dummy_tween_factory at 0x7ffffce34a60>),
+E       ?                                            ++ ^^
+E       
+E          ('pyramid.tweens.excview_tween_factory',
+E           <function excview_tween_factory at 0x7ffffcd57940>)]
+
+/r2e_tests/test_config/test_tweens.py:106: AssertionError
+__________ TestTweensConfiguratorMixin.test_add_tweens_names_distinct __________
+
+self = <r2e_tests.test_config.test_tweens.TestTweensConfiguratorMixin testMethod=test_add_tweens_names_distinct>
+
+    def test_add_tweens_names_distinct(self):
+        from pyramid.interfaces import ITweens
+        from pyramid.tweens import excview_tween_factory
+    
+        def factory1(handler, registry):  # pragma: no cover
+            return handler
+    
+        def factory2(handler, registry):  # pragma: no cover
+            return handler
+    
+        config = self._makeOne()
+        config.add_tween('tests.test_config.dummy_tween_factory')
+        config.add_tween('tests.test_config.dummy_tween_factory2')
+        config.commit()
+        tweens = config.registry.queryUtility(ITweens)
+        implicit = tweens.implicit()
+>       self.assertEqual(
+            implicit,
+            [
+                (
+                    'tests.test_config.dummy_tween_factory2',
+                    dummy_tween_factory2,
+                ),
+                ('tests.test_config.dummy_tween_factory', dummy_tween_factory),
+                (
+                    'pyramid.tweens.excview_tween_factory',
+                    excview_tween_factory,
+                ),
+            ],
+        )
+E       AssertionError: Lists differ: [('te[76 chars]ffffc620af0>), ('tests.test_config.dummy_tween[150 chars]40>)] != [('te[76 chars]ffffcf23280>), ('tests.test_config.dummy_tween[150 chars]40>)]
+E       
+E       First differing element 0:
+E       ('tes[25 chars]n_factory2', <function dummy_tween_factory2 at 0x7ffffc620af0>)
+E       ('tes[25 chars]n_factory2', <function dummy_tween_factory2 at 0x7ffffcf23280>)
+E       
+E         [('tests.test_config.dummy_tween_factory2',
+E       -   <function dummy_tween_factory2 at 0x7ffffc620af0>),
+E       ?                                             ^ ^^^
+E       
+E       +   <function dummy_tween_factory2 at 0x7ffffcf23280>),
+E       ?                                             ^ ^^^
+E       
+E          ('tests.test_config.dummy_tween_factory',
+E       -   <function dummy_tween_factory at 0x7ffffc43b1f0>),
+E       ?                                             ^^^^
+E       
+E       +   <function dummy_tween_factory at 0x7ffffce34a60>),
+E       ?                                            ++ ^^
+E       
+E          ('pyramid.tweens.excview_tween_factory',
+E           <function excview_tween_factory at 0x7ffffcd57940>)]
+
+/r2e_tests/test_config/test_tweens.py:31: AssertionError
+_______ TestTweensConfiguratorMixin.test_add_tweens_names_with_underover _______
+
+self = <r2e_tests.test_config.test_tweens.TestTweensConfiguratorMixin testMethod=test_add_tweens_names_with_underover>
+
+    def test_add_tweens_names_with_underover(self):
+        from pyramid.interfaces import ITweens
+        from pyramid.tweens import excview_tween_factory
+        from pyramid.tweens import MAIN
+    
+        config = self._makeOne()
+        config.add_tween('tests.test_config.dummy_tween_factory', over=MAIN)
+        config.add_tween(
+            'tests.test_config.dummy_tween_factory2',
+            over=MAIN,
+            under='tests.test_config.dummy_tween_factory',
+        )
+        config.commit()
+        tweens = config.registry.queryUtility(ITweens)
+        implicit = tweens.implicit()
+>       self.assertEqual(
+            implicit,
+            [
+                (
+                    'pyramid.tweens.excview_tween_factory',
+                    excview_tween_factory,
+                ),
+                ('tests.test_config.dummy_tween_factory', dummy_tween_factory),
+                (
+                    'tests.test_config.dummy_tween_factory2',
+                    dummy_tween_factory2,
+                ),
+            ],
+        )
+E       AssertionError: Lists differ: [('py[168 chars]ffffc43b1f0>), ('tests.test_config.dummy_tween[58 chars]f0>)] != [('py[168 chars]ffffce34a60>), ('tests.test_config.dummy_tween[58 chars]80>)]
+E       
+E       First differing element 1:
+E       ('tes[23 chars]een_factory', <function dummy_tween_factory at 0x7ffffc43b1f0>)
+E       ('tes[23 chars]een_factory', <function dummy_tween_factory at 0x7ffffce34a60>)
+E       
+E         [('pyramid.tweens.excview_tween_factory',
+E           <function excview_tween_factory at 0x7ffffcd57940>),
+E          ('tests.test_config.dummy_tween_factory',
+E       -   <function dummy_tween_factory at 0x7ffffc43b1f0>),
+E       ?                                             ^^^^
+E       
+E       +   <function dummy_tween_factory at 0x7ffffce34a60>),
+E       ?                                            ++ ^^
+E       
+E          ('tests.test_config.dummy_tween_factory2',
+E       -   <function dummy_tween_factory2 at 0x7ffffc620af0>)]
+E       ?                                             ^ ^^^
+E       
+E       +   <function dummy_tween_factory2 at 0x7ffffcf23280>)]
+E       ?                                             ^ ^^^
+
+/r2e_tests/test_config/test_tweens.py:61: AssertionError
+____ TestViewsConfigurationMixin.test_add_exception_view_with_view_defaults ____
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_exception_view_with_view_defaults>
+
+    def test_add_exception_view_with_view_defaults(self):
+        from pyramid.renderers import null_renderer
+        from pyramid.exceptions import PredicateMismatch
+        from zope.interface import directlyProvides
+        from zope.interface import implementedBy
+    
+        class view:
+            __view_defaults__ = {'containment': 'tests.test_config.IDummy'}
+    
+            def __init__(self, request):
+                pass
+    
+            def __call__(self):
+                return 'OK'
+    
+        config = self._makeOne(autocommit=True)
+        config.add_exception_view(
+            view=view, context=Exception, renderer=null_renderer
+        )
+        wrapper = self._getViewCallable(
+            config, exc_iface=implementedBy(Exception)
+        )
+        context = DummyContext()
+        directlyProvides(context, IDummy)
+        request = self._makeRequest(config)
+>       self.assertEqual(wrapper(context, request), 'OK')
+
+/r2e_tests/test_config/test_views.py:2375: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/pyramid/config/views.py:170: in attr_view
+    return view(context, request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+context = <r2e_tests.test_config.test_views.DummyContext object at 0x7ffffc420e20>
+request = <r2e_tests.test_config.test_views.DummyRequest object at 0x7ffffbe805b0>
+
+    def predicate_wrapper(context, request):
+        for predicate in preds:
+            if not predicate(context, request):
+                view_name = getattr(view, '__name__', view)
+>               raise PredicateMismatch(
+                    'predicate mismatch for view %s (%s)'
+                    % (view_name, predicate.text())
+                )
+E               pyramid.exceptions.PredicateMismatch: predicate mismatch for view view (containment = tests.test_config.IDummy)
+
+src/pyramid/config/views.py:192: PredicateMismatch
+____ TestViewsConfigurationMixin.test_add_forbidden_view_with_view_defaults ____
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_forbidden_view_with_view_defaults>
+
+    def test_add_forbidden_view_with_view_defaults(self):
+        from pyramid.interfaces import IRequest
+        from pyramid.renderers import null_renderer
+        from pyramid.exceptions import PredicateMismatch
+        from pyramid.httpexceptions import HTTPForbidden
+        from zope.interface import directlyProvides
+        from zope.interface import implementedBy
+    
+        class view:
+            __view_defaults__ = {'containment': 'tests.test_config.IDummy'}
+    
+            def __init__(self, request):
+                pass
+    
+            def __call__(self):
+                return 'OK'
+    
+        config = self._makeOne(autocommit=True)
+        config.add_forbidden_view(view=view, renderer=null_renderer)
+        wrapper = self._getViewCallable(
+            config,
+            exc_iface=implementedBy(HTTPForbidden),
+            request_iface=IRequest,
+        )
+        context = DummyContext()
+        directlyProvides(context, IDummy)
+        request = self._makeRequest(config)
+>       self.assertEqual(wrapper(context, request), 'OK')
+
+/r2e_tests/test_config/test_views.py:2600: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/pyramid/config/views.py:170: in attr_view
+    return view(context, request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+context = <r2e_tests.test_config.test_views.DummyContext object at 0x7ffffbea1d90>
+request = <r2e_tests.test_config.test_views.DummyRequest object at 0x7ffffc20fbe0>
+
+    def predicate_wrapper(context, request):
+        for predicate in preds:
+            if not predicate(context, request):
+                view_name = getattr(view, '__name__', view)
+>               raise PredicateMismatch(
+                    'predicate mismatch for view %s (%s)'
+                    % (view_name, predicate.text())
+                )
+E               pyramid.exceptions.PredicateMismatch: predicate mismatch for view view (containment = tests.test_config.IDummy)
+
+src/pyramid/config/views.py:192: PredicateMismatch
+____ TestViewsConfigurationMixin.test_add_notfound_view_with_view_defaults _____
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_notfound_view_with_view_defaults>
+
+    def test_add_notfound_view_with_view_defaults(self):
+        from pyramid.interfaces import IRequest
+        from pyramid.renderers import null_renderer
+        from pyramid.exceptions import PredicateMismatch
+        from pyramid.httpexceptions import HTTPNotFound
+        from zope.interface import directlyProvides
+        from zope.interface import implementedBy
+    
+        class view:
+            __view_defaults__ = {'containment': 'tests.test_config.IDummy'}
+    
+            def __init__(self, request):
+                pass
+    
+            def __call__(self):
+                return 'OK'
+    
+        config = self._makeOne(autocommit=True)
+        config.add_notfound_view(view=view, renderer=null_renderer)
+        wrapper = self._getViewCallable(
+            config,
+            exc_iface=implementedBy(HTTPNotFound),
+            request_iface=IRequest,
+        )
+        context = DummyContext()
+        directlyProvides(context, IDummy)
+        request = self._makeRequest(config)
+>       self.assertEqual(wrapper(context, request), 'OK')
+
+/r2e_tests/test_config/test_views.py:2764: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/pyramid/config/views.py:170: in attr_view
+    return view(context, request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+context = <r2e_tests.test_config.test_views.DummyContext object at 0x7ffffc0dbd60>
+request = <r2e_tests.test_config.test_views.DummyRequest object at 0x7ffffba86070>
+
+    def predicate_wrapper(context, request):
+        for predicate in preds:
+            if not predicate(context, request):
+                view_name = getattr(view, '__name__', view)
+>               raise PredicateMismatch(
+                    'predicate mismatch for view %s (%s)'
+                    % (view_name, predicate.text())
+                )
+E               pyramid.exceptions.PredicateMismatch: predicate mismatch for view view (containment = tests.test_config.IDummy)
+
+src/pyramid/config/views.py:192: PredicateMismatch
+____ TestViewsConfigurationMixin.test_add_static_view_package_here_relative ____
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_static_view_package_here_relative>
+
+    def test_add_static_view_package_here_relative(self):
+        from pyramid.interfaces import IStaticURLInfo
+    
+        info = DummyStaticURLInfo()
+        config = self._makeOne(autocommit=True)
+        config.registry.registerUtility(info, IStaticURLInfo)
+        config.add_static_view('static', 'files')
+>       self.assertEqual(
+            info.added, [(config, 'static', 'tests.test_config:files', {})]
+        )
+E       AssertionError: Lists differ: [(<py[35 chars] 0x7ffffc0d0eb0>, 'static', 'r2e_tests.test_config:files', {})] != [(<py[35 chars] 0x7ffffc0d0eb0>, 'static', 'tests.test_config:files', {})]
+E       
+E       First differing element 0:
+E       (<pyr[33 chars]t 0x7ffffc0d0eb0>, 'static', 'r2e_tests.test_config:files', {})
+E       (<pyr[33 chars]t 0x7ffffc0d0eb0>, 'static', 'tests.test_config:files', {})
+E       
+E         [(<pyramid.config.Configurator object at 0x7ffffc0d0eb0>,
+E           'static',
+E       -   'r2e_tests.test_config:files',
+E       ?    ----
+E       
+E       +   'tests.test_config:files',
+E           {})]
+
+/r2e_tests/test_config/test_views.py:2483: AssertionError
+_______ TestViewsConfigurationMixin.test_add_view_context_as_dottedname ________
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_view_context_as_dottedname>
+
+    def test_add_view_context_as_dottedname(self):
+        from pyramid.renderers import null_renderer
+    
+        view = lambda *arg: 'OK'
+        config = self._makeOne(autocommit=True)
+        config.add_view(
+            context='tests.test_config.IDummy',
+            view=view,
+            renderer=null_renderer,
+        )
+        wrapper = self._getViewCallable(config, IDummy)
+>       self.assertEqual(wrapper, view)
+E       AssertionError: None != <function TestViewsConfigurationMixin.tes[64 chars]c0d0>
+
+/r2e_tests/test_config/test_views.py:452: AssertionError
+_________ TestViewsConfigurationMixin.test_add_view_for__as_dottedname _________
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_view_for__as_dottedname>
+
+    def test_add_view_for__as_dottedname(self):
+        from pyramid.renderers import null_renderer
+    
+        view = lambda *arg: 'OK'
+        config = self._makeOne(autocommit=True)
+        config.add_view(
+            for_='tests.test_config.IDummy', view=view, renderer=null_renderer
+        )
+        wrapper = self._getViewCallable(config, IDummy)
+>       self.assertEqual(wrapper, view)
+E       AssertionError: None != <function TestViewsConfigurationMixin.tes[61 chars]4040>
+
+/r2e_tests/test_config/test_views.py:463: AssertionError
+____ TestViewsConfigurationMixin.test_add_view_with_containment_dottedname _____
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_view_with_containment_dottedname>
+
+    def test_add_view_with_containment_dottedname(self):
+        from pyramid.renderers import null_renderer
+        from zope.interface import directlyProvides
+    
+        view = lambda *arg: 'OK'
+        config = self._makeOne(autocommit=True)
+        config.add_view(
+            view=view,
+            containment='tests.test_config.IDummy',
+            renderer=null_renderer,
+        )
+        wrapper = self._getViewCallable(config)
+        context = DummyContext()
+        directlyProvides(context, IDummy)
+>       self.assertEqual(wrapper(context, None), 'OK')
+
+/r2e_tests/test_config/test_views.py:1863: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/pyramid/config/views.py:170: in attr_view
+    return view(context, request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+context = <r2e_tests.test_config.test_views.DummyContext object at 0x7ffffc4897f0>
+request = None
+
+    def predicate_wrapper(context, request):
+        for predicate in preds:
+            if not predicate(context, request):
+                view_name = getattr(view, '__name__', view)
+>               raise PredicateMismatch(
+                    'predicate mismatch for view %s (%s)'
+                    % (view_name, predicate.text())
+                )
+E               pyramid.exceptions.PredicateMismatch: predicate mismatch for view <lambda> (containment = tests.test_config.IDummy)
+
+src/pyramid/config/views.py:192: PredicateMismatch
+_______ TestViewsConfigurationMixin.test_add_view_with_template_renderer _______
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_view_with_template_renderer>
+
+    def test_add_view_with_template_renderer(self):
+        from tests import test_config
+        from pyramid.interfaces import ISettings
+    
+        class view:
+            def __init__(self, context, request):
+                self.request = request
+                self.context = context
+    
+            def __call__(self):
+                return {'a': '1'}
+    
+        config = self._makeOne(autocommit=True)
+        renderer = self._registerRenderer(config)
+        fixture = 'tests.test_config:files/minimal.txt'
+        config.introspection = False
+        config.add_view(view=view, renderer=fixture)
+        wrapper = self._getViewCallable(config)
+        request = self._makeRequest(config)
+        result = wrapper(None, request)
+        self.assertEqual(result.body, b'Hello!')
+        settings = config.registry.queryUtility(ISettings)
+        result = renderer.info
+        self.assertEqual(result.registry, config.registry)
+        self.assertEqual(result.type, '.txt')
+>       self.assertEqual(result.package, test_config)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_views.py:1492: AssertionError
+_ TestViewsConfigurationMixin.test_add_view_with_template_renderer_no_callable _
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_view_with_template_renderer_no_callable>
+
+    def test_add_view_with_template_renderer_no_callable(self):
+        from tests import test_config
+        from pyramid.interfaces import ISettings
+    
+        config = self._makeOne(autocommit=True)
+        renderer = self._registerRenderer(config)
+        fixture = 'tests.test_config:files/minimal.txt'
+        config.introspection = False
+        config.add_view(view=None, renderer=fixture)
+        wrapper = self._getViewCallable(config)
+        request = self._makeRequest(config)
+        result = wrapper(None, request)
+        self.assertEqual(result.body, b'Hello!')
+        settings = config.registry.queryUtility(ISettings)
+        result = renderer.info
+        self.assertEqual(result.registry, config.registry)
+        self.assertEqual(result.type, '.txt')
+>       self.assertEqual(result.package, test_config)
+E       AssertionError: <module 'r2e_tests.test_config' from '/r2e_tests/test_config/__init__.py'> != <module 'tests.test_config' from '/testbed/tests/test_config/__init__.py'>
+
+/r2e_tests/test_config/test_views.py:1538: AssertionError
+_________ TestViewsConfigurationMixin.test_add_view_with_view_defaults _________
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_view_with_view_defaults>
+
+    def test_add_view_with_view_defaults(self):
+        from pyramid.renderers import null_renderer
+        from pyramid.exceptions import PredicateMismatch
+        from zope.interface import directlyProvides
+    
+        class view:
+            __view_defaults__ = {'containment': 'tests.test_config.IDummy'}
+    
+            def __init__(self, request):
+                pass
+    
+            def __call__(self):
+                return 'OK'
+    
+        config = self._makeOne(autocommit=True)
+        config.add_view(view=view, renderer=null_renderer)
+        wrapper = self._getViewCallable(config)
+        context = DummyContext()
+        directlyProvides(context, IDummy)
+        request = self._makeRequest(config)
+>       self.assertEqual(wrapper(context, request), 'OK')
+
+/r2e_tests/test_config/test_views.py:2140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/pyramid/config/views.py:170: in attr_view
+    return view(context, request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+context = <r2e_tests.test_config.test_views.DummyContext object at 0x7ffffc3d44f0>
+request = <r2e_tests.test_config.test_views.DummyRequest object at 0x7ffffc1af670>
+
+    def predicate_wrapper(context, request):
+        for predicate in preds:
+            if not predicate(context, request):
+                view_name = getattr(view, '__name__', view)
+>               raise PredicateMismatch(
+                    'predicate mismatch for view %s (%s)'
+                    % (view_name, predicate.text())
+                )
+E               pyramid.exceptions.PredicateMismatch: predicate mismatch for view view (containment = tests.test_config.IDummy)
+
+src/pyramid/config/views.py:192: PredicateMismatch
+_ TestViewsConfigurationMixin.test_add_view_with_view_defaults_viewname_is_dottedname_kwarg _
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_view_with_view_defaults_viewname_is_dottedname_kwarg>
+
+    def test_add_view_with_view_defaults_viewname_is_dottedname_kwarg(self):
+        from pyramid.renderers import null_renderer
+        from pyramid.exceptions import PredicateMismatch
+        from zope.interface import directlyProvides
+    
+        config = self._makeOne(autocommit=True)
+        config.add_view(
+            view='tests.test_config.test_views.DummyViewDefaultsClass',
+            renderer=null_renderer,
+        )
+        wrapper = self._getViewCallable(config)
+        context = DummyContext()
+        directlyProvides(context, IDummy)
+        request = self._makeRequest(config)
+>       self.assertEqual(wrapper(context, request), 'OK')
+
+/r2e_tests/test_config/test_views.py:2159: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/pyramid/config/views.py:170: in attr_view
+    return view(context, request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+context = <r2e_tests.test_config.test_views.DummyContext object at 0x7ffffd66fa90>
+request = <r2e_tests.test_config.test_views.DummyRequest object at 0x7ffffc941f40>
+
+    def predicate_wrapper(context, request):
+        for predicate in preds:
+            if not predicate(context, request):
+                view_name = getattr(view, '__name__', view)
+>               raise PredicateMismatch(
+                    'predicate mismatch for view %s (%s)'
+                    % (view_name, predicate.text())
+                )
+E               pyramid.exceptions.PredicateMismatch: predicate mismatch for view DummyViewDefaultsClass (containment = tests.test_config.IDummy)
+
+src/pyramid/config/views.py:192: PredicateMismatch
+_ TestViewsConfigurationMixin.test_add_view_with_view_defaults_viewname_is_dottedname_nonkwarg _
+
+self = <r2e_tests.test_config.test_views.TestViewsConfigurationMixin testMethod=test_add_view_with_view_defaults_viewname_is_dottedname_nonkwarg>
+
+    def test_add_view_with_view_defaults_viewname_is_dottedname_nonkwarg(self):
+        from pyramid.renderers import null_renderer
+        from pyramid.exceptions import PredicateMismatch
+        from zope.interface import directlyProvides
+    
+        config = self._makeOne(autocommit=True)
+        config.add_view(
+            'tests.test_config.test_views.DummyViewDefaultsClass',
+            renderer=null_renderer,
+        )
+        wrapper = self._getViewCallable(config)
+        context = DummyContext()
+        directlyProvides(context, IDummy)
+        request = self._makeRequest(config)
+>       self.assertEqual(wrapper(context, request), 'OK')
+
+/r2e_tests/test_config/test_views.py:2178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/pyramid/config/views.py:170: in attr_view
+    return view(context, request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+context = <r2e_tests.test_config.test_views.DummyContext object at 0x7ffffbc4da30>
+request = <r2e_tests.test_config.test_views.DummyRequest object at 0x7ffffc1015e0>
+
+    def predicate_wrapper(context, request):
+        for predicate in preds:
+            if not predicate(context, request):
+                view_name = getattr(view, '__name__', view)
+>               raise PredicateMismatch(
+                    'predicate mismatch for view %s (%s)'
+                    % (view_name, predicate.text())
+                )
+E               pyramid.exceptions.PredicateMismatch: predicate mismatch for view DummyViewDefaultsClass (containment = tests.test_config.IDummy)
+
+src/pyramid/config/views.py:192: PredicateMismatch
+_________ TestStaticURLInfo.test_generate_url_cachebust_with_overrides _________
+
+self = <r2e_tests.test_config.test_views.TestStaticURLInfo testMethod=test_generate_url_cachebust_with_overrides>
+
+    def test_generate_url_cachebust_with_overrides(self):
+        config = testing.setUp()
+        try:
+            request = testing.DummyRequest()
+            config.add_static_view('static', 'path')
+            config.override_asset(
+                'tests.test_config:path/', 'tests.test_config:other_path/'
+            )
+    
+            def cb(val):
+                def cb_(request, subpath, kw):
+                    kw['_query'] = {'x': val}
+                    return subpath, kw
+    
+                return cb_
+    
+            config.add_cache_buster('path', cb('foo'))
+            result = request.static_url('path/foo.png')
+            self.assertEqual(result, 'http://example.com/static/foo.png?x=foo')
+            config.add_cache_buster('other_path', cb('bar'), explicit=True)
+            result = request.static_url('path/foo.png')
+>           self.assertEqual(result, 'http://example.com/static/foo.png?x=bar')
+E           AssertionError: 'http://example.com/static/foo.png?x=foo' != 'http://example.com/static/foo.png?x=bar'
+E           - http://example.com/static/foo.png?x=foo
+E           ?                                     ^^^
+E           + http://example.com/static/foo.png?x=bar
+E           ?                                     ^^^
+
+/r2e_tests/test_config/test_views.py:3953: AssertionError
+___________________ Test_view_description.test_without_text ____________________
+
+self = <r2e_tests.test_config.test_views.Test_view_description testMethod=test_without_text>
+
+    def test_without_text(self):
+        def view():  # pragma: no cover
+            pass
+    
+        result = self._callFUT(view)
+>       self.assertEqual(result, 'function tests.test_config.test_views.view')
+E       AssertionError: 'function r2e_tests.test_config.test_views.view' != 'function tests.test_config.test_views.view'
+E       - function r2e_tests.test_config.test_views.view
+E       ?          ----
+E       + function tests.test_config.test_views.view
+
+/r2e_tests/test_config/test_views.py:4157: AssertionError
+______________________ TestPRoutesCommand.test_class_view ______________________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_class_view>
+
+    def test_class_view(self):
+        from pyramid.renderers import null_renderer as nr
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b')
+        config.add_view(
+            route_name='foo',
+            view=dummy.DummyView,
+            attr='view',
+            renderer=nr,
+            request_method='POST',
+        )
+    
+        command = self._makeOne()
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=config.registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()
+        expected = [
+            'foo',
+            '/a/b',
+            'tests.test_scripts.dummy.DummyView.view',
+            'POST',
+        ]
+>       self.assertEqual(compare_to, expected)
+E       AssertionError: Lists differ: ['foo', '/a/b', 'r2e_tests.test_scripts.dummy.DummyView.view', 'POST'] != ['foo', '/a/b', 'tests.test_scripts.dummy.DummyView.view', 'POST']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.dummy.DummyView.view'
+E       'tests.test_scripts.dummy.DummyView.view'
+E       
+E       - ['foo', '/a/b', 'r2e_tests.test_scripts.dummy.DummyView.view', 'POST']
+E       ?                  ----
+E       
+E       + ['foo', '/a/b', 'tests.test_scripts.dummy.DummyView.view', 'POST']
+
+/r2e_tests/test_scripts/test_proutes.py:248: AssertionError
+_________ TestPRoutesCommand.test_one_route_all_methods_view_only_post _________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_one_route_all_methods_view_only_post>
+
+    def test_one_route_all_methods_view_only_post(self):
+        from pyramid.renderers import null_renderer as nr
+    
+        def view1(context, request):  # pragma: no cover
+            return 'view1'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b')
+        config.add_view(
+            route_name='foo', view=view1, renderer=nr, request_method='POST'
+        )
+    
+        command = self._makeOne()
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=config.registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()
+        expected = [
+            'foo',
+            '/a/b',
+            'tests.test_scripts.test_proutes.view1',
+            'POST',
+        ]
+>       self.assertEqual(compare_to, expected)
+E       AssertionError: Lists differ: ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', 'POST'] != ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', 'POST']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.test_proutes.view1'
+E       'tests.test_scripts.test_proutes.view1'
+E       
+E       - ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', 'POST']
+E       ?                  ----
+E       
+E       + ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', 'POST']
+
+/r2e_tests/test_scripts/test_proutes.py:361: AssertionError
+_________ TestPRoutesCommand.test_one_route_only_post_view_all_methods _________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_one_route_only_post_view_all_methods>
+
+    def test_one_route_only_post_view_all_methods(self):
+        from pyramid.renderers import null_renderer as nr
+    
+        def view1(context, request):  # pragma: no cover
+            return 'view1'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b', request_method='POST')
+        config.add_view(route_name='foo', view=view1, renderer=nr)
+    
+        command = self._makeOne()
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=config.registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()
+        expected = [
+            'foo',
+            '/a/b',
+            'tests.test_scripts.test_proutes.view1',
+            'POST',
+        ]
+>       self.assertEqual(compare_to, expected)
+E       AssertionError: Lists differ: ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', 'POST'] != ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', 'POST']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.test_proutes.view1'
+E       'tests.test_scripts.test_proutes.view1'
+E       
+E       - ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', 'POST']
+E       ?                  ----
+E       
+E       + ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', 'POST']
+
+/r2e_tests/test_scripts/test_proutes.py:387: AssertionError
+________ TestPRoutesCommand.test_one_route_only_post_view_post_and_get _________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_one_route_only_post_view_post_and_get>
+
+    def test_one_route_only_post_view_post_and_get(self):
+        from pyramid.renderers import null_renderer as nr
+    
+        def view1(context, request):  # pragma: no cover
+            return 'view1'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b', request_method='POST')
+        config.add_view(
+            route_name='foo',
+            view=view1,
+            renderer=nr,
+            request_method=('POST', 'GET'),
+        )
+    
+        command = self._makeOne()
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=config.registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()
+        expected = [
+            'foo',
+            '/a/b',
+            'tests.test_scripts.test_proutes.view1',
+            'POST',
+        ]
+>       self.assertEqual(compare_to, expected)
+E       AssertionError: Lists differ: ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', 'POST'] != ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', 'POST']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.test_proutes.view1'
+E       'tests.test_scripts.test_proutes.view1'
+E       
+E       - ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', 'POST']
+E       ?                  ----
+E       
+E       + ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', 'POST']
+
+/r2e_tests/test_scripts/test_proutes.py:418: AssertionError
+_____ TestPRoutesCommand.test_one_route_with_long_name_one_view_registered _____
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_one_route_with_long_name_one_view_registered>
+
+    def test_one_route_with_long_name_one_view_registered(self):
+        from zope.interface import Interface
+        from pyramid.interfaces import IRouteRequest
+        from pyramid.interfaces import IViewClassifier
+        from pyramid.interfaces import IView
+    
+        registry = self._makeRegistry()
+    
+        def view():  # pragma: no cover
+            pass
+    
+        class IMyRoute(Interface):
+            pass
+    
+        registry.registerAdapter(
+            view, (IViewClassifier, IMyRoute, Interface), IView, ''
+        )
+    
+        registry.registerUtility(
+            IMyRoute, IRouteRequest, name='very_long_name_123'
+        )
+    
+        command = self._makeOne()
+        route = dummy.DummyRoute(
+            'very_long_name_123', '/and_very_long_pattern_as_well'
+        )
+        mapper = dummy.DummyMapper(route)
+        command._get_mapper = lambda *arg: mapper
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()[:3]
+>       self.assertEqual(
+            compare_to,
+            [
+                'very_long_name_123',
+                '/and_very_long_pattern_as_well',
+                'tests.test_scripts.test_proutes.view',
+            ],
+        )
+E       AssertionError: Lists differ: ['ver[32 chars]g_pattern_as_well', 'r2e_tests.test_scripts.test_proutes.view'] != ['ver[32 chars]g_pattern_as_well', 'tests.test_scripts.test_proutes.view']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.test_proutes.view'
+E       'tests.test_scripts.test_proutes.view'
+E       
+E         ['very_long_name_123',
+E          '/and_very_long_pattern_as_well',
+E       -  'r2e_tests.test_scripts.test_proutes.view']
+E       ?   ----
+E       
+E       +  'tests.test_scripts.test_proutes.view']
+
+/r2e_tests/test_scripts/test_proutes.py:212: AssertionError
+______ TestPRoutesCommand.test_route_is_get_view_request_method_not_post _______
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_route_is_get_view_request_method_not_post>
+
+    def test_route_is_get_view_request_method_not_post(self):
+        from pyramid.renderers import null_renderer as nr
+        from pyramid.config import not_
+    
+        def view1(context, request):  # pragma: no cover
+            return 'view1'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b', request_method='GET')
+        config.add_view(
+            route_name='foo',
+            view=view1,
+            renderer=nr,
+            request_method=not_('POST'),
+        )
+    
+        command = self._makeOne()
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=config.registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()
+        expected = [
+            'foo',
+            '/a/b',
+            'tests.test_scripts.test_proutes.view1',
+            'GET',
+        ]
+>       self.assertEqual(compare_to, expected)
+E       AssertionError: Lists differ: ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', 'GET'] != ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', 'GET']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.test_proutes.view1'
+E       'tests.test_scripts.test_proutes.view1'
+E       
+E       - ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', 'GET']
+E       ?                  ----
+E       
+E       + ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', 'GET']
+
+/r2e_tests/test_scripts/test_proutes.py:558: AssertionError
+____________ TestPRoutesCommand.test_route_request_method_mismatch _____________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_route_request_method_mismatch>
+
+    def test_route_request_method_mismatch(self):
+        from pyramid.renderers import null_renderer as nr
+    
+        def view1(context, request):  # pragma: no cover
+            return 'view1'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b', request_method='POST')
+        config.add_view(
+            route_name='foo', view=view1, renderer=nr, request_method='GET'
+        )
+    
+        command = self._makeOne()
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=config.registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()
+        expected = [
+            'foo',
+            '/a/b',
+            'tests.test_scripts.test_proutes.view1',
+            '<route',
+            'mismatch>',
+        ]
+>       self.assertEqual(compare_to, expected)
+E       AssertionError: Lists differ: ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1[20 chars]ch>'] != ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', '[16 chars]ch>']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.test_proutes.view1'
+E       'tests.test_scripts.test_proutes.view1'
+E       
+E       + ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', '<route', 'mismatch>']
+E       - ['foo',
+E       -  '/a/b',
+E       -  'r2e_tests.test_scripts.test_proutes.view1',
+E       -  '<route',
+E       -  'mismatch>']
+
+/r2e_tests/test_scripts/test_proutes.py:447: AssertionError
+__________________ TestPRoutesCommand.test_route_static_views __________________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_route_static_views>
+
+    def test_route_static_views(self):
+        config = self._makeConfig(autocommit=True)
+        config.add_static_view('static', 'static', cache_max_age=3600)
+        path2 = os.path.normpath('/var/www/static')
+        config.add_static_view(name='static2', path=path2)
+        config.add_static_view(
+            name='pyramid_scaffold',
+            path='pyramid:scaffolds/starter/+package+/static',
+        )
+    
+        command = self._makeOne()
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=config.registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 5)
+    
+        expected = [
+            [
+                '__static/',
+                '/static/*subpath',
+                'tests.test_scripts:static/',
+                '*',
+            ],
+            ['__static2/', '/static2/*subpath', path2 + os.sep, '*'],
+            [
+                '__pyramid_scaffold/',
+                '/pyramid_scaffold/*subpath',
+                'pyramid:scaffolds/starter/+package+/static/',
+                '*',
+            ],
+        ]
+    
+        for index, line in enumerate(L[2:]):
+            data = line.split()
+>           self.assertEqual(data, expected[index])
+E           AssertionError: Lists differ: ['__static/', '/static/*subpath', 'r2e_tests.test_scripts:static/', '*'] != ['__static/', '/static/*subpath', 'tests.test_scripts:static/', '*']
+E           
+E           First differing element 2:
+E           'r2e_tests.test_scripts:static/'
+E           'tests.test_scripts:static/'
+E           
+E           - ['__static/', '/static/*subpath', 'r2e_tests.test_scripts:static/', '*']
+E           ?                                    ----
+E           
+E           + ['__static/', '/static/*subpath', 'tests.test_scripts:static/', '*']
+
+/r2e_tests/test_scripts/test_proutes.py:485: AssertionError
+__________ TestPRoutesCommand.test_single_route_multiview_registered ___________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_single_route_multiview_registered>
+
+    def test_single_route_multiview_registered(self):
+        from zope.interface import Interface
+        from pyramid.interfaces import IRouteRequest
+        from pyramid.interfaces import IViewClassifier
+        from pyramid.interfaces import IMultiView
+    
+        registry = self._makeRegistry()
+    
+        def view():  # pragma: no cover
+            pass
+    
+        class IMyRoute(Interface):
+            pass
+    
+        multiview1 = dummy.DummyMultiView(
+            view, context='context', view_name='a1'
+        )
+    
+        registry.registerAdapter(
+            multiview1, (IViewClassifier, IMyRoute, Interface), IMultiView, ''
+        )
+        registry.registerUtility(IMyRoute, IRouteRequest, name='a')
+        command = self._makeOne()
+        route = dummy.DummyRoute('a', '/a')
+        mapper = dummy.DummyMapper(route)
+        command._get_mapper = lambda *arg: mapper
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()[:3]
+        view_module = 'tests.test_scripts.dummy'
+        view_str = '<tests.test_scripts.dummy.DummyMultiView'
+        final = '%s.%s' % (view_module, view_str)
+    
+>       self.assertEqual(compare_to, ['a', '/a', final])
+E       AssertionError: Lists differ: ['a', '/a', 'r2e_tests.test_scripts.dummy.<r2e_tests.t[29 chars]iew'] != ['a', '/a', 'tests.test_scripts.dummy.<tests.test_scri[21 chars]iew']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.dummy.<r2e_tests.test_scripts.dummy.DummyMultiView'
+E       'tests.test_scripts.dummy.<tests.test_scripts.dummy.DummyMultiView'
+E       
+E       - ['a',
+E       -  '/a',
+E       -  'r2e_tests.test_scripts.dummy.<r2e_tests.test_scripts.dummy.DummyMultiView']
+E       ? ^ ^^^^                          ----
+E       
+E       + ['a', '/a', 'tests.test_scripts.dummy.<tests.test_scripts.dummy.DummyMultiView']
+E       ? ^ ^^^^^^^^^^^
+
+/r2e_tests/test_scripts/test_proutes.py:324: AssertionError
+___________ TestPRoutesCommand.test_single_route_one_view_registered ___________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_single_route_one_view_registered>
+
+    def test_single_route_one_view_registered(self):
+        from zope.interface import Interface
+        from pyramid.interfaces import IRouteRequest
+        from pyramid.interfaces import IViewClassifier
+        from pyramid.interfaces import IView
+    
+        registry = self._makeRegistry()
+    
+        def view():  # pragma: no cover
+            pass
+    
+        class IMyRoute(Interface):
+            pass
+    
+        registry.registerAdapter(
+            view, (IViewClassifier, IMyRoute, Interface), IView, ''
+        )
+        registry.registerUtility(IMyRoute, IRouteRequest, name='a')
+        command = self._makeOne()
+        route = dummy.DummyRoute('a', '/a')
+        mapper = dummy.DummyMapper(route)
+        command._get_mapper = lambda *arg: mapper
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()[:3]
+>       self.assertEqual(
+            compare_to, ['a', '/a', 'tests.test_scripts.test_proutes.view']
+        )
+E       AssertionError: Lists differ: ['a', '/a', 'r2e_tests.test_scripts.test_proutes.view'] != ['a', '/a', 'tests.test_scripts.test_proutes.view']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.test_proutes.view'
+E       'tests.test_scripts.test_proutes.view'
+E       
+E       - ['a', '/a', 'r2e_tests.test_scripts.test_proutes.view']
+E       ?              ----
+E       
+E       + ['a', '/a', 'tests.test_scripts.test_proutes.view']
+
+/r2e_tests/test_scripts/test_proutes.py:173: AssertionError
+______________________ TestPRoutesCommand.test_view_glob _______________________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_view_glob>
+
+    def test_view_glob(self):
+        from pyramid.renderers import null_renderer as nr
+        from pyramid.config import not_
+    
+        def view1(context, request):  # pragma: no cover
+            return 'view1'
+    
+        def view2(context, request):  # pragma: no cover
+            return 'view2'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b')
+        config.add_view(
+            route_name='foo',
+            view=view1,
+            renderer=nr,
+            request_method=not_('POST'),
+        )
+    
+        config.add_route('bar', '/b/a')
+        config.add_view(
+            route_name='bar',
+            view=view2,
+            renderer=nr,
+            request_method=not_('POST'),
+        )
+    
+        command = self._makeOne()
+        command.args.glob = '*foo*'
+    
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=config.registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()
+        expected = [
+            'foo',
+            '/a/b',
+            'tests.test_scripts.test_proutes.view1',
+            '!POST,*',
+        ]
+>       self.assertEqual(compare_to, expected)
+E       AssertionError: Lists differ: ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', '!POST,*'] != ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', '!POST,*']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.test_proutes.view1'
+E       'tests.test_scripts.test_proutes.view1'
+E       
+E       - ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', '!POST,*']
+E       ?                  ----
+E       
+E       + ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', '!POST,*']
+
+/r2e_tests/test_scripts/test_proutes.py:635: AssertionError
+_____________ TestPRoutesCommand.test_view_request_method_not_post _____________
+
+self = <r2e_tests.test_scripts.test_proutes.TestPRoutesCommand testMethod=test_view_request_method_not_post>
+
+    def test_view_request_method_not_post(self):
+        from pyramid.renderers import null_renderer as nr
+        from pyramid.config import not_
+    
+        def view1(context, request):  # pragma: no cover
+            return 'view1'
+    
+        config = self._makeConfig(autocommit=True)
+        config.add_route('foo', '/a/b')
+        config.add_view(
+            route_name='foo',
+            view=view1,
+            renderer=nr,
+            request_method=not_('POST'),
+        )
+    
+        command = self._makeOne()
+        L = []
+        command.out = L.append
+        command.bootstrap = dummy.DummyBootstrap(registry=config.registry)
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(len(L), 3)
+        compare_to = L[-1].split()
+        expected = [
+            'foo',
+            '/a/b',
+            'tests.test_scripts.test_proutes.view1',
+            '!POST,*',
+        ]
+>       self.assertEqual(compare_to, expected)
+E       AssertionError: Lists differ: ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', '!POST,*'] != ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', '!POST,*']
+E       
+E       First differing element 2:
+E       'r2e_tests.test_scripts.test_proutes.view1'
+E       'tests.test_scripts.test_proutes.view1'
+E       
+E       - ['foo', '/a/b', 'r2e_tests.test_scripts.test_proutes.view1', '!POST,*']
+E       ?                  ----
+E       
+E       + ['foo', '/a/b', 'tests.test_scripts.test_proutes.view1', '!POST,*']
+
+/r2e_tests/test_scripts/test_proutes.py:590: AssertionError
+_____________ TestPServeCommand.test_config_file_finds_watch_files _____________
+
+self = <r2e_tests.test_scripts.test_pserve.TestPServeCommand testMethod=test_config_file_finds_watch_files>
+
+    def test_config_file_finds_watch_files(self):
+        inst = self._makeOne('development.ini')
+        loader = self.loader('/base/path.ini')
+        loader.settings = {
+            'pserve': {'watch_files': 'foo\n/baz\ntests.test_scripts:*.py'}
+        }
+        inst.pserve_file_config(loader, global_conf={'a': '1'})
+        self.assertEqual(loader.calls[0]['defaults'], {'a': '1'})
+>       self.assertEqual(
+            inst.watch_files,
+            {
+                os.path.abspath('/base/foo'),
+                os.path.abspath('/baz'),
+                os.path.abspath(os.path.join(here, '*.py')),
+            },
+        )
+E       AssertionError: Items in the first set but not the second:
+E       '/testbed/tests/test_scripts/*.py'
+E       Items in the second set but not the first:
+E       '/r2e_tests/test_scripts/*.py'
+
+/r2e_tests/test_scripts/test_pserve.py:90: AssertionError
+____________ TestPViewsCommand.test_views_command_multi_view_nested ____________
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_multi_view_nested>
+
+    def test_views_command_multi_view_nested(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+        view1 = dummy.DummyView(context='context', view_name='a1')
+        view1.__name__ = 'view1'
+        view1.__view_attr__ = 'call'
+        multiview1 = dummy.DummyMultiView(
+            view1, context='context', view_name='a1'
+        )
+        multiview2 = dummy.DummyMultiView(
+            multiview1, context='context', view_name='a'
+        )
+        command._find_view = lambda arg1: multiview2
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+>       self.assertEqual(L[8], '    tests.test_scripts.dummy.DummyMultiView')
+E       AssertionError: '    r2e_tests.test_scripts.dummy.DummyMultiView' != '    tests.test_scripts.dummy.DummyMultiView'
+E       -     r2e_tests.test_scripts.dummy.DummyMultiView
+E       ?     ----
+E       +     tests.test_scripts.dummy.DummyMultiView
+
+/r2e_tests/test_scripts/test_pviews.py:482: AssertionError
+________________ TestPViewsCommand.test_views_command_multiview ________________
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_multiview>
+
+    def test_views_command_multiview(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+        view = dummy.DummyView(context='context')
+        view.__name__ = 'view'
+        view.__view_attr__ = 'call'
+        multiview = dummy.DummyMultiView(
+            view, context='context', view_name='a'
+        )
+        command._find_view = lambda arg1: multiview
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+>       self.assertEqual(L[8], '    tests.test_scripts.dummy.view.call')
+E       AssertionError: '    r2e_tests.test_scripts.dummy.view.call' != '    tests.test_scripts.dummy.view.call'
+E       -     r2e_tests.test_scripts.dummy.view.call
+E       ?     ----
+E       +     tests.test_scripts.dummy.view.call
+
+/r2e_tests/test_scripts/test_pviews.py:538: AssertionError
+________ TestPViewsCommand.test_views_command_multiview_with_permission ________
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_multiview_with_permission>
+
+    def test_views_command_multiview_with_permission(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+        view = dummy.DummyView(context='context')
+        view.__name__ = 'view'
+        view.__view_attr__ = 'call'
+        view.__permission__ = 'test'
+        multiview = dummy.DummyMultiView(
+            view, context='context', view_name='a'
+        )
+        command._find_view = lambda arg1: multiview
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+>       self.assertEqual(L[8], '    tests.test_scripts.dummy.view.call')
+E       AssertionError: '    r2e_tests.test_scripts.dummy.view.call' != '    tests.test_scripts.dummy.view.call'
+E       -     r2e_tests.test_scripts.dummy.view.call
+E       ?     ----
+E       +     tests.test_scripts.dummy.view.call
+
+/r2e_tests/test_scripts/test_pviews.py:562: AssertionError
+________ TestPViewsCommand.test_views_command_multiview_with_predicates ________
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_multiview_with_predicates>
+
+    def test_views_command_multiview_with_predicates(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+    
+        def predicate():  # pragma: no cover
+            pass
+    
+        predicate.text = lambda *arg: "predicate = x"
+        view = dummy.DummyView(context='context')
+        view.__name__ = 'view'
+        view.__view_attr__ = 'call'
+        view.__predicates__ = [predicate]
+        multiview = dummy.DummyMultiView(
+            view, context='context', view_name='a'
+        )
+        command._find_view = lambda arg1: multiview
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+>       self.assertEqual(L[8], '    tests.test_scripts.dummy.view.call')
+E       AssertionError: '    r2e_tests.test_scripts.dummy.view.call' != '    tests.test_scripts.dummy.view.call'
+E       -     r2e_tests.test_scripts.dummy.view.call
+E       ?     ----
+E       +     tests.test_scripts.dummy.view.call
+
+/r2e_tests/test_scripts/test_pviews.py:592: AssertionError
+_____ TestPViewsCommand.test_views_command_single_view_function_traversal ______
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_single_view_function_traversal>
+
+    def test_views_command_single_view_function_traversal(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+    
+        def view():  # pragma: no cover
+            pass
+    
+        view.__request_attrs__ = {'context': 'context', 'view_name': 'a'}
+        command._find_view = lambda arg1: view
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+>       self.assertEqual(L[8], '    tests.test_scripts.test_pviews.view')
+E       AssertionError: '    r2e_tests.test_scripts.test_pviews.view' != '    tests.test_scripts.test_pviews.view'
+E       -     r2e_tests.test_scripts.test_pviews.view
+E       ?     ----
+E       +     tests.test_scripts.test_pviews.view
+
+/r2e_tests/test_scripts/test_pviews.py:385: AssertionError
+____________ TestPViewsCommand.test_views_command_single_view_route ____________
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_single_view_route>
+
+    def test_views_command_single_view_route(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+        route = dummy.DummyRoute('a', '/a', matchdict={})
+        view = dummy.DummyView(
+            context='context', view_name='a', matched_route=route, subpath=''
+        )
+        command._find_view = lambda arg1: view
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+        self.assertEqual(L[6], '    Route:')
+        self.assertEqual(L[8], '    route name: a')
+        self.assertEqual(L[9], '    route pattern: /a')
+        self.assertEqual(L[10], '    route path: /a')
+        self.assertEqual(L[11], '    subpath: ')
+>       self.assertEqual(L[15], '        tests.test_scripts.dummy.DummyView')
+E       AssertionError: '        r2e_tests.test_scripts.dummy.DummyView' != '        tests.test_scripts.dummy.DummyView'
+E       -         r2e_tests.test_scripts.dummy.DummyView
+E       ?         ----
+E       +         tests.test_scripts.dummy.DummyView
+
+/r2e_tests/test_scripts/test_pviews.py:456: AssertionError
+_ TestPViewsCommand.test_views_command_single_view_route_with_route_predicates _
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_single_view_route_with_route_predicates>
+
+    def test_views_command_single_view_route_with_route_predicates(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+    
+        def predicate():  # pragma: no cover
+            pass
+    
+        predicate.text = lambda *arg: "predicate = x"
+        route = dummy.DummyRoute('a', '/a', matchdict={}, predicate=predicate)
+        view = dummy.DummyView(
+            context='context', view_name='a', matched_route=route, subpath=''
+        )
+        command._find_view = lambda arg1: view
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+        self.assertEqual(L[6], '    Route:')
+        self.assertEqual(L[8], '    route name: a')
+        self.assertEqual(L[9], '    route pattern: /a')
+        self.assertEqual(L[10], '    route path: /a')
+        self.assertEqual(L[11], '    subpath: ')
+        self.assertEqual(L[12], '    route predicates (predicate = x)')
+>       self.assertEqual(L[16], '        tests.test_scripts.dummy.DummyView')
+E       AssertionError: '        r2e_tests.test_scripts.dummy.DummyView' != '        tests.test_scripts.dummy.DummyView'
+E       -         r2e_tests.test_scripts.dummy.DummyView
+E       ?         ----
+E       +         tests.test_scripts.dummy.DummyView
+
+/r2e_tests/test_scripts/test_pviews.py:515: AssertionError
+__________ TestPViewsCommand.test_views_command_single_view_traversal __________
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_single_view_traversal>
+
+    def test_views_command_single_view_traversal(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+        view = dummy.DummyView(context='context', view_name='a')
+        command._find_view = lambda arg1: view
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+>       self.assertEqual(L[8], '    tests.test_scripts.dummy.DummyView')
+E       AssertionError: '    r2e_tests.test_scripts.dummy.DummyView' != '    tests.test_scripts.dummy.DummyView'
+E       -     r2e_tests.test_scripts.dummy.DummyView
+E       ?     ----
+E       +     tests.test_scripts.dummy.DummyView
+
+/r2e_tests/test_scripts/test_pviews.py:363: AssertionError
+__ TestPViewsCommand.test_views_command_single_view_traversal_with_permission __
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_single_view_traversal_with_permission>
+
+    def test_views_command_single_view_traversal_with_permission(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+        view = dummy.DummyView(context='context', view_name='a')
+        view.__permission__ = 'test'
+        command._find_view = lambda arg1: view
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+>       self.assertEqual(L[8], '    tests.test_scripts.dummy.DummyView')
+E       AssertionError: '    r2e_tests.test_scripts.dummy.DummyView' != '    tests.test_scripts.dummy.DummyView'
+E       -     r2e_tests.test_scripts.dummy.DummyView
+E       ?     ----
+E       +     tests.test_scripts.dummy.DummyView
+
+/r2e_tests/test_scripts/test_pviews.py:404: AssertionError
+__ TestPViewsCommand.test_views_command_single_view_traversal_with_predicates __
+
+self = <r2e_tests.test_scripts.test_pviews.TestPViewsCommand testMethod=test_views_command_single_view_traversal_with_predicates>
+
+    def test_views_command_single_view_traversal_with_predicates(self):
+        from pyramid.registry import Registry
+    
+        registry = Registry()
+        command = self._makeOne(registry=registry)
+        L = []
+        command.out = L.append
+    
+        def predicate():  # pragma: no cover
+            pass
+    
+        predicate.text = lambda *arg: "predicate = x"
+        view = dummy.DummyView(context='context', view_name='a')
+        view.__predicates__ = [predicate]
+        command._find_view = lambda arg1: view
+        command.args.config_uri = '/foo/bar/myapp.ini#myapp'
+        command.args.url = '/a'
+        result = command.run()
+        self.assertEqual(result, 0)
+        self.assertEqual(L[1], 'URL = /a')
+        self.assertEqual(L[3], '    context: context')
+        self.assertEqual(L[4], '    view name: a')
+>       self.assertEqual(L[8], '    tests.test_scripts.dummy.DummyView')
+E       AssertionError: '    r2e_tests.test_scripts.dummy.DummyView' != '    tests.test_scripts.dummy.DummyView'
+E       -     r2e_tests.test_scripts.dummy.DummyView
+E       ?     ----
+E       +     tests.test_scripts.dummy.DummyView
+
+/r2e_tests/test_scripts/test_pviews.py:429: AssertionError
+=============================== warnings summary ===============================
+src/pyramid/path.py:3
+  /testbed/src/pyramid/path.py:3: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+    import pkg_resources
+
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+  /testbed/.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('paste')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154
+  /testbed/.venv/lib/python3.8/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('zope')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+test_config/test_init.py::ConfiguratorTests::test_ctor_authentication_policy
+test_config/test_init.py::ConfiguratorTests::test_ctor_authorization_policy_only
+test_config/test_init.py::ConfiguratorTests::test_setup_registry_authentication_policy
+test_config/test_init.py::ConfiguratorTests::test_setup_registry_authentication_policy_dottedname
+test_config/test_init.py::ConfiguratorTests::test_setup_registry_authorization_policy_dottedname
+test_config/test_init.py::ConfiguratorTests::test_setup_registry_authorization_policy_only
+test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_with_no_default_permission_no_explicit_permission
+  /testbed/src/pyramid/config/__init__.py:405: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    self.set_authorization_policy(authorization_policy)
+
+test_config/test_init.py::ConfiguratorTests::test_ctor_authentication_policy
+test_config/test_init.py::ConfiguratorTests::test_setup_registry_authentication_policy
+test_config/test_init.py::ConfiguratorTests::test_setup_registry_authentication_policy_dottedname
+test_config/test_init.py::ConfiguratorTests::test_setup_registry_authorization_policy_dottedname
+test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_with_no_default_permission_no_explicit_permission
+  /testbed/src/pyramid/config/__init__.py:408: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    self.set_authentication_policy(authentication_policy)
+
+test_config/test_security.py::ConfiguratorSecurityMethodsTests::test_set_authentication_policy_no_authz_policy
+  /r2e_tests/test_config/test_security.py:38: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    config.set_authentication_policy(policy)
+
+test_config/test_security.py::ConfiguratorSecurityMethodsTests::test_set_authentication_policy_no_authz_policy_autocommit
+  /root/.local/share/uv/python/cpython-3.8.20-linux-x86_64-gnu/lib/python3.8/unittest/case.py:202: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    callable_obj(*args, **kwargs)
+
+test_config/test_security.py::ConfiguratorSecurityMethodsTests::test_set_authentication_policy_with_authz_policy
+  /r2e_tests/test_config/test_security.py:58: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    config.set_authentication_policy(authn_policy)
+
+test_config/test_security.py::ConfiguratorSecurityMethodsTests::test_set_authentication_policy_with_authz_policy_autocommit
+  /r2e_tests/test_config/test_security.py:77: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    config.set_authentication_policy(authn_policy)
+
+test_config/test_security.py::ConfiguratorSecurityMethodsTests::test_set_authentication_policy_with_security_policy
+  /r2e_tests/test_config/test_security.py:32: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    config.set_authentication_policy(authn_policy)
+
+test_config/test_security.py::ConfiguratorSecurityMethodsTests::test_set_authorization_policy_no_authn_policy
+  /r2e_tests/test_config/test_security.py:89: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    config.set_authorization_policy(policy)
+
+test_config/test_security.py::ConfiguratorSecurityMethodsTests::test_set_authorization_policy_no_authn_policy_autocommit
+  /r2e_tests/test_config/test_security.py:97: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    config.set_authorization_policy(policy)
+
+test_config/test_security.py::ConfiguratorSecurityMethodsTests::test_set_authorization_policy_with_authn_policy
+  /r2e_tests/test_config/test_security.py:110: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    config.set_authorization_policy(authz_policy)
+
+test_config/test_security.py::ConfiguratorSecurityMethodsTests::test_set_authorization_policy_with_authn_policy_autocommit
+  /r2e_tests/test_config/test_security.py:124: DeprecationWarning: Authentication and authorization policies have been deprecated in favor of security policies.  See "Upgrading Authentication/Authorization" in "What's New in Pyramid 2.0" of the documentation for more information.
+    config.set_authorization_policy(authz_policy)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+--------------------- generated xml file: /audit/junit.xml ---------------------
+=========================== short test summary info ============================
+FAILED ../r2e_tests/test_config/test_adapters.py::AdaptersConfiguratorMixinTests::test_add_resource_url_adapter_dotted_names
+FAILED ../r2e_tests/test_config/test_adapters.py::AdaptersConfiguratorMixinTests::test_add_resource_url_adapter_introspectables
+FAILED ../r2e_tests/test_config/test_adapters.py::AdaptersConfiguratorMixinTests::test_add_traverser_dotted_names
+FAILED ../r2e_tests/test_config/test_assets.py::TestAssetsConfiguratorMixin::test_override_asset_directory_with_directory
+FAILED ../r2e_tests/test_config/test_assets.py::TestAssetsConfiguratorMixin::test_override_asset_directory_with_package
+FAILED ../r2e_tests/test_config/test_assets.py::TestAssetsConfiguratorMixin::test_override_asset_file_with_file
+FAILED ../r2e_tests/test_config/test_assets.py::TestAssetsConfiguratorMixin::test_override_asset_package_with_directory
+FAILED ../r2e_tests/test_config/test_assets.py::TestAssetsConfiguratorMixin::test_override_asset_package_with_package
+FAILED ../r2e_tests/test_config/test_assets.py::TestOverrideProvider::test_get_resource_filename_no_overrides
+FAILED ../r2e_tests/test_config/test_assets.py::TestOverrideProvider::test_get_resource_filename_override_returns_None
+FAILED ../r2e_tests/test_config/test_assets.py::TestPackageAssetSource::test_get_filename
+FAILED ../r2e_tests/test_config/test_assets.py::TestPackageAssetSource::test_get_filename_with_prefix
+FAILED ../r2e_tests/test_config/test_factories.py::TestFactoriesMixin::test_set_request_factory_dottedname
+FAILED ../r2e_tests/test_config/test_factories.py::TestFactoriesMixin::test_set_response_factory_dottedname
+FAILED ../r2e_tests/test_config/test_factories.py::TestFactoriesMixin::test_set_root_factory_dottedname
+FAILED ../r2e_tests/test_config/test_factories.py::TestFactoriesMixin::test_set_session_factory_dottedname
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_add_translation_dirs_abspath
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_add_translation_dirs_asset_spec
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_add_translation_dirs_asset_spec_existing_translation_dirs
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_add_translation_dirs_doesnt_use_override_w_autocommit
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_add_translation_dirs_multiple_specs
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_add_translation_dirs_multiple_specs_multiple_calls
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_add_translation_dirs_override_multiple_specs_multiple_calls
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_add_translation_dirs_uses_override_out_of_order
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_add_translation_dirs_uses_override_w_autocommit
+FAILED ../r2e_tests/test_config/test_i18n.py::TestI18NConfiguratorMixin::test_set_locale_negotiator_dottedname
+FAILED ../r2e_tests/test_config/test_init.py::ConfiguratorTests::test_ctor_no_registry
+FAILED ../r2e_tests/test_config/test_init.py::ConfiguratorTests::test_ctor_noreg_debug_logger_None_default
+FAILED ../r2e_tests/test_config/test_init.py::ConfiguratorTests::test_include_constant_root_package
+FAILED ../r2e_tests/test_config/test_init.py::ConfiguratorTests::test_include_with_python_callable
+FAILED ../r2e_tests/test_config/test_init.py::ConfiguratorTests::test_setup_registry_debug_logger_None_default
+FAILED ../r2e_tests/test_config/test_init.py::ConfiguratorTests::test_setup_registry_tweens
+FAILED ../r2e_tests/test_config/test_init.py::ConfiguratorTests::test_with_package_module
+FAILED ../r2e_tests/test_config/test_init.py::TestConfigurator_add_directive::test_add_directive_with_custom_callable
+FAILED ../r2e_tests/test_config/test_init.py::TestConfigurator_add_directive::test_add_directive_with_partial
+FAILED ../r2e_tests/test_config/test_init.py::TestConfigurator_add_directive::test_extend_with_dotted_name
+FAILED ../r2e_tests/test_config/test_init.py::TestConfigurator_add_directive::test_extend_with_python_callable
+FAILED ../r2e_tests/test_config/test_init.py::TestConfigurator__add_predicate::test_factory_as_dotted_name
+FAILED ../r2e_tests/test_config/test_routes.py::RoutesConfiguratorMixinTests::test_add_route_with_factory_dottedname
+FAILED ../r2e_tests/test_config/test_testing.py::TestingConfiguratorMixinTests::test_testing_add_subscriber_dottedname
+FAILED ../r2e_tests/test_config/test_tweens.py::TestTweensConfiguratorMixin::test_add_tween_dottedname
+FAILED ../r2e_tests/test_config/test_tweens.py::TestTweensConfiguratorMixin::test_add_tweens_names_distinct
+FAILED ../r2e_tests/test_config/test_tweens.py::TestTweensConfiguratorMixin::test_add_tweens_names_with_underover
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_exception_view_with_view_defaults
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_forbidden_view_with_view_defaults
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_notfound_view_with_view_defaults
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_static_view_package_here_relative
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_context_as_dottedname
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_for__as_dottedname
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_with_containment_dottedname
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_with_template_renderer
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_with_template_renderer_no_callable
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_with_view_defaults
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_with_view_defaults_viewname_is_dottedname_kwarg
+FAILED ../r2e_tests/test_config/test_views.py::TestViewsConfigurationMixin::test_add_view_with_view_defaults_viewname_is_dottedname_nonkwarg
+FAILED ../r2e_tests/test_config/test_views.py::TestStaticURLInfo::test_generate_url_cachebust_with_overrides
+FAILED ../r2e_tests/test_config/test_views.py::Test_view_description::test_without_text
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_class_view
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_one_route_all_methods_view_only_post
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_one_route_only_post_view_all_methods
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_one_route_only_post_view_post_and_get
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_one_route_with_long_name_one_view_registered
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_route_is_get_view_request_method_not_post
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_route_request_method_mismatch
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_route_static_views
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_single_route_multiview_registered
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_single_route_one_view_registered
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_view_glob
+FAILED ../r2e_tests/test_scripts/test_proutes.py::TestPRoutesCommand::test_view_request_method_not_post
+FAILED ../r2e_tests/test_scripts/test_pserve.py::TestPServeCommand::test_config_file_finds_watch_files
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_multi_view_nested
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_multiview
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_multiview_with_permission
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_multiview_with_predicates
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_single_view_function_traversal
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_single_view_route
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_single_view_route_with_route_predicates
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_single_view_traversal
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_single_view_traversal_with_permission
+FAILED ../r2e_tests/test_scripts/test_pviews.py::TestPViewsCommand::test_views_command_single_view_traversal_with_predicates
+80 failed, 755 passed, 28 warnings in 3.01s

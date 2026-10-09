@@ -1,0 +1,568 @@
+============================= test session starts ==============================
+collected 93 items
+
+tests/unit/test_toolkit.py EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE [ 48%]
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE                         [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at setup of test_get_model_version ___________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+__________________________ ERROR at setup of test_sv ___________________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+__________ ERROR at setup of test_get_denormalized_association_slots ___________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+____________________ ERROR at setup of test_get_id_prefixes ____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_____________________ ERROR at setup of test_validate_edge _____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+__________________ ERROR at setup of test_mixin_validate_edge __________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+____________________ ERROR at setup of test_not_valid_edge _____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_________________ ERROR at setup of test_get_element_via_alias _________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_____________________ ERROR at setup of test_predicate_map _____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+__________________________ ERROR at setup of test_rna __________________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+________________ ERROR at setup of test_get_element_by_mapping _________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_________________ ERROR at setup of test_get_element_by_prefix _________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+___________________ ERROR at setup of test_get_all_elements ____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+___________________ ERROR at setup of test_get_all_entities ____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_________________ ERROR at setup of test_get_all_associations __________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_________________ ERROR at setup of test_filter_values_on_slot _________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[association-subj_cats0-predicates0-obj_cats0-True-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[chemical entity assesses named thing association-subj_cats1-predicates1-obj_cats1-False-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[chemical entity assesses named thing association-subj_cats2-predicates2-obj_cats2-True-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[chemical entity assesses named thing association-subj_cats3-predicates3-obj_cats3-True-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[gene to gene association-subj_cats4-predicates4-obj_cats4-True-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[gene to gene association-subj_cats5-predicates5-obj_cats5-True-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[gene to gene coexpression association-subj_cats6-predicates6-obj_cats6-True-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[pairwise molecular interaction-subj_cats7-predicates7-obj_cats7-False-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[chemical to entity association mixin-subj_cats8-predicates8-obj_cats8-False-False] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[organism taxon to environment association-subj_cats9-predicates9-obj_cats9-False-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[exon to transcript relationship-subj_cats10-predicates10-obj_cats10-False-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_match_association[exon to transcript relationship-subj_cats11-predicates11-obj_cats11-False-False] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+__________ ERROR at setup of test_get_associations_without_parameters __________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[None-None-None-True-contains0-does_not_contain0] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories1-None-None-True-contains1-does_not_contain1] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories2-None-object_categories2-True-contains2-does_not_contain2] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories3-predicates3-object_categories3-True-contains3-does_not_contain3] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories4-predicates4-object_categories4-True-contains4-does_not_contain4] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories5-predicates5-object_categories5-True-contains5-does_not_contain5] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories6-predicates6-object_categories6-True-contains6-does_not_contain6] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories7-predicates7-object_categories7-False-contains7-does_not_contain7] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories8-predicates8-object_categories8-False-contains8-does_not_contain8] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories9-predicates9-object_categories9-False-contains9-does_not_contain9] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+___________ ERROR at setup of test_get_associations_gene_to_chemical ___________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+________________ ERROR at setup of test_get_all_node_properties ________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+________________ ERROR at setup of test_get_all_edge_properties ________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+______________________ ERROR at setup of test_get_element ______________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_________________ ERROR at setup of test_get_enum_via_element __________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+___________________ ERROR at setup of test_is_node_property ____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+__________________ ERROR at setup of test_is_association_slot __________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_____________________ ERROR at setup of test_is_predicate ______________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_______________________ ERROR at setup of test_is_mixin ________________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_____________________ ERROR at setup of test_is_symmetric ______________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+___________ ERROR at setup of test_is_translator_canonical_predicate ___________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+______________________ ERROR at setup of test_has_inverse ______________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+______________________ ERROR at setup of test_get_inverse ______________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_______________ ERROR at setup of test_get_get_inverse_predicate _______________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_______________________ ERROR at setup of test_category ________________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_____________________ ERROR at setup of test_is_qualifier ______________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+________________________ ERROR at setup of test_is_enum ________________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+___________________ ERROR at setup of test_is_subproperty_of ___________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+___________ ERROR at setup of test_validate_qualifier[--None-False] ____________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[subject direction qualifier--None-False] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+______ ERROR at setup of test_validate_qualifier[-upregulated-None-False] ______
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[aspect qualifier-upregulated-None-False] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[subject direction qualifier-upregulated-None-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[biolink:subject_direction_qualifier-upregulated-None-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True0] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True0] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True1] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True1] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[subject direction qualifier-UBERON:0001981-None-False] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[species context qualifier-upregulated-None-False] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[subject aspect qualifier-synthesis-associations12-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[biolink:subject_aspect_qualifier-synthesis-associations13-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[qualified predicate-causes-associations14-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[biolink:qualified_predicate-causes-associations15-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_ ERROR at setup of test_validate_qualifier[biolink:object_aspect_qualifier-activity_or_abundance-associations16-True] _
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_____________ ERROR at setup of test_is_permissible_value_of_enum ______________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_______________________ ERROR at setup of test_ancestors _______________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+______________ ERROR at setup of test_permissible_value_ancestors ______________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+___________________ ERROR at setup of test_ancestors_for_kgx ___________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+______________________ ERROR at setup of test_descendants ______________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_______________________ ERROR at setup of test_children ________________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+________________________ ERROR at setup of test_parent _________________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+________________________ ERROR at setup of test_mapping ________________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+____________________ ERROR at setup of test_get_slot_domain ____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+____________________ ERROR at setup of test_get_slot_range _____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+____________ ERROR at setup of test_get_all_slots_with_class_domain ____________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+____________ ERROR at setup of test_get_all_slots_with_class_range _____________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_________ ERROR at setup of test_get_all_predicates_with_class_domain __________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+__________ ERROR at setup of test_get_all_predicates_with_class_range __________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_________ ERROR at setup of test_get_all_properties_with_class_domain __________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+__________ ERROR at setup of test_get_all_properties_with_class_range __________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+________________ ERROR at setup of test_get_value_type_for_slot ________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_____________________ ERROR at setup of test_get_all_types _____________________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+_______________ ERROR at setup of test_get_all_multivalued_slots _______________
+E   socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+E   urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+--------------------- generated xml file: /audit/junit.xml ---------------------
+=========================== short test summary info ============================
+ERROR tests/unit/test_toolkit.py::test_get_model_version - urllib.error.URLEr...
+ERROR tests/unit/test_toolkit.py::test_sv - urllib.error.URLError: <urlopen e...
+ERROR tests/unit/test_toolkit.py::test_get_denormalized_association_slots - u...
+ERROR tests/unit/test_toolkit.py::test_get_id_prefixes - urllib.error.URLErro...
+ERROR tests/unit/test_toolkit.py::test_validate_edge - urllib.error.URLError:...
+ERROR tests/unit/test_toolkit.py::test_mixin_validate_edge - urllib.error.URL...
+ERROR tests/unit/test_toolkit.py::test_not_valid_edge - urllib.error.URLError...
+ERROR tests/unit/test_toolkit.py::test_get_element_via_alias - urllib.error.U...
+ERROR tests/unit/test_toolkit.py::test_predicate_map - urllib.error.URLError:...
+ERROR tests/unit/test_toolkit.py::test_rna - urllib.error.URLError: <urlopen ...
+ERROR tests/unit/test_toolkit.py::test_get_element_by_mapping - urllib.error....
+ERROR tests/unit/test_toolkit.py::test_get_element_by_prefix - urllib.error.U...
+ERROR tests/unit/test_toolkit.py::test_get_all_elements - urllib.error.URLErr...
+ERROR tests/unit/test_toolkit.py::test_get_all_entities - urllib.error.URLErr...
+ERROR tests/unit/test_toolkit.py::test_get_all_associations - urllib.error.UR...
+ERROR tests/unit/test_toolkit.py::test_filter_values_on_slot - urllib.error.U...
+ERROR tests/unit/test_toolkit.py::test_match_association[association-subj_cats0-predicates0-obj_cats0-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats1-predicates1-obj_cats1-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats2-predicates2-obj_cats2-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats3-predicates3-obj_cats3-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[gene to gene association-subj_cats4-predicates4-obj_cats4-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[gene to gene association-subj_cats5-predicates5-obj_cats5-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[gene to gene coexpression association-subj_cats6-predicates6-obj_cats6-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[pairwise molecular interaction-subj_cats7-predicates7-obj_cats7-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical to entity association mixin-subj_cats8-predicates8-obj_cats8-False-False]
+ERROR tests/unit/test_toolkit.py::test_match_association[organism taxon to environment association-subj_cats9-predicates9-obj_cats9-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[exon to transcript relationship-subj_cats10-predicates10-obj_cats10-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[exon to transcript relationship-subj_cats11-predicates11-obj_cats11-False-False]
+ERROR tests/unit/test_toolkit.py::test_get_associations_without_parameters - ...
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[None-None-None-True-contains0-does_not_contain0]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories1-None-None-True-contains1-does_not_contain1]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories2-None-object_categories2-True-contains2-does_not_contain2]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories3-predicates3-object_categories3-True-contains3-does_not_contain3]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories4-predicates4-object_categories4-True-contains4-does_not_contain4]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories5-predicates5-object_categories5-True-contains5-does_not_contain5]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories6-predicates6-object_categories6-True-contains6-does_not_contain6]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories7-predicates7-object_categories7-False-contains7-does_not_contain7]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories8-predicates8-object_categories8-False-contains8-does_not_contain8]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories9-predicates9-object_categories9-False-contains9-does_not_contain9]
+ERROR tests/unit/test_toolkit.py::test_get_associations_gene_to_chemical - ur...
+ERROR tests/unit/test_toolkit.py::test_get_all_node_properties - urllib.error...
+ERROR tests/unit/test_toolkit.py::test_get_all_edge_properties - urllib.error...
+ERROR tests/unit/test_toolkit.py::test_get_element - urllib.error.URLError: <...
+ERROR tests/unit/test_toolkit.py::test_get_enum_via_element - urllib.error.UR...
+ERROR tests/unit/test_toolkit.py::test_is_node_property - urllib.error.URLErr...
+ERROR tests/unit/test_toolkit.py::test_is_association_slot - urllib.error.URL...
+ERROR tests/unit/test_toolkit.py::test_is_predicate - urllib.error.URLError: ...
+ERROR tests/unit/test_toolkit.py::test_is_mixin - urllib.error.URLError: <url...
+ERROR tests/unit/test_toolkit.py::test_is_symmetric - urllib.error.URLError: ...
+ERROR tests/unit/test_toolkit.py::test_is_translator_canonical_predicate - ur...
+ERROR tests/unit/test_toolkit.py::test_has_inverse - urllib.error.URLError: <...
+ERROR tests/unit/test_toolkit.py::test_get_inverse - urllib.error.URLError: <...
+ERROR tests/unit/test_toolkit.py::test_get_get_inverse_predicate - urllib.err...
+ERROR tests/unit/test_toolkit.py::test_category - urllib.error.URLError: <url...
+ERROR tests/unit/test_toolkit.py::test_is_qualifier - urllib.error.URLError: ...
+ERROR tests/unit/test_toolkit.py::test_is_enum - urllib.error.URLError: <urlo...
+ERROR tests/unit/test_toolkit.py::test_is_subproperty_of - urllib.error.URLEr...
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[--None-False] - url...
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier--None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[-upregulated-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[aspect qualifier-upregulated-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier-upregulated-None-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:subject_direction_qualifier-upregulated-None-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True0]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True0]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True1]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True1]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier-UBERON:0001981-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-upregulated-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject aspect qualifier-synthesis-associations12-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:subject_aspect_qualifier-synthesis-associations13-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[qualified predicate-causes-associations14-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:qualified_predicate-causes-associations15-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:object_aspect_qualifier-activity_or_abundance-associations16-True]
+ERROR tests/unit/test_toolkit.py::test_is_permissible_value_of_enum - urllib....
+ERROR tests/unit/test_toolkit.py::test_ancestors - urllib.error.URLError: <ur...
+ERROR tests/unit/test_toolkit.py::test_permissible_value_ancestors - urllib.e...
+ERROR tests/unit/test_toolkit.py::test_ancestors_for_kgx - urllib.error.URLEr...
+ERROR tests/unit/test_toolkit.py::test_descendants - urllib.error.URLError: <...
+ERROR tests/unit/test_toolkit.py::test_children - urllib.error.URLError: <url...
+ERROR tests/unit/test_toolkit.py::test_parent - urllib.error.URLError: <urlop...
+ERROR tests/unit/test_toolkit.py::test_mapping - urllib.error.URLError: <urlo...
+ERROR tests/unit/test_toolkit.py::test_get_slot_domain - urllib.error.URLErro...
+ERROR tests/unit/test_toolkit.py::test_get_slot_range - urllib.error.URLError...
+ERROR tests/unit/test_toolkit.py::test_get_all_slots_with_class_domain - urll...
+ERROR tests/unit/test_toolkit.py::test_get_all_slots_with_class_range - urlli...
+ERROR tests/unit/test_toolkit.py::test_get_all_predicates_with_class_domain
+ERROR tests/unit/test_toolkit.py::test_get_all_predicates_with_class_range - ...
+ERROR tests/unit/test_toolkit.py::test_get_all_properties_with_class_domain
+ERROR tests/unit/test_toolkit.py::test_get_all_properties_with_class_range - ...
+ERROR tests/unit/test_toolkit.py::test_get_value_type_for_slot - urllib.error...
+ERROR tests/unit/test_toolkit.py::test_get_all_types - urllib.error.URLError:...
+ERROR tests/unit/test_toolkit.py::test_get_all_multivalued_slots - urllib.err...
+============================== 93 errors in 0.56s ==============================

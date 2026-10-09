@@ -51,5 +51,74 @@ class SourceTaskMetadataTests(unittest.TestCase):
             project_r2e_task(row)
 
 
+class CorpusSelectionTests(unittest.TestCase):
+    def row(self, **changes):
+        return {'repo': 'owner/repo', 'instance_id': 'issue', 'trajectory_id': 'trace',
+                'dataset': 'R2E-Gym/R2E-Gym-Subset', 'reserved_repository_exact_match': False, **changes}
+
+    def test_reserved_exclusion_precedes_source_selection(self):
+        from zenithsync.source_task_metadata import select_r2e_metadata
+        selected, counts = select_r2e_metadata([
+            self.row(),
+            self.row(repo='ENCODE/HTTPX', trajectory_id='reserved',
+                     reserved_repository_exact_match=True, dataset='other'),
+            self.row(trajectory_id='unsupported', dataset='other'),
+        ], reserved_repositories=['encode/httpx'])
+        self.assertEqual(len(selected), 1)
+        self.assertEqual(counts, {'input_rows': 3, 'selected_r2e_rows': 1,
+            'excluded_reserved_rows': 1, 'other_source_rows_not_joined': 1})
+
+    def test_forged_or_nonboolean_exclusion_flag_rejects(self):
+        from zenithsync.source_task_metadata import select_r2e_metadata
+        for row in [self.row(repo='encode/httpx'), self.row(reserved_repository_exact_match=0)]:
+            with self.subTest(row=row), self.assertRaises(ValueError):
+                select_r2e_metadata([row], reserved_repositories=['encode/httpx'])
+
+    def test_duplicate_id_across_source_categories_rejects(self):
+        from zenithsync.source_task_metadata import select_r2e_metadata
+        with self.assertRaisesRegex(ValueError, 'Duplicate'):
+            select_r2e_metadata([self.row(), self.row(dataset='other')], reserved_repositories=[])
+
+
+class SwebenchIdentityTests(unittest.TestCase):
+    def row(self, **changes):
+        return {'repo': 'owner/repo', 'instance_id': 'owner__repo-12',
+            'base_commit': 'a' * 40, 'environment_setup_commit': 'b' * 40,
+            'docker_image': 'publisher/image:tag', 'image_name': 'publisher/image:tag',
+            'license_name': 'MIT License', 'patch': 'ORACLE',
+            'problem_statement': 'PRIVATE_ISSUE', **changes}
+
+    def test_projection_excludes_oracles_and_preserves_distinct_commits(self):
+        from zenithsync.source_task_metadata import project_swebench_task_identity
+        result = project_swebench_task_identity(self.row())
+        self.assertNotIn('ORACLE', json.dumps(result))
+        self.assertNotIn('PRIVATE_ISSUE', json.dumps(result))
+        self.assertNotEqual(result['base_commit'], result['environment_setup_commit'])
+        self.assertFalse(result['training_approved'])
+        self.assertFalse(result['environment_verified'])
+
+    def test_missing_declarations_are_not_invented(self):
+        from zenithsync.source_task_metadata import project_swebench_task_identity
+        result = project_swebench_task_identity(self.row(license_name=None, docker_image=None, image_name=None))
+        self.assertIsNone(result['publisher_license_declaration'])
+        self.assertIsNone(result['source_image_reference'])
+
+    def test_inconsistent_id_images_and_commit_rejected(self):
+        from zenithsync.source_task_metadata import project_swebench_task_identity
+        for changes in [{'instance_id': 'another__repo-12'},
+                        {'image_name': 'different/image'}, {'base_commit': 'main'},
+                        {'docker_image': 'image; command'}]:
+            with self.subTest(changes=changes), self.assertRaises(ValueError):
+                project_swebench_task_identity(self.row(**changes))
+
+    def test_source_filter_does_not_assume_r2e(self):
+        from zenithsync.source_task_metadata import select_source_metadata
+        rows = [{'repo': 'owner/repo', 'instance_id': 'owner__repo-12', 'trajectory_id': 'id',
+                 'dataset': 'nebius/SWE-rebench', 'reserved_repository_exact_match': False}]
+        selected, counts = select_source_metadata(rows, reserved_repositories=[], source_dataset='nebius/SWE-rebench')
+        self.assertEqual(len(selected), 1)
+        self.assertEqual(counts['selected_source_rows'], 1)
+
+
 if __name__ == '__main__':
     unittest.main()

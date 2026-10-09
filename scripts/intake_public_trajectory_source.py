@@ -56,6 +56,7 @@ def download_file(session, url, destination, row, maximum_bytes):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--dataset', required=True)
+    parser.add_argument('--revision', help='Exact dataset commit; omit only for first discovery')
     parser.add_argument('--directory', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--shard-path')
@@ -63,11 +64,15 @@ def main():
     args = parser.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', args.dataset):
         raise ValueError('Expected owner/dataset identifier')
+    if args.revision is not None and not re.fullmatch('[0-9a-f]{40}', args.revision):
+        raise ValueError('Revision must be a full lowercase commit SHA')
     if args.max_shard_bytes < 0:
         raise ValueError('Negative shard byte limit')
     import requests
     session = requests.Session()
     endpoint = 'https://huggingface.co/api/datasets/' + args.dataset
+    if args.revision is not None:
+        endpoint += '/revision/' + args.revision
     with session.get(endpoint, params={'blobs': 'true'}, stream=True, timeout=(15, 30)) as response:
         response.raise_for_status()
         raw = bytearray()
@@ -79,6 +84,8 @@ def main():
     revision = metadata['sha']
     if metadata['id'] != args.dataset or not re.fullmatch('[0-9a-f]{40}', revision):
         raise ValueError('Dataset identity or commit invalid')
+    if args.revision is not None and revision != args.revision:
+        raise ValueError('Publisher returned a different dataset revision')
     files = {}
     for row in metadata['siblings']:
         name = relative_path(row['rfilename'])

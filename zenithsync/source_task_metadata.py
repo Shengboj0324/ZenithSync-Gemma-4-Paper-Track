@@ -68,3 +68,78 @@ def match_trajectory(task, *, repo, instance_id):
         raise ValueError('Expected owner/repository')
     expected = repo.replace('/', '__') + '-' + task['solution_commit']
     return repo.split('/')[1] == task['source_repo_name'] and instance_id == expected
+
+
+def select_source_metadata(rows, *, reserved_repositories, source_dataset):
+    """Select one declared source; reject contradictory exclusion metadata.
+
+    This is an exact-name exclusion gate, not fork or semantic clearance.
+    Rows remain quarantined and no trajectory bodies are accessed here.
+    """
+    if not isinstance(source_dataset, str) or not source_dataset.strip():
+        raise ValueError('Explicit source dataset required')
+    reserved = {name.casefold() for name in reserved_repositories}
+    selected = []
+    seen = set()
+    excluded_reserved = 0
+    unsupported_source = 0
+    for row in rows:
+        for field in ('repo', 'instance_id', 'trajectory_id', 'dataset'):
+            if not isinstance(row.get(field), str) or not row[field].strip():
+                raise ValueError('Invalid census identity field')
+        if row['trajectory_id'] in seen:
+            raise ValueError('Duplicate census trajectory ID')
+        seen.add(row['trajectory_id'])
+        overlaps = row['repo'].casefold() in reserved
+        flag = row.get('reserved_repository_exact_match')
+        if type(flag) is not bool or flag != overlaps:
+            raise ValueError('Reserved-repository exclusion flag mismatch')
+        if overlaps:
+            excluded_reserved += 1
+        elif row['dataset'] != source_dataset:
+            unsupported_source += 1
+        else:
+            selected.append(row)
+    return selected, {'input_rows': len(seen), 'selected_source_rows': len(selected),
+                      'excluded_reserved_rows': excluded_reserved,
+                      'other_source_rows_not_joined': unsupported_source}
+
+
+def select_r2e_metadata(rows, *, reserved_repositories):
+    """Compatibility entrypoint for the R2E task join."""
+    selected, counts = select_source_metadata(rows, reserved_repositories=reserved_repositories,
+                                             source_dataset='R2E-Gym/R2E-Gym-Subset')
+    counts['selected_r2e_rows'] = counts.pop('selected_source_rows')
+    return selected, counts
+
+
+def project_swebench_task_identity(row):
+    """Allowlist SWE-rebench task metadata; never export issue bodies or patches."""
+    repo = row['repo']
+    if not isinstance(repo, str) or re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', repo) is None:
+        raise ValueError('Expected owner/repository')
+    if any(part in ('.', '..') for part in repo.split('/')):
+        raise ValueError('Invalid repository segment')
+    instance = row['instance_id']
+    if not isinstance(instance, str) or re.fullmatch(re.escape(repo.replace('/', '__')) + r'-[0-9]+', instance) is None:
+        raise ValueError('Instance ID does not match repository and PR number')
+    images = []
+    for name in ('docker_image', 'image_name'):
+        image = row[name]
+        if image is not None and (not isinstance(image, str)
+                or re.fullmatch(r'[a-z0-9_./:-]+', image) is None):
+            raise ValueError('Invalid declared image reference')
+        if image is not None:
+            images.append(image)
+    if len(set(images)) > 1:
+        raise ValueError('Conflicting declared images')
+    license_name = row['license_name']
+    if license_name is not None and not isinstance(license_name, str):
+        raise ValueError('Invalid publisher license declaration type')
+    if license_name is not None and not license_name.strip():
+        license_name = None
+    return {'repo': repo, 'instance_id': instance, 'base_commit': _commit(row['base_commit']),
+            'environment_setup_commit': _commit(row['environment_setup_commit']),
+            'source_image_reference': images[0] if images else None,
+            'publisher_license_declaration': license_name,
+            'environment_verified': False, 'training_approved': False}

@@ -1,0 +1,19 @@
+instance_id: string
+repo: string
+license: string
+trajectory_id: string
+trajectory: list<element: struct<content: string, role: string, tool_calls: list<element: struct<function: struc (... 64 chars omitted)
+  child 0, element: struct<content: string, role: string, tool_calls: list<element: struct<function: struct<arguments: s (... 49 chars omitted)
+      child 0, content: string
+      child 1, role: string
+      child 2, tool_calls: list<element: struct<function: struct<arguments: string, name: string>, id: string, type: string>>
+          child 0, element: struct<function: struct<arguments: string, name: string>, id: string, type: string>
+              child 0, function: struct<arguments: string, name: string>
+                  child 0, arguments: string
+                  child 1, name: string
+              child 1, id: string
+              child 2, type: string
+model_patch: string
+dataset: string
+-- schema metadata --
+pandas: '{"index_columns": [], "column_indexes": [], "columns": [{"name":' + 924

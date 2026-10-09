@@ -61,7 +61,7 @@ def tracked_snapshot(repo):
     return result
 
 
-def sanitize(repo, *, expected_base, solution, oracle_paths):
+def sanitize(repo, *, expected_base, solution, oracle_paths, solution_relation='first_parent'):
     """Sanitize an owned disposable filesystem; discard it on any failure.
 
     Preflight checks precede deletion. Post-mutation integrity failures cannot
@@ -70,6 +70,8 @@ def sanitize(repo, *, expected_base, solution, oracle_paths):
     repo = Path(repo).resolve(strict=True)
     if any(re.fullmatch('[0-9a-f]{40}', value) is None for value in (expected_base, solution)):
         raise ValueError('Expected full Git commit identities')
+    if solution_relation not in ('first_parent', 'ancestor') or expected_base == solution:
+        raise ValueError('Invalid solution relationship or identical base/solution')
     metadata = repo / '.git'
     if metadata.is_symlink() or not metadata.is_dir():
         raise ValueError('Expected ordinary local .git directory')
@@ -77,8 +79,11 @@ def sanitize(repo, *, expected_base, solution, oracle_paths):
         raise ValueError('Unexpected Git metadata location')
     if git(repo, 'rev-parse', 'HEAD').stdout.strip().decode() != expected_base:
         raise ValueError('Wrong source base commit')
-    if git(repo, 'rev-parse', solution + '^').stdout.strip().decode() != expected_base:
-        raise ValueError('Solution first parent differs from declared base')
+    if solution_relation == 'first_parent':
+        if git(repo, 'rev-parse', solution + '^').stdout.strip().decode() != expected_base:
+            raise ValueError('Solution first parent differs from declared base')
+    elif git(repo, 'merge-base', '--is-ancestor', expected_base, solution, check=False).returncode != 0:
+        raise ValueError('Declared base is not an ancestor of solution')
     tree = git(repo, 'rev-parse', 'HEAD^{tree}').stdout.strip().decode()
     if git(repo, 'diff', '--quiet', 'HEAD', '--', check=False).returncode != 0:
         raise ValueError('Source tree has tracked modifications')
@@ -131,7 +136,7 @@ def sanitize(repo, *, expected_base, solution, oracle_paths):
     if any(path.exists() or path.is_symlink() for path in paths):
         raise ValueError('Known oracle path remains accessible')
     return {'schema_version': 1, 'base_commit': expected_base, 'source_tree': tree,
-            'snapshot_commit': commit, 'tracked_files': len(before),
+            'snapshot_commit': commit, 'solution_relation': solution_relation, 'tracked_files': len(before),
             'tracked_bytes': sum(row['size_bytes'] for row in before),
             'tracked_manifest_sha256': hashlib.sha256(json.dumps(before, sort_keys=True).encode()).hexdigest(),
             'exact_tree_preserved': True, 'known_oracles_removed': removed,

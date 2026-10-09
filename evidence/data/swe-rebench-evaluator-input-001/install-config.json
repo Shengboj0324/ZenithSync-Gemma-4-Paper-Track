@@ -1,0 +1,1 @@
+{"env_vars":null,"env_yml_path":null,"install":"pip install -e .[dev]","log_parser":"parse_log_pytest","no_use_env":null,"packages":"requirements.txt","pip_packages":null,"pre_install":null,"python":"3.9","reqs_path":["requirements/base.txt"],"test_cmd":"pytest --no-header -rA --tb=line --color=no -p no:cacheprovider -W ignore::DeprecationWarning"}

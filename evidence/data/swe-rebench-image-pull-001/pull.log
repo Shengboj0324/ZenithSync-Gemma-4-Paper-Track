@@ -1,0 +1,22 @@
+docker.io/swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148: Pulling from swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172
+b59561a1e74c: Pulling fs layer
+d6457669acfb: Pulling fs layer
+315909694129: Pulling fs layer
+301022da91a1: Pulling fs layer
+da4cb36f60e7: Pulling fs layer
+d7bdcfc10f22: Pulling fs layer
+b59561a1e74c: Download complete
+315909694129: Download complete
+d6457669acfb: Download complete
+315909694129: Pull complete
+301022da91a1: Download complete
+301022da91a1: Pull complete
+d6457669acfb: Pull complete
+da4cb36f60e7: Download complete
+d7bdcfc10f22: Download complete
+da4cb36f60e7: Pull complete
+d7bdcfc10f22: Pull complete
+b59561a1e74c: Pull complete
+Digest: sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148
+Status: Downloaded newer image for swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148
+docker.io/swerebench/sweb.eval.x86_64.biolink_1776_biolink-model-toolkit-172@sha256:9bc8a7a7111ccc7ed016f32768956a8013e2bc972ba1d6a3dcfcb1854bf28148
