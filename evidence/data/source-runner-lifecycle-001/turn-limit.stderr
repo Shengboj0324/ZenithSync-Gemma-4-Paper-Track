@@ -1,0 +1,71 @@
+/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/zenithsync/harness_context.py:17: UserWarning: [EXPERIMENTAL] EventsCompactionConfig: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  'events_compaction_config': EventsCompactionConfig(
+/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/features/_feature_decorator.py:72: UserWarning: [EXPERIMENTAL] feature FeatureName.AGENT_CONFIG is enabled.
+  check_feature_enabled()
+/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/zenithsync/harness_context.py:17: UserWarning: [EXPERIMENTAL] EventsCompactionConfig: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  'events_compaction_config': EventsCompactionConfig(
+Traceback (most recent call last):
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/scripts/run_source_task.py", line 183, in <module>
+    main()
+    ~~~~^^
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/scripts/run_source_task.py", line 157, in main
+    patch = asyncio.run(attempt())
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/scripts/run_source_task.py", line 141, in attempt
+    async for event in runner.run_async(user_id='development', session_id=session.id,
+    ...<4 lines>...
+        stream.flush()
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/runners.py", line 613, in run_async
+    async for event in agen:
+      yield event
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/runners.py", line 596, in _run_with_trace
+    async for event in agen:
+      yield event
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/runners.py", line 858, in _exec_with_plugin
+    async for event in agen:
+    ...<29 lines>...
+      yield output_event
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/runners.py", line 585, in execute
+    async for event in agen:
+      yield event
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/agents/base_agent.py", line 295, in run_async
+    async for event in agen:
+      yield event
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/agents/llm_agent.py", line 488, in _run_async_impl
+    async for event in agen:
+    ...<5 lines>...
+        should_pause = True
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 869, in run_async
+    async for event in agen:
+      last_event = event
+      yield event
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 946, in _run_one_step_async
+    async for llm_response in agen:
+    ...<13 lines>...
+          yield event
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 1328, in _call_llm_async
+    async for event in agen:
+      yield event
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 1291, in _call_llm_with_tracing
+    invocation_context.increment_llm_call_count()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/agents/invocation_context.py", line 327, in increment_llm_call_count
+    self._invocation_cost_manager.increment_and_enforce_llm_calls_limit(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.run_config
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/google/adk/agents/invocation_context.py", line 95, in increment_and_enforce_llm_calls_limit
+    raise LlmCallsLimitExceededError(
+    ...<2 lines>...
+    )
+google.adk.agents.invocation_context.LlmCallsLimitExceededError: Max number of llm calls limit of `40` exceeded

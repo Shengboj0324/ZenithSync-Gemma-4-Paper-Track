@@ -32,7 +32,7 @@ sys.exit(test.returncode if diff.returncode == 0 else 99)
 '''
 
 
-def run_image(image, output, *, probe=PROBE, generated_grading_tests=False):
+def run_image(image, output, *, probe=PROBE, generated_grading_tests=False, patch_path=None):
     # Require a content identity, never a mutable local tag.
     if re.fullmatch(r'(?:[a-z0-9_./-]+@)?sha256:[0-9a-f]{64}', image) is None:
         raise ValueError('Expected an image digest or local image ID')
@@ -46,6 +46,10 @@ def run_image(image, output, *, probe=PROBE, generated_grading_tests=False):
     receipt = {'image': image, 'container': name, 'agent_executed': False,
                'generated_grading_tests_executed': generated_grading_tests}
     try:
+        if patch_path is not None:
+            receipt['staged_patch'] = file_record(patch_path)
+            subprocess.run(['docker', 'cp', str(patch_path.resolve()), name + ':/tmp/submitted.patch'],
+                           capture_output=True, check=True, timeout=30)
         with (output / 'stdout.log').open('w') as stdout, (output / 'stderr.log').open('w') as stderr:
             run = subprocess.run(['docker', 'start', '-a', name], stdout=stdout, stderr=stderr, timeout=330)
         receipt['returncode'] = run.returncode

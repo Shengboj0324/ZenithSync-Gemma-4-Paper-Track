@@ -551,3 +551,51 @@ expected failures. The reference matches all 994 actual cases; the buggy base ha
 19 mismatches. No learned agent ran and no trajectory was admitted to training.
 Next connect native tools and patch export to this sanitized/evaluator split,
 then expand qualification across the preselected repositories. Continue locally.
+
+### Native source workspace and patch transfer
+
+Added a reusable snapshot-to-native-workspace adapter with source identity checks
+and strict handling of the known installer leftover. Qualified actual native
+command/read/edit/submit operations, empty baseline submission, byte-identical
+patch application in a separate evaluator, and unchanged results across all 994
+evaluator cases. This used an explicit random-comment transport fixture with no
+model invocation, so it earns no repair credit and is excluded from training.
+
+Evidence: `evidence/data/native-source-transport-006`, with earlier integration
+failures retained. Next expose the sanitized/evaluator split through a repeatable
+task runner, including task-prompt provenance and runtime budgets, before any
+model-driven rollout or corpus admission. Broader repository qualification and
+the training campaign remain open; local work does not require a running Pod.
+
+### External task packaging and rollout-driver dry-run
+
+Prepared a manifest-backed task package with disjoint model-visible and evaluator
+projections, including an opaque task ID and source issue hash verification.
+Added a bounded ADK source-task driver and verified its dry-run using pinned SDKs.
+Its model execution path remains unqualified; no GPU restart is needed yet.
+The core suite has 148 passed and 15 skipped. Next exercise its actual lifecycle
+with an explicit offline fixture and connect independent patch grading.
+See `34-source-task-runtime.md` for artifacts, scope and remaining gates.
+
+### Actual offline source-runner lifecycle
+
+Ran five scripted fixtures through the actual new ADK/Docker execution path:
+success, exception after submission, asynchronous model timeout, 40-turn limit,
+and 42 requested tools against a 40-call budget. Verified exact patch retention,
+40 successful/2 rejected batched calls, model-input metadata separation, and
+cleanup of all five containers. No model quality or training credit is assigned.
+Evidence: `source-runner-lifecycle-001`, `source-runner-lifecycle-audit-001`.
+Next: slow-tool cancellation, cleanup-failure receipts, independent grading of
+saved outputs, and real HTTP behavior. GPU execution is still unnecessary.
+
+### Independent saved-patch grading and bounded native commands
+
+Added manifest/identity-checked grading of saved runner patches in a separate
+evaluator. The scripted file-addition fixture remains unsolved (19 mismatches),
+and tampered/unsubmitted/wrong-task inputs reject before evaluator execution.
+Verified native slow-command timeout with no delayed file write after its
+scheduled time. Cleanup failures now retain explicit uncertainty in receipts;
+controlled API-failure tests and a live successful cleanup pass.
+Core suite: 151 passed, 15 skipped. No model inference or GPU work occurred.
+Next qualify the real HTTP client path locally, then broaden task qualification
+and corpus preparation before requesting a GPU session.

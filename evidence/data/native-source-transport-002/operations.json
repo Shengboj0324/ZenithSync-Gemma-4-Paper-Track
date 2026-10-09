@@ -1,0 +1,1 @@
+[{"label":"workspace_setup","result":{"exit":0,"stderr":"","stdout":""}},{"label":"empty_patch","result":{"files_changed":0,"patch_size":0,"status":"ok"}},{"label":"read_source","result":{"error_message":"Symlink target '/testbed/pyramid/__init__.py' escapes allowed sandbox directories","error_type":"FileReadError","status":"error"}}]

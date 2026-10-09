@@ -1,0 +1,1 @@
+{"slow_tool_returned_timeout": true, "delayed_write_absent_after_five_seconds": true, "cleanup_verified": true, "scope": "Single cooperative subprocess timeout; not all descendant or daemon failure behavior"}

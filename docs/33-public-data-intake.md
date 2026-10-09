@@ -558,3 +558,40 @@ before comparison. Evidence directories: `source-snapshot-build-001`,
 `source-expectations-001`. All owned test containers were removed. No Runpod
 compute was used. Next integrate native agent tools with the sanitized workspace
 and evaluate exported patches only in the separate evaluator environment.
+
+### Native tool and evaluator transport qualification
+
+`zenithsync/source_workspace.py` now prepares a qualified snapshot for the native
+tool path contract. It verifies the snapshot commit and exact source tree, requires
+one reachable commit and no Git remotes, rejects unknown untracked files, moves
+the actual repository into `/workspace`, and retains `/testbed` as a compatibility
+alias for installed dependencies. The known untracked `install.sh` is removed;
+otherwise the native `submit_patch` would include that installer. Preparation is
+destructive only inside an owned disposable container; discard it on failure.
+
+`probe_native_source_transport.py` uses the pinned competition compiler, bound
+tools, and Docker manager. It compiles the base candidate without invoking a
+model. Actual native command execution confirms that the relocated Python
+environment imports Pyramid from `/workspace/pyramid/__init__.py`. An untouched
+workspace submits an empty patch. Native read/edit/submit then exports exactly
+one random comment in `pyramid/__init__.py`. This is a transport fixture, not a
+hardcoded repair, generated training example, or learned agent attempt.
+
+The agent container cannot access the declared grading path or solution commit.
+A second independent container receives only the exported patch, checks its
+application against the original base, and produces source bytes identical to
+the agent's edited file. Its 994 evaluator cases remain identical to the buggy
+base: 911 passed/83 failed and 19 publisher-expectation mismatches. A transport
+success is explicitly not a task solve. Both containers were offline, had no
+host mounts, and were removed after the probe. Graph/retrieval tools and learned
+action selection are outside this qualification.
+
+Retained failed probes identified integration constraints: deleting the initial
+working directory requires an explicit `cd`; `/workspace -> /testbed` is rejected
+by the native file-copy boundary; evaluator files under `/testbed` must be staged
+through its allowed `/tmp` export path. These failures are preserved in
+`native-source-transport-001` through `003`. Passing `004` established transport,
+`005` used the reusable workspace adapter, and `006` additionally verified native
+dependency imports. All directories are under `evidence/data`. The latest probe
+charged three budgeted tool calls; submission itself is not counted by the
+released harness. No GPU or model inference was used.

@@ -1,0 +1,7 @@
+diff --git a/pyramid/__init__.py b/pyramid/__init__.py
+index 5bb534f..7a118b5 100644
+--- a/pyramid/__init__.py
++++ b/pyramid/__init__.py
+@@ -1 +1,2 @@
++# transport-only fixture 7c36f53da2c240ef8cadd34cd0c65dd7
+ # package

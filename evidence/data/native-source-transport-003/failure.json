@@ -1,0 +1,1 @@
+{"message":"Symlink target '/testbed/pyramid/__init__.py' escapes allowed sandbox directories","type":"ValueError"}

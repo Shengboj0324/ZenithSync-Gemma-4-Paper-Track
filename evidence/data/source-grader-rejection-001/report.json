@@ -1,0 +1,20 @@
+[
+  {
+    "case": "tampered-patch",
+    "returncode": 1,
+    "output_created": false,
+    "error": "ValueError: Patch identity mismatch or excessive size"
+  },
+  {
+    "case": "unsubmitted",
+    "returncode": 1,
+    "output_created": false,
+    "error": "ValueError: No submitted patch to grade"
+  },
+  {
+    "case": "wrong-task",
+    "returncode": 1,
+    "output_created": false,
+    "error": "ValueError: Attempt task identity mismatch"
+  }
+]
