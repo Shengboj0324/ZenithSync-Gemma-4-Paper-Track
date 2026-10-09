@@ -1,0 +1,62 @@
+{
+  "status": "diagnostic_completed_with_content_failures",
+  "counts": {
+    "exact_match": 9,
+    "instruction_mismatch": 3
+  },
+  "semantic_checks": [
+    {
+      "case": "structured_repository",
+      "repeat": 0,
+      "utf8_encodable": false,
+      "code_points": [
+        "0x68",
+        "0x65",
+        "0x6c",
+        "0x6c",
+        "0x6f",
+        "0x20",
+        "0xd83c",
+        "0xdf0d"
+      ]
+    },
+    {
+      "case": "structured_repository",
+      "repeat": 1,
+      "utf8_encodable": false,
+      "code_points": [
+        "0x68",
+        "0x65",
+        "0x6c",
+        "0x6c",
+        "0x6f",
+        "0x20",
+        "0xd83c",
+        "0xdf0d"
+      ]
+    },
+    {
+      "case": "structured_repository",
+      "repeat": 2,
+      "utf8_encodable": false,
+      "code_points": [
+        "0x68",
+        "0x65",
+        "0x6c",
+        "0x6c",
+        "0x6f",
+        "0x20",
+        "0xd83c",
+        "0xdf0d"
+      ]
+    }
+  ],
+  "method": "AST literal extraction only; no generated code execution",
+  "limits": [
+    "Three repeats are not independent tasks",
+    "No parser disagreement observed in these 12 requests",
+    "Does not explain missing filepath calls from first A100 repair attempt",
+    "Prompt represents non-ASCII text as JSON escapes; that representation is a candidate contributing factor, not an established cause",
+    "No training readiness or general reliability claim"
+  ]
+}

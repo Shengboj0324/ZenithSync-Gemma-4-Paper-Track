@@ -1,0 +1,9 @@
+{
+  "status": "remote_files_verified_locally",
+  "file_count": 70,
+  "session_key_cleanup": "Session key entries removed: 1",
+  "remote_r2_credential_removed": true,
+  "server_stopped": true,
+  "gpu_memory_after_stop_mib": 0,
+  "pod_stop_performed": false
+}

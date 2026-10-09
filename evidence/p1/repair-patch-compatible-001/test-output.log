@@ -1,0 +1,68 @@
+STDOUT:
+........................................................................ [ 22%]
+...............................................s........................ [ 44%]
+........................................................................ [ 66%]
+................x....................................................... [ 88%]
+......................F.............                                     [100%]
+=================================== FAILURES ===================================
+_ TestPreparingURLs.test_redirecting_to_bad_url[http://localhost:-1-InvalidURL] _
+
+self = <tests.test_requests.TestPreparingURLs object at 0x7ffffb7c4b50>
+httpbin = <function prepare_url.<locals>.inner at 0x7ffffb97d800>
+url = 'http://localhost:-1'
+exception = <class 'requests.exceptions.InvalidURL'>
+
+    @pytest.mark.parametrize("url, exception", (("http://localhost:-1", InvalidURL),))
+    def test_redirecting_to_bad_url(self, httpbin, url, exception):
+>       with pytest.raises(exception):
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE InvalidURL
+
+tests/test_requests.py:2724: Failed
+----------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/wsgiref/handlers.py", line 137, in run
+    self.result = application(self.environ, self.start_response)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/flask/app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/flask/app.py", line 1518, in wsgi_app
+    return response(environ, start_response)
+  File "/usr/local/lib/python3.13/site-packages/werkzeug/wrappers/response.py", line 576, in __call__
+    app_iter, status, headers = self.get_wsgi_response(environ)
+                                ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/werkzeug/wrappers/response.py", line 562, in get_wsgi_response
+    headers = self.get_wsgi_headers(environ)
+  File "/usr/local/lib/python3.13/site-packages/werkzeug/wrappers/response.py", line 481, in get_wsgi_headers
+    location = iri_to_uri(location)
+  File "/usr/local/lib/python3.13/site-packages/werkzeug/urls.py", line 153, in iri_to_uri
+    if parts.port:
+       ^^^^^^^^^^
+  File "/usr/local/lib/python3.13/urllib/parse.py", line 182, in port
+    raise ValueError(f"Port could not be cast to integer value as {port!r}")
+ValueError: Port could not be cast to integer value as '-1'
+127.0.0.1 - - [09/Oct/2026 03:29:49] "GET /redirect-to?url=http%3A%2F%2Flocalhost%3A-1 HTTP/1.1" 500 59
+=========================== short test summary info ============================
+FAILED tests/test_requests.py::TestPreparingURLs::test_redirecting_to_bad_url[http://localhost:-1-InvalidURL]
+1 failed, 321 passed, 1 skipped, 1 xfailed in 31.47s
+
+STDERR:
+127.0.0.1 - - [09/Oct/2026 03:29:18] "GET /get HTTP/1.1" 200 170
+127.0.0.1 - - [09/Oct/2026 03:29:18] "POST /post HTTP/1.1" 200 291
+127.0.0.1 - - [09/Oct/2026 03:29:18] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:29:18] "HEAD /get HTTP/1.1" 200 0
+127.0.0.1 - - [09/Oct/2026 03:29:18] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:29:18] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:29:18] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:29:19] "GET /digest-auth/auth/user/pass/SHA-512 HTTP/1.1" 200 37
+127.0.0.1 - - [09/Oct/2026 03:29:19] "POST /post HTTP/1.1" 200 388
+127.0.0.1 - - [09/Oct/2026 03:29:19] "GET /get?f%C3%B8%C3%B8=f%C3%B8%C3%B8 HTTP/1.1" 200 281
+127.0.0.1 - - [09/Oct/2026 03:29:19] "POST /post?blah=asdf1234 HTTP/1.1" 200 105738
+127.0.0.1 - - [09/Oct/2026 03:29:19] "POST /post HTTP/1.1" 200 105710
+127.0.0.1 - - [09/Oct/2026 03:29:19] "POST /post HTTP/1.1" 200 105700
+127.0.0.1 - - [09/Oct/2026 03:29:19] "POST /post HTTP/1.1" 200 105633
+127.0.0.1 - - [09/Oct/2026 03:29:19] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:29:19] "GET /get?foo=bar&FOO=bar HTTP/1.1" 200 261
+127.0.0.1 - - [09/Oct/2026 03:29:19] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:29:49] "GET /get HTTP/1.1" 200 222

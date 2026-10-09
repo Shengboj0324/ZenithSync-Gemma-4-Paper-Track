@@ -1,0 +1,36 @@
+test_hyperparameter_drift_rejected_before_restore (tests.test_optimizer_checkpoint_torch.OptimizerCheckpointTests.test_hyperparameter_drift_rejected_before_restore) ... ok
+test_malformed_moments_and_steps_rejected (tests.test_optimizer_checkpoint_torch.OptimizerCheckpointTests.test_malformed_moments_and_steps_rejected) ... ok
+test_names_and_order_protect_equal_shapes (tests.test_optimizer_checkpoint_torch.OptimizerCheckpointTests.test_names_and_order_protect_equal_shapes) ... ok
+test_next_update_matches_continuous_run (tests.test_optimizer_checkpoint_torch.OptimizerCheckpointTests.test_next_update_matches_continuous_run) ... ok
+test_ownership_and_missing_state_rejected (tests.test_optimizer_checkpoint_torch.OptimizerCheckpointTests.test_ownership_and_missing_state_rejected) ... ok
+test_changed_reload_base_rejected_without_receipt (tests.test_training_pilot_torch.PilotFailureTests.test_changed_reload_base_rejected_without_receipt) ... {"training_stage": "initial_base_load_started", "monotonic_seconds": 197800.152394416}
+{"training_stage": "initial_base_loaded", "monotonic_seconds": 197800.164227125}
+{"training_stage": "adapter_attachment_started", "monotonic_seconds": 197800.164264}
+{"training_stage": "adapter_attachment_finished", "monotonic_seconds": 197800.177306375}
+{"training_stage": "initial_state_hash_started", "monotonic_seconds": 197800.177520083}
+{"training_stage": "initial_state_hash_finished", "monotonic_seconds": 197800.178697833}
+{"training_stage": "forward_started", "monotonic_seconds": 197800.178794666}
+{"training_stage": "backward_finished", "monotonic_seconds": 197800.204254916}
+{"training_stage": "optimizer_step_finished", "monotonic_seconds": 197800.204948208}
+{"training_stage": "updated_frozen_state_verified", "monotonic_seconds": 197800.205293708}
+{"training_stage": "adapter_and_optimizer_saved", "monotonic_seconds": 197800.215756958}
+{"training_stage": "fresh_base_and_adapter_load_started", "monotonic_seconds": 197800.270020166}
+{"training_stage": "fresh_base_and_adapter_loaded", "monotonic_seconds": 197800.309856625}
+ok
+test_existing_output_never_overwritten (tests.test_training_pilot_torch.PilotFailureTests.test_existing_output_never_overwritten) ... ok
+test_no_supervised_targets_rejected_without_receipt (tests.test_training_pilot_torch.PilotFailureTests.test_no_supervised_targets_rejected_without_receipt) ... {"training_stage": "initial_base_load_started", "monotonic_seconds": 197800.311927916}
+{"training_stage": "initial_base_loaded", "monotonic_seconds": 197800.313992458}
+{"training_stage": "adapter_attachment_started", "monotonic_seconds": 197800.314027583}
+{"training_stage": "adapter_attachment_finished", "monotonic_seconds": 197800.315122166}
+{"training_stage": "initial_state_hash_started", "monotonic_seconds": 197800.315338}
+{"training_stage": "initial_state_hash_finished", "monotonic_seconds": 197800.315641791}
+{"training_stage": "forward_started", "monotonic_seconds": 197800.315702125}
+ok
+test_wrong_target_rejected_without_receipt (tests.test_training_pilot_torch.PilotFailureTests.test_wrong_target_rejected_without_receipt) ... {"training_stage": "initial_base_load_started", "monotonic_seconds": 197800.317431708}
+{"training_stage": "initial_base_loaded", "monotonic_seconds": 197800.319187541}
+ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 2.943s
+
+OK

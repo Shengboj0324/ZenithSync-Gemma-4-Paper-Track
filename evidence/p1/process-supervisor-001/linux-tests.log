@@ -1,0 +1,12 @@
+test_cooperative_worker_obeys_stop_request (test_process_supervisor.ProcessSupervisorTests.test_cooperative_worker_obeys_stop_request) ... ok
+test_deadline_stops_inherited_child_group (test_process_supervisor.ProcessSupervisorTests.test_deadline_stops_inherited_child_group) ... ok
+test_escalates_when_worker_ignores_termination (test_process_supervisor.ProcessSupervisorTests.test_escalates_when_worker_ignores_termination) ... ok
+test_expired_deadline_does_not_launch (test_process_supervisor.ProcessSupervisorTests.test_expired_deadline_does_not_launch) ... ok
+test_insufficient_cleanup_window_does_not_launch (test_process_supervisor.ProcessSupervisorTests.test_insufficient_cleanup_window_does_not_launch) ... ok
+test_normal_completion_and_nonzero_exit (test_process_supervisor.ProcessSupervisorTests.test_normal_completion_and_nonzero_exit) ... ok
+test_supervisor_interruption_cleans_worker_and_restores_handler (test_process_supervisor.ProcessSupervisorTests.test_supervisor_interruption_cleans_worker_and_restores_handler) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.641s
+
+OK

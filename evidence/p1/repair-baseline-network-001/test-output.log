@@ -1,0 +1,92 @@
+STDOUT:
+........................................................................ [ 22%]
+...............................................s........................ [ 44%]
+............................................................F........... [ 66%]
+................x....................................................... [ 88%]
+......................F.............                                     [100%]
+=================================== FAILURES ===================================
+________ TestRequests.test_content_length_for_string_data_counts_bytes _________
+
+self = <tests.test_requests.TestRequests object at 0x7ffffb787d40>
+httpbin = <function prepare_url.<locals>.inner at 0x7ffffb9f1e40>
+
+    def test_content_length_for_string_data_counts_bytes(self, httpbin):
+        data = "This is a string containing multi-byte UTF-8 ☃️"
+        length = str(len(data.encode("utf-8")))
+        req = requests.Request("POST", httpbin("post"), data=data)
+        p = req.prepare()
+    
+>       assert p.headers["Content-Length"] == length
+E       AssertionError: assert '47' == '51'
+E         
+E         - 51
+E         + 47
+
+tests/test_requests.py:1826: AssertionError
+_ TestPreparingURLs.test_redirecting_to_bad_url[http://localhost:-1-InvalidURL] _
+
+self = <tests.test_requests.TestPreparingURLs object at 0x7ffffb7bcc00>
+httpbin = <function prepare_url.<locals>.inner at 0x7ffffc451940>
+url = 'http://localhost:-1'
+exception = <class 'requests.exceptions.InvalidURL'>
+
+    @pytest.mark.parametrize("url, exception", (("http://localhost:-1", InvalidURL),))
+    def test_redirecting_to_bad_url(self, httpbin, url, exception):
+>       with pytest.raises(exception):
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE InvalidURL
+
+tests/test_requests.py:2724: Failed
+----------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/wsgiref/handlers.py", line 137, in run
+    self.result = application(self.environ, self.start_response)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/flask/app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/flask/app.py", line 1518, in wsgi_app
+    return response(environ, start_response)
+  File "/usr/local/lib/python3.13/site-packages/werkzeug/wrappers/response.py", line 576, in __call__
+    app_iter, status, headers = self.get_wsgi_response(environ)
+                                ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/werkzeug/wrappers/response.py", line 562, in get_wsgi_response
+    headers = self.get_wsgi_headers(environ)
+  File "/usr/local/lib/python3.13/site-packages/werkzeug/wrappers/response.py", line 481, in get_wsgi_headers
+    location = iri_to_uri(location)
+  File "/usr/local/lib/python3.13/site-packages/werkzeug/urls.py", line 153, in iri_to_uri
+    if parts.port:
+       ^^^^^^^^^^
+  File "/usr/local/lib/python3.13/urllib/parse.py", line 182, in port
+    raise ValueError(f"Port could not be cast to integer value as {port!r}")
+ValueError: Port could not be cast to integer value as '-1'
+127.0.0.1 - - [09/Oct/2026 03:25:23] "GET /redirect-to?url=http%3A%2F%2Flocalhost%3A-1 HTTP/1.1" 500 59
+=========================== short test summary info ============================
+FAILED tests/test_requests.py::TestRequests::test_content_length_for_string_data_counts_bytes
+FAILED tests/test_requests.py::TestPreparingURLs::test_redirecting_to_bad_url[http://localhost:-1-InvalidURL]
+2 failed, 320 passed, 1 skipped, 1 xfailed in 32.29s
+
+STDERR:
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /get HTTP/1.1" 200 170
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /relative-redirect/20 HTTP/1.1" 302 0
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /relative-redirect/45 HTTP/1.1" 302 0
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:24:52] "HEAD /get HTTP/1.1" 200 0
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /get HTTP/1.1" 200 241
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /cookies HTTP/1.1" 200 30
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /cookies HTTP/1.1" 200 26
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /user-agent HTTP/1.1" 200 55
+127.0.0.1 - - [09/Oct/2026 03:24:52] "GET /digest-auth/auth/user/pass/SHA-512 HTTP/1.1" 200 37
+127.0.0.1 - - [09/Oct/2026 03:24:53] "GET /digest-auth/auth/user/pass/SHA-512 HTTP/1.1" 401 0
+127.0.0.1 - - [09/Oct/2026 03:24:53] "POST /post HTTP/1.1" 200 289
+127.0.0.1 - - [09/Oct/2026 03:24:53] "POST /post HTTP/1.1" 200 351
+127.0.0.1 - - [09/Oct/2026 03:24:53] "POST /post?blah=asdf1234 HTTP/1.1" 200 105738
+127.0.0.1 - - [09/Oct/2026 03:24:53] "POST /post HTTP/1.1" 200 105710
+127.0.0.1 - - [09/Oct/2026 03:24:53] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:24:53] "GET /get?foo=bar&FOO=bar HTTP/1.1" 200 261
+127.0.0.1 - - [09/Oct/2026 03:24:53] "GET /get HTTP/1.1" 200 244
+127.0.0.1 - - [09/Oct/2026 03:24:53] "GET /get HTTP/1.1" 200 222
+127.0.0.1 - - [09/Oct/2026 03:24:53] "POST /post HTTP/1.1" 200 343
+127.0.0.1 - - [09/Oct/2026 03:25:23] "GET /status/200 HTTP/1.1" 200 0

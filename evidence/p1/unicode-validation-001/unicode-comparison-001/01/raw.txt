@@ -1,0 +1,7 @@
+<|channel>thought
+<channel|><|tool_call>call:write_file{content:<|"|>def describe(s):
+    data = {"filepath:": s, "bytes": len(s.encode("utf-8"))}
+    return f"{data['bytes']}: {s}"
+
+print(describe("hello 🌍"))
+<|"|>,filepath:<|"|>serialization_probe.py<|"|>}<tool_call|><|tool_response>

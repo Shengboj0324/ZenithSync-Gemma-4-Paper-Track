@@ -27,22 +27,30 @@ def main():
     parser.add_argument('--manifest', type=Path, required=True)
     parser.add_argument('--dependencies', type=Path, required=True)
     parser.add_argument('--dependency-manifest', type=Path, required=True)
-    parser.add_argument('--image', required=True)
+    parser.add_argument('--backend', choices=['docker', 'subprocess'], default='docker')
+    parser.add_argument('--image')
+    parser.add_argument('--source-path-control', action='store_true',
+                        help='Diagnostic only: prepend checkout source paths for pytest')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    if args.backend == 'docker' and not args.image:
+        parser.error('--image is required for Docker')
+    if args.backend == 'subprocess' and args.image:
+        parser.error('--image does not apply to the subprocess backend')
     args.output.mkdir(parents=True, exist_ok=False)
     verify(args.bundle, load_json(args.manifest))
     verify(args.dependencies, load_json(args.dependency_manifest))
     if version('swegemma') != '0.2.10':
         raise ValueError('this audit requires swegemma 0.2.10')
-    os.environ.setdefault('DOCKER_HOST', subprocess.check_output(
-        ['docker', 'context', 'inspect', '--format', '{{.Endpoints.docker.Host}}'],
-        text=True, timeout=15).strip())
+    if args.backend == 'docker':
+        os.environ.setdefault('DOCKER_HOST', subprocess.check_output(
+            ['docker', 'context', 'inspect', '--format', '{{.Endpoints.docker.Host}}'],
+            text=True, timeout=15).strip())
     os.environ['KAGGLE_SANDBOX_DIR'] = str(ROOT / 'artifacts/official/gemma-4-developer-agent/sandbox')
     from adk_submission import ModelRegistry
     from swegemma.config import EvalConfig
     from swegemma.models import Task
-    from swegemma.sandbox import ContainerConfig, ContainerManager
+    from swegemma.sandbox import ContainerConfig, ContainerManager, SubprocessManager
     from swegemma.harness.verification import verify_task
     import swegemma.harness.verification as implementation
 
@@ -53,8 +61,9 @@ def main():
     source = ('from pathlib import Path\n\n'
               'def test_workspace_source_origin():\n'
               '    import requests\n'
-              '    origin = str(Path(requests.__file__).resolve())\n'
-              '    assert origin.startswith("/workspace/src/requests/"), origin\n')
+              '    origin = Path(requests.__file__).resolve()\n'
+              '    expected = Path(__file__).resolve().parents[1] / "src" / "requests"\n'
+              '    assert origin.is_relative_to(expected), str(origin)\n')
     test_path = 'tests/test_zenith_source_probe.py'
     patch = (f'diff --git a/{test_path} b/{test_path}\nnew file mode 100644\n'
              f'--- /dev/null\n+++ b/{test_path}\n@@ -0,0 +1,{len(source.splitlines())} @@\n'
@@ -66,10 +75,25 @@ def main():
     config = EvalConfig(tasks_path=args.bundle / 'tasks.jsonl', snapshots_dir=args.bundle / 'snapshots',
                         results_dir=args.output, models=ModelRegistry(),
                         submission_dir=ROOT / 'artifacts/official/gemma-4-developer-agent/sample_submission',
-                        wheels_dir=args.dependencies / 'wheels')
-    manager = ContainerManager(ContainerConfig(image=args.image, reuse_containers=False))
-    image = manager.client.images.get(args.image)
-    manager.config.image = image.id
+                        wheels_dir=args.dependencies / 'wheels', sandbox=args.backend)
+    image_id = None
+    if args.backend == 'docker':
+        manager = ContainerManager(ContainerConfig(image=args.image, reuse_containers=False))
+        image_id = manager.client.images.get(args.image).id
+        manager.config.image = image_id
+    else:
+        manager = SubprocessManager()
+    if args.source_path_control:
+        original_exec = manager.exec
+
+        def source_control_exec(sandbox_id, command, **kwargs):
+            if ' -m pytest ' in command:
+                command = command.replace(
+                    'PYTHONSAFEPATH=1',
+                    'PYTHONPATH=/workspace/src:/workspace PYTHONSAFEPATH=1', 1)
+            return original_exec(sandbox_id, command, **kwargs)
+
+        manager.exec = source_control_exec
     identities = {'verifier': file_record(Path(__file__)),
                   'official_verification': file_record(Path(implementation.__file__))}
     result = asyncio.run(verify_task(manager, config, task,
@@ -84,7 +108,9 @@ def main():
         raise ValueError('audit implementation changed')
     (args.output / 'receipt.json').write_bytes(canonical_json({
         'schema_version': 1, 'status': 'official_evaluator_source_probe_recorded',
-        'image': image.id, 'sources': identities, 'swegemma_version': version('swegemma'),
+        'image': image_id, 'backend': args.backend, 'sources': identities, 'swegemma_version': version('swegemma'),
+        'host_python': sys.version,
+        'source_path_control': args.source_path_control,
         'test_exit_code': result.test_exit_code, 'resolved': result.resolved,
         'result': file_record(args.output / 'result.json'),
         'scope': 'Synthetic origin assertion through real verify_task; no benchmark repair claim'}))

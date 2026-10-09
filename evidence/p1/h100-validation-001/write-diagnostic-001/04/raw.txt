@@ -1,0 +1,3 @@
+<|channel>thought
+<channel|><|tool_call>call:write_file{content:<|"|>answer = 1
+<|"|>,filepath:<|"|>serialization_probe.py<|"|>}<tool_call|><|tool_response>

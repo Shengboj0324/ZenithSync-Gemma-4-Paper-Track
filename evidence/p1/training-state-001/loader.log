@@ -1,0 +1,12 @@
+Compressing model:   0%|          | 0/42 [00:00<?, ?it/s]Compressing model: 100%|██████████| 42/42 [00:00<00:00, 5991.46it/s]
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00, 421.03it/s]
+Decompressing model:   0%|          | 0/42 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 42/42 [00:00<00:00, 25686.90it/s]
+/private/tmp/zenithsync-adapter-cpu-p1/lib/python3.13/site-packages/transformers/quantizers/auto.py:271: UserWarning: You passed `quantization_config` or equivalent parameters to `from_pretrained` but the model you're loading already has a `quantization_config` attribute. The `quantization_config` from the model will be used.However, loading attributes (e.g. ['run_compressed']) will be overwritten with the one you passed to `from_pretrained`. The rest will be ignored.
+  warnings.warn(warning_msg)
+Compressing model:   0%|          | 0/42 [00:00<?, ?it/s]Compressing model: 100%|██████████| 42/42 [00:00<00:00, 4344.29it/s]
+Loading weights:   0%|          | 0/55 [00:00<?, ?it/s]Loading weights: 100%|██████████| 55/55 [00:00<00:00, 24125.36it/s]
+Decompressing model:   0%|          | 0/42 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 42/42 [00:00<00:00, 40496.73it/s]
+Compressing model:   0%|          | 0/42 [00:00<?, ?it/s]Compressing model: 100%|██████████| 42/42 [00:00<00:00, 4611.30it/s]
+Loading weights:   0%|          | 0/55 [00:00<?, ?it/s]Loading weights: 100%|██████████| 55/55 [00:00<00:00, 34947.24it/s]
+Decompressing model:   0%|          | 0/42 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 42/42 [00:00<00:00, 41303.81it/s]
+BF16 compressed Gemma loader, frozen-base adapter update and adapter reload passed

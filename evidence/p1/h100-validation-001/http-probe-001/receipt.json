@@ -1,0 +1,36 @@
+{
+  "status": "http_stack_passed",
+  "versions": {
+    "fastapi": "0.136.3",
+    "starlette": "0.52.1",
+    "prometheus-fastapi-instrumentator": "7.1.0",
+    "httpx": "0.28.1"
+  },
+  "checks": [
+    {
+      "route": "/health",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "route": "/v1/health",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    },
+    {
+      "route": "/missing",
+      "expected": 404,
+      "actual": 404,
+      "passed": true
+    },
+    {
+      "route": "/metrics",
+      "expected": 200,
+      "actual": 200,
+      "passed": true
+    }
+  ],
+  "scope": "Real HTTP middleware with synthetic included routes; no vLLM generation"
+}

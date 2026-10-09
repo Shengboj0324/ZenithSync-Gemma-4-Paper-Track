@@ -1,0 +1,21 @@
+STDOUT:
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________________________ test_workspace_source_origin _________________________
+
+    def test_workspace_source_origin():
+        import requests
+        origin = Path(requests.__file__).resolve()
+        expected = Path(__file__).resolve().parents[1] / "src" / "requests"
+>       assert origin.is_relative_to(expected), str(origin)
+E       AssertionError: /Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/requests/__init__.py
+E       assert False
+E        +  where False = is_relative_to(PosixPath('/private/var/folders/y0/l9ns18ns5472mqrprmhhmsw00000gn/T/swegemma_sandbox_97bcb915-a02_kvc5mxgv/workspace/src/requests'))
+E        +    where is_relative_to = PosixPath('/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/requests/__init__.py').is_relative_to
+
+tests/test_zenith_source_probe.py:7: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_zenith_source_probe.py::test_workspace_source_origin - Asse...
+1 failed in 0.01s
+
+STDERR:

@@ -1,0 +1,9 @@
+test_exact_text_and_tool_identity_preserved_without_mutation (tests.test_gemma_trajectory.GemmaTrajectoryTests.test_exact_text_and_tool_identity_preserved_without_mutation) ... ok
+test_existing_reasoning_not_overwritten (tests.test_gemma_trajectory.GemmaTrajectoryTests.test_existing_reasoning_not_overwritten) ... ok
+test_later_user_and_preuser_assistant_rejected (tests.test_gemma_trajectory.GemmaTrajectoryTests.test_later_user_and_preuser_assistant_rejected) ... ok
+test_plain_assistant_response_not_reclassified (tests.test_gemma_trajectory.GemmaTrajectoryTests.test_plain_assistant_response_not_reclassified) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK

@@ -1,0 +1,18 @@
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+usage: run_p1_training.py [-h] --model MODEL --manifest MANIFEST
+                          --manifest-sha256 MANIFEST_SHA256 --output OUTPUT
+                          [--volume-root VOLUME_ROOT]
+                          --session-deadline SESSION_DEADLINE
+
+Deadline-bound full-checkpoint qualification; does not start or stop Pods.
+
+options:
+  -h, --help            show this help message and exit
+  --model MODEL
+  --manifest MANIFEST
+  --manifest-sha256 MANIFEST_SHA256
+  --output OUTPUT
+  --volume-root VOLUME_ROOT
+  --session-deadline SESSION_DEADLINE
+                        Previously approved absolute ISO-8601 deadline with
+                        timezone

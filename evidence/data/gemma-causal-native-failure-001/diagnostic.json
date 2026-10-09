@@ -1,0 +1,10 @@
+{
+  "error": "Projected tokens are not prefix stable",
+  "returned_type": "BatchEncoding",
+  "keys": [
+    "input_ids",
+    "attention_mask"
+  ],
+  "actual_token_prefix_equal": true,
+  "scope": "Probe API-shape error, not tokenizer prefix failure"
+}

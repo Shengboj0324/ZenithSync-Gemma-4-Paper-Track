@@ -1,0 +1,9 @@
+test_corrupt_short_and_oversized_downloads_not_promoted (tests.test_public_source_download.PublicSourceDownloadTests.test_corrupt_short_and_oversized_downloads_not_promoted) ... ok
+test_git_blob_identity (tests.test_public_source_download.PublicSourceDownloadTests.test_git_blob_identity) ... ok
+test_lfs_identity (tests.test_public_source_download.PublicSourceDownloadTests.test_lfs_identity) ... ok
+test_size_budget_rejected_before_network (tests.test_public_source_download.PublicSourceDownloadTests.test_size_budget_rejected_before_network) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK

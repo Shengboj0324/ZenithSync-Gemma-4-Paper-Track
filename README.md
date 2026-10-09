@@ -4,13 +4,16 @@ Joint research and execution plan for the Google Gemma 4 Developer Agent Competi
 
 **Adopted direction:** build a complete, trainable Gemma-powered repository engineering agent first, using the competition's supported runtime. Measure its failure profile, train targeted adapters, and add specialist capabilities only when their benefit is demonstrated. The discarded debugging/product hypotheses no longer gate core implementation. Research novelty remains unproved; documents 15–18 are historical evidence, not the current product mandate.
 
-**Status, October 8:** P0 is accepted within its recorded scope; P1 is partially qualified. Gemma ran on the A100, passed a real tool continuation and submitted a source-only patch in one of two development attempts. Corrected local evaluation confirms the target regression is fixed, with five unchanged baseline failures; official overall solve and general tool reliability remain unproven. Model/R2 recovery is verified. No training has started. The GPU server is stopped; the user controls the Pod's billing stop. See the [GPU session report](docs/27-p1-gpu-validation-report.md).
+**Status, October 8:** P0 is accepted within its recorded scope; P1 remains partially qualified. A corrected local Requests evaluation records 321 passing tests plus one failure before the generated patch and 322 passing tests after it, with two skips in both cases; hidden-grader parity and broad agent reliability remain unproven. The full Gemma checkpoint also passed one synthetic LoRA update and fresh adapter reload on the H100, with unchanged frozen state and zero reload logit difference. This is compatibility evidence, not a trained competition candidate or a coding-performance gain. Model/R2 recovery is verified. See the [training qualification](docs/32-full-checkpoint-gpu-qualification.md) and [P1 acceptance checklist](docs/26-p1-acceptance-checklist.md).
 
 ## Reading order
 
 | Document | Purpose |
 | --- | --- |
+| [Pinned public data intake](docs/33-public-data-intake.md) | Acquired shard, measured metadata, conversion gaps and quarantine gates |
+| [Full-checkpoint training qualification](docs/32-full-checkpoint-gpu-qualification.md) | Actual H100 update/reload evidence, memory measurements and remaining long-run gates |
 | [P1 requirements audit](docs/28-p1-requirements-audit.md) | Published phase exit evidence, broader open obligations and measured resource limits |
+| [H100 validation and content-fidelity finding](docs/30-p1-h100-validation.md) | Successful restored deployment; three repeated Unicode content failures in repository context |
 | [P1 GPU session report](docs/27-p1-gpu-validation-report.md) | Actual inference, two repair attempts, corrected local grading, limits and cleanup |
 | [P1 acceptance checklist](docs/26-p1-acceptance-checklist.md) | Gate-by-gate evidence and remaining failures |
 | [P1 deployment handoff](docs/25-p1-deployment-handoff.md) | Corrected serving lock, durable recovery and future Pod procedure |

@@ -1,0 +1,26 @@
+{"training_stage": "initial_base_load_started", "monotonic_seconds": 197179.036696291}
+{"training_stage": "initial_base_loaded", "monotonic_seconds": 197179.059352375}
+{"training_stage": "adapter_attachment_started", "monotonic_seconds": 197179.059397625}
+{"training_stage": "adapter_attachment_finished", "monotonic_seconds": 197179.072803958}
+{"training_stage": "initial_state_hash_started", "monotonic_seconds": 197179.087509833}
+{"training_stage": "initial_state_hash_finished", "monotonic_seconds": 197179.0901515}
+{"training_stage": "forward_started", "monotonic_seconds": 197179.090483791}
+{"training_stage": "backward_finished", "monotonic_seconds": 197179.155903166}
+{"training_stage": "optimizer_step_finished", "monotonic_seconds": 197179.159214791}
+{"training_stage": "updated_frozen_state_verified", "monotonic_seconds": 197179.159495708}
+{"training_stage": "adapter_and_optimizer_saved", "monotonic_seconds": 197179.170454375}
+{"training_stage": "fresh_base_and_adapter_load_started", "monotonic_seconds": 197179.220591458}
+{"training_stage": "fresh_base_and_adapter_loaded", "monotonic_seconds": 197179.256485541}
+{"training_stage": "initial_base_load_started", "monotonic_seconds": 197179.260160125}
+{"training_stage": "initial_base_loaded", "monotonic_seconds": 197179.262151833}
+{"training_stage": "adapter_attachment_started", "monotonic_seconds": 197179.262184333}
+{"training_stage": "adapter_attachment_finished", "monotonic_seconds": 197179.263200666}
+{"training_stage": "initial_state_hash_started", "monotonic_seconds": 197179.263412416}
+{"training_stage": "initial_state_hash_finished", "monotonic_seconds": 197179.263704958}
+{"training_stage": "forward_started", "monotonic_seconds": 197179.263767291}
+{"training_stage": "initial_base_load_started", "monotonic_seconds": 197179.265683208}
+{"training_stage": "initial_base_loaded", "monotonic_seconds": 197179.267430833}
+----------------------------------------------------------------------
+Ran 10 tests in 3.851s
+
+OK

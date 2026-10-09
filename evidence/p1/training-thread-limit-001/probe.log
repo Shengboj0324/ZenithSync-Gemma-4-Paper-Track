@@ -1,0 +1,24 @@
+{"training_stage": "initial_base_load_started", "monotonic_seconds": 197181.4964575}
+/private/tmp/zenithsync-adapter-cpu-p1/lib/python3.13/site-packages/transformers/quantizers/auto.py:271: UserWarning: You passed `quantization_config` or equivalent parameters to `from_pretrained` but the model you're loading already has a `quantization_config` attribute. The `quantization_config` from the model will be used.However, loading attributes (e.g. ['run_compressed']) will be overwritten with the one you passed to `from_pretrained`. The rest will be ignored.
+  warnings.warn(warning_msg)
+Compressing model:   0%|          | 0/42 [00:00<?, ?it/s]Compressing model: 100%|██████████| 42/42 [00:00<00:00, 3359.73it/s]
+Loading weights:   0%|          | 0/55 [00:00<?, ?it/s]Loading weights: 100%|██████████| 55/55 [00:00<00:00, 23365.41it/s]
+Decompressing model:   0%|          | 0/42 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 42/42 [00:00<00:00, 21339.89it/s]
+{"training_stage": "initial_base_loaded", "monotonic_seconds": 197182.013977666}
+{"training_stage": "adapter_attachment_started", "monotonic_seconds": 197182.014012666}
+{"training_stage": "adapter_attachment_finished", "monotonic_seconds": 197182.021347583}
+{"training_stage": "initial_state_hash_started", "monotonic_seconds": 197182.021898041}
+{"training_stage": "initial_state_hash_finished", "monotonic_seconds": 197182.022781291}
+{"training_stage": "forward_started", "monotonic_seconds": 197182.023005833}
+{"training_stage": "backward_finished", "monotonic_seconds": 197182.040579958}
+{"training_stage": "optimizer_step_finished", "monotonic_seconds": 197182.04109475}
+{"training_stage": "updated_frozen_state_verified", "monotonic_seconds": 197182.041754333}
+{"training_stage": "adapter_and_optimizer_saved", "monotonic_seconds": 197182.05443625}
+{"training_stage": "fresh_base_and_adapter_load_started", "monotonic_seconds": 197182.129943}
+Compressing model:   0%|          | 0/42 [00:00<?, ?it/s]Compressing model: 100%|██████████| 42/42 [00:00<00:00, 5073.02it/s]
+Loading weights:   0%|          | 0/55 [00:00<?, ?it/s]Loading weights: 100%|██████████| 55/55 [00:00<00:00, 37141.64it/s]
+Decompressing model:   0%|          | 0/42 [00:00<?, ?it/s]Decompressing model: 100%|██████████| 42/42 [00:00<00:00, 44631.56it/s]
+{"training_stage": "fresh_base_and_adapter_loaded", "monotonic_seconds": 197182.181430208}
+{"training_stage": "reloaded_state_verified", "monotonic_seconds": 197182.182611875}
+{"training_stage": "reloaded_outputs_verified", "monotonic_seconds": 197182.184273}
+{'status': 'one_update_and_reload_passed', 'loss': 4.128345489501953, 'trainable_parameters': 7808, 'adapter_effect_max_abs': 0.4324951171875, 'reload_max_abs_error': 0.0}

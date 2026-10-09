@@ -1,0 +1,19 @@
+{
+  "task_id": "zenith_source_origin_probe",
+  "resolved": false,
+  "status": "SUCCESS",
+  "duration_seconds": 1.6456971250008792,
+  "cost_usd": 0.0,
+  "total_tokens": 0,
+  "total_llm_calls": 0,
+  "error_message": null,
+  "trace_path": null,
+  "metadata": {},
+  "repo": "psf/requests",
+  "agent_patch": "",
+  "test_output": "STDOUT:\nF                                                                        [100%]\n=================================== FAILURES ===================================\n_________________________ test_workspace_source_origin _________________________\n\n    def test_workspace_source_origin():\n        import requests\n        origin = Path(requests.__file__).resolve()\n        expected = Path(__file__).resolve().parents[1] / \"src\" / \"requests\"\n>       assert origin.is_relative_to(expected), str(origin)\nE       AssertionError: /Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/requests/__init__.py\nE       assert False\nE        +  where False = is_relative_to(PosixPath('/private/var/folders/y0/l9ns18ns5472mqrprmhhmsw00000gn/T/swegemma_sandbox_97bcb915-a02_kvc5mxgv/workspace/src/requests'))\nE        +    where is_relative_to = PosixPath('/Users/jiangshengbo/Desktop/ZenithSync-Gemma-4-Paper-Track/.venv/lib/python3.13/site-packages/requests/__init__.py').is_relative_to\n\ntests/test_zenith_source_probe.py:7: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_zenith_source_probe.py::test_workspace_source_origin - Asse...\n1 failed in 0.01s\n\nSTDERR:\n",
+  "test_exit_code": 1,
+  "trace": null,
+  "tool_calls": 0,
+  "task_index": null
+}

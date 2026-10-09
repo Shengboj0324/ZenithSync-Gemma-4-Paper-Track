@@ -1,0 +1,4 @@
+Looking in links: .
+Processing ./peft-0.21.2-py3-none-any.whl (from -r bundle/requirements/training-peft-supplement.lock.txt (line 1))
+Installing collected packages: peft
+Successfully installed peft-0.21.2

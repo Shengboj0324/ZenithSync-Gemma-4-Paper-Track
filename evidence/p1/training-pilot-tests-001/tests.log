@@ -1,0 +1,15 @@
+test_changed_reload_base_rejected_without_receipt (tests.test_training_pilot_torch.PilotFailureTests.test_changed_reload_base_rejected_without_receipt) ... ok
+test_existing_output_never_overwritten (tests.test_training_pilot_torch.PilotFailureTests.test_existing_output_never_overwritten) ... ok
+test_no_supervised_targets_rejected_without_receipt (tests.test_training_pilot_torch.PilotFailureTests.test_no_supervised_targets_rejected_without_receipt) ... ok
+test_wrong_target_rejected_without_receipt (tests.test_training_pilot_torch.PilotFailureTests.test_wrong_target_rejected_without_receipt) ... ok
+test_buffers_and_parameters_detected (tests.test_training_state_torch.StateFingerprintTests.test_buffers_and_parameters_detected) ... ok
+test_exclusions_are_exact_and_validated (tests.test_training_state_torch.StateFingerprintTests.test_exclusions_are_exact_and_validated) ... ok
+test_independent_bytes_and_chunk_boundaries (tests.test_training_state_torch.StateFingerprintTests.test_independent_bytes_and_chunk_boundaries) ... ok
+test_invalid_chunk_sizes (tests.test_training_state_torch.StateFingerprintTests.test_invalid_chunk_sizes) ... ok
+test_metadata_and_state_identity_changes (tests.test_training_state_torch.StateFingerprintTests.test_metadata_and_state_identity_changes) ... ok
+test_noncontiguous_and_meta_rejected (tests.test_training_state_torch.StateFingerprintTests.test_noncontiguous_and_meta_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.976s
+
+OK

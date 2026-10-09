@@ -1,0 +1,28 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.p1-http-compatibility
+#1 transferring dockerfile: 797B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/sha256:784c47f534d350ffb732e058f5c5d02526e91469c7d03d5ece05496c8d6b6f29
+#2 ...
+
+#3 [auth] library/sha256:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/sha256:784c47f534d350ffb732e058f5c5d02526e91469c7d03d5ece05496c8d6b6f29
+#2 ERROR: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+------
+ > [internal] load metadata for docker.io/library/sha256:784c47f534d350ffb732e058f5c5d02526e91469c7d03d5ece05496c8d6b6f29:
+------
+Dockerfile.p1-http-compatibility:3
+--------------------
+   1 |     # Local historical HTTP fixture compatibility; not the official grading image.
+   2 |     # Build context: artifacts/official/p1-httpcompat-build (two wheels and lock).
+   3 | >>> FROM sha256:784c47f534d350ffb732e058f5c5d02526e91469c7d03d5ece05496c8d6b6f29
+   4 |     COPY . /tmp/compat/
+   5 |     RUN python -m pip install --no-index --no-deps --find-links=/tmp/compat --require-hashes -r /tmp/compat/compat.lock \
+--------------------
+ERROR: failed to build: failed to solve: sha256:784c47f534d350ffb732e058f5c5d02526e91469c7d03d5ece05496c8d6b6f29: failed to resolve source metadata for docker.io/library/sha256:784c47f534d350ffb732e058f5c5d02526e91469c7d03d5ece05496c8d6b6f29: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/uwvj9gdb10qxoa875blhg9mb8

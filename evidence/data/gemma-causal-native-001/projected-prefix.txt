@@ -1,0 +1,6 @@
+<bos><|turn>user
+TASK_SENTINEL<turn|>
+<|turn>model
+<|channel>thought
+PRE_ACTION_SENTINEL
+<channel|><|tool_call>call:execute_bash{command:<|"|>pwd<|"|>}<tool_call|><|tool_response>

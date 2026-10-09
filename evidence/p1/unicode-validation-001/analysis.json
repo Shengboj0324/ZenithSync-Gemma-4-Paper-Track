@@ -1,0 +1,38 @@
+{
+  "status": "paired_representation_result_verified",
+  "remote_files_hash_verified": 69,
+  "counts": {
+    "escaped_short": {
+      "exact_match": 3
+    },
+    "literal_short": {
+      "exact_match": 3
+    },
+    "escaped_repository": {
+      "instruction_mismatch": 3
+    },
+    "literal_repository": {
+      "exact_match": 3
+    }
+  },
+  "semantic_checks": [
+    {
+      "case": "escaped_repository",
+      "repeat": 0,
+      "utf8_encodable": false
+    },
+    {
+      "case": "escaped_repository",
+      "repeat": 1,
+      "utf8_encodable": false
+    },
+    {
+      "case": "escaped_repository",
+      "repeat": 2,
+      "utf8_encodable": false
+    }
+  ],
+  "scope": "Single structured fixture in two contexts, three fixed-seed repeats; no independent population estimate",
+  "causal_limit": "Representation intervention changes eight input tokens; no separate token-length or cache-order isolation",
+  "no_generated_code_executed": true
+}

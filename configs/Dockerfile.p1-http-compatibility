@@ -1,0 +1,8 @@
+# Local historical HTTP fixture compatibility; not the official grading image.
+# Build context: artifacts/official/p1-httpcompat-build (two wheels and lock).
+FROM zenithsync-p1-http-parent:784c47f534d3
+COPY . /tmp/compat/
+RUN python -m pip install --no-index --no-deps --find-links=/tmp/compat --require-hashes -r /tmp/compat/compat.lock \
+    && python -m pip check \
+    && python -c 'import httpbin, pytest_httpbin.plugin; from werkzeug.wrappers import Response; from werkzeug.test import EnvironBuilder; r = Response(status=302, headers={"Location": "http://localhost:-1"}); assert r.get_wsgi_headers(EnvironBuilder().get_environ())["Location"] == "http://localhost:-1"' \
+    && rm -rf /tmp/compat

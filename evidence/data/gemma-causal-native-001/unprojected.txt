@@ -1,0 +1,5 @@
+<bos><|turn>user
+TASK_SENTINEL<turn|>
+<|turn>model
+<|tool_call>call:execute_bash{command:<|"|>pwd<|"|>}<tool_call|><|tool_response>response:execute_bash{value:<|"|>FUTURE_RESULT_SENTINEL<|"|>}<tool_response|>PRE_ACTION_SENTINEL<turn|>
+<|tool_call>call:finish{}<tool_call|><|tool_response>

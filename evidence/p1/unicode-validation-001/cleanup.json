@@ -1,0 +1,7 @@
+{
+  "session_key_cleanup": "Session key entries removed: 1",
+  "server_stopped": true,
+  "gpu_memory_after_stop_mib": 0,
+  "pod_stop_performed": false,
+  "session_deadline_unchanged": "2026-10-09T06:35:09.796249+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "task_id": "zenith_source_origin_probe",
+  "resolved": false,
+  "status": "SUCCESS",
+  "duration_seconds": 1.7591572499950416,
+  "cost_usd": 0.0,
+  "total_tokens": 0,
+  "total_llm_calls": 0,
+  "error_message": null,
+  "trace_path": null,
+  "metadata": {},
+  "repo": "psf/requests",
+  "agent_patch": "",
+  "test_output": "STDOUT:\n\nSTDERR:\n/private/var/folders/y0/l9ns18ns5472mqrprmhhmsw00000gn/T/swegemma_sandbox_e3b45303-ab0_5wbs797o/venv/bin/python3: No module named pytest\n",
+  "test_exit_code": 1,
+  "trace": null,
+  "tool_calls": 0,
+  "task_index": null
+}

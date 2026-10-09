@@ -1,0 +1,10 @@
+test_duplicate_ids_bad_arguments_and_unknown_tools_rejected (tests.test_trajectory_import.TrajectoryImportTests.test_duplicate_ids_bad_arguments_and_unknown_tools_rejected) ... ok
+test_missing_or_nonfinish_terminal_call_rejected (tests.test_trajectory_import.TrajectoryImportTests.test_missing_or_nonfinish_terminal_call_rejected) ... ok
+test_orphan_and_interruption_rejected (tests.test_trajectory_import.TrajectoryImportTests.test_orphan_and_interruption_rejected) ... ok
+test_parallel_calls_never_assume_response_order (tests.test_trajectory_import.TrajectoryImportTests.test_parallel_calls_never_assume_response_order) ... ok
+test_preserves_content_ids_and_records_inference (tests.test_trajectory_import.TrajectoryImportTests.test_preserves_content_ids_and_records_inference) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK

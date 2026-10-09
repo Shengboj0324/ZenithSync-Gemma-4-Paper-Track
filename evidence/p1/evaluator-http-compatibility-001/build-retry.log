@@ -1,0 +1,22 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.p1-http-compatibility
+#1 transferring dockerfile: 764B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/zenithsync-p1-http-parent:784c47f534d3
+#2 ERROR: no match for platform in manifest: not found
+------
+ > [internal] load metadata for docker.io/library/zenithsync-p1-http-parent:784c47f534d3:
+------
+Dockerfile.p1-http-compatibility:3
+--------------------
+   1 |     # Local historical HTTP fixture compatibility; not the official grading image.
+   2 |     # Build context: artifacts/official/p1-httpcompat-build (two wheels and lock).
+   3 | >>> FROM zenithsync-p1-http-parent:784c47f534d3
+   4 |     COPY . /tmp/compat/
+   5 |     RUN python -m pip install --no-index --no-deps --find-links=/tmp/compat --require-hashes -r /tmp/compat/compat.lock \
+--------------------
+ERROR: failed to build: failed to solve: zenithsync-p1-http-parent:784c47f534d3: failed to resolve source metadata for docker.io/library/zenithsync-p1-http-parent:784c47f534d3: no match for platform in manifest: not found
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/x7np5h7yh2jt3eszpqnc7h8p1

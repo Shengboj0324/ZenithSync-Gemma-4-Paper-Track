@@ -1,0 +1,53 @@
+{
+  "cases": {
+    "base": {
+      "requests": 42,
+      "summary_prompt_matches": 2,
+      "generated_tool_calls": {
+        "run_command": 16,
+        "read_file": 19,
+        "write_file": 2,
+        "edit_file": 1,
+        "submit_patch": 2
+      },
+      "prompt_tokens": 375666,
+      "completion_tokens": 9031,
+      "total_tokens": 384697,
+      "http_errors": [],
+      "finish_reasons": {
+        "tool_calls": 40,
+        "stop": 2
+      },
+      "agent_error": "Agent exceeded turns budget (40 turns)",
+      "patch": {
+        "sha256": "9e64a55b9e5d3e55a21875c1d851a51353c6ee2880952aad48a0e44cb1524425",
+        "size_bytes": 439
+      }
+    },
+    "candidate": {
+      "requests": 34,
+      "summary_prompt_matches": 1,
+      "generated_tool_calls": {
+        "run_command": 15,
+        "read_file": 11,
+        "write_file": 2,
+        "edit_file": 1,
+        "submit_patch": 2
+      },
+      "prompt_tokens": 304105,
+      "completion_tokens": 7903,
+      "total_tokens": 312008,
+      "http_errors": [],
+      "finish_reasons": {
+        "tool_calls": 31,
+        "stop": 3
+      },
+      "agent_error": null,
+      "patch": {
+        "sha256": "18de62d71c0625fdabef3960faee110ea209ff2585ec45de6ccd233970556fe4",
+        "size_bytes": 363
+      }
+    }
+  },
+  "scope": "Full captured server usage; summary classification by organizer prompt prefix; one repeated development task, not causal or statistical superiority evidence"
+}

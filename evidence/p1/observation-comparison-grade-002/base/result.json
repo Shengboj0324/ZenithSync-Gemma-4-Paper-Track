@@ -1,0 +1,19 @@
+{
+  "task_id": "requests_6589",
+  "resolved": true,
+  "status": "SUCCESS",
+  "duration_seconds": 43.22566345799714,
+  "cost_usd": 0.0,
+  "total_tokens": 0,
+  "total_llm_calls": 0,
+  "error_message": null,
+  "trace_path": null,
+  "metadata": {},
+  "repo": "psf/requests",
+  "agent_patch": "diff --git a/src/requests/utils.py b/src/requests/utils.py\nindex c3b123ea..509fc340 100644\n--- a/src/requests/utils.py\n+++ b/src/requests/utils.py\n@@ -134,7 +134,9 @@ def super_len(o):\n     total_length = None\n     current_position = 0\n \n-    if hasattr(o, \"__len__\"):\n+    if isinstance(o, str):\n+        total_length = len(o.encode(\"utf-8\"))\n+    elif hasattr(o, \"__len__\"):\n         total_length = len(o)\n \n     elif hasattr(o, \"len\"):\n",
+  "test_output": "STDOUT:\n........................................................................ [ 22%]\n...............................................spytest-httpbin server hit an exception serving request: [SSL: TLSV1_ALERT_UNKNOWN_CA] tlsv1 alert unknown ca (_ssl.c:1032)\nattempting to ignore so the rest of the tests can run\n........................ [ 44%]\n........................................................................ [ 66%]\n................x....................................................... [ 88%]\n....................................                                     [100%]\n322 passed, 1 skipped, 1 xfailed in 31.75s\n\nSTDERR:\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"GET /get HTTP/1.1\" 200 208\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"GET /relative-redirect/45 HTTP/1.1\" 302 0\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"GET /get HTTP/1.1\" 200 272\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"HEAD /get HTTP/1.1\" 200 0\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"GET /get HTTP/1.1\" 200 272\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"GET /get HTTP/1.1\" 200 297\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"GET /get HTTP/1.1\" 200 247\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"HEAD /get HTTP/1.1\" 200 0\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"POST /post HTTP/1.1\" 200 438\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"GET /status/500 HTTP/1.1\" 500 0\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"GET /get?foo=f%C3%B8%C3%B8 HTTP/1.1\" 200 320\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"POST /post?blah=asdf1234 HTTP/1.1\" 200 105843\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"POST /post HTTP/1.1\" 200 105806\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"POST /post HTTP/1.1\" 200 105796\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"POST /post HTTP/1.1\" 200 105796\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"POST /post HTTP/1.1\" 200 105772\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"POST /post HTTP/1.1\" 200 105772\n127.0.0.1 - - [09/Oct/2026 05:34:34] \"GET /get HTTP/1.1\" 200 208\n",
+  "test_exit_code": 0,
+  "trace": null,
+  "tool_calls": 0,
+  "task_index": null
+}

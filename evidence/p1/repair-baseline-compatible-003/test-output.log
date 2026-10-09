@@ -1,0 +1,49 @@
+STDOUT:
+........................................................................ [ 22%]
+...............................................s........................ [ 44%]
+............................................................F........... [ 66%]
+................x....................................................... [ 88%]
+....................................                                     [100%]
+=================================== FAILURES ===================================
+________ TestRequests.test_content_length_for_string_data_counts_bytes _________
+
+self = <tests.test_requests.TestRequests object at 0x7ffffb554be0>
+httpbin = <function prepare_url.<locals>.inner at 0x7ffffb4e5f80>
+
+    def test_content_length_for_string_data_counts_bytes(self, httpbin):
+        data = "This is a string containing multi-byte UTF-8 ☃️"
+        length = str(len(data.encode("utf-8")))
+        req = requests.Request("POST", httpbin("post"), data=data)
+        p = req.prepare()
+    
+>       assert p.headers["Content-Length"] == length
+E       AssertionError: assert '47' == '51'
+E         
+E         - 51
+E         + 47
+
+tests/test_requests.py:1826: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_requests.py::TestRequests::test_content_length_for_string_data_counts_bytes
+1 failed, 321 passed, 1 skipped, 1 xfailed in 31.64s
+
+STDERR:
+127.0.0.1 - - [09/Oct/2026 03:32:14] "GET /get HTTP/1.1" 200 208
+127.0.0.1 - - [09/Oct/2026 03:32:14] "GET /get HTTP/1.1" 200 272
+127.0.0.1 - - [09/Oct/2026 03:32:14] "GET /get HTTP/1.1" 200 272
+127.0.0.1 - - [09/Oct/2026 03:32:14] "HEAD /get HTTP/1.1" 200 0
+127.0.0.1 - - [09/Oct/2026 03:32:14] "GET /get HTTP/1.1" 200 272
+127.0.0.1 - - [09/Oct/2026 03:32:14] "GET /get?test=true&q=test HTTP/1.1" 200 317
+127.0.0.1 - - [09/Oct/2026 03:32:14] "GET /get HTTP/1.1" 200 297
+127.0.0.1 - - [09/Oct/2026 03:32:14] "GET /get HTTP/1.1" 200 272
+127.0.0.1 - - [09/Oct/2026 03:32:14] "POST /post HTTP/1.1" 200 416
+127.0.0.1 - - [09/Oct/2026 03:32:14] "POST /post HTTP/1.1" 200 475
+127.0.0.1 - - [09/Oct/2026 03:32:14] "POST /post HTTP/1.1" 200 105806
+127.0.0.1 - - [09/Oct/2026 03:32:14] "POST /post HTTP/1.1" 200 105796
+127.0.0.1 - - [09/Oct/2026 03:32:14] "POST /post HTTP/1.1" 200 105796
+127.0.0.1 - - [09/Oct/2026 03:32:14] "POST /post HTTP/1.1" 200 105708
+127.0.0.1 - - [09/Oct/2026 03:32:14] "GET /get HTTP/1.1" 200 208
+127.0.0.1 - - [09/Oct/2026 03:32:15] "GET /get HTTP/1.1" 200 315
+127.0.0.1 - - [09/Oct/2026 03:32:15] "GET /get HTTP/1.1" 200 272
+127.0.0.1 - - [09/Oct/2026 03:32:15] "GET /html HTTP/1.1" 200 3741
+127.0.0.1 - - [09/Oct/2026 03:32:45] "GET /status/500 HTTP/1.1" 500 0

@@ -1,0 +1,16 @@
+{
+  "scripts/prepare_write_diagnostic.py": "scripts/prepare_write_diagnostic.py",
+  "scripts/run_write_diagnostic.py": "scripts/run_write_diagnostic.py",
+  "zenithsync/__init__.py": "zenithsync/__init__.py",
+  "zenithsync/artifacts.py": "zenithsync/artifacts.py",
+  "zenithsync/contracts.py": "zenithsync/contracts.py",
+  "zenithsync/conversation.py": "zenithsync/conversation.py",
+  "zenithsync/tool_diagnostic.py": "zenithsync/tool_diagnostic.py",
+  "zenithsync/deadline.py": "zenithsync/deadline.py",
+  "tests/test_deadline.py": "tests/test_deadline.py",
+  "tests/test_tool_diagnostic.py": "tests/test_tool_diagnostic.py",
+  "docs/29-write-call-diagnostic.md": "docs/29-write-call-diagnostic.md",
+  "experiment/plan.json": "artifacts/official/p1-unicode-comparison-001/plan.json",
+  "experiment-manifest.json": "evidence/p1/unicode-comparison-prepare-001/manifest.json",
+  "scripts/prepare_unicode_comparison.py": "scripts/prepare_unicode_comparison.py"
+}

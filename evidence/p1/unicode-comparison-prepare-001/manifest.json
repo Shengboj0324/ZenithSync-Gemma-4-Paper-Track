@@ -1,0 +1,1 @@
+{"files":[{"path":"plan.json","sha256":"bbeea8e780cae60d4c8c8cb2e97b1876cb072e093e5d4f58a05edae1de345ec7","size_bytes":127984}],"kind":"fixture","revision":"unicode-comparison-v1","schema_version":1,"source":"12 paired development requests; vary only requested-argument JSON spelling within context; fixed-seed repeats are not independent tasks; no returned tools executed"}

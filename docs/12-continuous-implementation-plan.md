@@ -135,3 +135,403 @@ This strengthens the validity of local measurements without asserting that the o
 ### P1 requirements audit and resource evidence
 
 The [requirements audit](28-p1-requirements-audit.md) separates the published intake/inference exit criteria from the broader reliability, independent evaluation and training obligations. It indexes actual memory/latency measurements and retains every unresolved limitation. The Pod is now confirmed `EXITED` by an authenticated read. No inference or training was started. The broad objective remains active; this audit is not a phase waiver or an assertion of training readiness. Next work must address a functional qualification gap rather than accumulating redundant packaging or test-count updates.
+
+### P1 network-dependent evaluator qualification — October 8, 2026
+
+The unchanged Requests baseline and captured agent patch were evaluated in the
+same pinned Docker image with bridge networking, an explicit local diagnostic
+source-path override, and source provenance checked inside pytest. Four timeout
+failures disappeared from both runs. Of 324 paired cases, only the target
+content-length regression changed (failure to pass); the candidate has 321
+passed, one failed, and two skipped (including xfail). The remaining failure
+is the HTTP fixture rejecting a negative-port redirect before delivering it
+to Requests. Both official aggregate results remain false. This does not
+establish Kaggle environment parity or an overall benchmark solve.
+
+Added reusable JUnit comparison that rejects empty reports, duplicate identities,
+ambiguous outcomes, declared-count mismatches, and different case sets. All 90
+local tests passed. Individual tests are not independent task-level statistical
+samples. Evidence: `evidence/p1/repair-network-comparison-001/receipt.json`.
+No GPU work or training ran. Next: resolve the fixture/runtime compatibility
+boundary without altering benchmark assertions, and continue training-readiness
+qualification separately from this single repair.
+
+### P1 clean local repair qualification — October 8, 2026
+
+The unchanged agent patch now receives local resolved=true through the released
+verifier: 322 passed and two skipped (one xfail); baseline has 321 passed, one
+failed and two skipped. Exactly the target regression changes across 324 paired
+cases. See [analysis](../evidence/p1/repair-compatible-comparison-001/analysis.md).
+Historical HTTP fixture dependencies and a fresh per-run unpacked-wheel cache
+were needed in addition to the previously recorded source-path/network controls.
+The runner now records actual fixture versions and manifest identity. All 90
+local tests passed. No GPU time or training was used. Official target parity,
+broader reliability, and training qualification remain open; do not rerun this
+same repair simply to accumulate repetitions.
+
+### Training representation preflight — October 8, 2026
+
+The pinned compressed-tensors path decompresses for forward execution. Static
+checkpoint accounting gives 60.8757 GiB of dense BF16 weights, excluding working
+memory. The [representation readiness note](31-training-representation-readiness.md)
+sets the next CPU gradient/adapter and bounded GPU qualification steps. No long
+training run, new weights, or H100 fit is approved by these static calculations.
+
+### Synthetic CPU adapter qualification — October 8, 2026
+
+The real compressed-tensors codec and PEFT passed a synthetic exact-grid
+roundtrip, independent gradient comparison, frozen-base check, measurable
+adapter effect, and exact adapter save/reload. See document 31 and
+`evidence/p1/adapter-cpu-002/receipt.json`. This is CPU Torch 2.14.1, not the
+CUDA training runtime. Next qualify a reduced Gemma architecture, masking
+and optimizer resume before preparing the full-checkpoint GPU pilot. No
+model-training or repair-performance gain is claimed from the toy fixture.
+
+### Reduced Gemma training mechanics — October 8, 2026
+
+Pinned Gemma4 code with random reduced dimensions passed exact adapter coverage,
+independent masked-loss and logit-gradient checks, frozen-base integrity, and
+bitwise optimizer-resume equivalence under non-reentrant checkpointing and
+zero dropout. Receipt: `evidence/p1/gemma-training-cpu-002/receipt.json`. This
+does not establish native chat-mask correctness, full-checkpoint training,
+CUDA memory fit, stochastic resume, or a performance gain. Next prepare native
+conversation masks and loader qualification locally; no GPU work occurred.
+
+### Native assistant supervision — October 8, 2026
+
+Added template-hash-bound assistant masks with exact native text/token identity
+and character-boundary checks. Four actual-tokenizer fixtures and three invalid
+input checks passed, including exclusion of a tool result containing model-turn
+markers. Evidence: `evidence/p1/training-masks-001/receipt.json`. No corpus is
+approved by these fixtures; padding/packing and full-checkpoint gradients are
+not yet qualified. No GPU work occurred.
+
+### Native batching integration — October 8, 2026
+
+Native assistant masks now feed a strict independent-sequence collator. Actual
+Gemma token IDs and full vocabulary passed reduced-model CPU loss/gradient
+equivalence checks between a padded batch and token-weighted microbatches
+with unequal target counts. Masked padding changes leave loss unchanged.
+All 92 unit tests passed. Evidence: `evidence/p1/native-training-batch-001`.
+Packing and full-checkpoint loader/CUDA qualification remain open. No GPU
+compute or training corpus was used.
+
+### Compressed BF16 loader qualification — October 8, 2026
+
+A reduced random Gemma BF16 model was packed to W4/group32, saved, reloaded via
+the pinned Transformers quantizer, and trained for one adapter update on CPU.
+Loaded state matches its decompressed reference exactly; base remains frozen;
+adapter reload reproduces logits exactly. Receipt:
+`evidence/p1/compressed-gemma-loader-001/receipt.json`. Next prepare the bounded
+full-checkpoint GPU bundle; no full-model training readiness, vLLM adapter
+compatibility, or performance gain is claimed. No GPU compute was used.
+
+### Full-checkpoint test preparation — October 8, 2026
+
+PEFT 0.21.2 metadata satisfies all ten active dependencies against the existing
+Linux/Python 3.12 GPU lock; no core-package change is planned. Added a pinned
+supplement and a [bounded qualification specification](32-full-checkpoint-gpu-qualification.md)
+with an explicit unexecuted profile. Next implement and locally test the worker
+and external deadline supervisor. This is preparation, not full-model training
+qualification or GPU execution.
+
+### Training supervisor implementation — October 8, 2026
+
+Implemented external POSIX process-group deadlines, stop requests, termination
+escalation and interruption cleanup. Seven lifecycle tests passed on macOS and
+local Linux; the full suite passed 99 tests. The training worker itself and
+GPU integration remain pending. No GPU time was used. Evidence:
+`evidence/p1/process-supervisor-001`.
+
+### Frozen-state audit implementation update
+
+Added bounded-chunk state fingerprinting for the training qualification worker,
+including parameters and persistent buffers, with explicit adapter exclusions.
+Six dedicated CPU tests passed. Integrated the check into the reduced BF16
+compressed Gemma loader/adapter probe; evidence is recorded under
+`evidence/p1/training-state-001` and `evidence/p1/compressed-gemma-loader-002`.
+Full CUDA worker integration and checkpoint qualification remain pending;
+this update does not approve a training streak or close P1 acceptance.
+
+### Shared adapter qualification engine
+
+Implemented `zenithsync/training_pilot.py`: exact target/shape and adapter-count
+checks, non-reentrant checkpointing, one AdamW update, finite gradient and
+parameter checks, frozen state fingerprints, adapter/optimizer export, complete
+first-model scope release, independent reload, and predeclared output comparison.
+The reduced compressed BF16 Gemma probe passed with 7,808 trainable parameters
+and zero reload logit error. Weak references confirmed the first base object
+was released before the second load. Ten focused tests passed, including
+wrong-target, missing-supervision, altered-reload-base and output-preservation
+failures. Evidence: `evidence/p1/training-pilot-cpu-002` and
+`evidence/p1/training-pilot-tests-001`.
+
+Remaining: full CUDA entry point, native-tokenized fixture integration, runtime
+and storage preflight, memory measurements, supervisor integration and actual
+GPU qualification. Optimizer state is saved but resume is not qualified by
+this engine. CPU results do not qualify full-model training or repair quality.
+
+### Full-checkpoint command and native fixture integration
+
+Added a deadline-supervised full-checkpoint command and CUDA worker, with
+persistent-filesystem checks, exact manifest verification, pinned core runtime
+versions, single-device/no-competing-process admission, exact projection count,
+native supervision and shared update/reload qualification. Native fixture
+preflight passed: 24 input tokens, five supervised targets. Three storage
+admission tests passed, including symlink escape rejection. CLI imports/help
+are checked without loading the model. Evidence:
+`evidence/p1/training-worker-preflight-001`.
+
+No GPU command has been executed. Device-wide memory sampling, curated
+deployment preparation and actual full-checkpoint qualification remain open.
+The command does not start/stop the Pod or extend session authorization.
+
+### Device-wide telemetry and deployable source closure
+
+Added persistent initial/periodic/final device-memory samples, strict parsing,
+identity/capacity consistency and failure propagation. Six monitoring tests
+passed; the core suite passed 108 tests with ten separately scoped Torch tests
+skipped. Prepared an explicit 19-file source bundle and verified both CLI
+imports outside the checkout and in a network-disabled Linux container.
+Evidence: `evidence/p1/gpu-memory-monitor-001` and
+`evidence/p1/training-deployment-001`. Device readings are sampled maxima,
+not continuous peak bounds. Full CUDA execution remains unperformed; no
+training-corpus or coding-quality claim follows from this preparation.
+
+### H100 full-checkpoint attempt and setup diagnosis
+
+Verified persistent storage, idle H100, 251 runtime pins and PEFT dependencies.
+The full checkpoint loaded/decompressed, but the first qualification attempt
+was stopped after 278.84 seconds of prolonged CPU-heavy setup. Supervisor
+cleanup and zero remaining GPU memory were confirmed. No update/reload success
+is claimed. Default Torch thread counts were 104/104; added explicit 4/1 thread
+limits and stage timestamps for the next bounded attempt. Ten focused tests
+and the reduced compressed-model probe passed after this instrumentation.
+Evidence: `evidence/p1/full-training-gpu-001`,
+`evidence/p1/training-thread-limit-001`, `evidence/p1/training-pilot-cpu-003`.
+
+### Full-checkpoint H100 one-update qualification passed
+
+The revised bounded worker completed in 216.195 seconds. All 30,607,360
+rank-four adapter parameters matched expected targets/counts; loss and gradients
+were finite; an optimizer update changed the adapter; frozen state remained
+identical; export and fresh reload reproduced logits exactly. The diagnostic
+used only one 24-token synthetic example with five supervised targets.
+Peak Torch allocated/reserved memory was 60.919/71.961 GiB; maximum sampled
+device-wide memory was 72.632 GiB. Process cleanup and zero remaining GPU memory
+were confirmed. The temporary session SSH key was removed, preserving other keys.
+
+Complete outputs remain on the network volume and in a local copy verified
+against the remote manifest. Evidence: `evidence/p1/full-training-gpu-002`;
+large artifacts: `artifacts/official/p1-full-training-gpu-002`;
+R2 publication: `evidence/p1/full-training-gpu-publish-002`.
+P1 remains open. Next functional gates are full-model resume/stability and
+realistic sequence-length admission, adapter serving compatibility, qualified
+data ingestion and held-out agent evaluation. No long training streak has begun.
+
+### Optimizer export audit and identity-bound resume contract
+
+Audited the actual H100 export locally: all 820 states/30,607,360 parameter
+elements have finite moments, nonnegative second moments, step one and
+first-step Adam consistency within a declared numerical tolerance. The old
+export has no names, so full-model resume remains unqualified. Added explicit
+ordered name/shape/dtype and hyperparameter validation for new optimizer
+checkpoints. Five contract tests and four engine failure tests pass; a reduced
+Gemma export/reload probe passes with the new format. No GPU run occurred for
+this change. Evidence: `evidence/p1/exported-optimizer-audit-002`,
+`evidence/p1/optimizer-contract-001`, `evidence/p1/training-pilot-cpu-004`.
+
+### Pinned public-data quarantine intake
+
+Acquired and hash-verified one 151.8 MB SWE-Hero shard plus pinned source cards
+and Nebius metadata/LICENSE. The shard contains 2,500 distinct issue records
+over eight repositories; the first-shard selection is not representative.
+Metadata-only inspection found no exact competition-repository overlap but
+identified missing explicit tool-response IDs and no row-level resolved field.
+No trace body or patch was read by this audit and no source was training-approved.
+Implemented bounded publisher-hash verification, four download tests, and a
+metadata-only audit. See [current findings and admission work](33-public-data-intake.md).
+
+### Source-history conversion without fabricated tool outcomes
+
+Implemented a strict SWE-Hero converter that preserves source call IDs, links
+responses only to one outstanding call, retains unanswered terminal finish
+calls, and records inferred-link provenance. All 2,500 acquired histories passed
+its structural contract: 296,414 messages and 144,457 inferred links. Five
+rejection/preservation tests passed. No commands were executed, no task-success
+label was invented, and no source tool was renamed to imply runtime equivalence.
+Native pending-call supervision, tool semantics, replay, rights and broader
+contamination remain open. Evidence: `evidence/data/swe-hero-conversion-audit-001`.
+
+### Native supervision qualified; long-context admission gap measured
+
+Added explicit terminal-tool supervision without weakening default complete
+history checks. Four contract tests and six positive/six negative native
+tokenizer fixtures pass. A predetermined per-repository sample of eight real
+trajectories passes full render/token identity and mask checks without truncation.
+Lengths range from 32,376 to 114,224 tokens; seven exceed the current 32,768
+serving cap and all exceed the actual 24-token GPU qualification fixture.
+Next data admission work must address context handling jointly with the runtime,
+not silently truncate traces. Tool semantics, replay, rights and contamination
+remain open. Evidence: `evidence/data/native-trajectory-masks-001`.
+
+### Imported-history causal ordering correction
+
+Found that naive native rendering moves source assistant text accompanying a
+tool call behind its result. This affects 104,196 result-followed messages in
+the acquired shard. Added an explicit, provenance-preserving field projection
+into Gemma's pre-action channel, with guards against later-user text loss and
+reasoning-field collisions. The native synthetic fixture verifies chronology
+and invariance of earlier tokens under changed future results. Four unit tests
+pass; all 2,500 histories meet structural projection preconditions and the same
+eight sampled traces pass native mask checks. Their lengths remain too large
+for current admission. Earlier mask results were format consistency, not proof
+of semantic chronology. No training data was promoted and no GPU was used.
+
+### Full-shard context measurement and admission decision
+
+Measured all 2,500 projected native histories without truncation: 120,914,948
+input-token occurrences, median 44,981, maximum 183,776. Only 250 histories fit
+32,768 input tokens, with NumPy/pandas increasing to 82% of that retained subset.
+None fit 16,384. Eight prior native-mask cases match exact token hashes. Two new
+statistics tests pass; the core suite has 127 passes and 15 explicit skips.
+Evidence: `evidence/data/context-census-001`; details and mathematical target
+accounting are in `docs/33-public-data-intake.md`. Next implement and replay-test
+a shared runtime/training context policy before admission; do not silently
+truncate or count these raw input tokens toward approved candidate budgets.
+GPU use remains unnecessary for this local data-policy work.
+
+### Competition context configuration and summarizer audit
+
+The local repair driver left compaction and cache disabled, unlike the acquired
+competition README. It now supplies documented settings using pinned ADK 1.36.1
+and records them in attempt receipts. Deployment bundle 006 includes the helper
+and passes archive verification and isolated CLI import. The actual-ADK offline
+probe reproduces omission of structured tool calls/results from summary input.
+This is a diagnostic finding, not a successful memory mechanism. Core suite:
+127 passed, 15 skipped. No GPU or real summarizer call was made.
+
+Revised next step: reproduce the pinned runner's selection/trigger behavior and
+official request stream before designing context transformations. A custom
+compactor needs a supported competition deployment path. Future admitted data
+must retain actual summary/continuation pairs and evaluate observation recovery.
+Historical repair evidence does not establish compaction compatibility.
+Evidence: `evidence/p1/harness-compaction-002`.
+
+### Runner-level compaction reproduction
+
+Ran three actual-ADK offline cases with six local tool calls inside one user
+invocation. Synthetic prompt usage 14,335 produced no compaction; 14,336 produced
+five summaries and excluded the oldest tool observation from later agent input.
+The disabled control retained it. Original tool events remain in session storage.
+The runner compacts before model calls as well as post-invocation; the earlier
+docstring-based post-invocation description was incomplete and is corrected.
+Source bytes match pinned ADK. These are synthetic-model integration tests, not
+GPU or learned-agent performance tests. Evidence: `evidence/p1/compaction-runner-002`.
+Next qualify recovery and capture actual summaries during a bounded future
+GPU session; local context/data work remains available before that session.
+
+### Supported source-observation recovery candidate
+
+Added a separate untrained declarative candidate with an ADK source-observation
+skill. It saves actual source excerpts outside the repository and checks whole-file
+freshness before recall. Five focused tests pass. The pinned compiler and actual
+ADK script wrapper pass snapshot/recall/staleness checks across separate processes.
+This does not yet qualify the production sandbox or demonstrate model adoption
+and repair gains. Compare against the preserved baseline after executor and
+compaction-recovery integration checks; account for added tool/token costs.
+
+The compiler version guard detected older packages in the general environment.
+Pinned versions now run in an isolated overlay; the earlier compaction config
+check was repeated under the correct harness and still passes (probe 003).
+Evidence: `evidence/p1/observation-skill-001` and `harness-compaction-003`.
+
+### Actual Docker skill execution and patch isolation
+
+The recovery candidate compiles against real bound tools and executes through
+the released sandbox executor in a pinned local Linux container with networking
+disabled and no host mounts. Exact recall survives separate calls; actual source
+edits invalidate records. The workspace stays clean until the intended source
+edit, and official patch extraction includes only that edit. The owned container
+was removed and cleanup verified. Evidence: `evidence/p1/observation-sandbox-001`.
+No GPU or model was used. Next integrate deterministic compaction/recovery and
+cost accounting before testing whether Gemma uses this capability effectively.
+
+### Compiled candidate through runner compaction and real skill dispatch
+
+Integrated actual ADK runner/compaction, compiled candidate, bound tools and
+Docker executor in two controlled cases. A scripted summary retaining the handle
+permits exact source recovery after the original observation leaves context;
+dropping the handle prevents recovery. The source marker is fresh, and recall
+uses only information present in the current model request. Snapshot/recall each
+consume one harness tool call; summary requests are reported separately.
+Evidence: `evidence/p1/observation-recovery-001`. No model quality, real token
+cost, learned retention rate or training-data claim follows. Both containers
+were removed. Next learned-agent comparison needs an explicitly bounded GPU
+session; local source-data qualification and ingestion remain open in parallel.
+
+### Actual Gemma paired development run
+
+Used the still-running H100 within the existing approved four-hour session.
+The driver now selects either immutable candidate and records its identity;
+both use the same checkpoint, 40-turn/40-tool/10-minute budgets and documented
+compaction. Deadline enforcement reserves 30 seconds for cleanup. Deployment
+bundle 007 includes both candidates and manifests. Core suite: 132 passed,
+15 skipped. Neither candidate was modified between attempts.
+
+On repeated development task `requests_6589`, both produced source patches and
+passed the paired compatible local grading. The base hit the turn limit despite
+submitting; the observation candidate finished without an agent error but used
+no skill tools. Captured total tokens, including summary requests, were 384,697
+versus 312,008. This single ordered pair does not establish an efficiency gain,
+and cannot attribute any difference to unused observation recovery. Do not adopt
+or train toward the candidate on this evidence alone. Next select an independent
+development scenario where loss/recovery is actually exercised, with a fixed
+comparison protocol and no oracle leakage.
+
+Initial grading used the wrong original container image and failed the source
+origin measurement before tests. Both failures remain in grade-001; grade-002
+uses the previously qualified compatibility image and passes source checks.
+Results are local diagnostics with a source-path override and network-enabled
+test environment, not hidden-grader parity. Evidence:
+`evidence/p1/observation-comparison-live-001` and `observation-comparison-grade-002`.
+Server ran 441.32 seconds including startup, shut down cleanly, and GPU memory
+returned to zero. Temporary SSH access was revoked and the tunnel closed.
+
+### Corpus tool contracts and success-label qualification
+
+Audited argument shapes for all 2,500 acquired histories. Found 1,874 root-directory
+views, 231 shell-input calls across 122 histories, 468 explicit shell timeouts,
+six editor undos and 298 open-ended view ranges. These require explicit semantic
+handling; ordinary tool renaming is not a valid native-runtime conversion.
+The linked paper also retains unresolved Hero trajectories, and its reported
+composition differs from the pinned card. No row-level success is inferred.
+Evidence: `evidence/data/source-tool-contracts-001`. Next join source tasks and
+base-state metadata, then replay or regenerate with native tools before admission.
+
+### Source task metadata recovered
+
+Acquired and checksum-verified all 4,578 R2E-Gym subset tasks (~944 MB compressed).
+All 2,500 acquired Hero trajectories join to a source task. Added a strict metadata
+projection that excludes oracle content and distinguishes unresolved first-parent
+references from actual base commit hashes. The initial full-hash assumption was
+rejected by real data and corrected; no environment or training admission follows
+from the join alone. Core suite: 137 passed, 15 skipped.
+
+Next: resolve base references and image digests, audit oracle isolation in actual
+source environments, then qualify native tool replay/regeneration. No GPU run is
+needed for the metadata stage. Evidence: `evidence/data/source-task-join-001`.
+
+### Source environment resolution and isolation finding
+
+Completed R2 readback verification for all eight source task shards (~944 MB).
+Resolved immutable Linux/amd64 image digests and first-parent commits for a fixed
+eight-repository sample. Local inspection of the first sample (Pyramid) confirmed
+the intended base commit but also accessible solution Git objects and generated
+grading tests. The inspection container was removed; no GPU work was used.
+Core suite: 140 passed, 15 skipped.
+
+Next implement a sanitized agent snapshot with an independent evaluator, verify
+that intended source/dependencies still execute, and then qualify native replay.
+Do not promote these trajectories based on metadata joins or publisher labels.
+Evidence: `source-environment-resolution-001`, `source-image-probe-001`.

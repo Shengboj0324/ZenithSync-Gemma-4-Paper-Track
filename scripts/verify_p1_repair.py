@@ -13,6 +13,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,6 +30,12 @@ def main():
     parser.add_argument('--source-path-override', action='store_true')
     parser.add_argument('--in-process-source-check', action='store_true',
                         help='Local diagnostic: fail if pytest loads Requests outside the checkout')
+    parser.add_argument('--network-mode', choices=['none', 'bridge'], default='none',
+                        help='Bridge is a local diagnostic for network-dependent tests, not official parity')
+    parser.add_argument('--dependencies', type=Path,
+                        default=ROOT/'artifacts/official/restored-dependencies-p1-001')
+    parser.add_argument('--dependency-manifest', type=Path,
+                        default=ROOT/'evidence/p1/wheels-001/manifest.json')
     parser.add_argument('--image', default='sha256:14d857d591be7d1a7efc83ff1dcc87f83c96c764895b0986a45db0d8af5a8a46')
     args = parser.parse_args()
     if not re.fullmatch(r'sha256:[0-9a-f]{64}', args.image):
@@ -43,9 +50,10 @@ def main():
     if task_data['repo'] != 'psf/requests':
         raise ValueError('This source-origin probe is specific to Requests')
     bundle = ROOT/'artifacts/official/restored-pilot-p1-001'
-    dependencies = ROOT/'artifacts/official/restored-dependencies-p1-001'
+    dependencies = args.dependencies
     verify(bundle, load_json(ROOT/'evidence/p1/pilot-bundle-001/manifest.json'))
-    verify(dependencies, load_json(ROOT/'evidence/p1/wheels-001/manifest.json'))
+    dependency_manifest = load_json(args.dependency_manifest)
+    verify(dependencies, dependency_manifest)
     patch_text = args.patch.read_text() if args.patch else ''
     patch_identity = file_record(args.patch) if args.patch else None
     args.output.mkdir(parents=True, exist_ok=False)
@@ -65,7 +73,8 @@ def main():
         environment.update(ZENITH_SOURCE_REPORT='/tmp/zenithsync-source.jsonl',
                            ZENITH_SOURCE_MODULES='["requests","requests.utils"]',
                            ZENITH_SOURCE_ROOT='/workspace')
-    manager = ContainerManager(ContainerConfig(image=image, environment=environment, reuse_containers=False))
+    manager = ContainerManager(ContainerConfig(image=image, environment=environment,
+        network_mode=args.network_mode, reuse_containers=False))
     if manager.client.images.get(image).id != image:
         raise ValueError('Unexpected local image')
     original_exec = manager.exec
@@ -84,7 +93,9 @@ def main():
                 command = command.replace(' -m pytest ', ' -m pytest -p zenithsync_source_probe ', 1)
             observed = original_exec(container_id,
                 "PYTHONSAFEPATH=1 python3 -s -c 'import requests,requests.utils,json; "
-                "print(json.dumps({\"package\":requests.__file__,\"utils\":requests.utils.__file__}))'", timeout=30)
+                "from importlib.metadata import version; "
+                "print(json.dumps({\"package\":requests.__file__,\"utils\":requests.utils.__file__,"
+                "\"versions\":{n:version(n) for n in [\"Flask\",\"Werkzeug\",\"pytest\",\"httpbin\",\"pytest-httpbin\"]}}))'", timeout=30)
             if observed.exit_code:
                 raise RuntimeError('Evaluator source-origin measurement failed')
             origins.append(json.loads(observed.stdout))
@@ -110,16 +121,30 @@ def main():
     config = EvalConfig(tasks_path=oracle/'task.json', snapshots_dir=bundle/'snapshots',
         results_dir=args.output, submission_dir=ROOT/'candidates/p1-base', models=ModelRegistry(),
         wheels_dir=dependencies/'wheels', timeout_seconds=120)
-    result = asyncio.run(verify_task(manager, config, Task(**task_data),
-        bundle/'snapshots'/(task_data['instance_id']+'.tgz'), agent_patch=patch_text,
-        start_time=time.perf_counter()))
+    # The released evaluator caches unpacked wheels by a constant name, without
+    # binding the cache to the wheel manifest. Isolate each invocation so a prior
+    # evaluation cannot silently supply different dependencies. This script runs
+    # one evaluation per process; restore the global setting even on failure.
+    previous_tempdir = tempfile.tempdir
+    with tempfile.TemporaryDirectory(prefix='zenithsync-evaluator-') as fresh_temp:
+        try:
+            tempfile.tempdir = fresh_temp
+            result = asyncio.run(verify_task(manager, config, Task(**task_data),
+                bundle/'snapshots'/(task_data['instance_id']+'.tgz'), agent_patch=patch_text,
+                start_time=time.perf_counter()))
+        finally:
+            tempfile.tempdir = previous_tempdir
     (args.output/'result.json').write_text(result.model_dump_json(indent=2)+'\n')
     (args.output/'test-output.log').write_text(result.test_output)
     if args.patch and patch_identity != file_record(args.patch):
         raise ValueError('Agent patch changed during evaluation')
+    verify(dependencies, dependency_manifest)
     (args.output/'receipt.json').write_bytes(canonical_json({
         'schema_version':1, 'status':'evaluation_recorded', 'source_override':args.source_path_override,
         'image':image,
+        'network_mode':args.network_mode,
+        'dependency_manifest':file_record(args.dependency_manifest),
+        'isolated_dependency_cache':True,
         'in_process_source_check':args.in_process_source_check,
         'agent_patch':patch_identity, 'source_origins':origins, 'reported_resolved':result.resolved,
         'test_exit_code':result.test_exit_code, 'verifier':file_record(Path(__file__)),

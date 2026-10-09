@@ -1,0 +1,8 @@
+diff --git a/module.py b/module.py
+index 6dff4be..357f9a3 100644
+--- a/module.py
++++ b/module.py
+@@ -1,2 +1,2 @@
+ value = "α"
+-return_value = value
++return_value = None

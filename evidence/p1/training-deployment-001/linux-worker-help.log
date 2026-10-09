@@ -1,0 +1,15 @@
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+usage: run_p1_training_worker.py [-h] --model MODEL --manifest MANIFEST
+                                 --manifest-sha256 MANIFEST_SHA256
+                                 --output OUTPUT [--volume-root VOLUME_ROOT]
+
+Full-checkpoint one-update worker. Invoke through a deadline supervisor. No
+implicit downloads, CPU offload, corpus training or Pod lifecycle changes.
+
+options:
+  -h, --help            show this help message and exit
+  --model MODEL
+  --manifest MANIFEST
+  --manifest-sha256 MANIFEST_SHA256
+  --output OUTPUT
+  --volume-root VOLUME_ROOT
