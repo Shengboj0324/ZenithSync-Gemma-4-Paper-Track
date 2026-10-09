@@ -1,0 +1,1 @@
+{"role": "candidate", "tests_started": true, "import": {"returncode": 0, "stdout": "/testbed/bmt/__init__.py", "stderr": ""}, "pytest_exit": 0, "tracked_diff_unchanged_by_tests": true}

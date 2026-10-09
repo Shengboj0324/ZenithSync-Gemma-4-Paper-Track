@@ -174,3 +174,126 @@ utility now reports changed stat fields and before/after values when rejecting a
 mutation; it does not retry automatically or ignore metadata changes. A dedicated
 regression confirms even a ctime-only change remains rejected. The cause of the
 intermittent local metadata changes is still unestablished.
+
+
+### Offline evaluator dependency diagnosis (2026-10-09)
+
+The original-image base and reference controls in
+`evidence/data/swe-rebench-evaluator-controls-001` each collected 93 tests:
+93 setup failures, 93 successful teardowns, zero call-phase reports, and zero
+collection errors. These observations do not measure repair correctness.
+The task's module-scoped fixture invokes `Toolkit()`; the pinned checkout
+loads Biolink 4.2.1 schema and predicate mappings from GitHub. Network-disabled
+containers cannot retrieve those resources. Both disposable containers were
+removed successfully.
+
+`evidence/data/swe-rebench-resource-diagnosis-001` preserves the inspected
+checkout sources. `evidence/data/swe-rebench-biolink-resources-001` now contains
+the two external YAML resources, their SHA-256 identities, and release revision
+`db265a8ffa0903b478a1c6232fb3a2aec4a5dff9`. Each tag-addressed download was
+byte-compared with its commit-addressed download. This establishes current
+release-resource identity, not proof of the publisher's historical fetched bytes.
+
+Next: implement an explicit, allowlisted offline resource replay; preserve
+unmodified test assertions; detect additional schema imports; rerun paired
+controls and inspect full test identities before evaluator admission. These
+new resources and diagnosis receipts have not yet been published to R2.
+No agent or GPU ran, and no training-data admission follows from this work.
+
+
+### Offline response replay and paired controls (2026-10-09)
+
+Implemented `zenithsync/offline_resources.py`: exact-URL, SHA-256-checked
+body replay for the task's urllib and requests GET calls. Unsupported URLs,
+body mutations, and unsupported request options fail closed. TLS context is
+explicitly bypassed and logged because no TLS connection occurs. The container
+still has network disabled. This is an evaluator transport adaptation, not a
+claim of identical historical publisher infrastructure.
+
+Controls 003–006 preserve adapter compatibility failures (TLS context and
+Python 3.9 response `mode` requirements). Control 002 records a Linux argv-size
+failure; the disposable-container runner now stages the probe as a file.
+Control 007 first reached assertions; an import-only script cleanup occurred
+during that run, so control 008 was rerun against stable source and is the
+preferred evidence. Both containers in each completed pair were removed.
+
+`evidence/data/swe-rebench-evaluator-controls-008/paired-observations.json`
+binds the full node-ID observations: 93 distinct tests in both roles, all setup
+and teardown phases successful; base 92 passed / 1 failed, reference 93 passed.
+The sole transition is `test_get_associations_gene_to_chemical`, the published
+FAIL_TO_PASS test. Both fetched exactly the two allowlisted resources, and
+tracked diffs were unchanged by tests. No agent ran.
+
+Validation: pinned lightweight suite 210 tests, 188 passed and 22 skipped
+(including six requests-dependent tests); those six adapter tests separately
+passed in the requests-enabled local environment. No GPU validation follows.
+
+Outstanding: audit the publisher's truncated PASS_TO_PASS identifiers, verify
+sanitized-image equivalence, integrate qualified resource replay into the
+source-task runtime, and assess rights/splits before any training admission.
+
+
+### Sanitized-image evaluator equivalence (2026-10-09)
+
+`evidence/data/swe-rebench-snapshot-controls-001` runs the same test/reference
+patches and hashed resource replay on the sanitized image. The probe checks
+snapshot HEAD, tree identity, and initially clean tracked source. Both control
+containers completed and were removed; testing did not change tracked diffs.
+
+`zenithsync/pytest_controls.py` retains full pytest identities and maps the
+publisher's whitespace-truncated names to groups. Every member must match the
+expected transition. Missing/duplicate phases, failed setup/teardown, skips,
+collection errors, contradictory exits, conflicting expectations, and unequal
+coverage fail closed. This is deliberately stricter than last-write-wins parsing.
+
+`evidence/data/swe-rebench-control-comparison-001/comparison.json` binds both
+runs: 93 full identities, 82 publisher names, five collision groups; all
+transitions match. The original and sanitized controls have identical per-test
+outcomes and resource events. Each base passes 92 tests and fails the intended
+repair test; each reference passes all 93. This verifies task-specific evaluator
+equivalence, not general image isolation or model performance. Snapshot lower
+layers and unreviewed dependency content remain outside the isolation claim.
+
+Tests: 215 discovered, 193 passed, 22 skipped in the lightweight pinned runtime.
+Five new comparator tests exercise hidden collision-member failures, phase
+integrity, setup/teardown errors, skips, exit consistency and coverage conflicts.
+The six requests-dependent adapter tests passed separately in the preceding
+cycle. Prior offline evaluator bundle R2 publication completed with remote
+hash verification: 180 files, 8,510,129 bytes (`swe-rebench-offline-evaluator-publish-001`).
+
+Next: integrate the resource replay and strict outcomes into source trajectory
+execution/patch grading; source-specific rights and admission remain required.
+
+
+### Candidate patch grading integration (2026-10-09)
+
+Added `scripts/grade_swe_rebench_patch.py`, explicitly scoped to task 172.
+It verifies the qualified control inputs, rechecks publisher transitions, runs
+one candidate in the sanitized offline evaluator, checks environment/resource
+identity and cleanup, then compares full test identities with the qualified
+reference. Infrastructure errors do not become repair scores. Candidate runs
+receive only the candidate and test patches, without a reference-patch payload.
+This entry point grades bytes; it does not yet validate teacher/agent provenance.
+
+Candidate source allowance is currently `bmt/toolkit.py`. Candidate patches are
+applied to the Git index so newly added files are also included in the path
+check. This restricts changes to the evaluated source surface; it is not a
+security proof against malicious source code executing inside the sandbox.
+
+Runtime acceptance evidence:
+- `swe-rebench-empty-grade-002`: 93 cases, one disagreement, repair rejected.
+- `swe-rebench-reference-grade-002`: 93 cases, zero disagreements.
+- `swe-rebench-injection-grade-001`: adding `tests/injected.py` rejected before
+  test execution; container removed. No successful grading report is emitted.
+
+These are grader controls, not model-generated repairs. The source-control
+suite ran 217 tests: 195 passed, 22 skipped. Two new candidate-comparison tests
+check that actual repair failure is reported but missing coverage is rejected.
+
+Three candidate teacher traces for task 172 are present in the verified full
+join: `2cc9a006-de14-4fbb-ba13-8c17b59245c8`,
+`e7d37fbd-fc5c-4102-a7bc-7a9972287d84`, and
+`808755ac-3ab0-431d-9596-0929241ce8c0`. Their commands have not yet been reviewed
+or replayed. Next: resolve and verify their source shards, review path/action
+adaptation, integrate runtime resource availability, replay native actions,
+and independently grade submitted patches. Training admission remains false.

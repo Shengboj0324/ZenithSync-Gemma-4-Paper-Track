@@ -1,0 +1,134 @@
+============================= test session starts ==============================
+collected 93 items
+
+tests/unit/test_toolkit.py .......................................F..... [ 48%]
+................................................                         [100%]
+
+=================================== FAILURES ===================================
+/testbed/tests/unit/test_toolkit.py:614: assert []
+==================================== PASSES ====================================
+___________________________________ test_sv ____________________________________
+----------------------------- Captured stdout call -----------------------------
+['broad match', 'related to at concept level', 'related to']
+___________________ test_get_denormalized_association_slots ____________________
+----------------------------- Captured stdout call -----------------------------
+['biolink:in_taxon_label', 'biolink:subject_closure', 'biolink:object_closure', 'biolink:subject_category', 'biolink:object_category', 'biolink:subject_category_closure', 'biolink:object_category_closure', 'biolink:subject_label_closure', 'biolink:object_label_closure', 'biolink:subject_namespace', 'biolink:object_namespace']
+__________________________ test_get_element_via_alias __________________________
+----------------------------- Captured stdout call -----------------------------
+SlotDefinition({
+  'name': 'caused by',
+  'description': ('holds between two entities where the occurrence, existence, or activity of '
+     'one is caused by the occurrence or generation of the other'),
+  'in_subset': ['translator_minimal'],
+  'from_schema': 'https://w3id.org/biolink/biolink-model',
+  'aliases': ['disease caused by disruption of', 'disease has basis in dysfunction of',
+    'realized in response to', 'realized in response to stimulus'],
+  'exact_mappings': ['WIKIDATA_PROPERTY:P828'],
+  'narrow_mappings': ['RO:0001022', 'RO:0002608', 'RO:0004019', 'RO:0004020', 'RO:0004028',
+    'RO:0009501'],
+  'is_a': 'contribution from',
+  'slot_uri': 'biolink:caused_by',
+  'inverse': 'causes'
+})
+__________________________ test_get_element_by_prefix __________________________
+------------------------------ Captured log call -------------------------------
+WARNING  bmt.toolkit:toolkit.py:1819 no biolink class found for the given curie: TEST:1234, try get_element_by_mapping?
+__ test_validate_qualifier[species context qualifier-upregulated-None-False] ___
+------------------------------ Captured log call -------------------------------
+WARNING  bmt.toolkit:toolkit.py:1819 no biolink class found for the given curie: upregulated, try get_element_by_mapping?
+--------------------- generated xml file: /audit/junit.xml ---------------------
+=========================== short test summary info ============================
+PASSED tests/unit/test_toolkit.py::test_get_model_version
+PASSED tests/unit/test_toolkit.py::test_sv
+PASSED tests/unit/test_toolkit.py::test_get_denormalized_association_slots
+PASSED tests/unit/test_toolkit.py::test_get_id_prefixes
+PASSED tests/unit/test_toolkit.py::test_validate_edge
+PASSED tests/unit/test_toolkit.py::test_mixin_validate_edge
+PASSED tests/unit/test_toolkit.py::test_not_valid_edge
+PASSED tests/unit/test_toolkit.py::test_get_element_via_alias
+PASSED tests/unit/test_toolkit.py::test_predicate_map
+PASSED tests/unit/test_toolkit.py::test_rna
+PASSED tests/unit/test_toolkit.py::test_get_element_by_mapping
+PASSED tests/unit/test_toolkit.py::test_get_element_by_prefix
+PASSED tests/unit/test_toolkit.py::test_get_all_elements
+PASSED tests/unit/test_toolkit.py::test_get_all_entities
+PASSED tests/unit/test_toolkit.py::test_get_all_associations
+PASSED tests/unit/test_toolkit.py::test_filter_values_on_slot
+PASSED tests/unit/test_toolkit.py::test_match_association[association-subj_cats0-predicates0-obj_cats0-True-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats1-predicates1-obj_cats1-False-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats2-predicates2-obj_cats2-True-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats3-predicates3-obj_cats3-True-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[gene to gene association-subj_cats4-predicates4-obj_cats4-True-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[gene to gene association-subj_cats5-predicates5-obj_cats5-True-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[gene to gene coexpression association-subj_cats6-predicates6-obj_cats6-True-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[pairwise molecular interaction-subj_cats7-predicates7-obj_cats7-False-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[chemical to entity association mixin-subj_cats8-predicates8-obj_cats8-False-False]
+PASSED tests/unit/test_toolkit.py::test_match_association[organism taxon to environment association-subj_cats9-predicates9-obj_cats9-False-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[exon to transcript relationship-subj_cats10-predicates10-obj_cats10-False-True]
+PASSED tests/unit/test_toolkit.py::test_match_association[exon to transcript relationship-subj_cats11-predicates11-obj_cats11-False-False]
+PASSED tests/unit/test_toolkit.py::test_get_associations_without_parameters
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[None-None-None-True-contains0-does_not_contain0]
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories1-None-None-True-contains1-does_not_contain1]
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories2-None-object_categories2-True-contains2-does_not_contain2]
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories3-predicates3-object_categories3-True-contains3-does_not_contain3]
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories4-predicates4-object_categories4-True-contains4-does_not_contain4]
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories5-predicates5-object_categories5-True-contains5-does_not_contain5]
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories6-predicates6-object_categories6-True-contains6-does_not_contain6]
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories7-predicates7-object_categories7-False-contains7-does_not_contain7]
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories8-predicates8-object_categories8-False-contains8-does_not_contain8]
+PASSED tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories9-predicates9-object_categories9-False-contains9-does_not_contain9]
+PASSED tests/unit/test_toolkit.py::test_get_all_node_properties
+PASSED tests/unit/test_toolkit.py::test_get_all_edge_properties
+PASSED tests/unit/test_toolkit.py::test_get_element
+PASSED tests/unit/test_toolkit.py::test_get_enum_via_element
+PASSED tests/unit/test_toolkit.py::test_is_node_property
+PASSED tests/unit/test_toolkit.py::test_is_association_slot
+PASSED tests/unit/test_toolkit.py::test_is_predicate
+PASSED tests/unit/test_toolkit.py::test_is_mixin
+PASSED tests/unit/test_toolkit.py::test_is_symmetric
+PASSED tests/unit/test_toolkit.py::test_is_translator_canonical_predicate
+PASSED tests/unit/test_toolkit.py::test_has_inverse
+PASSED tests/unit/test_toolkit.py::test_get_inverse
+PASSED tests/unit/test_toolkit.py::test_get_get_inverse_predicate
+PASSED tests/unit/test_toolkit.py::test_category
+PASSED tests/unit/test_toolkit.py::test_is_qualifier
+PASSED tests/unit/test_toolkit.py::test_is_enum
+PASSED tests/unit/test_toolkit.py::test_is_subproperty_of
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[--None-False]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier--None-False]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[-upregulated-None-False]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[aspect qualifier-upregulated-None-False]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier-upregulated-None-True]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[biolink:subject_direction_qualifier-upregulated-None-True]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True0]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True0]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True1]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True1]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier-UBERON:0001981-None-False]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-upregulated-None-False]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[subject aspect qualifier-synthesis-associations12-True]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[biolink:subject_aspect_qualifier-synthesis-associations13-True]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[qualified predicate-causes-associations14-True]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[biolink:qualified_predicate-causes-associations15-True]
+PASSED tests/unit/test_toolkit.py::test_validate_qualifier[biolink:object_aspect_qualifier-activity_or_abundance-associations16-True]
+PASSED tests/unit/test_toolkit.py::test_is_permissible_value_of_enum
+PASSED tests/unit/test_toolkit.py::test_ancestors
+PASSED tests/unit/test_toolkit.py::test_permissible_value_ancestors
+PASSED tests/unit/test_toolkit.py::test_ancestors_for_kgx
+PASSED tests/unit/test_toolkit.py::test_descendants
+PASSED tests/unit/test_toolkit.py::test_children
+PASSED tests/unit/test_toolkit.py::test_parent
+PASSED tests/unit/test_toolkit.py::test_mapping
+PASSED tests/unit/test_toolkit.py::test_get_slot_domain
+PASSED tests/unit/test_toolkit.py::test_get_slot_range
+PASSED tests/unit/test_toolkit.py::test_get_all_slots_with_class_domain
+PASSED tests/unit/test_toolkit.py::test_get_all_slots_with_class_range
+PASSED tests/unit/test_toolkit.py::test_get_all_predicates_with_class_domain
+PASSED tests/unit/test_toolkit.py::test_get_all_predicates_with_class_range
+PASSED tests/unit/test_toolkit.py::test_get_all_properties_with_class_domain
+PASSED tests/unit/test_toolkit.py::test_get_all_properties_with_class_range
+PASSED tests/unit/test_toolkit.py::test_get_value_type_for_slot
+PASSED tests/unit/test_toolkit.py::test_get_all_types
+PASSED tests/unit/test_toolkit.py::test_get_all_multivalued_slots
+FAILED tests/unit/test_toolkit.py::test_get_associations_gene_to_chemical - a...
+========================= 1 failed, 92 passed in 0.78s =========================

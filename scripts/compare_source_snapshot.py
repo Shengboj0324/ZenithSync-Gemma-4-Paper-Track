@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
 import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,11 +42,21 @@ def run_image(image, output, *, probe=PROBE, generated_grading_tests=False, patc
     create = ['docker', 'create', '--pull', 'never', '--name', name,
               '--platform', 'linux/amd64', '--network', 'none', '--cap-drop', 'ALL',
               '--security-opt', 'no-new-privileges', '--pids-limit', '128',
-              '--memory', '2g', '--cpus', '2', '--entrypoint', '/usr/bin/python3', image, '-c', probe]
+              '--memory', '2g', '--cpus', '2', '--entrypoint', '/usr/bin/python3', image,
+              '/tmp/zenithsync-qualification-probe.py']
     subprocess.run(create, capture_output=True, check=True, timeout=30)
     receipt = {'image': image, 'container': name, 'agent_executed': False,
                'generated_grading_tests_executed': generated_grading_tests}
     try:
+        # Stage source as a file: Linux limits a single argv entry to 128 KiB.
+        # Resource-backed probes may exceed that even after payload compression.
+        with tempfile.TemporaryDirectory(prefix='zenithsync-probe-') as staging:
+            source = Path(staging) / 'probe.py'
+            source.write_text(probe)
+            receipt['probe_source'] = file_record(source)
+            subprocess.run(['docker', 'cp', str(source),
+                            name + ':/tmp/zenithsync-qualification-probe.py'],
+                           capture_output=True, check=True, timeout=30)
         if patch_path is not None:
             receipt['staged_patch'] = file_record(patch_path)
             subprocess.run(['docker', 'cp', str(patch_path.resolve()), name + ':/tmp/submitted.patch'],

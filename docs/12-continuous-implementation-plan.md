@@ -800,3 +800,41 @@ Task evaluator and runtime compatibility remain unverified. Docker lower layers
 retain original bytes and must not be agent-accessible. Latest suite: 204 run,
 188 passed, 16 skipped. Improved file-mutation diagnostics without weakening the
 guard; intermittent source-metadata changes remain an open local reliability issue.
+
+
+### P1 evaluator qualification update — 2026-10-09
+
+Biolink task 172 base/reference controls both stop in fixture setup (93/93
+errors each); no test assertions execute. Captured and hash-pinned the two
+Biolink 4.2.1 resources required by the fixture. Offline replay and paired
+assertion-level verification remain outstanding; see document 37. New
+resource/diagnosis bundles still require R2 publication. Pod remains stopped.
+
+
+### P1 offline evaluator controls — 2026-10-09
+
+Biolink task 172 now reaches all assertions offline: base 92/93 passing and
+reference 93/93 passing, with the intended failure-to-pass transition. Exact
+resource bodies are hash-pinned; no assertions changed. Full suite: 210 tests,
+22 skipped; six adapter tests passed separately. Continue with source-harness
+identity mapping and sanitized-image parity before admitting trajectories.
+Pod remains stopped; this is evaluator evidence, not model improvement.
+
+
+### P1 sanitized source controls — 2026-10-09
+
+Confirmed task-172 evaluator equivalence between original and sanitized images:
+all 93 full identities have identical outcomes; all 82 publisher expectation
+groups match without suppressing collisions. Added strict paired-control
+validation and five adversarial tests. Suite: 215 tests, 193 passed, 22 skipped.
+Continue source trajectory integration and rights/admission work; no model
+performance claim or training readiness follows. Pod remains stopped.
+
+
+### P1 candidate grading path — 2026-10-09
+
+Task-172 patch grader now rejects an empty repair, accepts the known reference
+repair, and rejects added test files before execution. This establishes grader
+behavior only. Full suite: 217 tests, 195 passed, 22 skipped. Located three
+source trajectories for provenance/action review and subsequent native replay.
+Runpod remains unnecessary and stopped; training admission remains pending.

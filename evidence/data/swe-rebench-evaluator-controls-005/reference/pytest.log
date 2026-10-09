@@ -1,0 +1,289 @@
+============================= test session starts ==============================
+collected 93 items
+
+tests/unit/test_toolkit.py EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE [ 48%]
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE                         [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at setup of test_get_model_version ___________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+__________________________ ERROR at setup of test_sv ___________________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+__________ ERROR at setup of test_get_denormalized_association_slots ___________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+____________________ ERROR at setup of test_get_id_prefixes ____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_____________________ ERROR at setup of test_validate_edge _____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+__________________ ERROR at setup of test_mixin_validate_edge __________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+____________________ ERROR at setup of test_not_valid_edge _____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_________________ ERROR at setup of test_get_element_via_alias _________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_____________________ ERROR at setup of test_predicate_map _____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+__________________________ ERROR at setup of test_rna __________________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+________________ ERROR at setup of test_get_element_by_mapping _________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_________________ ERROR at setup of test_get_element_by_prefix _________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+___________________ ERROR at setup of test_get_all_elements ____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+___________________ ERROR at setup of test_get_all_entities ____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_________________ ERROR at setup of test_get_all_associations __________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_________________ ERROR at setup of test_filter_values_on_slot _________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[association-subj_cats0-predicates0-obj_cats0-True-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[chemical entity assesses named thing association-subj_cats1-predicates1-obj_cats1-False-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[chemical entity assesses named thing association-subj_cats2-predicates2-obj_cats2-True-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[chemical entity assesses named thing association-subj_cats3-predicates3-obj_cats3-True-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[gene to gene association-subj_cats4-predicates4-obj_cats4-True-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[gene to gene association-subj_cats5-predicates5-obj_cats5-True-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[gene to gene coexpression association-subj_cats6-predicates6-obj_cats6-True-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[pairwise molecular interaction-subj_cats7-predicates7-obj_cats7-False-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[chemical to entity association mixin-subj_cats8-predicates8-obj_cats8-False-False] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[organism taxon to environment association-subj_cats9-predicates9-obj_cats9-False-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[exon to transcript relationship-subj_cats10-predicates10-obj_cats10-False-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_match_association[exon to transcript relationship-subj_cats11-predicates11-obj_cats11-False-False] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+__________ ERROR at setup of test_get_associations_without_parameters __________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[None-None-None-True-contains0-does_not_contain0] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories1-None-None-True-contains1-does_not_contain1] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories2-None-object_categories2-True-contains2-does_not_contain2] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories3-predicates3-object_categories3-True-contains3-does_not_contain3] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories4-predicates4-object_categories4-True-contains4-does_not_contain4] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories5-predicates5-object_categories5-True-contains5-does_not_contain5] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories6-predicates6-object_categories6-True-contains6-does_not_contain6] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories7-predicates7-object_categories7-False-contains7-does_not_contain7] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories8-predicates8-object_categories8-False-contains8-does_not_contain8] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories9-predicates9-object_categories9-False-contains9-does_not_contain9] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+___________ ERROR at setup of test_get_associations_gene_to_chemical ___________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+________________ ERROR at setup of test_get_all_node_properties ________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+________________ ERROR at setup of test_get_all_edge_properties ________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+______________________ ERROR at setup of test_get_element ______________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_________________ ERROR at setup of test_get_enum_via_element __________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+___________________ ERROR at setup of test_is_node_property ____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+__________________ ERROR at setup of test_is_association_slot __________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_____________________ ERROR at setup of test_is_predicate ______________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_______________________ ERROR at setup of test_is_mixin ________________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_____________________ ERROR at setup of test_is_symmetric ______________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+___________ ERROR at setup of test_is_translator_canonical_predicate ___________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+______________________ ERROR at setup of test_has_inverse ______________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+______________________ ERROR at setup of test_get_inverse ______________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_______________ ERROR at setup of test_get_get_inverse_predicate _______________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_______________________ ERROR at setup of test_category ________________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_____________________ ERROR at setup of test_is_qualifier ______________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+________________________ ERROR at setup of test_is_enum ________________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+___________________ ERROR at setup of test_is_subproperty_of ___________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+___________ ERROR at setup of test_validate_qualifier[--None-False] ____________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[subject direction qualifier--None-False] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+______ ERROR at setup of test_validate_qualifier[-upregulated-None-False] ______
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[aspect qualifier-upregulated-None-False] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[subject direction qualifier-upregulated-None-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[biolink:subject_direction_qualifier-upregulated-None-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True0] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True0] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True1] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True1] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[subject direction qualifier-UBERON:0001981-None-False] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[species context qualifier-upregulated-None-False] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[subject aspect qualifier-synthesis-associations12-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[biolink:subject_aspect_qualifier-synthesis-associations13-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[qualified predicate-causes-associations14-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[biolink:qualified_predicate-causes-associations15-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_ ERROR at setup of test_validate_qualifier[biolink:object_aspect_qualifier-activity_or_abundance-associations16-True] _
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_____________ ERROR at setup of test_is_permissible_value_of_enum ______________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_______________________ ERROR at setup of test_ancestors _______________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+______________ ERROR at setup of test_permissible_value_ancestors ______________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+___________________ ERROR at setup of test_ancestors_for_kgx ___________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+______________________ ERROR at setup of test_descendants ______________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_______________________ ERROR at setup of test_children ________________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+________________________ ERROR at setup of test_parent _________________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+________________________ ERROR at setup of test_mapping ________________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+____________________ ERROR at setup of test_get_slot_domain ____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+____________________ ERROR at setup of test_get_slot_range _____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+____________ ERROR at setup of test_get_all_slots_with_class_domain ____________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+____________ ERROR at setup of test_get_all_slots_with_class_range _____________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_________ ERROR at setup of test_get_all_predicates_with_class_domain __________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+__________ ERROR at setup of test_get_all_predicates_with_class_range __________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_________ ERROR at setup of test_get_all_properties_with_class_domain __________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+__________ ERROR at setup of test_get_all_properties_with_class_range __________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+________________ ERROR at setup of test_get_value_type_for_slot ________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_____________________ ERROR at setup of test_get_all_types _____________________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+_______________ ERROR at setup of test_get_all_multivalued_slots _______________
+E   AttributeError: '_io.BytesIO' object has no attribute 'mode'
+--------------------- generated xml file: /audit/junit.xml ---------------------
+=========================== short test summary info ============================
+ERROR tests/unit/test_toolkit.py::test_get_model_version - AttributeError: '_...
+ERROR tests/unit/test_toolkit.py::test_sv - AttributeError: '_io.BytesIO' obj...
+ERROR tests/unit/test_toolkit.py::test_get_denormalized_association_slots - A...
+ERROR tests/unit/test_toolkit.py::test_get_id_prefixes - AttributeError: '_io...
+ERROR tests/unit/test_toolkit.py::test_validate_edge - AttributeError: '_io.B...
+ERROR tests/unit/test_toolkit.py::test_mixin_validate_edge - AttributeError: ...
+ERROR tests/unit/test_toolkit.py::test_not_valid_edge - AttributeError: '_io....
+ERROR tests/unit/test_toolkit.py::test_get_element_via_alias - AttributeError...
+ERROR tests/unit/test_toolkit.py::test_predicate_map - AttributeError: '_io.B...
+ERROR tests/unit/test_toolkit.py::test_rna - AttributeError: '_io.BytesIO' ob...
+ERROR tests/unit/test_toolkit.py::test_get_element_by_mapping - AttributeErro...
+ERROR tests/unit/test_toolkit.py::test_get_element_by_prefix - AttributeError...
+ERROR tests/unit/test_toolkit.py::test_get_all_elements - AttributeError: '_i...
+ERROR tests/unit/test_toolkit.py::test_get_all_entities - AttributeError: '_i...
+ERROR tests/unit/test_toolkit.py::test_get_all_associations - AttributeError:...
+ERROR tests/unit/test_toolkit.py::test_filter_values_on_slot - AttributeError...
+ERROR tests/unit/test_toolkit.py::test_match_association[association-subj_cats0-predicates0-obj_cats0-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats1-predicates1-obj_cats1-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats2-predicates2-obj_cats2-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats3-predicates3-obj_cats3-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[gene to gene association-subj_cats4-predicates4-obj_cats4-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[gene to gene association-subj_cats5-predicates5-obj_cats5-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[gene to gene coexpression association-subj_cats6-predicates6-obj_cats6-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[pairwise molecular interaction-subj_cats7-predicates7-obj_cats7-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical to entity association mixin-subj_cats8-predicates8-obj_cats8-False-False]
+ERROR tests/unit/test_toolkit.py::test_match_association[organism taxon to environment association-subj_cats9-predicates9-obj_cats9-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[exon to transcript relationship-subj_cats10-predicates10-obj_cats10-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[exon to transcript relationship-subj_cats11-predicates11-obj_cats11-False-False]
+ERROR tests/unit/test_toolkit.py::test_get_associations_without_parameters - ...
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[None-None-None-True-contains0-does_not_contain0]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories1-None-None-True-contains1-does_not_contain1]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories2-None-object_categories2-True-contains2-does_not_contain2]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories3-predicates3-object_categories3-True-contains3-does_not_contain3]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories4-predicates4-object_categories4-True-contains4-does_not_contain4]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories5-predicates5-object_categories5-True-contains5-does_not_contain5]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories6-predicates6-object_categories6-True-contains6-does_not_contain6]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories7-predicates7-object_categories7-False-contains7-does_not_contain7]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories8-predicates8-object_categories8-False-contains8-does_not_contain8]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories9-predicates9-object_categories9-False-contains9-does_not_contain9]
+ERROR tests/unit/test_toolkit.py::test_get_associations_gene_to_chemical - At...
+ERROR tests/unit/test_toolkit.py::test_get_all_node_properties - AttributeErr...
+ERROR tests/unit/test_toolkit.py::test_get_all_edge_properties - AttributeErr...
+ERROR tests/unit/test_toolkit.py::test_get_element - AttributeError: '_io.Byt...
+ERROR tests/unit/test_toolkit.py::test_get_enum_via_element - AttributeError:...
+ERROR tests/unit/test_toolkit.py::test_is_node_property - AttributeError: '_i...
+ERROR tests/unit/test_toolkit.py::test_is_association_slot - AttributeError: ...
+ERROR tests/unit/test_toolkit.py::test_is_predicate - AttributeError: '_io.By...
+ERROR tests/unit/test_toolkit.py::test_is_mixin - AttributeError: '_io.BytesI...
+ERROR tests/unit/test_toolkit.py::test_is_symmetric - AttributeError: '_io.By...
+ERROR tests/unit/test_toolkit.py::test_is_translator_canonical_predicate - At...
+ERROR tests/unit/test_toolkit.py::test_has_inverse - AttributeError: '_io.Byt...
+ERROR tests/unit/test_toolkit.py::test_get_inverse - AttributeError: '_io.Byt...
+ERROR tests/unit/test_toolkit.py::test_get_get_inverse_predicate - AttributeE...
+ERROR tests/unit/test_toolkit.py::test_category - AttributeError: '_io.BytesI...
+ERROR tests/unit/test_toolkit.py::test_is_qualifier - AttributeError: '_io.By...
+ERROR tests/unit/test_toolkit.py::test_is_enum - AttributeError: '_io.BytesIO...
+ERROR tests/unit/test_toolkit.py::test_is_subproperty_of - AttributeError: '_...
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[--None-False] - Att...
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier--None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[-upregulated-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[aspect qualifier-upregulated-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier-upregulated-None-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:subject_direction_qualifier-upregulated-None-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True0]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True0]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True1]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True1]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier-UBERON:0001981-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-upregulated-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject aspect qualifier-synthesis-associations12-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:subject_aspect_qualifier-synthesis-associations13-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[qualified predicate-causes-associations14-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:qualified_predicate-causes-associations15-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:object_aspect_qualifier-activity_or_abundance-associations16-True]
+ERROR tests/unit/test_toolkit.py::test_is_permissible_value_of_enum - Attribu...
+ERROR tests/unit/test_toolkit.py::test_ancestors - AttributeError: '_io.Bytes...
+ERROR tests/unit/test_toolkit.py::test_permissible_value_ancestors - Attribut...
+ERROR tests/unit/test_toolkit.py::test_ancestors_for_kgx - AttributeError: '_...
+ERROR tests/unit/test_toolkit.py::test_descendants - AttributeError: '_io.Byt...
+ERROR tests/unit/test_toolkit.py::test_children - AttributeError: '_io.BytesI...
+ERROR tests/unit/test_toolkit.py::test_parent - AttributeError: '_io.BytesIO'...
+ERROR tests/unit/test_toolkit.py::test_mapping - AttributeError: '_io.BytesIO...
+ERROR tests/unit/test_toolkit.py::test_get_slot_domain - AttributeError: '_io...
+ERROR tests/unit/test_toolkit.py::test_get_slot_range - AttributeError: '_io....
+ERROR tests/unit/test_toolkit.py::test_get_all_slots_with_class_domain - Attr...
+ERROR tests/unit/test_toolkit.py::test_get_all_slots_with_class_range - Attri...
+ERROR tests/unit/test_toolkit.py::test_get_all_predicates_with_class_domain
+ERROR tests/unit/test_toolkit.py::test_get_all_predicates_with_class_range - ...
+ERROR tests/unit/test_toolkit.py::test_get_all_properties_with_class_domain
+ERROR tests/unit/test_toolkit.py::test_get_all_properties_with_class_range - ...
+ERROR tests/unit/test_toolkit.py::test_get_value_type_for_slot - AttributeErr...
+ERROR tests/unit/test_toolkit.py::test_get_all_types - AttributeError: '_io.B...
+ERROR tests/unit/test_toolkit.py::test_get_all_multivalued_slots - AttributeE...
+============================== 93 errors in 0.37s ==============================

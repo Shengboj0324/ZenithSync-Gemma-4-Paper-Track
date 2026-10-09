@@ -1,0 +1,6 @@
+diff --git a/tests/injected.py b/tests/injected.py
+new file mode 100644
+--- /dev/null
++++ b/tests/injected.py
+@@ -0,0 +1 @@
++raise RuntimeError("must not execute")

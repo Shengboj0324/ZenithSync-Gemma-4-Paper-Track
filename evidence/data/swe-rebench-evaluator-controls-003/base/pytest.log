@@ -1,0 +1,289 @@
+============================= test session starts ==============================
+collected 93 items
+
+tests/unit/test_toolkit.py EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE [ 48%]
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE                         [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at setup of test_get_model_version ___________________
+E   ValueError: Unsupported urllib request options
+__________________________ ERROR at setup of test_sv ___________________________
+E   ValueError: Unsupported urllib request options
+__________ ERROR at setup of test_get_denormalized_association_slots ___________
+E   ValueError: Unsupported urllib request options
+____________________ ERROR at setup of test_get_id_prefixes ____________________
+E   ValueError: Unsupported urllib request options
+_____________________ ERROR at setup of test_validate_edge _____________________
+E   ValueError: Unsupported urllib request options
+__________________ ERROR at setup of test_mixin_validate_edge __________________
+E   ValueError: Unsupported urllib request options
+____________________ ERROR at setup of test_not_valid_edge _____________________
+E   ValueError: Unsupported urllib request options
+_________________ ERROR at setup of test_get_element_via_alias _________________
+E   ValueError: Unsupported urllib request options
+_____________________ ERROR at setup of test_predicate_map _____________________
+E   ValueError: Unsupported urllib request options
+__________________________ ERROR at setup of test_rna __________________________
+E   ValueError: Unsupported urllib request options
+________________ ERROR at setup of test_get_element_by_mapping _________________
+E   ValueError: Unsupported urllib request options
+_________________ ERROR at setup of test_get_element_by_prefix _________________
+E   ValueError: Unsupported urllib request options
+___________________ ERROR at setup of test_get_all_elements ____________________
+E   ValueError: Unsupported urllib request options
+___________________ ERROR at setup of test_get_all_entities ____________________
+E   ValueError: Unsupported urllib request options
+_________________ ERROR at setup of test_get_all_associations __________________
+E   ValueError: Unsupported urllib request options
+_________________ ERROR at setup of test_filter_values_on_slot _________________
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[association-subj_cats0-predicates0-obj_cats0-True-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[chemical entity assesses named thing association-subj_cats1-predicates1-obj_cats1-False-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[chemical entity assesses named thing association-subj_cats2-predicates2-obj_cats2-True-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[chemical entity assesses named thing association-subj_cats3-predicates3-obj_cats3-True-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[gene to gene association-subj_cats4-predicates4-obj_cats4-True-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[gene to gene association-subj_cats5-predicates5-obj_cats5-True-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[gene to gene coexpression association-subj_cats6-predicates6-obj_cats6-True-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[pairwise molecular interaction-subj_cats7-predicates7-obj_cats7-False-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[chemical to entity association mixin-subj_cats8-predicates8-obj_cats8-False-False] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[organism taxon to environment association-subj_cats9-predicates9-obj_cats9-False-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[exon to transcript relationship-subj_cats10-predicates10-obj_cats10-False-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_match_association[exon to transcript relationship-subj_cats11-predicates11-obj_cats11-False-False] _
+E   ValueError: Unsupported urllib request options
+__________ ERROR at setup of test_get_associations_without_parameters __________
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[None-None-None-True-contains0-does_not_contain0] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories1-None-None-True-contains1-does_not_contain1] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories2-None-object_categories2-True-contains2-does_not_contain2] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories3-predicates3-object_categories3-True-contains3-does_not_contain3] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories4-predicates4-object_categories4-True-contains4-does_not_contain4] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories5-predicates5-object_categories5-True-contains5-does_not_contain5] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories6-predicates6-object_categories6-True-contains6-does_not_contain6] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories7-predicates7-object_categories7-False-contains7-does_not_contain7] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories8-predicates8-object_categories8-False-contains8-does_not_contain8] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_get_associations_with_parameters[subject_categories9-predicates9-object_categories9-False-contains9-does_not_contain9] _
+E   ValueError: Unsupported urllib request options
+___________ ERROR at setup of test_get_associations_gene_to_chemical ___________
+E   ValueError: Unsupported urllib request options
+________________ ERROR at setup of test_get_all_node_properties ________________
+E   ValueError: Unsupported urllib request options
+________________ ERROR at setup of test_get_all_edge_properties ________________
+E   ValueError: Unsupported urllib request options
+______________________ ERROR at setup of test_get_element ______________________
+E   ValueError: Unsupported urllib request options
+_________________ ERROR at setup of test_get_enum_via_element __________________
+E   ValueError: Unsupported urllib request options
+___________________ ERROR at setup of test_is_node_property ____________________
+E   ValueError: Unsupported urllib request options
+__________________ ERROR at setup of test_is_association_slot __________________
+E   ValueError: Unsupported urllib request options
+_____________________ ERROR at setup of test_is_predicate ______________________
+E   ValueError: Unsupported urllib request options
+_______________________ ERROR at setup of test_is_mixin ________________________
+E   ValueError: Unsupported urllib request options
+_____________________ ERROR at setup of test_is_symmetric ______________________
+E   ValueError: Unsupported urllib request options
+___________ ERROR at setup of test_is_translator_canonical_predicate ___________
+E   ValueError: Unsupported urllib request options
+______________________ ERROR at setup of test_has_inverse ______________________
+E   ValueError: Unsupported urllib request options
+______________________ ERROR at setup of test_get_inverse ______________________
+E   ValueError: Unsupported urllib request options
+_______________ ERROR at setup of test_get_get_inverse_predicate _______________
+E   ValueError: Unsupported urllib request options
+_______________________ ERROR at setup of test_category ________________________
+E   ValueError: Unsupported urllib request options
+_____________________ ERROR at setup of test_is_qualifier ______________________
+E   ValueError: Unsupported urllib request options
+________________________ ERROR at setup of test_is_enum ________________________
+E   ValueError: Unsupported urllib request options
+___________________ ERROR at setup of test_is_subproperty_of ___________________
+E   ValueError: Unsupported urllib request options
+___________ ERROR at setup of test_validate_qualifier[--None-False] ____________
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[subject direction qualifier--None-False] _
+E   ValueError: Unsupported urllib request options
+______ ERROR at setup of test_validate_qualifier[-upregulated-None-False] ______
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[aspect qualifier-upregulated-None-False] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[subject direction qualifier-upregulated-None-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[biolink:subject_direction_qualifier-upregulated-None-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True0] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True0] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True1] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True1] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[subject direction qualifier-UBERON:0001981-None-False] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[species context qualifier-upregulated-None-False] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[subject aspect qualifier-synthesis-associations12-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[biolink:subject_aspect_qualifier-synthesis-associations13-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[qualified predicate-causes-associations14-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[biolink:qualified_predicate-causes-associations15-True] _
+E   ValueError: Unsupported urllib request options
+_ ERROR at setup of test_validate_qualifier[biolink:object_aspect_qualifier-activity_or_abundance-associations16-True] _
+E   ValueError: Unsupported urllib request options
+_____________ ERROR at setup of test_is_permissible_value_of_enum ______________
+E   ValueError: Unsupported urllib request options
+_______________________ ERROR at setup of test_ancestors _______________________
+E   ValueError: Unsupported urllib request options
+______________ ERROR at setup of test_permissible_value_ancestors ______________
+E   ValueError: Unsupported urllib request options
+___________________ ERROR at setup of test_ancestors_for_kgx ___________________
+E   ValueError: Unsupported urllib request options
+______________________ ERROR at setup of test_descendants ______________________
+E   ValueError: Unsupported urllib request options
+_______________________ ERROR at setup of test_children ________________________
+E   ValueError: Unsupported urllib request options
+________________________ ERROR at setup of test_parent _________________________
+E   ValueError: Unsupported urllib request options
+________________________ ERROR at setup of test_mapping ________________________
+E   ValueError: Unsupported urllib request options
+____________________ ERROR at setup of test_get_slot_domain ____________________
+E   ValueError: Unsupported urllib request options
+____________________ ERROR at setup of test_get_slot_range _____________________
+E   ValueError: Unsupported urllib request options
+____________ ERROR at setup of test_get_all_slots_with_class_domain ____________
+E   ValueError: Unsupported urllib request options
+____________ ERROR at setup of test_get_all_slots_with_class_range _____________
+E   ValueError: Unsupported urllib request options
+_________ ERROR at setup of test_get_all_predicates_with_class_domain __________
+E   ValueError: Unsupported urllib request options
+__________ ERROR at setup of test_get_all_predicates_with_class_range __________
+E   ValueError: Unsupported urllib request options
+_________ ERROR at setup of test_get_all_properties_with_class_domain __________
+E   ValueError: Unsupported urllib request options
+__________ ERROR at setup of test_get_all_properties_with_class_range __________
+E   ValueError: Unsupported urllib request options
+________________ ERROR at setup of test_get_value_type_for_slot ________________
+E   ValueError: Unsupported urllib request options
+_____________________ ERROR at setup of test_get_all_types _____________________
+E   ValueError: Unsupported urllib request options
+_______________ ERROR at setup of test_get_all_multivalued_slots _______________
+E   ValueError: Unsupported urllib request options
+--------------------- generated xml file: /audit/junit.xml ---------------------
+=========================== short test summary info ============================
+ERROR tests/unit/test_toolkit.py::test_get_model_version - ValueError: Unsupp...
+ERROR tests/unit/test_toolkit.py::test_sv - ValueError: Unsupported urllib re...
+ERROR tests/unit/test_toolkit.py::test_get_denormalized_association_slots - V...
+ERROR tests/unit/test_toolkit.py::test_get_id_prefixes - ValueError: Unsuppor...
+ERROR tests/unit/test_toolkit.py::test_validate_edge - ValueError: Unsupporte...
+ERROR tests/unit/test_toolkit.py::test_mixin_validate_edge - ValueError: Unsu...
+ERROR tests/unit/test_toolkit.py::test_not_valid_edge - ValueError: Unsupport...
+ERROR tests/unit/test_toolkit.py::test_get_element_via_alias - ValueError: Un...
+ERROR tests/unit/test_toolkit.py::test_predicate_map - ValueError: Unsupporte...
+ERROR tests/unit/test_toolkit.py::test_rna - ValueError: Unsupported urllib r...
+ERROR tests/unit/test_toolkit.py::test_get_element_by_mapping - ValueError: U...
+ERROR tests/unit/test_toolkit.py::test_get_element_by_prefix - ValueError: Un...
+ERROR tests/unit/test_toolkit.py::test_get_all_elements - ValueError: Unsuppo...
+ERROR tests/unit/test_toolkit.py::test_get_all_entities - ValueError: Unsuppo...
+ERROR tests/unit/test_toolkit.py::test_get_all_associations - ValueError: Uns...
+ERROR tests/unit/test_toolkit.py::test_filter_values_on_slot - ValueError: Un...
+ERROR tests/unit/test_toolkit.py::test_match_association[association-subj_cats0-predicates0-obj_cats0-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats1-predicates1-obj_cats1-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats2-predicates2-obj_cats2-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical entity assesses named thing association-subj_cats3-predicates3-obj_cats3-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[gene to gene association-subj_cats4-predicates4-obj_cats4-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[gene to gene association-subj_cats5-predicates5-obj_cats5-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[gene to gene coexpression association-subj_cats6-predicates6-obj_cats6-True-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[pairwise molecular interaction-subj_cats7-predicates7-obj_cats7-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[chemical to entity association mixin-subj_cats8-predicates8-obj_cats8-False-False]
+ERROR tests/unit/test_toolkit.py::test_match_association[organism taxon to environment association-subj_cats9-predicates9-obj_cats9-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[exon to transcript relationship-subj_cats10-predicates10-obj_cats10-False-True]
+ERROR tests/unit/test_toolkit.py::test_match_association[exon to transcript relationship-subj_cats11-predicates11-obj_cats11-False-False]
+ERROR tests/unit/test_toolkit.py::test_get_associations_without_parameters - ...
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[None-None-None-True-contains0-does_not_contain0]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories1-None-None-True-contains1-does_not_contain1]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories2-None-object_categories2-True-contains2-does_not_contain2]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories3-predicates3-object_categories3-True-contains3-does_not_contain3]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories4-predicates4-object_categories4-True-contains4-does_not_contain4]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories5-predicates5-object_categories5-True-contains5-does_not_contain5]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories6-predicates6-object_categories6-True-contains6-does_not_contain6]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories7-predicates7-object_categories7-False-contains7-does_not_contain7]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories8-predicates8-object_categories8-False-contains8-does_not_contain8]
+ERROR tests/unit/test_toolkit.py::test_get_associations_with_parameters[subject_categories9-predicates9-object_categories9-False-contains9-does_not_contain9]
+ERROR tests/unit/test_toolkit.py::test_get_associations_gene_to_chemical - Va...
+ERROR tests/unit/test_toolkit.py::test_get_all_node_properties - ValueError: ...
+ERROR tests/unit/test_toolkit.py::test_get_all_edge_properties - ValueError: ...
+ERROR tests/unit/test_toolkit.py::test_get_element - ValueError: Unsupported ...
+ERROR tests/unit/test_toolkit.py::test_get_enum_via_element - ValueError: Uns...
+ERROR tests/unit/test_toolkit.py::test_is_node_property - ValueError: Unsuppo...
+ERROR tests/unit/test_toolkit.py::test_is_association_slot - ValueError: Unsu...
+ERROR tests/unit/test_toolkit.py::test_is_predicate - ValueError: Unsupported...
+ERROR tests/unit/test_toolkit.py::test_is_mixin - ValueError: Unsupported url...
+ERROR tests/unit/test_toolkit.py::test_is_symmetric - ValueError: Unsupported...
+ERROR tests/unit/test_toolkit.py::test_is_translator_canonical_predicate - Va...
+ERROR tests/unit/test_toolkit.py::test_has_inverse - ValueError: Unsupported ...
+ERROR tests/unit/test_toolkit.py::test_get_inverse - ValueError: Unsupported ...
+ERROR tests/unit/test_toolkit.py::test_get_get_inverse_predicate - ValueError...
+ERROR tests/unit/test_toolkit.py::test_category - ValueError: Unsupported url...
+ERROR tests/unit/test_toolkit.py::test_is_qualifier - ValueError: Unsupported...
+ERROR tests/unit/test_toolkit.py::test_is_enum - ValueError: Unsupported urll...
+ERROR tests/unit/test_toolkit.py::test_is_subproperty_of - ValueError: Unsupp...
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[--None-False] - Val...
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier--None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[-upregulated-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[aspect qualifier-upregulated-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier-upregulated-None-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:subject_direction_qualifier-upregulated-None-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True0]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True0]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-NCBITaxon:9606-None-True1]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:species_context_qualifier-NCBITaxon:9606-None-True1]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject direction qualifier-UBERON:0001981-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[species context qualifier-upregulated-None-False]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[subject aspect qualifier-synthesis-associations12-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:subject_aspect_qualifier-synthesis-associations13-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[qualified predicate-causes-associations14-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:qualified_predicate-causes-associations15-True]
+ERROR tests/unit/test_toolkit.py::test_validate_qualifier[biolink:object_aspect_qualifier-activity_or_abundance-associations16-True]
+ERROR tests/unit/test_toolkit.py::test_is_permissible_value_of_enum - ValueEr...
+ERROR tests/unit/test_toolkit.py::test_ancestors - ValueError: Unsupported ur...
+ERROR tests/unit/test_toolkit.py::test_permissible_value_ancestors - ValueErr...
+ERROR tests/unit/test_toolkit.py::test_ancestors_for_kgx - ValueError: Unsupp...
+ERROR tests/unit/test_toolkit.py::test_descendants - ValueError: Unsupported ...
+ERROR tests/unit/test_toolkit.py::test_children - ValueError: Unsupported url...
+ERROR tests/unit/test_toolkit.py::test_parent - ValueError: Unsupported urlli...
+ERROR tests/unit/test_toolkit.py::test_mapping - ValueError: Unsupported urll...
+ERROR tests/unit/test_toolkit.py::test_get_slot_domain - ValueError: Unsuppor...
+ERROR tests/unit/test_toolkit.py::test_get_slot_range - ValueError: Unsupport...
+ERROR tests/unit/test_toolkit.py::test_get_all_slots_with_class_domain - Valu...
+ERROR tests/unit/test_toolkit.py::test_get_all_slots_with_class_range - Value...
+ERROR tests/unit/test_toolkit.py::test_get_all_predicates_with_class_domain
+ERROR tests/unit/test_toolkit.py::test_get_all_predicates_with_class_range - ...
+ERROR tests/unit/test_toolkit.py::test_get_all_properties_with_class_domain
+ERROR tests/unit/test_toolkit.py::test_get_all_properties_with_class_range - ...
+ERROR tests/unit/test_toolkit.py::test_get_value_type_for_slot - ValueError: ...
+ERROR tests/unit/test_toolkit.py::test_get_all_types - ValueError: Unsupporte...
+ERROR tests/unit/test_toolkit.py::test_get_all_multivalued_slots - ValueError...
+============================== 93 errors in 0.36s ==============================
