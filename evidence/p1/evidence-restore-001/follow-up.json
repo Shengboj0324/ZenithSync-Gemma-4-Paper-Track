@@ -1,0 +1,5 @@
+{
+  "status": "post_restore_destination_missing",
+  "expected_destination": "artifacts/official/restored-evidence-p1-001",
+  "scope": "Receipt returned verified but directory absent at independent follow-up; cause unestablished; not accepted as recovery evidence"
+}

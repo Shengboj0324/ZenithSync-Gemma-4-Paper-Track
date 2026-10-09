@@ -1,0 +1,73 @@
+<|channel>thought
+In `unicode_is_ascii`, it uses `assert isinstance(u_string, str)`.
+And `str` is imported from `compat`.
+
+So it seems `isinstance(o, str)` is the intended way to check for unicode strings in this codebase.
+
+Now let's implement the fix in `super_len`.
+
+```python
+def super_len(o):
+    total_length = None
+    current_position = 0
+
+    if isinstance(o, str):
+        total_length = len(o.encode('utf-8'))
+    elif hasattr(o, "__len__"):
+        total_length = len(o)
+    # ...
+```
+
+Wait, if I do this, I'm adding a dependency on `str` being available in the scope.
+In `utils.py`, `str` is already imported from `.compat`.
+
+Let's check the imports in `utils.py` again.
+```python
+from .compat import (
+    proxy_bypass,
+    proxy_bypass_environment,
+    quote,
+    str,
+    unquote,
+    urlparse,
+    urlunparse,
+)
+```
+Yes, it is.
+
+So I will apply the change.
+
+Wait, I should check if `o` is `None` first?
+`super_len` is called with `body` in `prepare_content_length`.
+```python
+    def prepare_content_length(self, body):
+        """Prepare Content-Length header based on request method and body"""
+        if body is not None:
+            length = super_len(body)
+```
+So `o` will not be `None` when called from there.
+But `super_len` might be used elsewhere.
+
+If `o` is `None`, `isinstance(None, str)` is false, `hasattr(None, "__len__")` is false, `hasattr(None, "len")` is false, `hasattr(None, "fileno")` is false, `hasattr(None, "tell")` is false.
+Then `total_length` remains `None`, and it returns `max(0, 0 - 0) = 0`.
+So it handles `None` fine.
+
+Let's apply the change.
+
+<channel|><|tool_call>call:edit_file{filepath:<|"|>/workspace/src/requests/utils.py<|"|>,new_string:<|"|>def super_len(o):
+    total_length = None
+    current_position = 0
+
+    if isinstance(o, str):
+        total_length = len(o.encode('utf-8'))
+    elif hasattr(o, "__len__"):
+        total_length = len(o)
+
+    elif hasattr(o, "len"):<|"|>,old_string:<|"|>def super_len(o):
+    total_length = None
+    current_position = 0
+
+    if hasattr(o, "__len__"):
+        total_length = len(o)
+
+    elif hasattr(o, "len"):<|"|>}<tool_call|><|tool_response>

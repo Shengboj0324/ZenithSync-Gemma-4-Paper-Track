@@ -1,0 +1,22 @@
+[
+  {
+    "step": "create-venv",
+    "returncode": 0,
+    "seconds": 2.7181007796898484
+  },
+  {
+    "step": "offline-install",
+    "returncode": 0,
+    "seconds": 162.5724900830537
+  },
+  {
+    "step": "dependency-check",
+    "returncode": 0,
+    "seconds": 1.866794914007187
+  },
+  {
+    "step": "runtime-probe",
+    "returncode": 0,
+    "seconds": 33.90404237341136
+  }
+]

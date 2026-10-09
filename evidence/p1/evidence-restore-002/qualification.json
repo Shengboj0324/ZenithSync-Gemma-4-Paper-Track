@@ -1,0 +1,1 @@
+{"archive":{"sha256":"b80976af6d5d923fd287d348bb84aafbf6b8bf11df282ca6b07e2e7225a7f6c3","size_bytes":8953138},"index":{"sha256":"ca65b16e24d6e83a0a6fcbcca2f670ddb59f2acb0bfcfb23f41b8a37472d5fa0","size_bytes":77626},"members":493,"scope":"Evaluator-bearing audit archive; excludes model weights; not an agent or training input","status":"restored_archive_and_all_members_verified"}

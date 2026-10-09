@@ -1,0 +1,7 @@
+STDOUT:
+
+no tests ran in 0.27s
+
+STDERR:
+ERROR: Source qualification failed: required modules are not from the checkout
+

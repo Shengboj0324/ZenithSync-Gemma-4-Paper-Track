@@ -1,0 +1,3 @@
+<|tool_call>call:write_file{content:<|"|>s = "hello 🌍"
+print(f"{len(s)}: {s}")
+<|"|>,filepath:<|"|>probe.py<|"|>}<tool_call|><|tool_response>

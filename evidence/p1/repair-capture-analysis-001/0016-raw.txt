@@ -1,0 +1,4 @@
+<|channel>thought
+This is very strange. Let me try to run a simpler test.
+
+<channel|><|tool_call>call:run_command{command:<|"|>python3 -c "from requests.utils import super_len; print(f'super_len(\"🚀\") = {super_len(\"🚀\")}')"<|"|>}<tool_call|><|tool_response>

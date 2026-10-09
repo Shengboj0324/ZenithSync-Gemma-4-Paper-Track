@@ -1,0 +1,1 @@
+{"files":[{"path":"fastapi-0.136.3-py3-none-any.whl","sha256":"3d2a69bdf04b7e9f3afa292c3bc7a98816bbfafa10bc9b45f3f3700d2f761620","size_bytes":117481}],"kind":"harness","revision":"fastapi-0.136.3","schema_version":1,"source":"PyPI FastAPI 0.136.3 official wheel; HTTP middleware compatibility correction"}

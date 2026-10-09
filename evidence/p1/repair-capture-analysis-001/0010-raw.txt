@@ -1,0 +1,22 @@
+<|channel>thought
+If `body` is a `str`, `super_len(body)` returns `len(body)`.
+If `body` contains non-ASCII characters, `len(body)` is less than the number of bytes when encoded as UTF-8.
+The `Content-Length` header must be the number of bytes.
+
+So `super_len` should be modified to handle `str` by encoding it.
+
+Wait, if I encode it in `super_len`, I'm assuming UTF-8. Is that always correct?
+In `_encode_params`, it uses `utf-8`:
+```python
+                                k.encode("utf-8") if isinstance(k, str) else k,
+                                v.encode("utf-8") if isinstance(v, str) else v,
+```
+
+And in `prepare_body` (which I can see a bit of in the first `read_file` of `models.py`):
+```python
+            if not isinstance(body, bytes):
+                body = body.encode("utf-8")
+```
+Wait, let me find that part again.
+
+<channel|><|tool_call>call:read_file{end_line:520,filepath:<|"|>/workspace/src/requests/models.py<|"|>,start_line:500}<tool_call|><|tool_response>

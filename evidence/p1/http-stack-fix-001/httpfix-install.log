@@ -1,0 +1,8 @@
+Looking in links: /workspace/zenithsync-p1-20261008/p1-http-fix-wheels
+Processing /workspace/zenithsync-p1-20261008/p1-http-fix-wheels/fastapi-0.136.3-py3-none-any.whl (from -r /workspace/zenithsync-p1-20261008/replacement.lock (line 1))
+Installing collected packages: fastapi
+  Attempting uninstall: fastapi
+    Found existing installation: fastapi 0.141.1
+    Uninstalling fastapi-0.141.1:
+      Successfully uninstalled fastapi-0.141.1
+Successfully installed fastapi-0.136.3

@@ -1,6 +1,10 @@
 # Local compatibility exceptions: OTLP exporter 1.41.1 (official 1.44.0),
 # metrics instrumentator 7.1.0 (official 8.1.0), xgrammar 0.2.8 (official 0.2.5.post1).
 # See runtime-resolve-002 through runtime-resolve-005 evidence.
+# Additional HTTP compatibility pin: FastAPI 0.136.3. The newer 0.141.1
+# resolved previously but fails included-router instrumentation with metrics 7.1.0.
+# See evidence/p1/http-stack-fix-001; use the separate httpfix lock for deployment.
+fastapi==0.136.3
 # Exact versions from the authenticated official wheelhouse listing.
 # Constraints alone neither install these packages nor resolve transitives.
 adk-eval-core==0.1.0

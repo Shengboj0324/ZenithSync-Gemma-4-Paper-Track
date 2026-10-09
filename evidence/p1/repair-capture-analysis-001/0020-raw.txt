@@ -1,0 +1,11 @@
+<|channel>thought
+Okay, so `len('🚀')` is 1.
+Then why did `super_len('🚀')` return 4?
+
+Wait... I'm using `from requests.utils import super_len`.
+Is it possible that `requests` is installed as a package and I'm importing from the installed package instead of the source code in `/workspace/src/requests`?
+
+Let's check where `requests` is being imported from.
+
+
+<channel|><|tool_call>call:run_command{command:<|"|>python3 -c "import requests; print(requests.__file__)"<|"|>}<tool_call|><|tool_response>

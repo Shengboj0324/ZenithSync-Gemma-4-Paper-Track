@@ -1,0 +1,157 @@
+{
+  "calls": [
+    {
+      "response": "0001",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0002",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0003",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0004",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0005",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0006",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0007",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0008",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0009",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0010",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0011",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0012",
+      "tool": "write_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0013",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0014",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0015",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0016",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0017",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0018",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0019",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0020",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0021",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0022",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0023",
+      "tool": "read_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0024",
+      "tool": "edit_file",
+      "schema_errors": []
+    },
+    {
+      "response": "0025",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0026",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0027",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0028",
+      "tool": "run_command",
+      "schema_errors": []
+    },
+    {
+      "response": "0029",
+      "tool": "submit_patch",
+      "schema_errors": []
+    }
+  ],
+  "counts": {
+    "run_command": 14,
+    "read_file": 12,
+    "write_file": 1,
+    "edit_file": 1,
+    "submit_patch": 1
+  },
+  "scope": "Actual request schemas only; schema validity does not prove semantic correctness"
+}

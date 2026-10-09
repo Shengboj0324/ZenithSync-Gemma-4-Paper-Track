@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "pod_id": "ywpfgef6yvnr9m",
+  "started_utc": "2026-10-09T01:01:47.237628+00:00",
+  "validation_deadline_utc": "2026-10-09T05:01:47.237628+00:00",
+  "max_seconds": 14400,
+  "reported_cost_per_hour": 1.79,
+  "remote_root": "/workspace/zenithsync-p1-20261008",
+  "storage": "container overlay; no persistence claim",
+  "ssh_identity": "~/.ssh/zenithsync_p1_20261008"
+}

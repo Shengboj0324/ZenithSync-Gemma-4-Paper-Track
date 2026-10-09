@@ -1,0 +1,240 @@
+[
+  {
+    "request": "0001",
+    "generated_token_count": 88,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0002",
+    "generated_token_count": 86,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0003",
+    "generated_token_count": 49,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0004",
+    "generated_token_count": 848,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0005",
+    "generated_token_count": 55,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0006",
+    "generated_token_count": 66,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0007",
+    "generated_token_count": 239,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0008",
+    "generated_token_count": 86,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0009",
+    "generated_token_count": 52,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0010",
+    "generated_token_count": 286,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0011",
+    "generated_token_count": 352,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0012",
+    "generated_token_count": 556,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "write_file"
+    ]
+  },
+  {
+    "request": "0013",
+    "generated_token_count": 47,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0014",
+    "generated_token_count": 180,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0015",
+    "generated_token_count": 305,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0016",
+    "generated_token_count": 69,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0017",
+    "generated_token_count": 79,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0018",
+    "generated_token_count": 63,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0019",
+    "generated_token_count": 116,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0020",
+    "generated_token_count": 130,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0021",
+    "generated_token_count": 109,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0022",
+    "generated_token_count": 1403,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0023",
+    "generated_token_count": 73,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "read_file"
+    ]
+  },
+  {
+    "request": "0024",
+    "generated_token_count": 679,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "edit_file"
+    ]
+  },
+  {
+    "request": "0025",
+    "generated_token_count": 42,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0026",
+    "generated_token_count": 62,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0027",
+    "generated_token_count": 79,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0028",
+    "generated_token_count": 383,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "run_command"
+    ]
+  },
+  {
+    "request": "0029",
+    "generated_token_count": 18,
+    "finish_reason": "tool_calls",
+    "tool_names": [
+      "submit_patch"
+    ]
+  },
+  {
+    "request": "0030",
+    "generated_token_count": 255,
+    "finish_reason": "stop",
+    "tool_names": []
+  }
+]

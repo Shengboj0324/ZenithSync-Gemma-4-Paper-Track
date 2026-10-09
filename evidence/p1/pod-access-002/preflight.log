@@ -1,0 +1,6 @@
+Linux x86_64
+Python 3.12.3
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          80G  2.9G   78G   4% /
+/      overlay
+NVIDIA A100-SXM4-80GB, 81920 MiB, 570.172.08

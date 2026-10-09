@@ -1,0 +1,1 @@
+{"configured_secret_scan":"passed; not a general secret detector","manifest":{"sha256":"f4d683425e325c26f897cd627b0b8d49628137d4cc23e9b4b356807704b50e79","size_bytes":394},"member_count":493,"scope":"Evaluator outcomes inside; never use as a training corpus","source_bytes":27090968,"status":"evidence_archive_created"}

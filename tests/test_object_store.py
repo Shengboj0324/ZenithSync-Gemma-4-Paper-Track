@@ -1,9 +1,12 @@
 """Fault-injected object transport tests, separate from live R2 evidence."""
 
 import io
+import os
 from pathlib import Path
+import shutil
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from zenithsync.artifacts import inventory, verify
 from zenithsync.object_store import ArtifactStore, IntegrityError
@@ -54,8 +57,46 @@ class ObjectStoreTests(unittest.TestCase):
         self.assertEqual(second["reused_files"], 2)
         self.assertEqual(self.client.uploads, 2)
         dest = self.root / "restored"
-        self.store.restore(self.manifest, dest, max_bytes=100)
+        result = self.store.restore(self.manifest, dest, max_bytes=100)
+        self.assertEqual(result["destination"], str(dest.resolve()))
+        self.assertTrue(result["destination_verified"])
         verify(dest, self.manifest)
+
+    def test_removed_promoted_destination_is_not_reported_as_verified(self):
+        self.store.publish(self.source, self.manifest)
+        dest = self.root / 'removed-after-promotion'
+        original = Path.rename
+
+        def remove_after_rename(source, target):
+            result = original(source, target)
+            shutil.rmtree(target)
+            return result
+
+        with patch.object(Path, 'rename', remove_after_rename):
+            with self.assertRaises(ValueError):
+                self.store.restore(self.manifest, dest, max_bytes=100)
+        self.assertFalse(dest.exists())
+
+    def test_relative_destination_does_not_follow_callback_cwd_change(self):
+        self.store.publish(self.source, self.manifest)
+        original = self.client.get_object
+        alternate = self.root / 'other'
+        alternate.mkdir()
+        previous = Path.cwd()
+
+        def change_cwd(**kwargs):
+            os.chdir(alternate)
+            return original(**kwargs)
+
+        try:
+            os.chdir(self.root)
+            self.client.get_object = change_cwd
+            result = self.store.restore(self.manifest, Path('restored'), max_bytes=100)
+        finally:
+            os.chdir(previous)
+        verify(self.root / 'restored', self.manifest)
+        self.assertFalse((alternate / 'restored').exists())
+        self.assertEqual(result['destination'], str(self.root.resolve() / 'restored'))
 
     def test_corrupt_upload_cannot_commit_manifest(self):
         self.client.corrupt_upload = True

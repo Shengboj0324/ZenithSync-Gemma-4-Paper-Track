@@ -1,0 +1,11 @@
+<|channel>thought
+YES! It's importing from site-packages.
+I need to make sure I'm importing from `/workspace/src`.
+
+I should add `/workspace/src` to `PYTHONPATH`.
+
+Let's try again.
+
+
+
+<channel|><|tool_call>call:run_command{command:<|"|>PYTHONPATH=/workspace/src python3 -c "from requests.utils import super_len; print(f'super_len(\"🚀\") = {super_len(\"🚀\")}')"<|"|>}<tool_call|><|tool_response>

@@ -1,0 +1,8 @@
+test_child_failure_preserves_exit_and_log (test_p1_server.ServerLifecycleTests.test_child_failure_preserves_exit_and_log) ... ok
+test_session_deadline_terminates_live_child (test_p1_server.ServerLifecycleTests.test_session_deadline_terminates_live_child) ... ok
+test_unready_child_is_terminated_at_startup_timeout (test_p1_server.ServerLifecycleTests.test_unready_child_is_terminated_at_startup_timeout) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 4.464s
+
+OK

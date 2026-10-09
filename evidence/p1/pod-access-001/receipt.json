@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "pod_running_ssh_authentication_blocked",
+  "pod_id": "ywpfgef6yvnr9m",
+  "pod_status": "RUNNING",
+  "reported_hourly_cost": 1.79,
+  "ssh_host": "185.216.23.121",
+  "ssh_port": 22084,
+  "checks": [
+    {
+      "identity": "default local SSH identities",
+      "result": "Permission denied (publickey,password)",
+      "exit_code": 255
+    },
+    {
+      "identity": "~/.ssh/google_compute_engine",
+      "result": "Permission denied (publickey,password)",
+      "exit_code": 255
+    }
+  ],
+  "limitations": [
+    "No successful remote command",
+    "No verified device, storage or interpreter",
+    "No model invocation or Pod mutation"
+  ],
+  "timestamp_utc": "2026-10-09T00:48:46.616Z"
+}

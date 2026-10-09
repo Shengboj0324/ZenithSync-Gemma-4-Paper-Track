@@ -1,0 +1,2 @@
+<|tool_call>call:write_file{content:<|"|>x = 1
+<|"|>,filepath:<|"|>probe.py<|"|>}<tool_call|><|tool_response>

@@ -1,0 +1,4 @@
+<|channel>thought
+`super_len` is defined in `/workspace/src/requests/utils.py` and used in `/workspace/src/requests/models.py`.
+
+Let's examine the definition of `super_len` in `/workspace/src/requests/utils.py`.<channel|><|tool_call>call:read_file{filepath:<|"|>/workspace/src/requests/utils.py<|"|>}<tool_call|><|tool_response>

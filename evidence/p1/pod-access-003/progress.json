@@ -1,0 +1,26 @@
+{
+  "pod_id": "609g4lt940xrxe",
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "gpu_memory_mib": 81559,
+  "driver": "580.126.09",
+  "python": "3.12.3",
+  "volume_id": "ipbk8awbhv",
+  "volume_gb": 201,
+  "data_center": "US-MO-1",
+  "remote_root": "/workspace/zenithsync-p1-h100",
+  "bootstrap_python": "/root/zenithsync-bootstrap-h100/bin/python",
+  "serving_python": "/root/zenithsync-serving-h100/bin/python",
+  "ssh_verified": true,
+  "staged_manifests_verified": [
+    "code",
+    "diagnostic",
+    "bootstrap"
+  ],
+  "bootstrap_dependency_check": "passed",
+  "model_restore_session": 37004,
+  "wheel_restore_session": 49301,
+  "model_restore_pid": 869,
+  "wheel_restore_pid": 881,
+  "restore_status": "running_last_live_check",
+  "note": "Partial network-filesystem bootstrap installation was explicitly terminated; replacement local-disk bootstrap passed. Do not restart restore processes without terminal evidence."
+}

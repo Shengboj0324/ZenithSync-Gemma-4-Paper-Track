@@ -1,0 +1,66 @@
+{
+  "status": "generated_write_probe_recorded",
+  "versions": {
+    "transformers": "5.13.1",
+    "vllm": "0.19.1"
+  },
+  "cases": [
+    {
+      "case": "simple",
+      "expected": {
+        "filepath": "probe.py",
+        "content": "x = 1\n"
+      },
+      "actual": {
+        "content": "x = 1\n",
+        "filepath": "probe.py"
+      },
+      "exact_match": true,
+      "elapsed_seconds": 0.4735048497095704,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "case": "multiline_quotes",
+      "expected": {
+        "filepath": "probe.py",
+        "content": "greeting = \"hello\"\nprint(greeting)\n"
+      },
+      "actual": {
+        "content": "greeting = \"hello\"\nprint(greeting)\n",
+        "filepath": "probe.py"
+      },
+      "exact_match": true,
+      "elapsed_seconds": 0.5497236754745245,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "case": "fstring_unicode",
+      "expected": {
+        "filepath": "probe.py",
+        "content": "s = \"hello \ud83c\udf0d\"\nprint(f\"{len(s)}: {s}\")\n"
+      },
+      "actual": {
+        "content": "s = \"hello \ud83c\udf0d\"\nprint(f\"{len(s)}: {s}\")\n",
+        "filepath": "probe.py"
+      },
+      "exact_match": true,
+      "elapsed_seconds": 0.7089889878407121,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "case": "content_first_fstring",
+      "expected": {
+        "content": "s = \"hello \ud83c\udf0d\"\nprint(f\"{len(s)}: {s}\")\n",
+        "filepath": "probe.py"
+      },
+      "actual": {
+        "content": "s = \"hello \ud83c\udf0d\"\nprint(f\"{len(s)}: {s}\")\n",
+        "filepath": "probe.py"
+      },
+      "exact_match": true,
+      "elapsed_seconds": 0.7087740665301681,
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "scope": "Generated synthetic tool calls with raw token evidence; no file tool executed"
+}

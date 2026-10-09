@@ -1,0 +1,3 @@
+<|channel>thought
+I need to find where `super_len` is called in `models.py`.
+<channel|><|tool_call>call:run_command{command:<|"|>grep -n "super_len" /workspace/src/requests/models.py<|"|>}<tool_call|><|tool_response>

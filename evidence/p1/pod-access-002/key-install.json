@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "status": "public_key_installed_via_authenticated_jupyter",
+  "pod_id": "ywpfgef6yvnr9m",
+  "outputs": [
+    "PUBLIC_KEY_PRESENT True\nREMOTE_HOME /root\n"
+  ],
+  "execution_status": "ok",
+  "owned_kernel_removed": true,
+  "existing_keys_preserved": true,
+  "scope": "Public key installation; SSH still requires separate verification"
+}

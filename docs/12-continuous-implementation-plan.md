@@ -1,6 +1,6 @@
 # Continuous implementation and acceptance plan
 
-Updated October 7, 2026. **Living plan; user adopted a foundation-first, trainable Gemma agent. R0/P0 contracts and skeleton are accepted within the recorded scope; Gemma inference and training have not started.** Codex owns implementation, mathematical design, engineering, tests, analysis, and evidence preparation. The entrant supplies account access, eligibility decisions, and resource authorization. This document governs cycle cadence; [platform specification and handoff](19-agent-platform-and-model-handoff.md) governs the current build, [joint strategy](11-code-track-and-joint-strategy.md) governs competition constraints, and [evaluation protocol](05-evaluation-protocol.md) governs experiments.
+Updated October 8, 2026. **Living plan; user adopted a foundation-first, trainable Gemma agent. P0 is accepted within its recorded scope. P1 has real GPU inference and submitted-patch evidence, but is not fully accepted; training has not started.** Codex owns implementation, mathematical design, engineering, tests, analysis, and evidence preparation. The entrant supplies account access, eligibility decisions, and resource authorization. This document governs cycle cadence; [platform specification and handoff](19-agent-platform-and-model-handoff.md) governs the current build, [joint strategy](11-code-track-and-joint-strategy.md) governs competition constraints, and [evaluation protocol](05-evaluation-protocol.md) governs experiments.
 
 The objective is a reproducible, competitive repair agent with defensible research results. Mathematical sophistication must improve a justified objective or explain observed behavior. No fabricated results, task-specific answer lookup, leaked reference patches, or cosmetic chat interface presented as a working system. Explicit configuration constants and clearly labeled synthetic test fixtures are legitimate; hardcoded benchmark outcomes are not.
 
@@ -52,8 +52,8 @@ No finite test suite guarantees arbitrary patches or all future executions. Guar
 | Variable | Current setting and revision rule |
 | --- | --- |
 | Cycle duration and phase count | 8–14 hours; nominal 12. Estimate remaining cycles after the baseline pilot |
-| Compute, storage and cash caps | Unset; establish before resource-consuming work; include training and failed runs |
-| Hardware and runtime reserve | Unmeasured; derive from the actual supported environment and stress runs |
+| Compute, storage and cash caps | First P1 GPU session: four hours at observed $1.79/hour, about $7.16 compute maximum; remote work ended early, Pod stop remains user-controlled. New sessions need their own cap |
+| Hardware and runtime reserve | A100 80GB inference observed at up to 67,231 MiB in recorded samples; not a whole-run peak or training-memory estimate |
 | Cohorts, seeds and evaluation budget | Provisional in document 5; freeze before relevant comparisons; log changes and lost holdout status |
 | Effect threshold, noninferiority margin, confidence level | Declare per comparison before outcomes; use document 5 as the starting protocol, not a post-hoc choice |
 | Candidate mechanism | Core Gemma agent adopted; specialist novelty undecided. Prioritize measured localization, editing, tool-use and budget failures |
@@ -113,3 +113,25 @@ Status: **progress; Linux integration pending**. The asset-access blocker was re
 ### Data research update — October 8, 2026
 
 See [document 23](23-data-requirements-and-acquisition-plan.md) for the proposed data plan supporting the user-preferred three 50M-token candidates. This is a research/planning update, not an implementation cycle or permission to spend on teacher generation. External sources are shortlisted, not yet admitted. Mixtures are provisional and total 50M processed tokens per candidate; they do not imply 150M unique source tokens. P1 requires only a small development subset; freeze contamination groups before corpus ingestion. Official task assets total approximately 22.42GB in the saved download listing; expanded environments are extra. Next gate: authenticated source-rule check, task/environment intake and native baseline traces. No training gains or data-quality acceptance are claimed.
+
+### P1 first GPU session — October 8, 2026
+
+Status: **revise / partial integration evidence**, no trained-candidate promotion. [Session report](27-p1-gpu-validation-report.md) records the environment correction, two actual attempts, independent local grading and remaining gates. Remote work lasted about 42 minutes after the approved start; active engineering time and the final billed Pod duration were not instrumented. The server stopped and temporary remote access was cleaned up. The user was notified to stop the Pod. Subsequent documentation and evaluator checks are local.
+
+Next bounded work: finish durable recovery verification for the updated deployment/evidence; resolve official evaluator source selection and baseline compatibility, then investigate tool-call variability with captured failures. No bulk synthetic generation or training begins merely because the model loaded. P4 remains the main synthetic trajectory phase; P5 uses qualified training data for the pilot, and P6 owns the proposed three up-to-50M processed-token candidates.
+
+Recovery closeout: the revised 75-file deployment bundle was published to R2, independently restored and passed all 77 tests from the restored copy ([qualification](../evidence/p1/deployment-restore-003/qualification.json)). The 28 evaluator dependency wheels also passed independent restoration. The separate audit archive was published and a fresh absolute-path restore independently verified all 493 members ([qualification](../evidence/p1/evidence-restore-002/qualification.json)). The first restore returned a passing receipt, but its destination was absent at follow-up; this unexplained discrepancy is retained in `evidence-restore-001/follow-up.json` and that first receipt is not treated as accepted recovery evidence. This archive contains evaluator outcomes and must not be used as agent context or training data. These recovery checks do not waive the remaining P1 acceptance gates.
+
+### P1 local follow-up: final-destination recovery checks
+
+Progress: strengthened restoration to verify the promoted public directory and bind its absolute path before transport callbacks. Two new fault tests passed; the complete local and freshly restored suites each passed 79 tests. A live R2 restore passed the revised path check. Deployment bundle 004 supersedes bundle 003 for this implementation and passed independent restoration ([qualification](../evidence/p1/deployment-restore-004/qualification.json)). The initial missing-directory anomaly remains unexplained; no cause was inferred from the new tests. The fifth unchanged evaluator failure was traced to HTTP fixture response construction, not changed Requests code. P1 remains unaccepted; continue evaluator compatibility and model/tool qualification locally before requesting any further GPU session. No GPU work or training ran in this follow-up.
+
+### P1 local follow-up: actual pytest-process source qualification
+
+Progress: implemented an evaluator-only source gate observing loaded modules inside pytest. The uncorrected environment is rejected before execution; the corrected environment passes the source gate, matches exact snapshot-plus-agent-patch source hashes, and retains all 324 previous per-case outcomes. All 81 local and restored-copy software tests passed. Deployment bundle 005 includes the plugin and corresponding tests and passed independent R2 recovery ([qualification](../evidence/p1/deployment-restore-005/qualification.json)). No GPU inference or training ran.
+
+This strengthens the validity of local measurements without asserting that the organizer runtime has been repaired. Remaining work includes broader model/tool qualification and a defensible resolution of official evaluator incompatibilities. P1 remains unaccepted; the active implementation objective is unchanged.
+
+### P1 requirements audit and resource evidence
+
+The [requirements audit](28-p1-requirements-audit.md) separates the published intake/inference exit criteria from the broader reliability, independent evaluation and training obligations. It indexes actual memory/latency measurements and retains every unresolved limitation. The Pod is now confirmed `EXITED` by an authenticated read. No inference or training was started. The broad objective remains active; this audit is not a phase waiver or an assertion of training readiness. Next work must address a functional qualification gap rather than accumulating redundant packaging or test-count updates.

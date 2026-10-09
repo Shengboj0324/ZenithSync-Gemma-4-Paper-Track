@@ -1,0 +1,7 @@
+**
+!artifacts/
+!artifacts/official/
+!artifacts/official/p1-evaluator-http-wheels-002/
+!artifacts/official/p1-evaluator-http-wheels-002/*.whl
+!requirements/
+!requirements/evaluator-http-linux-py313.lock.txt

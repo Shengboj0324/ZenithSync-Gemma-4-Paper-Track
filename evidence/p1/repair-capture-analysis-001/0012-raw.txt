@@ -1,0 +1,51 @@
+<|channel>thought
+In Python 3, `str` is unicode and `bytes` is bytes.
+`basestring` is `(str, bytes)`.
+
+If `o` is a `str` (unicode in Py3), `len(o)` is number of characters.
+If `o` is `bytes`, `len(o)` is number of bytes.
+
+So if `o` is a `str`, we should encode it.
+
+Wait, if `o` is `bytes`, `hasattr(o, "__len__")` is true, and `len(o)` is correct.
+If `o` is `str`, `hasattr(o, "__len__")` is true, and `len(o)` is NOT correct for `Content-Length`.
+
+So I should check if `o` is a `str` first.
+
+But wait, `basestring` includes both `str` and `bytes`.
+If I use `isinstance(o, str)`, it will be true for `str` in Py3.
+
+Let's see if I should use `isinstance(o, str)` or something else.
+In `models.py`, `_encode_params` does:
+```python
+                                k.encode("utf-8") if isinstance(k, str) else k,
+                                v.encode("utf-8") if isinstance(v, str) else v,
+```
+And `prepare_body` does:
+```python
+            if not isinstance(body, bytes):
+                body = body.encode("utf-8")
+```
+
+So it seems `isinstance(o, str)` is the way to go to identify strings that need encoding.
+
+Let's verify this with a test case.
+I'll create a small script to test `super_len`.
+
+<channel|><|tool_call>call:write_file{content:<|"|>
+from requests.utils import super_len
+
+def test_super_len():
+    # ASCII string
+    assert super_len("hello") == 5
+    # Non-ASCII string
+    # '🚀' is 4 bytes in UTF-8
+    assert super_len("🚀") == 4
+    # Bytes
+    assert super_len(b"hello") == 5
+    assert super_len(b"\xf0\x9f\x9a\x80") == 4
+    print("All tests passed!")
+
+if __name__ == "__main__":
+    test_super_len()
+<|"|>,filepath:<|"|>test_super_len.py<|"|>}<tool_call|><|tool_response>

@@ -1,0 +1,2 @@
+<|channel>thought
+I'm done.<channel|><|tool_call>call:submit_patch{}<tool_call|><|tool_response>

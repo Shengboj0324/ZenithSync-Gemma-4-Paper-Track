@@ -4,12 +4,17 @@ Joint research and execution plan for the Google Gemma 4 Developer Agent Competi
 
 **Adopted direction:** build a complete, trainable Gemma-powered repository engineering agent first, using the competition's supported runtime. Measure its failure profile, train targeted adapters, and add specialist capabilities only when their benefit is demonstrated. The discarded debugging/product hypotheses no longer gate core implementation. Research novelty remains unproved; documents 15–18 are historical evidence, not the current product mandate.
 
-**Status:** R0/P0 contracts and skeleton accepted: local/Linux foundation tests, released compiler checks and real sandbox tool integration pass. Gemma execution and training have not started. The earlier reproduction pilot remains complete with no demonstrated mechanism advantage. The user reports model download access. Live checks confirmed Runpod authentication and an active DigitalOcean account; Cloudflare connection is unverified. See document 19 for the model handoff, exact verification scope, and service activation gates.
+**Status, October 8:** P0 is accepted within its recorded scope; P1 is partially qualified. Gemma ran on the A100, passed a real tool continuation and submitted a source-only patch in one of two development attempts. Corrected local evaluation confirms the target regression is fixed, with five unchanged baseline failures; official overall solve and general tool reliability remain unproven. Model/R2 recovery is verified. No training has started. The GPU server is stopped; the user controls the Pod's billing stop. See the [GPU session report](docs/27-p1-gpu-validation-report.md).
 
 ## Reading order
 
 | Document | Purpose |
 | --- | --- |
+| [P1 requirements audit](docs/28-p1-requirements-audit.md) | Published phase exit evidence, broader open obligations and measured resource limits |
+| [P1 GPU session report](docs/27-p1-gpu-validation-report.md) | Actual inference, two repair attempts, corrected local grading, limits and cleanup |
+| [P1 acceptance checklist](docs/26-p1-acceptance-checklist.md) | Gate-by-gate evidence and remaining failures |
+| [P1 deployment handoff](docs/25-p1-deployment-handoff.md) | Corrected serving lock, durable recovery and future Pod procedure |
+| [P1 implementation history](docs/24-p1-implementation-status.md) | Preserved development checkpoints and unsuccessful attempts |
 | [Data requirements and acquisition](docs/23-data-requirements-and-acquisition-plan.md) | Specific source shortlist, schemas, 3×50M candidate mixtures, contamination controls and intake gates |
 | [R0 implementation and correctness](docs/20-r0-foundation.md) | Contracts, CLI, schemas, mathematical ledger, offline checks and bounded integration acceptance |
 | [Cloud preparation](docs/21-cloud-preparation.md) | Actions needed for Runpod, DigitalOcean, R2 and the model handoff |
@@ -53,7 +58,7 @@ The code track currently allows one submission per day and two final selections.
 4. Freeze evaluation partitions before inspecting reference fixes for method development; complete the nearest-prior-art review before asserting novelty.
 5. Use measured failures to choose between reasoning, retrieval, recovery, and tuning interventions; keep a stable code champion throughout.
 
-The revised schedule starts October 7 and extends through December 2. Both submissions remain planned. The reproduction pilot used hosted Codex inference; no GPU provisioning, model training or publication has been initiated. Competition rule acceptance was confirmed in the authenticated Chrome session on October 7.
+Both submissions remain planned. The earlier reproduction pilot used hosted Codex inference; P1 subsequently used the user's existing Runpod GPU. Model training and competition submission have not started. Competition rule acceptance was confirmed in the authenticated Chrome session on October 7.
 
 ## Run the foundation checks
 
@@ -62,7 +67,7 @@ python3 -m unittest discover -s tests -v
 python3 -m zenithsync --help
 ```
 
-Python 3.13.7 was tested locally; no third-party dependencies are required. [Retained validation receipt](evidence/r0/local-004/receipt.json) records 26-test success in its linked test log and an isolated offline CLI smoke check. This is not an inference or repair benchmark. See [R0 acceptance audit](docs/20-r0-foundation.md).
+The original 26-test foundation used Python 3.13.7 and the standard library: [R0 validation](evidence/r0/local-004/receipt.json). The expanded suite passed 81 tests in the qualified tokenizer environment: [P1 validation](evidence/p1/local-006/receipt.json). Optional tokenizer checks require the pinned dependencies; do not interpret skipped checks as verified. These software tests are separate from inference and repair evidence.
 
 The official starter and harness assets are now downloaded into ignored local storage. The unchanged starter compiled with ADK submission 0.2.12 and Google ADK 1.36.1. See the [official contract audit](docs/22-official-contract-audit.md) for source discrepancies, compiler tests and remaining runtime gates.
 

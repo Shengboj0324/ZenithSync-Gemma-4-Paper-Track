@@ -1,0 +1,32 @@
+diff --git a/repro.py b/repro.py
+new file mode 100644
+index 00000000..18e5d02b
+--- /dev/null
++++ b/repro.py
+@@ -0,0 +1,11 @@
++from requests.utils import super_len
++
++def test_super_len_str():
++    s = "hello"
++    print("len(hello): %s, super_len(hello): %s" % (len(s), super_len(s)))
++    
++    s_unicode = "hello \u2713"
++    print("len(unicode): %s, super_len(unicode): %s" % (len(s_unicode), super_len(s_unicode)))
++
++if __name__ == "__main__":
++    test_super_len_str()
+diff --git a/src/requests/utils.py b/src/requests/utils.py
+index c3b123ea..f5b97b6d 100644
+--- a/src/requests/utils.py
++++ b/src/requests/utils.py
+@@ -134,7 +134,9 @@ def super_len(o):
+     total_length = None
+     current_position = 0
+ 
+-    if hasattr(o, "__len__"):
++    if isinstance(o, str):
++        total_length = len(o.encode('utf-8'))
++    elif hasattr(o, "__len__"):
+         total_length = len(o)
+ 
+     elif hasattr(o, "len"):

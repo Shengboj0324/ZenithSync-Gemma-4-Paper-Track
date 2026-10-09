@@ -1,0 +1,71 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.p1-evaluator-http
+#1 transferring dockerfile: 893B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/zenithsync-r0-sandbox:20261008
+#2 DONE 0.0s
+
+#3 [1/4] FROM docker.io/library/zenithsync-r0-sandbox:20261008@sha256:14d857d591be7d1a7efc83ff1dcc87f83c96c764895b0986a45db0d8af5a8a46
+#3 resolve docker.io/library/zenithsync-r0-sandbox:20261008@sha256:14d857d591be7d1a7efc83ff1dcc87f83c96c764895b0986a45db0d8af5a8a46 done
+#3 CACHED
+
+#4 [internal] load build context
+#4 transferring context: 10.34MB 0.1s done
+#4 DONE 0.1s
+
+#5 [2/4] COPY artifacts/official/p1-evaluator-http-wheels-002 /tmp/http-wheels
+#5 DONE 0.1s
+
+#6 [3/4] COPY requirements/evaluator-http-linux-py313.lock.txt /tmp/http.lock
+#6 DONE 0.0s
+
+#7 [4/4] RUN python -m pip install --no-index --find-links=/tmp/http-wheels --require-hashes -r /tmp/http.lock     && python -m pip check     && python -c 'import pytest_httpbin.plugin, httpbin'     && rm -rf /tmp/http-wheels /tmp/http.lock
+#7 0.358 Looking in links: /tmp/http-wheels
+#7 0.365 Processing /tmp/http-wheels/attrs-26.1.0-py3-none-any.whl (from -r /tmp/http.lock (line 1))
+#7 0.371 Processing /tmp/http-wheels/blinker-1.9.0-py3-none-any.whl (from -r /tmp/http.lock (line 2))
+#7 0.373 Processing /tmp/http-wheels/brotlicffi-1.2.0.2-cp39-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (from -r /tmp/http.lock (line 3))
+#7 0.380 Processing /tmp/http-wheels/cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from -r /tmp/http.lock (line 4))
+#7 0.383 Processing /tmp/http-wheels/click-8.5.0-py3-none-any.whl (from -r /tmp/http.lock (line 5))
+#7 0.385 Processing /tmp/http-wheels/decorator-5.3.1-py3-none-any.whl (from -r /tmp/http.lock (line 6))
+#7 0.387 Processing /tmp/http-wheels/flasgger-0.9.7.1-py2.py3-none-any.whl (from -r /tmp/http.lock (line 7))
+#7 0.402 Processing /tmp/http-wheels/flask-3.1.3-py3-none-any.whl (from -r /tmp/http.lock (line 8))
+#7 0.404 Processing /tmp/http-wheels/greenlet-3.2.5-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (from -r /tmp/http.lock (line 9))
+#7 0.408 Processing /tmp/http-wheels/httpbin-0.10.2-py2.py3-none-any.whl (from -r /tmp/http.lock (line 10))
+#7 0.410 Requirement already satisfied: iniconfig==2.3.1 in /usr/local/lib/python3.13/site-packages (from -r /tmp/http.lock (line 11)) (2.3.1)
+#7 0.411 Processing /tmp/http-wheels/itsdangerous-2.2.0-py3-none-any.whl (from -r /tmp/http.lock (line 12))
+#7 0.413 Processing /tmp/http-wheels/jinja2-3.1.6-py3-none-any.whl (from -r /tmp/http.lock (line 13))
+#7 0.415 Processing /tmp/http-wheels/jsonschema-4.26.0-py3-none-any.whl (from -r /tmp/http.lock (line 14))
+#7 0.418 Processing /tmp/http-wheels/jsonschema_specifications-2025.9.1-py3-none-any.whl (from -r /tmp/http.lock (line 15))
+#7 0.420 Processing /tmp/http-wheels/markupsafe-3.0.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (from -r /tmp/http.lock (line 16))
+#7 0.422 Processing /tmp/http-wheels/mistune-3.3.4-py3-none-any.whl (from -r /tmp/http.lock (line 17))
+#7 0.424 Requirement already satisfied: packaging==26.3 in /usr/local/lib/python3.13/site-packages (from -r /tmp/http.lock (line 18)) (26.3)
+#7 0.424 Requirement already satisfied: pluggy==1.6.0 in /usr/local/lib/python3.13/site-packages (from -r /tmp/http.lock (line 19)) (1.6.0)
+#7 0.425 Processing /tmp/http-wheels/pycparser-3.1-py3-none-any.whl (from -r /tmp/http.lock (line 20))
+#7 0.426 Requirement already satisfied: Pygments==2.21.0 in /usr/local/lib/python3.13/site-packages (from -r /tmp/http.lock (line 21)) (2.21.0)
+#7 0.427 Requirement already satisfied: pytest==9.1.1 in /usr/local/lib/python3.13/site-packages (from -r /tmp/http.lock (line 22)) (9.1.1)
+#7 0.428 Processing /tmp/http-wheels/pytest_httpbin-2.1.0-py3-none-any.whl (from -r /tmp/http.lock (line 23))
+#7 0.429 Processing /tmp/http-wheels/pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (from -r /tmp/http.lock (line 24))
+#7 0.433 Processing /tmp/http-wheels/referencing-0.37.0-py3-none-any.whl (from -r /tmp/http.lock (line 25))
+#7 0.435 Processing /tmp/http-wheels/rpds_py-2026.9.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (from -r /tmp/http.lock (line 26))
+#7 0.438 Processing /tmp/http-wheels/six-1.17.0-py2.py3-none-any.whl (from -r /tmp/http.lock (line 27))
+#7 0.439 Processing /tmp/http-wheels/werkzeug-3.1.8-py3-none-any.whl (from -r /tmp/http.lock (line 28))
+#7 0.489 Installing collected packages: six, rpds-py, PyYAML, pycparser, mistune, MarkupSafe, itsdangerous, greenlet, decorator, click, blinker, attrs, Werkzeug, referencing, Jinja2, cffi, jsonschema-specifications, Flask, brotlicffi, jsonschema, flasgger, httpbin, pytest-httpbin
+#7 1.131 
+#7 1.135 Successfully installed Flask-3.1.3 Jinja2-3.1.6 MarkupSafe-3.0.4 PyYAML-6.0.3 Werkzeug-3.1.8 attrs-26.1.0 blinker-1.9.0 brotlicffi-1.2.0.2 cffi-2.1.1 click-8.5.0 decorator-5.3.1 flasgger-0.9.7.1 greenlet-3.2.5 httpbin-0.10.2 itsdangerous-2.2.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 mistune-3.3.4 pycparser-3.1 pytest-httpbin-2.1.0 referencing-0.37.0 rpds-py-2026.9.1 six-1.17.0
+#7 1.135 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#7 1.397 No broken requirements found.
+#7 DONE 1.9s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 0.7s done
+#8 exporting manifest sha256:d130690b537b299fd2b1af29cae0d9ed0e628011c2349458be63bd907e0d1953 done
+#8 exporting config sha256:47dd83316284bbf5ae98d0a1bace4e89903b8a00bfeb8c76b0d1cd185d0af9de done
+#8 exporting attestation manifest sha256:ec910a83a610ebf49513dc4cf61621f05674b68a6869d031bc76970ad864aeea done
+#8 exporting manifest list sha256:784c47f534d350ffb732e058f5c5d02526e91469c7d03d5ece05496c8d6b6f29 done
+#8 naming to docker.io/library/zenithsync-p1-evaluator-http:20261008-v2 done
+#8 DONE 0.8s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/rqukwvs5v0zghxugp8cn183si

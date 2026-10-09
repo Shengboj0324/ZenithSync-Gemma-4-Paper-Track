@@ -1,0 +1,13 @@
+<|channel>thought
+The patch has been submitted.
+<channel|>The `super_len` function in `src/requests/utils.py` was previously using `len()` for string objects, which returns the number of characters rather than the number of encoded bytes. This led to incorrect `Content-Length` headers for request bodies containing non-ASCII characters.
+
+I have updated `super_len` to explicitly encode `str` objects using UTF-8 and then calculate the length of the resulting bytes. This ensures that the `Content-Length` header correctly reflects the size of the payload as it will be sent over the network.
+
+The change was verified with a targeted test case:
+- `super_len("hello")` returns 5.
+- `super_len("🚀")` returns 4 (the number of bytes for the rocket emoji in UTF-8).
+- `super_len(b"hello")` returns 5.
+- `super_len(b"\xf0\x9f\x9a\x80")` returns 4.
+
+The fix is consistent with how `requests` handles string encoding in other parts of the codebase (e.g., in `models.py`).<turn|>

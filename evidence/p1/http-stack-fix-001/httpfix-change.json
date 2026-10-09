@@ -1,0 +1,11 @@
+{
+  "status": "dependency_and_http_regression_checks_passed",
+  "package_count": 250,
+  "changed_versions": {
+    "fastapi": [
+      "0.141.1",
+      "0.136.3"
+    ]
+  },
+  "limitation": "GPU server retry pending"
+}

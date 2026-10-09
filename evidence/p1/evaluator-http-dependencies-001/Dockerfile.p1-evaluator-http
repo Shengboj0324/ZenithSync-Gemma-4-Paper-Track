@@ -1,0 +1,8 @@
+# Local diagnostic image: upstream's Python 3.13 fixture compatibility update.
+# This is not an assertion of parity with Kaggle's grading image.
+FROM zenithsync-r0-sandbox:20261008
+COPY artifacts/official/p1-evaluator-http-wheels /tmp/http-wheels
+COPY requirements/evaluator-http-linux-py313.lock.txt /tmp/http.lock
+RUN python -m pip install --no-index --find-links=/tmp/http-wheels --require-hashes -r /tmp/http.lock \
+    && python -m pip check \
+    && rm -rf /tmp/http-wheels /tmp/http.lock

@@ -1,0 +1,1 @@
+{"files":[{"path":"task.json","sha256":"b9cea28ccefb7f991e1fb134274d845fb1674698d37f7b209f0e9cbb6b48f78f","size_bytes":1540}],"kind":"harness","revision":"requests_6589-evaluator-v1","schema_version":1,"source":"Official development task evaluator tests; reference implementation excluded"}

@@ -1,0 +1,38 @@
+{
+  "status": "generated_write_probe_recorded",
+  "versions": {
+    "transformers": "5.13.1",
+    "vllm": "0.19.1"
+  },
+  "cases": [
+    {
+      "case": "simple",
+      "expected": {
+        "filepath": "probe.py",
+        "content": "x = 1\n"
+      },
+      "actual": {
+        "content": "x = 1\n",
+        "filepath": "probe.py"
+      },
+      "exact_match": true,
+      "elapsed_seconds": 0.49648033548146486,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "case": "multiline_quotes",
+      "expected": {
+        "filepath": "probe.py",
+        "content": "greeting = \"hello\"\nprint(greeting)\n"
+      },
+      "actual": {
+        "content": "greeting = \"hello\"\nprint(greeting)\n",
+        "filepath": "probe.py"
+      },
+      "exact_match": true,
+      "elapsed_seconds": 0.5541831199079752,
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "scope": "Two generated synthetic tool calls with raw token evidence; no file tool executed"
+}

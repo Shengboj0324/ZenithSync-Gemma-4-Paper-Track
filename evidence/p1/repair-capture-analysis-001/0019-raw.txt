@@ -1,0 +1,14 @@
+<|channel>thought
+It's exactly as I thought:
+```python
+    if hasattr(o, "__len__"):
+        total_length = len(o)
+```
+So `super_len("🚀")` should be 1.
+Why is it 4?
+
+Is it possible that `str` in this environment is not what I think it is?
+Let's check.
+
+
+<channel|><|tool_call>call:run_command{command:<|"|>python3 -c "print(type('🚀'), len('🚀'))"<|"|>}<tool_call|><|tool_response>

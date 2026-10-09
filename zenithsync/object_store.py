@@ -121,6 +121,8 @@ class ArtifactStore:
         if os.path.lexists(destination):
             raise FileExistsError("restore destination already exists")
         parent = destination.parent.resolve(strict=True)
+        # Bind relative destinations once, before any transport callbacks run.
+        destination = parent / destination.name
         with tempfile.TemporaryDirectory(prefix=".restore-", dir=parent) as temporary:
             staging = Path(temporary) / "bundle"
             staging.mkdir(mode=0o700)
@@ -135,4 +137,8 @@ class ArtifactStore:
             if os.path.lexists(destination):
                 raise FileExistsError("restore destination appeared during transfer")
             staging.rename(destination)
-        return {"restored_files": len(frozen["files"]), "verified_bytes": total}
+        # Verify the public destination after promotion and temporary cleanup.
+        # This is a point-in-time check, not protection from later external edits.
+        verify(destination, frozen)
+        return {"restored_files": len(frozen["files"]), "verified_bytes": total,
+                "destination": str(destination), "destination_verified": True}

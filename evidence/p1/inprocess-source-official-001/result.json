@@ -1,0 +1,19 @@
+{
+  "task_id": "requests_6589",
+  "resolved": false,
+  "status": "SUCCESS",
+  "duration_seconds": 9.632538166013546,
+  "cost_usd": 0.0,
+  "total_tokens": 0,
+  "total_llm_calls": 0,
+  "error_message": null,
+  "trace_path": null,
+  "metadata": {},
+  "repo": "psf/requests",
+  "agent_patch": "",
+  "test_output": "STDOUT:\n\nno tests ran in 0.27s\n\nSTDERR:\nERROR: Source qualification failed: required modules are not from the checkout\n\n",
+  "test_exit_code": 4,
+  "trace": null,
+  "tool_calls": 0,
+  "task_index": null
+}
