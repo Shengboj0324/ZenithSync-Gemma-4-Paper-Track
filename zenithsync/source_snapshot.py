@@ -60,7 +60,15 @@ def tracked_snapshot(repo):
             if executable != (mode == '100755'):
                 raise ValueError('Tracked executable mode mismatch')
             content = path.read_bytes()
-        actual = git(repo, 'hash-object', '--no-filters', '--stdin', data=content).stdout.strip().decode()
+        # The snapshot contract uses SHA-1 Git object identities (40 hex digits).
+        # Hash the unfiltered Git blob encoding directly, avoiding one process
+        # per file. Symlink content is its link text, as in Git's index.
+        if re.fullmatch('[0-9a-f]{40}', blob) is None:
+            raise ValueError('Expected SHA-1 Git blob identity')
+        header = b'blob ' + str(len(content)).encode('ascii') + b'\0'
+        digest = hashlib.sha1(header)
+        digest.update(content)
+        actual = digest.hexdigest()
         if actual != blob:
             raise ValueError('Working file differs from tracked Git blob')
         result.append({'path': relative, 'mode': mode, 'blob': blob,

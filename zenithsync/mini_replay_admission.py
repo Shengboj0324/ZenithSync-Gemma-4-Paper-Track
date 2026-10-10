@@ -8,6 +8,7 @@ from .replay_history import mini_replay_history
 from .submission_reconciliation import scratch_cleanup_command
 from .training_batch import collate_training_examples
 from .resource_replay_binding import verify_resource_replay_binding
+from .replay_correction import verify_correction_binding
 from .session_resource_bundle import session_resource_payload
 
 
@@ -99,8 +100,7 @@ def assess_mini_replay_bundle(*, root, attempt, history, grade, tokens, candidat
     verify(attempt / 'receipt.json', history_receipt['attempt'])
     verify(attempt / 'submitted.patch', replay['patch'])
     verify(attempt / 'intended.patch', replay['intended_patch'])
-    if (replay['native_submission_equals_source_export'] is not True
-            or replay['patch'] != replay['intended_patch']):
+    if replay['patch'] != replay['intended_patch']:
         raise ValueError('Native patch differs from source intended export')
     verify(candidate, replay['candidate'])
     verify(profile, replay['profile'])
@@ -115,6 +115,13 @@ def assess_mini_replay_bundle(*, root, attempt, history, grade, tokens, candidat
             or grading['sanitized_snapshot'] is not True):
         raise ValueError('Completed portable replay and sanitized evaluation required')
     source, task_data, reviewed = read(candidate), read(task), read(profile)
+    correction = verify_correction_binding(reviewed, replay)
+    if correction is not None:
+        verify(attempt / 'source-intended.patch', correction['source_patch'])
+        if history_receipt.get('correction') != correction:
+            raise ValueError('History correction provenance differs')
+    elif 'correction' in history_receipt:
+        raise ValueError('Orphaned history correction provenance')
     resource_proof, resource_files = verify_resource_replay_binding(
         replay, reviewed, path(session_resources) if session_resources is not None else None)
     resource_payload = None
@@ -151,7 +158,8 @@ def assess_mini_replay_bundle(*, root, attempt, history, grade, tokens, candidat
     if len(tools) != 9 or len(allowed) != 9:
         raise ValueError('Nine native tool schemas required')
     reconstructed = mini_replay_history(events, source_messages=source['messages'],
-        system=messages[0]['content'], problem=task_data['problem_statement'], allowed_tools=allowed)
+        system=messages[0]['content'], problem=task_data['problem_statement'], allowed_tools=allowed,
+        correction_plan=correction)
     if reconstructed['messages'] != messages or reconstructed['mapping'] != mapping:
         raise ValueError('History differs from fresh native exchanges')
     expected_command = scratch_cleanup_command(python=reviewed['python'],
@@ -251,4 +259,8 @@ def assess_mini_replay_bundle(*, root, attempt, history, grade, tokens, candidat
         result['resource_environment'] = resource_proof
         result['remaining_gates'].append('captured_response_rights_and_supervision_review')
         result['limitations'].append('Current recorded response bodies do not establish historical website equivalence.')
+    if correction is not None:
+        result['correction'] = correction
+        result['remaining_gates'].append('assistant_correction_supervision_review')
+        result['limitations'].append('Correction commands are assistant-authored extensions, not original teacher actions.')
     return result

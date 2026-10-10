@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from zenithsync.artifacts import canonical_json, file_record, load_json
 from zenithsync.replay_history import native_replay_history
+from zenithsync.replay_completion import validate_completion_plan, completed_replay_history
 
 
 def main():
@@ -70,8 +71,21 @@ def main():
     if allowed != set(attempt['available_tools']) or len(tools) != len(allowed):
         raise ValueError('Native tool schema set mismatch')
     events = load_json(args.attempt / 'events.json')
-    projected = native_replay_history(events, system=protocol['messages'][0]['content'],
-                                      problem=problem, allowed_tools=allowed)
+    projection_arguments = dict(system=protocol['messages'][0]['content'],
+                                problem=problem, allowed_tools=allowed)
+    if 'completion_plan' in attempt:
+        plan = validate_completion_plan(attempt['completion_plan'])
+        action_path = args.attempt / 'actions.json'
+        bindings[str(action_path)] = file_record(action_path)
+        if (bindings[str(action_path)] != plan['source_actions']
+                or attempt['patch'] != plan['final_patch']
+                or attempt.get('completion_module') != file_record(ROOT/'zenithsync/replay_completion.py')):
+            raise ValueError('Completion provenance mismatch')
+        projected = completed_replay_history(events, plan=plan, **projection_arguments)
+    else:
+        if any(e.get('kind') == 'completion' or 'adapter_authored' in e for e in events):
+            raise ValueError('Completion events require a bound plan')
+        projected = native_replay_history(events, **projection_arguments)
     if (file_record(source) != identity
             or any(file_record(Path(path)) != record for path, record in bindings.items())):
         raise ValueError('Task source changed during projection')
@@ -89,6 +103,8 @@ def main():
                'limitations': ['Reconstructed prompt is not proof of original teacher conditioning.',
                                'Fresh native observations; original teacher reasoning omitted.',
                                'Tool-name equality does not establish identical source tool semantics.']}
+    if 'completion_plan' in attempt:
+        receipt['completion_plan'] = attempt['completion_plan']
     (args.output / 'receipt.json').write_bytes(canonical_json(receipt))
     print({'messages': len(projected['messages']), 'exchanges': len(projected['mapping'])})
 

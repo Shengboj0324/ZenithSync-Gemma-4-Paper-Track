@@ -2590,3 +2590,241 @@ trace and the executable counterexample; do not rewrite it to look successful.
 The evidence can support future error-analysis work, but is not automatically
 approved as negative training data or a preference pair. Priority review 004
 records the hold. Corpus 009 remains unchanged and Runpod remains stopped.
+
+## Corpus 012: preserved correction history and restored schedule
+
+The current assembly contains nine examples across eight repository groups,
+155,931 input tokens and 54,365 supervised targets. The added PySyft trajectory
+preserves the observed doctest failure and explicitly assistant-authored correction;
+the unchanged original trace remains excluded. Mechanical replay is not evidence
+of a trained model producing this fix. All admission gates remain unresolved.
+
+The inspection update cap is now 9,216 supervised targets, explicitly replacing
+8,192 for this plan because the complete correction example has 8,218 targets.
+This changes example grouping and optimizer-update frequency; it is not claimed
+equivalent to the earlier schedule or validated GPU capacity. With seed 7,401,
+one epoch consumes all 54,365 targets in eight planned updates with zero overshoot.
+No tokens were truncated to meet the earlier cap.
+
+R2 publish and independent restore verified 19 files totaling 1,731,152 bytes.
+Restored corpus inspection passed, and both schedule and update files are byte
+identical to the original 9,216-cap plan. Training-purpose loading still rejects
+the quarantine corpus. Repository identity/fork screening found no overlap with
+the four reserved projects; detached copies and semantic overlap remain unexcluded.
+
+Evidence: [assembly](../evidence/data/training-corpus-assembly-012/receipt.json),
+[selection rationale](../evidence/data/training-corpus-selection-011/rationale.json),
+[restore](../evidence/data/training-corpus-restore-012/receipt.json),
+[schedule comparison](../evidence/data/training-corpus-restored-schedule-011/comparison.json),
+[training denial](../evidence/data/training-corpus-denial-011/report.json), and
+[lineage screen](../evidence/data/current-corpus-lineage-006/report.json).
+
+This small qualification corpus does not supply the planned 3×50M campaigns.
+Continue diverse task acquisition, attribution and split review locally; keep
+the Pod stopped until a bounded GPU qualification bundle is ready.
+
+## Statsmodels corrected native replay and completion integration
+
+Attempt003 completed with 33 charged calls plus native submission and confirmed
+container removal. Three separately attributed completion actions preserve the
+observed p-value counterexample (native CommandError exit1), correct the
+verification assumption, check the independent lag case, and remove three
+hash-verified scratch scripts. Final native patch matches the declared hash
+and modifies only diagnostic.py. Applying it and the control candidate to the
+same pinned source produces identical bytes; prior 131-test controls apply to
+that exact source change, not to an invented new test run.
+
+Reconstructed history: 70 messages, 34 exchanges; all three added actions have
+null original source indices and explicit adapter authorship. Complete native
+tokenization yields 19,994 input / 6,446 supervised tokens, 28,186 including the
+8,192 output reserve. Token arrays were exported as an unapproved candidate.
+Source failures and corrective observations are retained. No Gemma model ran.
+
+Evidence: native-replay-003, native-history-003, native-tokens-002 and
+native-alignment-001 under the statsmodels8339 prefix. Next: task-level review,
+canonical repository isolation, rights/observation attribution and corpus
+integration. The reference's lag-index defect remains documented; no general
+mathematical correctness or training readiness is claimed. Pod remains stopped.
+
+## Corpus 013: corrected statsmodels quarantine integration
+
+Ten examples across nine repository groups now total 175,925 input tokens and
+60,811 supervised targets. The corrected statsmodels history has a distinct
+completion-plan-derived example ID; the earlier scratch-containing submission
+remains excluded. All four training admission gates remain null. New repository
+identity and observation/rights checks remain open; no lineage pass is invented.
+
+R2 publish and independent restore verified 21 files, 1,957,026 bytes. Restored
+inspection passed and schedule/update files are byte-identical. Seed7401, one
+epoch and cap9216 yield nine planned updates with zero target overshoot. This
+is an inspection plan only. Training-purpose load rejects the new manifest.
+
+Evidence: selection012, assembly013, publish014, restore013, restored-inspection013,
+schedule014, restored-schedule012 and denial012 under their training-corpus
+prefixes. P1 remains incomplete: this small qualification corpus does not
+supply three 50M-token campaigns. Next local work should expand repository/task
+coverage and close attribution and isolation gaps, without repeating the current
+small corpus and describing that as additional unique data. Pod remains stopped.
+
+
+## Corpus 014: Numkit numerical-verification integration
+
+Eleven examples across ten repository groups total 195,042 input tokens and
+65,769 supervised targets. The Numkit example uses a completion-plan-derived ID
+and explicitly attributes one added numerical verification command to the
+assistant. The earlier original-only replay remains archived, not duplicated
+in this assembly. Native numerical verification matched an independent scalar
+convolution oracle in 1,620 cases, with maximum absolute error
+7.105427357601002e-15; zero-output and reversed-custom-weight mutations were
+rejected in 1,620 and 180 cases respectively. This is bounded numerical evidence,
+not a universal proof. Full-suite collection failure, compatibility warnings
+and original command failures remain in the observations.
+
+R2 publish and independent restore verified 23 files / 2,169,563 bytes. Restored
+corpus validation passed. With seed 7401, one epoch and a 9,216 supervised-token
+update cap, the inspection schedule has ten updates and zero token overshoot.
+Original and restored schedule/update files match byte for byte. No optimizer
+steps occurred; training-purpose loading correctly rejects the quarantine
+manifest. All four admission gates remain null. Repository identity and rights
+review remain open, including the newly added Numkit group.
+
+Evidence: selection013, assembly014, publish015, restore014,
+restored-inspection014, schedule015, restored-schedule013 and denial013, under
+the training-corpus evidence prefixes. Numerical evidence and content review:
+numkit8-native-replay-002, numkit8-native-history-002, numkit8-native-tokens-002,
+and numkit8-observation-review-001. Corpus manifest SHA256:
+`ccca52a2abb0b9bf856390dc33349357e2d2b95b1eb3396c14a513b6d78dd78d`.
+
+Next: scale diverse task qualification and complete attribution and repository
+isolation review. This small corpus still does not supply the planned 3×50M
+campaigns. P1 remains incomplete and the Pod stays stopped.
+
+
+## Explicit source timeout support and emcee runtime controls
+
+The replay adapter now accepts an explicitly specified integer 30-second source
+command timeout because it equals the native runner limit. The original timeout
+is retained in the adapted action. Other limits, boolean/float/string values and
+unknown argument fields reject. The same constant controls the recorded limit
+and native context configuration. Fourteen focused tests pass; the full local
+suite reports 391 tests, 358 passed and 33 skipped. The initial broad run had two
+source-hydration inventory failures; those logs are retained, and no integrity
+check was relaxed to obtain the subsequent passing run.
+
+Emcee task 295 has a pinned 124-file source snapshot. Its original image lacked
+h5py, silently omitting ten HDF backend tests. An explicitly recorded offline
+addition of the hash-verified h5py 3.12.1 CPython 3.9 Linux wheel restores that
+coverage while retaining NumPy 2.0.2. This is an environment repair, not a claim
+of historical environment equivalence. Source isolation was reverified after
+installation. All 21 publisher test transitions match: base 11 passes / 10
+failures, reference and candidate 19 passes / 2 failures. Both persistent
+failures are publisher-declared FAIL_TO_FAIL cases; they are not counted as
+successful tests or silently omitted. Candidate and reference agree on every
+case, including setup and teardown validation.
+
+Evidence: `evidence/p1/explicit-source-timeout-regression-001`,
+`evidence/data/emcee295-h5py-verify-001`,
+`evidence/data/emcee295-controls-002`, and `qualification-triage-publish-002`.
+Emcee native replay and observation review are still separate requirements.
+Corpus 014 remains unchanged and quarantine-only. The Pod remains stopped.
+
+
+The first completed emcee native replay executes 39 charged actions with the
+explicit 30-second source timeout preserved. Its disposable container was
+removed. The submitted patch still contains `reproduce_issue.py` alongside the
+intended source fix; it is held and is not part of Corpus 014. Next work must
+review the observations, verify numerical axis mapping inside the native
+package, and remove only identity-verified scratch files through an explicitly
+attributed completion. The initial pre-container attempt failed source-shard
+hydration checks and its log is retained. Evidence: emcee295-native-replay-002
+and emcee295-native-preflight-failure-001.
+
+
+## Corpus 015: emcee completion integration
+
+The current quarantine assembly contains 12 examples from 12 tasks and 11 declared
+repository groups: **222,446 input / 71,444 supervised tokens**. The added emcee
+history includes a separately attributed completion with actual memory/HDF5
+sampler assertions and verified scratch cleanup. Its source patch yields the
+same bytes as the independently tested candidate. Original failures remain in
+the history; no full-suite pass or universal numerical guarantee is asserted.
+
+Corpus manifest SHA-256:
+`57e8f47b47f79dee03ed97980aa66c9c93a274f9894c0f36e1bc8e122ef22427`.
+Content SHA-256:
+`ba775fc6f5eed1ea729e104ab678c6d877faed16c6e8f8a538e5538371a98048`.
+
+Publish-016 and restore-015 verify 25 files / 2,476,074 bytes. Inspection-015
+validates the restored examples. Schedule-016 and restored-schedule-014 match
+byte for byte: seed 7401, one epoch, 11 planned updates, 71,444 supervised tokens,
+zero target overshoot, and a 9,216-supervised-token update cap. These are planned
+exposures, not executed optimizer updates or new unique data. Denial-014 confirms
+`Quarantine corpus cannot train`; all four admission gates remain null.
+
+Evidence: `training-corpus-selection-014`, `training-corpus-assembly-015`,
+`training-corpus-publish-016`, `training-corpus-restore-015`,
+`training-corpus-inspection-015`, and `corpus015-integration-check-001` under
+`evidence/data`. Earlier Corpus 014 entries above describe the previous assembly.
+
+Next: finish archival of the runtime evidence, expand diverse qualified supply,
+and resolve attribution, repository identity and admission. The corpus remains
+far below the planned training scale. GPU memory fit and learned coding gains
+remain unproven. Keep the Pod stopped during this local work.
+
+
+## Optuna 3545: isolated runtime qualification
+
+The digest-pinned source image matches base
+`f00abac7d53bb29e53e7c8bd13e9b4be9e0f9d44`. Its original Git history exposes
+19,230 commits. Snapshot verification preserves all 402 tracked files, leaves
+one parentless commit, and confirms that the base and PR-head objects plus
+listed oracle paths are inaccessible in the mounted filesystem. Inherited image
+layers are not audited.
+
+Paired controls execute the full GridSampler test file with the publisher test
+patch: baseline 8/9 pass; reference and teacher candidate 9/9 pass, with zero
+candidate/reference outcome disagreements. Import origin is the task checkout;
+tests leave the tracked patch unchanged; all three containers are removed.
+The teacher changes unsupported-value rejection into UserWarning and differs
+from the reference in warning type-name formatting. The nine tests do not
+establish universal semantic equivalence.
+
+The static action audit accepts 27 source actions and holds source indices
+14, 18, 26, 30 and 32: standalone find/grep forms outside the reviewed adapter.
+No command is silently skipped or repaired. Native replay, token measurement,
+observation review, admission and corpus integration remain pending. Corpus 015
+is unchanged. Evidence prefixes: `optuna3545-base-probe-001`,
+`optuna3545-snapshot-build-001`, `optuna3545-snapshot-verify-001`,
+`optuna3545-controls-001`, and `optuna3545-action-audit-001`.
+
+Next: implement and test faithful, bounded adaptation of these search forms,
+then replay against the isolated runtime. The Pod remains stopped.
+
+
+## Reviewed standalone searches and first Optuna native replay
+
+The source adapter now supports bounded quoted grep phrases, BRE alternation
+with context, recursive grep on a source file, find/name with a grep/head
+pipeline, and find/name with grep execution. Only the captured repository path
+changes; pattern bytes, quoting, options, pipes and escaped terminators remain
+unchanged. Unknown forms continue to reject. This compatibility grammar is not
+a general shell security boundary; replay remains offline and disposable.
+
+Actual shell parity tests cover matching and nonmatching fixtures, exit codes,
+stdout/stderr, timeout metadata and unsafe extensions/paths. The full regression
+suite reports **394 tests: 361 passed, 33 skipped, zero failures**. Evidence:
+`evidence/p1/source-search-regression-001`. The previous adapter is retained at
+`artifacts/official/source-replay-before-search-001/scripts/replay_source_teacher.py`.
+
+`optuna3545-native-replay-001` completes 29 charged calls plus submission and
+verifies container cleanup. Its 809-byte source-only patch changes rejection to
+UserWarning. The trace retains source errors at 32 (grep no match) and 46 (the
+original test still expects ValueError). The independent publisher controls
+already verify corrected expectations; do not call the native old test a pass.
+
+`optuna3545-native-history-001` and `optuna3545-tokens-001` measure **18,723 input /
+4,509 supervised tokens** without truncation. These are candidate tokens, not
+Corpus 015 additions. Next: review source observations and add explicitly
+attributed assertions where printed checks are insufficient, then verify patch
+alignment and decide quarantine assembly. No training admission or GPU fit is
+established; the Pod remains stopped.

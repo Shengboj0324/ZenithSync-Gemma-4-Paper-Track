@@ -602,3 +602,141 @@ against all four reserved repository identities with no known fork-network
 overlap. Detached copies, semantic duplication and pretraining overlap remain
 outside this check. Nineteen corpus-loader/scheduling regression tests pass.
 No GPU was used; abundant data supply and all final admission gates remain open.
+
+## Corpus 011: second PennyLane task, same repository split
+
+Selection 010 adds PennyLane 5831, with 17,691 input / 6,993 supervised tokens,
+to the existing quarantine candidates. Assembly 011 contains eight tasks across
+seven repositories: 133,225 input / 46,147 supervised tokens. Both PennyLane tasks
+remain in `train`; no extra repository diversity is inferred. Corpus manifest:
+`1d71e5203b7c7110d9b5dae5b1e1436bfcac2ad2284a95c42ddb2ff5dab4644b`.
+
+Publication 012 and restore 011 verify all 17 files / 1,479,218 bytes. Inspection
+011 validates the restored corpus; original schedule 012 and restored schedule
+010 produce identical schedule/update bytes. Seed 7401, one epoch and an
+8,192-token supervised-update ceiling produce eight updates with zero target
+overshoot. Training denial 010 confirms that the four null admission gates
+prevent training. No optimizer or GPU execution is claimed.
+
+`corpus011-composition-001` records exact rational token shares by declared
+repository group: PennyLane contributes 30.62%. Inverse concentration
+`1 / sum(p_r**2)` is about 5.604; this is a descriptive diversity measure, not
+an effective sample size or proof that tasks are independent. Additional
+repository coverage, final rights/split reviews and abundant data remain needed.
+
+## Corpus 012: preserved correction history and restored schedule
+
+The current assembly contains nine examples across eight repository groups,
+155,931 input tokens and 54,365 supervised targets. The added PySyft trajectory
+preserves the observed doctest failure and explicitly assistant-authored correction;
+the unchanged original trace remains excluded. Mechanical replay is not evidence
+of a trained model producing this fix. All admission gates remain unresolved.
+
+The inspection update cap is now 9,216 supervised targets, explicitly replacing
+8,192 for this plan because the complete correction example has 8,218 targets.
+This changes example grouping and optimizer-update frequency; it is not claimed
+equivalent to the earlier schedule or validated GPU capacity. With seed 7,401,
+one epoch consumes all 54,365 targets in eight planned updates with zero overshoot.
+No tokens were truncated to meet the earlier cap.
+
+R2 publish and independent restore verified 19 files totaling 1,731,152 bytes.
+Restored corpus inspection passed, and both schedule and update files are byte
+identical to the original 9,216-cap plan. Training-purpose loading still rejects
+the quarantine corpus. Repository identity/fork screening found no overlap with
+the four reserved projects; detached copies and semantic overlap remain unexcluded.
+
+Evidence: [assembly](../evidence/data/training-corpus-assembly-012/receipt.json),
+[selection rationale](../evidence/data/training-corpus-selection-011/rationale.json),
+[restore](../evidence/data/training-corpus-restore-012/receipt.json),
+[schedule comparison](../evidence/data/training-corpus-restored-schedule-011/comparison.json),
+[training denial](../evidence/data/training-corpus-denial-011/report.json), and
+[lineage screen](../evidence/data/current-corpus-lineage-006/report.json).
+
+This small qualification corpus does not supply the planned 3×50M campaigns.
+Continue diverse task acquisition, attribution and split review locally; keep
+the Pod stopped until a bounded GPU qualification bundle is ready.
+
+## Corpus 013: corrected statsmodels quarantine integration
+
+Ten examples across nine repository groups now total 175,925 input tokens and
+60,811 supervised targets. The corrected statsmodels history has a distinct
+completion-plan-derived example ID; the earlier scratch-containing submission
+remains excluded. All four training admission gates remain null. New repository
+identity and observation/rights checks remain open; no lineage pass is invented.
+
+R2 publish and independent restore verified 21 files, 1,957,026 bytes. Restored
+inspection passed and schedule/update files are byte-identical. Seed7401, one
+epoch and cap9216 yield nine planned updates with zero target overshoot. This
+is an inspection plan only. Training-purpose load rejects the new manifest.
+
+Evidence: selection012, assembly013, publish014, restore013, restored-inspection013,
+schedule014, restored-schedule012 and denial012 under their training-corpus
+prefixes. P1 remains incomplete: this small qualification corpus does not
+supply three 50M-token campaigns. Next local work should expand repository/task
+coverage and close attribution and isolation gaps, without repeating the current
+small corpus and describing that as additional unique data. Pod remains stopped.
+
+
+## Corpus 014: Numkit numerical-verification integration
+
+Eleven examples across ten repository groups total 195,042 input tokens and
+65,769 supervised targets. The Numkit example uses a completion-plan-derived ID
+and explicitly attributes one added numerical verification command to the
+assistant. The earlier original-only replay remains archived, not duplicated
+in this assembly. Native numerical verification matched an independent scalar
+convolution oracle in 1,620 cases, with maximum absolute error
+7.105427357601002e-15; zero-output and reversed-custom-weight mutations were
+rejected in 1,620 and 180 cases respectively. This is bounded numerical evidence,
+not a universal proof. Full-suite collection failure, compatibility warnings
+and original command failures remain in the observations.
+
+R2 publish and independent restore verified 23 files / 2,169,563 bytes. Restored
+corpus validation passed. With seed 7401, one epoch and a 9,216 supervised-token
+update cap, the inspection schedule has ten updates and zero token overshoot.
+Original and restored schedule/update files match byte for byte. No optimizer
+steps occurred; training-purpose loading correctly rejects the quarantine
+manifest. All four admission gates remain null. Repository identity and rights
+review remain open, including the newly added Numkit group.
+
+Evidence: selection013, assembly014, publish015, restore014,
+restored-inspection014, schedule015, restored-schedule013 and denial013, under
+the training-corpus evidence prefixes. Numerical evidence and content review:
+numkit8-native-replay-002, numkit8-native-history-002, numkit8-native-tokens-002,
+and numkit8-observation-review-001. Corpus manifest SHA256:
+`ccca52a2abb0b9bf856390dc33349357e2d2b95b1eb3396c14a513b6d78dd78d`.
+
+Next: scale diverse task qualification and complete attribution and repository
+isolation review. This small corpus still does not supply the planned 3×50M
+campaigns. P1 remains incomplete and the Pod stays stopped.
+
+
+## Corpus 015: emcee completion integration
+
+The current quarantine assembly contains 12 examples from 12 tasks and 11 declared
+repository groups: **222,446 input / 71,444 supervised tokens**. The added emcee
+history includes a separately attributed completion with actual memory/HDF5
+sampler assertions and verified scratch cleanup. Its source patch yields the
+same bytes as the independently tested candidate. Original failures remain in
+the history; no full-suite pass or universal numerical guarantee is asserted.
+
+Corpus manifest SHA-256:
+`57e8f47b47f79dee03ed97980aa66c9c93a274f9894c0f36e1bc8e122ef22427`.
+Content SHA-256:
+`ba775fc6f5eed1ea729e104ab678c6d877faed16c6e8f8a538e5538371a98048`.
+
+Publish-016 and restore-015 verify 25 files / 2,476,074 bytes. Inspection-015
+validates the restored examples. Schedule-016 and restored-schedule-014 match
+byte for byte: seed 7401, one epoch, 11 planned updates, 71,444 supervised tokens,
+zero target overshoot, and a 9,216-supervised-token update cap. These are planned
+exposures, not executed optimizer updates or new unique data. Denial-014 confirms
+`Quarantine corpus cannot train`; all four admission gates remain null.
+
+Evidence: `training-corpus-selection-014`, `training-corpus-assembly-015`,
+`training-corpus-publish-016`, `training-corpus-restore-015`,
+`training-corpus-inspection-015`, and `corpus015-integration-check-001` under
+`evidence/data`. Earlier Corpus 014 entries above describe the previous assembly.
+
+Next: finish archival of the runtime evidence, expand diverse qualified supply,
+and resolve attribution, repository identity and admission. The corpus remains
+far below the planned training scale. GPU memory fit and learned coding gains
+remain unproven. Keep the Pod stopped during this local work.

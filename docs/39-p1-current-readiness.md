@@ -5,28 +5,28 @@ state; documents 12, 35, 37 and 38 retain detailed development history.
 
 | Requirement | Current evidence | Remaining work |
 | --- | --- | --- |
-| Corpus supply | Seven assembled quarantined examples; 115,534 input / 39,154 supervised tokens | Abundant, diverse, approved corpus; the 3×50M plan is not supplied |
+| Corpus supply | Twelve quarantined examples across eleven repository groups; 222,446 input / 71,444 supervised tokens | Abundant, diverse, approved corpus; the 3×50M plan is not supplied |
 | Repair fidelity | Nodebook excluded; Datetransform has added semantic probes; Werkzeug portable replay matches reference on 12/12 publisher tests and 55/55 additional semantic cases | Broader tasks and stronger coverage; teacher replay is not learned performance |
 | Task quality | Narwhals and mypy_extensions mismatches recorded; Dkey held; pipdeptree teacher held for a reproduced type-override regression | Task-by-task alignment evidence for every admitted task |
 | Rights | Exact repository notices and selected dependency notices captured; pytest upstream 7.1.2 notice recovered | Complete observation/dependency attribution review; installed Conda build equivalence is not established |
-| Evaluation isolation | Current repository ID/fork audit passes for all seven source projects and recorded aliases; exact issue fingerprints cover earlier candidate pool; final grouping review pending | Frozen complete splits, semantic and detached-copy review for the final corpus |
-| Local training implementation | CPU loss/gradient, optimizer, checkpoint, RNG and scheduling tests; latest suite 345 passed / 33 skipped, plus seven focused Session replay tests passed in the requests-enabled environment | GPU/full-model corroboration and long-running stability |
-| Remote ingestion | Corpus 010 published and restored from R2; seven examples validate; schedule and updates match original bytes | Repeat on the actual Runpod volume with the final admitted bundle |
+| Evaluation isolation | Prior repository ID/fork audit covers eight source projects and aliases; statsmodels and Numkit identity resolution remains incomplete; final grouping review pending | Frozen complete splits, semantic and detached-copy review for the final corpus |
+| Local training implementation | CPU loss/gradient, optimizer, checkpoint, RNG and scheduling tests; latest suite 361 passed / 33 skipped, plus seven focused Session replay tests passed in the requests-enabled environment | GPU/full-model corroboration and long-running stability |
+| Remote ingestion | Corpus 015 published and restored from R2; twelve examples validate; schedule and updates match original bytes | Repeat on the actual Runpod volume with the final admitted bundle |
 | GPU qualification | Earlier single synthetic full-model update/reload only | Real-corpus long-sequence memory, checkpoint/resume, throughput and bounded failure handling |
 | Product performance | No demonstrated learned held-out gain | Train, evaluate and compare against the frozen baseline |
 
 ## Current artifacts
 
-- [Current seven-example quarantine assembly](../evidence/data/training-corpus-assembly-010/receipt.json)
+- [Current eleven-example quarantine assembly](../evidence/data/training-corpus-assembly-014/receipt.json)
 - [Semantic probe results](../evidence/data/current-corpus-semantic-probes-001/report.json)
 - [Candidate review and exclusion](../evidence/data/current-corpus-semantic-probes-001/review.json)
-- [Current R2 restore receipt](../evidence/data/training-corpus-restore-010/receipt.json)
-- [Restored corpus inspection](../evidence/data/training-corpus-restored-inspection-010/report.json)
-- [Byte-identical restored schedule](../evidence/data/training-corpus-restored-schedule-009/comparison.json)
+- [Current R2 restore receipt](../evidence/data/training-corpus-restore-014/receipt.json)
+- [Restored corpus inspection](../evidence/data/training-corpus-restored-inspection-014/report.json)
+- [Byte-identical restored schedule](../evidence/data/training-corpus-restored-schedule-013/comparison.json)
 - [Werkzeug independent semantic probes](../evidence/data/werkzeug-v2-semantic-probes-001/report.json)
 - [Werkzeug computational AST comparison and notice capture](../evidence/data/werkzeug-v2-source-review-001/report.json)
 - [Werkzeug V2 mechanical assessment](../evidence/data/werkzeug-v2-admission-002/report.json)
-- [Quarantined corpus training denial](../evidence/data/training-corpus-denial-009/report.json)
+- [Quarantined corpus training denial](../evidence/data/training-corpus-denial-013/report.json)
 - [Datetransform mechanical assessment](../evidence/data/datetransform-native-admission-001/report.json)
 - [Selected dependency notices and explicit gaps](../evidence/data/datetransform-rights-material-003/report.json)
 - [Matching upstream pytest release notice](../evidence/data/datetransform-pytest-upstream-notice-001/receipt.json)
@@ -51,7 +51,7 @@ by CPU tests. Prepare the exact restored corpus, source bundle, budget and resum
 checks before requesting a user-initiated Pod restart. Do not start a campaign
 based on the earlier short synthetic update.
 
-The latest local regression run completed 305 tests: 281 passed, 24 skipped.
+An earlier local regression run completed 305 tests: 281 passed, 24 skipped.
 The Python 3.7 notice-capture path was additionally exercised in the actual
 Datetransform container. Missing notices still fail by default; the explicitly
 requested inventory mode records gaps and never approves training.
@@ -1588,3 +1588,674 @@ Training denial 009 rejects this exact real corpus. Nineteen focused corpus
 and scheduling tests pass. Lineage review 005 finds no known repository-ID or
 fork-network overlap with the four reserved projects; broader isolation remains
 unproven. Earlier Corpus 009 statements above are historical results.
+
+### PennyLane 5831 controls and publisher parameter selection
+
+The next candidate preserves `Exp.num_steps` during simplification. The pinned
+original environment collects 345 whole-file cases, of which 176 skip; that run
+is retained and fails strict qualification. Directly selecting all publisher
+keys also fails because six parameter labels were truncated at whitespace in
+the publisher metadata.
+
+The qualifier now widens an incomplete parameter identity to the whole test
+function and deduplicates overlapping selectors. This only controls execution;
+the existing comparison still demands exact publisher-group coverage, all
+phases, no skips and correct transitions. A regression test confirms that an
+extra, unlisted parameter rejects. The previous qualifier bytes are archived in
+`artifacts/official/qualifier-before-truncated-publisher-001` for historical
+receipt verification. No old receipt was rebound to changed producer code.
+
+Controls 003 execute all 169 required publisher cases: base 168/169, reference
+169/169. Additional actual-repository numerical probes compare explicit 4x4
+Pauli-generator exponentials against SciPy, checking step counts and repeated
+simplification with absolute tolerance 1e-12. Base passes 8/24; reference and
+source candidate pass 24/24. NumPy-only probes do not certify optional backends,
+differentiation or arbitrary operators. Native trajectory replay remains pending.
+
+Source review also identifies errors in the dataset's added interface paragraph
+(an extra imaginary factor and incorrect `num_steps=None` semantics). The
+existing history builder conditions on the original task problem statement,
+excluding that paragraph; inspect the actual generated history before assembly.
+No candidate has been added to Corpus 010 in this cycle. Twenty-one focused
+tests pass; full discovery completes 380 tests: 347 passed, 33 skipped.
+
+### PennyLane 5831 native qualification
+
+The source snapshot preserves all 1,366 tracked files and has one parentless
+commit. Independent verification finds the old base, PR head and merge commits
+inaccessible and known oracle paths absent in the mounted filesystem. Inherited
+image layers are outside that verification scope.
+
+Native replay 001 completes 30 charged calls plus submission. Two original
+trajectory mistakes remain as actual failed observations: source index 18 calls
+a NumPy matrix as a function, and index 32 specifies an incorrect pytest class.
+Subsequent corrections and final checks succeed. Cleanup removes only the six
+reviewed scratch files; submitted and intended patch bytes match.
+
+Native grade 001 covers all 169 publisher cases: base 168/169, reference and
+candidate 169/169. Mechanical assessment 001 passes without approving training.
+History 001 has 64 messages / 31 exchanges; token audit 001 exports 17,691 input
+tokens and 6,993 supervised tokens without truncation. Conditioning review 001
+verifies that the original issue is preserved and the inaccurate added-interface
+paragraph is absent from the actual generated user prompt.
+
+Whole-file optional-backend skips remain unresolved; these results do not
+certify all PennyLane backends. Rights, final split review and corpus integration
+remain pending. Corpus 010 is unchanged and no GPU was used.
+
+### Corpus 011: eight tasks across seven repositories
+
+Selection 010 and assembly 011 add the qualified PennyLane 5831 token history to
+quarantine: 133,225 input tokens / 46,147 supervised tokens. Both PennyLane tasks
+remain in the same `train` repository group; this is not an eighth independent
+repository. Four admission gates remain null, and denial 010 confirms training
+is rejected for the actual new bundle.
+
+Publication 012 and restore 011 verify 17 files / 1,479,218 bytes. Restored
+inspection 011 validates all eight records. Schedule 012 and restored schedule
+010 are byte-identical: seed 7401, one epoch, eight updates, an 8,192-token
+supervised-update ceiling, and zero overshoot of the 46,147-token target.
+
+Composition report 001 computes exact rational repository token shares. The
+two PennyLane tasks account for 30.62% of supervised tokens. Inverse squared-share
+concentration is approximately 5.604 repository equivalents out of seven; this
+describes token concentration, not statistical independence or effective sample
+size. Prioritize additional projects rather than treating same-project examples
+as independent evidence. Corpus 011 remains far short of the 3×50M plan.
+
+### PySyft 250: operational checks pass; documentation defects hold the trace
+
+The hash-verified V2 task and digest-pinned Python 3.7 image reproduce publisher
+controls: base 128/132, reference 132/132. Twenty additional actual-repository
+cases cover integer, float, nonfinite, scalar, complex, empty and broadcast
+equality, copy/in-place behavior, failed broadcasts and encrypted-left-operand
+short-circuiting. Scalar comparisons provide the expected values. Base passes
+0/20; reference and source candidate pass 20/20. This does not prove arbitrary
+tensor behavior or encrypted computation correctness.
+
+However, Python doctest executes seven examples in the candidate's added method
+docstrings and finds two failures. `eq` shows `TensorBase([...])` instead of the
+actual `BaseTensor: array([...])`. The `eq_` example expects no display although
+the method returns the tensor. The source verification checks documentation
+presence and keywords, so it does not catch these incorrect examples.
+
+Review 001 holds this unchanged trajectory out of positive corpus selection.
+The executable equality code is not invalidated by these documentation defects.
+A corrected, explicitly new trajectory can be qualified later; do not silently
+rewrite historical supervision. Snapshot build 001 completed, but independent
+snapshot verification and native replay were not performed after discovering
+the defect. Corpus 011 remains unchanged; no GPU was used.
+
+### PySyft 250: verified documentation correction, not a new trajectory
+
+Correction 001 is a separately labeled assistant-authored derivative. It changes
+the `eq` example's displayed result to the actual representation and assigns
+the `eq_` return to `_` so that the example correctly expects no display.
+The original candidate and all original observations remain untouched.
+
+The executable AST, excluding documentation strings, is identical before and
+after correction. Actual pinned-runtime checks pass 132/132 publisher cases,
+20/20 operational cases and 7/7 doctest examples. The correction report binds
+the source inputs, derived patch and exact documentation-only difference.
+This verifies a patch artifact; it is not a model-generated trajectory or
+training-admission receipt.
+
+To recover this task as training material, record an explicit new correction
+trajectory with fresh native observations of the failing examples, the edit
+and the successful rerun. Preserve the source trace's identity and label new
+commands as assistant-authored extensions. Verify the final submitted patch,
+reconstruct the extended history, audit tokens and retain all admission gates.
+Do not relabel historical source messages or invent intermediate observations.
+Corpus 011 remains unchanged pending that work.
+
+### Explicit correction replay support and PySyft fresh history
+
+The replay path now accepts an optional reviewed correction plan with separate
+source/corrected patch identities, assistant authorship, rationale, exact commands
+and expected process exits. Native command failures must match their explicit
+exit codes; timeout/infrastructure errors cannot substitute. History projection
+maps correction indices and authorship separately, preserves fresh failure
+observations and rejects undeclared or misattributed actions. Assessment verifies
+the correction provenance and adds a distinct supervision-review gate.
+
+Previous implementations are retained under
+`artifacts/official/before-correction-replay-001`. Original traces and receipts
+are not rewritten. Four new tests cover plan/schema rejection, actual-exit
+requirements, patch-provenance mismatches and history attribution. Fifteen focused
+tests pass; final full discovery completes 384 tests: 351 passed, 33 skipped.
+
+PySyft corrected replay 001 reached cleanup but was rejected because a manually
+formatted diff differed from canonical Git output. The failed attempt remains
+intact. Profile 002 binds a canonical diff generated from the verified correction.
+Replay 002 completes 34 charged calls plus submission, with four explicit
+correction commands: failing doctests, the edit, successful doctests and patch
+export. Cleanup is confirmed and submitted bytes equal the corrected export,
+explicitly not the original teacher export. Native grade passes 132/132 cases.
+
+Corrected history 001 has 72 messages / 35 exchanges and passes mechanical
+assessment with 22,706 input / 8,218 supervised tokens. The context plus reserve
+fits, but the example exceeds the current 8,192 supervised-token update cap by
+26 tokens. Budget review 001 records this without truncation or silently raising
+the cap. Correction-supervision review, budget/runtime qualification and all
+ordinary admission gates remain pending. Corpus 011 is unchanged; no GPU was used.
+
+## Corpus 012: preserved correction history and restored schedule
+
+The current assembly contains nine examples across eight repository groups,
+155,931 input tokens and 54,365 supervised targets. The added PySyft trajectory
+preserves the observed doctest failure and explicitly assistant-authored correction;
+the unchanged original trace remains excluded. Mechanical replay is not evidence
+of a trained model producing this fix. All admission gates remain unresolved.
+
+The inspection update cap is now 9,216 supervised targets, explicitly replacing
+8,192 for this plan because the complete correction example has 8,218 targets.
+This changes example grouping and optimizer-update frequency; it is not claimed
+equivalent to the earlier schedule or validated GPU capacity. With seed 7,401,
+one epoch consumes all 54,365 targets in eight planned updates with zero overshoot.
+No tokens were truncated to meet the earlier cap.
+
+R2 publish and independent restore verified 19 files totaling 1,731,152 bytes.
+Restored corpus inspection passed, and both schedule and update files are byte
+identical to the original 9,216-cap plan. Training-purpose loading still rejects
+the quarantine corpus. Repository identity/fork screening found no overlap with
+the four reserved projects; detached copies and semantic overlap remain unexcluded.
+
+Evidence: [assembly](../evidence/data/training-corpus-assembly-012/receipt.json),
+[selection rationale](../evidence/data/training-corpus-selection-011/rationale.json),
+[restore](../evidence/data/training-corpus-restore-012/receipt.json),
+[schedule comparison](../evidence/data/training-corpus-restored-schedule-011/comparison.json),
+[training denial](../evidence/data/training-corpus-denial-011/report.json), and
+[lineage screen](../evidence/data/current-corpus-lineage-006/report.json).
+
+This small qualification corpus does not supply the planned 3×50M campaigns.
+Continue diverse task acquisition, attribution and split review locally; keep
+the Pod stopped until a bounded GPU qualification bundle is ready.
+
+## Explicit-input qualification batch planning
+
+The batch planner now requires the corpus path and expected manifest SHA-256,
+source screen, census and evaluation metadata as explicit inputs. Seed and
+per-stratum sample size are configurable. It automatically adds current corpus
+repository groups and reserved evaluation repository names to exclusions.
+Source/census integrity, deterministic selection and input-drift checks remain.
+The prior implementation is preserved under
+`artifacts/official/qualification-planner-before-explicit-inputs-001`.
+
+`evidence/data/qualification-batch-current-001` records a 32-repository batch
+against Corpus 012 from 2,621 screened traces, 1,575 tasks and 902 repositories.
+Three sampling tests pass; a live negative check rejects an incorrect corpus
+manifest hash without creating output. Selected repository names are distinct
+and do not overlap explicit exclusions. These are exact-name checks only.
+Before new replay, reconcile this batch with historical task reviews and canonical
+repository aliases; selection alone does not establish that every task is new.
+
+The optimistic one-trace-per-task ceiling is 38,705,625 supervised targets
+before masks, quality rejection and admission review. It is not acquired usable
+training supply. No new example is admitted and no GPU work is started.
+
+## Batch reconciliation and new repository coverage
+
+Exact trajectory reconciliation found all 32 entries in current-batch-001 were
+already in qualification-batch-001. They are not new data. The planner now
+accepts repeatable `--previous-batch` files, binds their hashes, and excludes
+their repository names before stratification. Current-batch-002 contains
+32 distinct repositories with zero case-normalized name overlap with batch001.
+All 32 issue descriptions were extracted from identity-checked pinned shards.
+Three deterministic sampling tests still pass. No task has been accepted.
+
+The new live lineage check resolved five of 36 requested source/reserved names;
+31 returned HTTP 403. Its identity screen is incomplete and cannot support
+admission. Do not interpret this as evidence of repository independence or
+retry the entire batch blindly. Local issue/patch review can continue meanwhile.
+
+Next review priority: statsmodels-8339 (penalized autocorrelation lag selection),
+numkit-8 (smoothing boundary indices) and emcee-295 (compatibility axis order).
+These are issue-only priorities, not verified fixes or mathematical claims.
+Inspect pinned source, reference tests and teacher actions before defining
+independent boundary/property tests or spending runtime resources.
+
+Evidence: `qualification-batch-reconciliation-001`,
+`qualification-batch-current-002/issue-extraction.json`, and
+`qualification-batch-current-lineage-002/report.json`. Pod remains stopped.
+
+## Statsmodels 8339: reference defect and teacher distinction
+
+Pinned source and evaluator patches were extracted and retained. The reference
+patch uses `max(1, np.argmax(scores))` for scores indexed by lags 1 through
+n-1; this omits the index-to-lag +1 conversion. An isolated execution of its
+actual patched auto-lag block disagrees with rational score maximization in
+322 of 1,452 cases (all nonconstant ternary length-six series, both statistics).
+For [-1,-1,-1,0,0,-1], Ljung-Box penalized scores have their maximum at lag 2
+(-33/20), while the reference selects lag 1 (-26/15). The test patch only
+requires a positive lag count and leaves exact lag validation as a TODO.
+
+The extracted teacher edit instead initializes the original helper with lag 1
+and negative infinity. Its actual helper agrees with all 1,452 rational-score
+cases, versus 1,138 disagreements for the base helper. These are constructed
+algorithm probes of the 2p penalty branch, not full-package tests, mathematical
+proof over all inputs, or validation of the teacher's recorded test claims.
+The pinned full source also includes lag zero in its threshold metric; broader
+theoretical conformity needs a separate source/paper audit before any such claim.
+
+Hold the reference as a correctness oracle; retain the teacher for independent
+runtime and supervision review. No corpus admission or GPU use. Evidence:
+`statsmodels8339-{task,evaluator,source,math,teacher-math}-001` and
+`statsmodels8339-teacher-002`. Probe sources are retained alongside results.
+
+## Statsmodels full-package runtime corroboration and control mismatch
+
+The pinned local evaluator image downloaded successfully; its /testbed checkout
+matched the exact base commit and source bytes. Actual package calls reproduce
+the mathematical probe results on all 1,452 cases: base raises 1,138 errors;
+reference returns 322 wrong lags; teacher has neither errors nor wrong lags.
+NumPy is 1.24.4. This is direct runtime evidence, not agent replay or training.
+
+With publisher test additions applied, all 131 diagnostic-file tests pass in
+all three roles, including all setup/call/teardown phases and unchanged tracked
+source during tests. The publisher-declared failing white-noise case already
+passes on the base. Therefore benchmark-control qualification is held; do not
+write a passing baseline receipt or call these tests discriminating evidence.
+The independent cases remain useful but do not silently override this mismatch.
+
+Teacher verification also includes a universal p>0.05 expectation for a random
+white-noise sample and catches failures without failing process exits. Audit
+actual observations before any native history can be admitted. Disposable
+containers were removed. Evidence: `statsmodels8339-runtime-math-001`,
+`statsmodels8339-controls-001`, and retained runtime-source-001 scripts.
+The earlier import hydration wait completed; no duplicate run or Pod start.
+
+## Statsmodels random-state diagnosis and explicit control configuration
+
+The pinned fixture resets NumPy's global state to seed 1. A paired direct-call
+sweep (seeds 0..31, normal and uniform length-1000 inputs) produced 49 base
+errors and zero candidate errors, with identical input hashes across roles.
+Two candidate samples have first-lag p-values below 0.05; the teacher's universal
+white-noise p-value expectation is invalid. These fixed-cohort counts are not
+population failure-rate estimates.
+
+Repeating the full diagnostic file with the explicit pytest option
+`-p no:randomly` restored the publisher distinction: base 130/131, reference
+131/131, candidate 131/131. The base fails exactly the declared white-noise
+FAIL_TO_PASS node; all other setup/call/teardown outcomes meet expectations.
+This intervention identifies pytest-randomly interaction as the cause of the
+observed default-plugin mismatch. Preserve both configurations and require the
+explicit override for this task's qualification. No default-runtime parity claim.
+The separate reference lag-index defect remains and blocks its use as an
+unqualified correctness oracle. Native history and supervision review remain.
+
+Evidence: `statsmodels8339-randomstate-001/comparison.json` and
+`statsmodels8339-controls-002/comparison.json`; scripts and prior runs retained.
+No training admission, learned-performance claim or Pod start.
+
+## Statsmodels native replay preparation
+
+Source-action preflight passed: 18 shell calls, eight views, three creates and
+one source replacement; two reasoning entries are excluded from execution and
+one finish becomes submission. The three scratch verification scripts require
+explicit reconciliation before submission. Actual failure observations and
+unsupported blanket claims require review, not silent removal.
+
+GitHub API PR metadata still returns 403. Public Git ref resolution succeeded:
+refs/pull/8339/head advertises 0dd88024badd563190f8000f06ec003506215df2. This is
+a PR head, not an asserted merge commit. The snapshot build uses this identity
+and checks its local relationship to the pinned base. Build and independent
+verification must finish before native replay. Evidence:
+`statsmodels8339-snapshot-resolution-002` and `statsmodels8339-replay-preflight-001`.
+No native replay, data admission or Pod restart has occurred in this step.
+
+## Snapshot verification and exact blob-hash optimization
+
+Statsmodels snapshot build001 and independent verify001 completed: 2,131
+tracked files match the original manifest, one parentless commit remains,
+base/PR-head commits are inaccessible and declared oracle paths are absent.
+This covers the mounted filesystem, not inherited Docker layer bytes.
+
+Future snapshot verification now computes Git SHA-1 blob identities directly
+from `blob <byte length>\0` followed by the original bytes, rejecting non-40-hex
+index identities under the existing SHA-1 snapshot contract. Symlinks use link
+text. This removes one Git process per file without dropping byte/mode checks.
+Eight focused tests pass, including independent `git hash-object` comparisons
+for binary, empty, Unicode/CRLF, executable and symlink content and rejection
+of modified content. The previous implementation is retained in
+`artifacts/official/source-snapshot-before-local-blob-hash-001`.
+
+On the actual 2,131-file statsmodels snapshot, the new verifier produced the
+identical full tracked manifest hash as the old Git-backed implementation.
+Observed verification time was about 0.254 seconds in one run, not a general
+performance guarantee. Evidence: `snapshot-blob-hash-runtime-001`. The full
+regression run remains pending local test-file hydration; no all-suite pass
+is claimed. Native replay and training admission remain pending; Pod stopped.
+
+## Snapshot optimization regression complete
+
+The pending full local suite completed: 385 tests, 352 passed, 33 skipped,
+zero failures. Evidence: `evidence/p1/snapshot-blob-hash-regression-001`.
+Skipped coverage and GPU behavior remain unqualified. Statsmodels native replay
+attempt001 stopped before execution on shard-hydration metadata drift; after
+confirmed termination, attempt002 started against the verified source snapshot.
+
+## Statsmodels native replay result and hold
+
+Attempt002 completed with 30 charged tool calls plus native submission, fresh
+observations and confirmed container removal. The original error appears in
+pre-edit stdout despite exit zero; after the repair the same reproduction
+succeeds. The actual diagnostic run reports 130 passed (original tests, without
+publisher additions). Reconstructed history has 64 messages and 31 exchanges.
+
+Pinned tokenizer measurement: 17,227 input and 4,057 supervised tokens; adding
+8,192 output reserve gives 25,419, within 32,768. No tokens were exported for
+training. Submitted patch includes final_verification.py and reproduce_issue.py
+as well as the intended diagnostic.py edit. Hold this attempt pending explicit
+scratch reconciliation and supervision correction; do not silently strip files
+or relabel the attempt as accepted. See `statsmodels8339-native-review-001`.
+
+## Explicit pre-submission completion support
+
+The SWE-Hero replay path accepts an optional assistant-authored completion plan
+bound to the exact adapted source actions and expected final patch. One to
+eight declared commands run before the original terminal submission. Every
+native outcome is retained, including an explicitly expected nonzero process
+exit; infrastructure errors do not count as that expected failure. Source and
+completion actions remain separately attributed in reconstructed history.
+Plan, source-action and final patch mismatches reject; tool budgets still apply.
+Original traces and earlier replay artifacts are unchanged.
+
+Four focused tests exercise authorship, ordering, altered commands, failure
+provenance and terminal validation. Full local suite: 389 tests, 356 passed,
+33 skipped. Evidence: `evidence/p1/replay-completion-regression-001`.
+Previous scripts are preserved under
+`artifacts/official/source-replay-before-completion-001`.
+
+Statsmodels completion-plan-001 declares an expected failing p-value assertion,
+a correction plus independent lag check, and hash-verified scratch cleanup.
+Native attempt003 is the integration test; do not infer success from unit tests
+or plan preparation. Training approval remains false and the Pod stays stopped.
+
+## Statsmodels corrected native replay and completion integration
+
+Attempt003 completed with 33 charged calls plus native submission and confirmed
+container removal. Three separately attributed completion actions preserve the
+observed p-value counterexample (native CommandError exit1), correct the
+verification assumption, check the independent lag case, and remove three
+hash-verified scratch scripts. Final native patch matches the declared hash
+and modifies only diagnostic.py. Applying it and the control candidate to the
+same pinned source produces identical bytes; prior 131-test controls apply to
+that exact source change, not to an invented new test run.
+
+Reconstructed history: 70 messages, 34 exchanges; all three added actions have
+null original source indices and explicit adapter authorship. Complete native
+tokenization yields 19,994 input / 6,446 supervised tokens, 28,186 including the
+8,192 output reserve. Token arrays were exported as an unapproved candidate.
+Source failures and corrective observations are retained. No Gemma model ran.
+
+Evidence: native-replay-003, native-history-003, native-tokens-002 and
+native-alignment-001 under the statsmodels8339 prefix. Next: task-level review,
+canonical repository isolation, rights/observation attribution and corpus
+integration. The reference's lag-index defect remains documented; no general
+mathematical correctness or training readiness is claimed. Pod remains stopped.
+
+## Corpus 013: corrected statsmodels quarantine integration
+
+Ten examples across nine repository groups now total 175,925 input tokens and
+60,811 supervised targets. The corrected statsmodels history has a distinct
+completion-plan-derived example ID; the earlier scratch-containing submission
+remains excluded. All four training admission gates remain null. New repository
+identity and observation/rights checks remain open; no lineage pass is invented.
+
+R2 publish and independent restore verified 21 files, 1,957,026 bytes. Restored
+inspection passed and schedule/update files are byte-identical. Seed7401, one
+epoch and cap9216 yield nine planned updates with zero target overshoot. This
+is an inspection plan only. Training-purpose load rejects the new manifest.
+
+Evidence: selection012, assembly013, publish014, restore013, restored-inspection013,
+schedule014, restored-schedule012 and denial012 under their training-corpus
+prefixes. P1 remains incomplete: this small qualification corpus does not
+supply three 50M-token campaigns. Next local work should expand repository/task
+coverage and close attribution and isolation gaps, without repeating the current
+small corpus and describing that as additional unique data. Pod remains stopped.
+
+## Numkit 8 mathematical/source screening
+
+Selected exact teacher trace 9157adb5-0648-4a1d-8ab6-c58fdc6394d2 from the
+new repository batch. Pinned source, evaluator patches, teacher actions and
+LICENSE were captured; old COPYING and alternative notice URLs returned 404.
+The teacher smooth function AST equals the reference's smooth function AST.
+Reference changes elsewhere are not asserted equivalent.
+
+An independent scalar convolution calculation matched the extracted teacher
+function in 1,620 constructed cases: lengths3..20, supported odd window sizes,
+six window types including asymmetric custom weights, and ramp/constant/
+oscillatory inputs. Base raises TypeError on all those cases under Python3.
+Even-window rejection and unit-window identity were checked. This is isolated
+function execution, not full-package qualification or native replay.
+
+For odd w>=3, n>=w: padded length n+2(w-1), valid convolution length n+w-1,
+then trimming w-1 entries yields n. Nonfinite/zero-sum weights and Python2
+behavior are outside this check. Next: pinned runtime controls and source
+observation review. Evidence: numkit8-{source002,evaluator002,teacher002,math001,
+review001} directories (hyphens retained in actual filenames). Corpus remains
+013, training unapproved, Pod stopped.
+
+### Numkit pinned runtime controls
+
+The first control attempts did not execute tests: the publisher image had the
+wrong checkout, and neither Conda interpreter imported the source package.
+Those failures are retained. The normalized, isolated snapshot preserves all
+39 tracked files. A derived image explicitly binds `/testbed/src` into the
+existing Python 3.6 environment using a `.pth` file; it downloads no packages.
+The installed versions are NumPy 1.19.2, SciPy 1.5.2 and pytest 7.0.1.
+
+The repaired image reproduces exactly the publisher's five smoothing failures
+on the original code and 48 passes. Reference and teacher fixes each pass all
+53 cases. Every setup, call and teardown result, collection membership,
+unchanged tracked source and container cleanup is checked by
+`numkit8-runtime-source-001/assess_controls.py`; the bound report is
+`evidence/data/numkit8-runtime-assessment-001/report.json`.
+Isolation was reverified after the import repair: one parentless commit,
+matching tracked manifest, old commits inaccessible, declared oracle paths
+absent. This checks the mounted filesystem, not inherited image layers.
+
+These results qualify this test file only. Native action replay, observation
+quality, rights and final corpus admission remain separate requirements.
+Corpus 013 remains unchanged and unapproved for training. No Runpod compute
+was used for these controls.
+
+Numkit native replay subsequently completed 28 charged actions plus submission
+(29 exchanges), removing its own three scratch scripts. The submitted patch
+changes only the slice division and produces exactly the source bytes tested
+above. History projection preserves fresh observations and four command
+failures, including full-suite collection failure from the missing
+`scipy.integrate.quadrature` module. A NumPy binary-compatibility warning also
+remains visible. Neither is treated as a passing full-suite result.
+The reconstructed history tokenizes to 17,967 input and 3,973 supervised tokens;
+with an 8,192-token output reserve, the total is 26,159, below 32,768.
+Evidence: `numkit8-native-{replay,history,tokens,assessment}-001`.
+This candidate is not added to Corpus 013 pending observation and attribution
+review. Native teacher replay demonstrates tool execution, not Gemma ability.
+
+
+## Corpus 014: Numkit numerical-verification integration
+
+Eleven examples across ten repository groups total 195,042 input tokens and
+65,769 supervised targets. The Numkit example uses a completion-plan-derived ID
+and explicitly attributes one added numerical verification command to the
+assistant. The earlier original-only replay remains archived, not duplicated
+in this assembly. Native numerical verification matched an independent scalar
+convolution oracle in 1,620 cases, with maximum absolute error
+7.105427357601002e-15; zero-output and reversed-custom-weight mutations were
+rejected in 1,620 and 180 cases respectively. This is bounded numerical evidence,
+not a universal proof. Full-suite collection failure, compatibility warnings
+and original command failures remain in the observations.
+
+R2 publish and independent restore verified 23 files / 2,169,563 bytes. Restored
+corpus validation passed. With seed 7401, one epoch and a 9,216 supervised-token
+update cap, the inspection schedule has ten updates and zero token overshoot.
+Original and restored schedule/update files match byte for byte. No optimizer
+steps occurred; training-purpose loading correctly rejects the quarantine
+manifest. All four admission gates remain null. Repository identity and rights
+review remain open, including the newly added Numkit group.
+
+Evidence: selection013, assembly014, publish015, restore014,
+restored-inspection014, schedule015, restored-schedule013 and denial013, under
+the training-corpus evidence prefixes. Numerical evidence and content review:
+numkit8-native-replay-002, numkit8-native-history-002, numkit8-native-tokens-002,
+and numkit8-observation-review-001. Corpus manifest SHA256:
+`ccca52a2abb0b9bf856390dc33349357e2d2b95b1eb3396c14a513b6d78dd78d`.
+
+Next: scale diverse task qualification and complete attribution and repository
+isolation review. This small corpus still does not supply the planned 3×50M
+campaigns. P1 remains incomplete and the Pod stays stopped.
+
+
+## Explicit source timeout support and emcee runtime controls
+
+The replay adapter now accepts an explicitly specified integer 30-second source
+command timeout because it equals the native runner limit. The original timeout
+is retained in the adapted action. Other limits, boolean/float/string values and
+unknown argument fields reject. The same constant controls the recorded limit
+and native context configuration. Fourteen focused tests pass; the full local
+suite reports 391 tests, 358 passed and 33 skipped. The initial broad run had two
+source-hydration inventory failures; those logs are retained, and no integrity
+check was relaxed to obtain the subsequent passing run.
+
+Emcee task 295 has a pinned 124-file source snapshot. Its original image lacked
+h5py, silently omitting ten HDF backend tests. An explicitly recorded offline
+addition of the hash-verified h5py 3.12.1 CPython 3.9 Linux wheel restores that
+coverage while retaining NumPy 2.0.2. This is an environment repair, not a claim
+of historical environment equivalence. Source isolation was reverified after
+installation. All 21 publisher test transitions match: base 11 passes / 10
+failures, reference and candidate 19 passes / 2 failures. Both persistent
+failures are publisher-declared FAIL_TO_FAIL cases; they are not counted as
+successful tests or silently omitted. Candidate and reference agree on every
+case, including setup and teardown validation.
+
+Evidence: `evidence/p1/explicit-source-timeout-regression-001`,
+`evidence/data/emcee295-h5py-verify-001`,
+`evidence/data/emcee295-controls-002`, and `qualification-triage-publish-002`.
+Emcee native replay and observation review are still separate requirements.
+Corpus 014 remains unchanged and quarantine-only. The Pod remains stopped.
+
+
+The first completed emcee native replay executes 39 charged actions with the
+explicit 30-second source timeout preserved. Its disposable container was
+removed. The submitted patch still contains `reproduce_issue.py` alongside the
+intended source fix; it is held and is not part of Corpus 014. Next work must
+review the observations, verify numerical axis mapping inside the native
+package, and remove only identity-verified scratch files through an explicitly
+attributed completion. The initial pre-container attempt failed source-shard
+hydration checks and its log is retained. Evidence: emcee295-native-replay-002
+and emcee295-native-preflight-failure-001.
+
+### Completed emcee replay and bounded observation review
+
+The later `emcee295-native-replay-004` completes 40 charged actions and submission,
+with container cleanup verified. Its 415-byte source-only patch produces exactly
+the same source bytes as the candidate tested in controls-002. The separately
+attributed completion checks 224 stored log-probability values across memory and
+HDF5 storage, legacy/modern axis correspondence and flatten order, with observed
+maximum absolute error zero. It removes four hash-verified scratch files.
+
+`emcee295-native-history-003` reconstructs 84 messages and 41 exchanges.
+`emcee295-tokens-001` measures **27,404 input / 5,675 supervised tokens**, without
+truncation, using the pinned model tokenizer. This establishes context-cap fit,
+not GPU-memory fit. `emcee295-observation-review-001` verifies patch alignment,
+completion observations, history attribution and preserved error indices
+16, 18, 62 and 72. Native test output is tool-truncated; no full-suite totals are
+inferred from it. The independent publisher controls retain both FAIL_TO_FAIL
+cases and verify all 21 cases (base 11 passes; reference and candidate 19).
+
+This candidate is eligible for quarantine selection review only. It has **not**
+been assembled into Corpus 014, which remains unchanged. Training approval,
+repository identity, observation attribution and dependency notices remain open.
+Finite checks do not establish MCMC convergence or universal correctness.
+The new history, token audit and observation review still require R2 archival.
+
+
+## Corpus 015: emcee completion integration
+
+The current quarantine assembly contains 12 examples from 12 tasks and 11 declared
+repository groups: **222,446 input / 71,444 supervised tokens**. The added emcee
+history includes a separately attributed completion with actual memory/HDF5
+sampler assertions and verified scratch cleanup. Its source patch yields the
+same bytes as the independently tested candidate. Original failures remain in
+the history; no full-suite pass or universal numerical guarantee is asserted.
+
+Corpus manifest SHA-256:
+`57e8f47b47f79dee03ed97980aa66c9c93a274f9894c0f36e1bc8e122ef22427`.
+Content SHA-256:
+`ba775fc6f5eed1ea729e104ab678c6d877faed16c6e8f8a538e5538371a98048`.
+
+Publish-016 and restore-015 verify 25 files / 2,476,074 bytes. Inspection-015
+validates the restored examples. Schedule-016 and restored-schedule-014 match
+byte for byte: seed 7401, one epoch, 11 planned updates, 71,444 supervised tokens,
+zero target overshoot, and a 9,216-supervised-token update cap. These are planned
+exposures, not executed optimizer updates or new unique data. Denial-014 confirms
+`Quarantine corpus cannot train`; all four admission gates remain null.
+
+Evidence: `training-corpus-selection-014`, `training-corpus-assembly-015`,
+`training-corpus-publish-016`, `training-corpus-restore-015`,
+`training-corpus-inspection-015`, and `corpus015-integration-check-001` under
+`evidence/data`. Earlier Corpus 014 entries above describe the previous assembly.
+
+Next: finish archival of the runtime evidence, expand diverse qualified supply,
+and resolve attribution, repository identity and admission. The corpus remains
+far below the planned training scale. GPU memory fit and learned coding gains
+remain unproven. Keep the Pod stopped during this local work.
+
+
+## Optuna 3545: isolated runtime qualification
+
+The digest-pinned source image matches base
+`f00abac7d53bb29e53e7c8bd13e9b4be9e0f9d44`. Its original Git history exposes
+19,230 commits. Snapshot verification preserves all 402 tracked files, leaves
+one parentless commit, and confirms that the base and PR-head objects plus
+listed oracle paths are inaccessible in the mounted filesystem. Inherited image
+layers are not audited.
+
+Paired controls execute the full GridSampler test file with the publisher test
+patch: baseline 8/9 pass; reference and teacher candidate 9/9 pass, with zero
+candidate/reference outcome disagreements. Import origin is the task checkout;
+tests leave the tracked patch unchanged; all three containers are removed.
+The teacher changes unsupported-value rejection into UserWarning and differs
+from the reference in warning type-name formatting. The nine tests do not
+establish universal semantic equivalence.
+
+The static action audit accepts 27 source actions and holds source indices
+14, 18, 26, 30 and 32: standalone find/grep forms outside the reviewed adapter.
+No command is silently skipped or repaired. Native replay, token measurement,
+observation review, admission and corpus integration remain pending. Corpus 015
+is unchanged. Evidence prefixes: `optuna3545-base-probe-001`,
+`optuna3545-snapshot-build-001`, `optuna3545-snapshot-verify-001`,
+`optuna3545-controls-001`, and `optuna3545-action-audit-001`.
+
+Next: implement and test faithful, bounded adaptation of these search forms,
+then replay against the isolated runtime. The Pod remains stopped.
+
+
+## Reviewed standalone searches and first Optuna native replay
+
+The source adapter now supports bounded quoted grep phrases, BRE alternation
+with context, recursive grep on a source file, find/name with a grep/head
+pipeline, and find/name with grep execution. Only the captured repository path
+changes; pattern bytes, quoting, options, pipes and escaped terminators remain
+unchanged. Unknown forms continue to reject. This compatibility grammar is not
+a general shell security boundary; replay remains offline and disposable.
+
+Actual shell parity tests cover matching and nonmatching fixtures, exit codes,
+stdout/stderr, timeout metadata and unsafe extensions/paths. The full regression
+suite reports **394 tests: 361 passed, 33 skipped, zero failures**. Evidence:
+`evidence/p1/source-search-regression-001`. The previous adapter is retained at
+`artifacts/official/source-replay-before-search-001/scripts/replay_source_teacher.py`.
+
+`optuna3545-native-replay-001` completes 29 charged calls plus submission and
+verifies container cleanup. Its 809-byte source-only patch changes rejection to
+UserWarning. The trace retains source errors at 32 (grep no match) and 46 (the
+original test still expects ValueError). The independent publisher controls
+already verify corrected expectations; do not call the native old test a pass.
+
+`optuna3545-native-history-001` and `optuna3545-tokens-001` measure **18,723 input /
+4,509 supervised tokens** without truncation. These are candidate tokens, not
+Corpus 015 additions. Next: review source observations and add explicitly
+attributed assertions where printed checks are insufficient, then verify patch
+alignment and decide quarantine assembly. No training admission or GPU fit is
+established; the Pod remains stopped.

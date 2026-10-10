@@ -132,4 +132,29 @@ class StandaloneSourceGrepTests(unittest.TestCase):
             source_preflight(call('execute_bash',{'command':valid,'is_input':True}),prefix)
 
 
+class ExplicitSourceTimeoutTests(unittest.TestCase):
+    def test_equivalent_timeout_preserves_command_and_records_source_intent(self):
+        from scripts.replay_source_teacher import preflight as source_preflight
+        prefix = '/workspace/example__repo__1.0'
+        args = {'command': 'cd '+prefix+' && python debug_test.py', 'timeout': 30}
+        original = dict(args)
+        result = source_preflight(call('execute_bash', args), prefix)
+        self.assertEqual(args, original)
+        self.assertEqual(result, [{'index': 0, 'kind': 'shell',
+                                  'command': 'cd /workspace && python debug_test.py',
+                                  'source_timeout_seconds': 30}])
+
+    def test_non_equivalent_or_ambiguous_timeouts_reject(self):
+        from scripts.replay_source_teacher import preflight as source_preflight
+        prefix = '/workspace/example__repo__1.0'
+        for timeout in (None, True, 0, -1, 29, 31, 60, 30.0, '30'):
+            with self.subTest(timeout=timeout), self.assertRaises(ValueError):
+                source_preflight(call('execute_bash', {
+                    'command': 'cd '+prefix+' && pwd', 'timeout': timeout}), prefix)
+        for args in ({'command': None}, {'command': [], 'timeout': 30},
+                     {'command': 'python --version', 'timeout': 30, 'is_input': True}):
+            with self.subTest(args=args), self.assertRaises(ValueError):
+                source_preflight(call('execute_bash', args), prefix)
+
+
 if __name__=='__main__':unittest.main()

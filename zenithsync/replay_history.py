@@ -1,9 +1,10 @@
 """Project captured native exchanges without inventing reasoning or observations."""
 from .artifacts import canonical_json
 from .conversation import normalize_history
+from .replay_correction import validate_correction_plan, verify_correction_result
 
 
-def mini_replay_history(events, *, source_messages, system, problem, allowed_tools):
+def mini_replay_history(events, *, source_messages, system, problem, allowed_tools, correction_plan=None):
     """Project exact source commands followed by explicitly authored native actions.
 
     The source terminal only exports a patch. Its replacement cleanup and native
@@ -22,7 +23,8 @@ def mini_replay_history(events, *, source_messages, system, problem, allowed_too
                  'echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT && cat /testbed/patch.txt'}
     if not commands or commands[-1][1]['command'] not in terminals:
         raise ValueError('Reviewed source terminal required')
-    if not isinstance(events, list) or len(events) != len(commands) + 1:
+    corrections = [] if correction_plan is None else validate_correction_plan(correction_plan)['commands']
+    if not isinstance(events, list) or len(events) != len(commands) + len(corrections) + 1:
         raise ValueError('Every nonterminal source command and both adapter actions required')
     projected = []
     for ordinal, event in enumerate(events):
@@ -37,6 +39,12 @@ def mini_replay_history(events, *, source_messages, system, problem, allowed_too
                     or event['source_index'] != index or event['name'] != 'run_command'
                     or event['arguments'] != arguments):
                 raise ValueError('Native source command differs from recorded source')
+        elif ordinal < len(commands) - 1 + len(corrections):
+            row = corrections[ordinal - len(commands) + 1]
+            if (event['adapter_authored'] is not True or event['source_index'] is not None
+                    or event['name'] != 'run_command' or event['arguments'] != {'command': row['command']}):
+                raise ValueError('Correction action or authorship differs from explicit plan')
+            verify_correction_result(event['result'], row['expected_exit_code'])
         else:
             if event['adapter_authored'] is not True or event['source_index'] is not None:
                 raise ValueError('Adapter suffix cannot claim source authorship')
@@ -53,7 +61,11 @@ def mini_replay_history(events, *, source_messages, system, problem, allowed_too
     for ordinal, mapping in enumerate(result['mapping']):
         mapping.update(event_index=ordinal, source_index=events[ordinal]['source_index'],
                        adapter_authored=events[ordinal]['adapter_authored'])
+        if len(commands) - 1 <= ordinal < len(commands) - 1 + len(corrections):
+            mapping.update(correction_index=ordinal - len(commands) + 1, author='assistant')
     result['scope'] += '; cleanup and submission are adapter-authored, explicitly mapped'
+    if corrections:
+        result['scope'] += '; explicit assistant-authored corrections are separately mapped'
     return result
 
 

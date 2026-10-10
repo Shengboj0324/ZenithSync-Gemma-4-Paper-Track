@@ -2,10 +2,32 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from zenithsync.source_snapshot import git, is_relative_to, sanitize
+from zenithsync.source_snapshot import git, is_relative_to, sanitize, tracked_snapshot
 
 
 class SourceSnapshotTests(unittest.TestCase):
+    def test_blob_hash_matches_git_for_binary_modes_and_symlink(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp).resolve()
+            git(repo, '-c', 'init.templateDir=', 'init')
+            contents = {'empty': b'', 'binary': bytes(range(256)),
+                        'unicode': 'π\r\n雪\n'.encode(), 'run': b'#!/bin/sh\nexit 0\n'}
+            for name, content in contents.items():
+                (repo / name).write_bytes(content)
+            (repo / 'run').chmod(0o755)
+            (repo / 'link').symlink_to('unicode')
+            git(repo, 'add', '--all')
+            rows = tracked_snapshot(repo)
+            self.assertEqual(len(rows), 5)
+            for row in rows:
+                content = b'unicode' if row['path'] == 'link' else contents[row['path']]
+                expected = git(repo, 'hash-object', '--no-filters', '--stdin',
+                               data=content).stdout.strip().decode()
+                self.assertEqual(row['blob'], expected)
+            (repo / 'binary').write_bytes(b'changed')
+            with self.assertRaisesRegex(ValueError, 'differs from tracked Git blob'):
+                tracked_snapshot(repo)
+
     def test_containment_uses_components_not_string_prefixes(self):
         self.assertTrue(is_relative_to(Path('/repo/child'), Path('/repo')))
         self.assertTrue(is_relative_to(Path('/repo'), Path('/repo')))

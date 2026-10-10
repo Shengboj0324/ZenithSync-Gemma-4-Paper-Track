@@ -9,6 +9,7 @@ from zenithsync.artifacts import canonical_json, file_record, load_json
 from zenithsync.replay_history import mini_replay_history
 from zenithsync.submission_reconciliation import scratch_cleanup_command
 from zenithsync.resource_replay_binding import verify_resource_replay_binding
+from zenithsync.replay_correction import verify_correction_binding
 
 
 def main():
@@ -24,11 +25,19 @@ def main():
              args.attempt / 'submitted.patch', Path(__file__),
              ROOT / 'zenithsync/replay_history.py', ROOT / 'zenithsync/conversation.py',
              ROOT / 'zenithsync/resource_replay_binding.py',
+             ROOT / 'zenithsync/replay_correction.py',
              ROOT / 'zenithsync/submission_reconciliation.py', ROOT / 'zenithsync/artifacts.py']
     bindings = {str(path): file_record(path) for path in paths}
     attempt = load_json(args.attempt / 'receipt.json')
     candidate = load_json(args.candidate)
     profile = load_json(args.profile)
+    correction = verify_correction_binding(profile, attempt)
+    if correction is not None:
+        source_patch = args.attempt / 'source-intended.patch'
+        if file_record(source_patch) != correction['source_patch']:
+            raise ValueError('Correction source patch differs')
+        bindings[str(source_patch)] = correction['source_patch']
+        paths.append(source_patch)
     resource_proof, resource_files = verify_resource_replay_binding(attempt, profile, args.session_resources)
     for name, identity in resource_files.items():
         if file_record(Path(name)) != identity:
@@ -66,7 +75,7 @@ def main():
         raise ValueError('Adapter cleanup differs from the reviewed standalone action')
     result = mini_replay_history(events,
         source_messages=candidate['messages'], system=protocol['messages'][0]['content'],
-        problem=task['problem_statement'], allowed_tools=names)
+        problem=task['problem_statement'], allowed_tools=names, correction_plan=correction)
     if any(file_record(path) != bindings[str(path)] for path in paths):
         raise ValueError('History projection inputs changed')
     args.output.mkdir(parents=True, exist_ok=False)
@@ -86,6 +95,9 @@ def main():
     if resource_proof is not None:
         receipt['resource_environment'] = resource_proof
         receipt['limitations'].append('Recorded current response bodies alter the environment; rights and historical equivalence are not established.')
+    if correction is not None:
+        receipt['correction'] = correction
+        receipt['limitations'].append('Correction commands are explicit assistant-authored extensions, not original teacher actions.')
     (args.output / 'receipt.json').write_bytes(canonical_json(receipt))
     print({'messages': len(result['messages']), 'exchanges': receipt['exchanges']})
 

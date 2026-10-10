@@ -81,7 +81,12 @@ def validate_source_allowance(paths, *, package_root='src'):
 
 
 def publisher_test_targets(task, reviewed_files):
-    """Select every declared publisher node, never a convenient passing subset."""
+    """Select publisher nodes, widening truncated parameters to their function.
+
+    Log-derived parameter labels may be truncated at whitespace. Execute the
+    full function in that case; compare_controls must still enforce exact
+    publisher-group coverage and valid phases for every collected case.
+    """
     if any(not isinstance(task.get(key), list) for key in ('FAIL_TO_PASS', 'PASS_TO_PASS')):
         raise ValueError('Publisher expectation lists required')
     nodes = task['FAIL_TO_PASS'] + task['PASS_TO_PASS']
@@ -89,7 +94,12 @@ def publisher_test_targets(task, reviewed_files):
             node.startswith(name + '::') and len(node) > len(name) + 2 for name in reviewed_files)
             for node in nodes) or len(set(nodes)) != len(nodes)):
         raise ValueError('Publisher nodes must be unique and within reviewed test files')
-    return nodes
+    targets = [node.split('[', 1)[0] if '[' in node and not node.endswith(']')
+               else node for node in nodes]
+    # Whole-function selection already includes explicitly named parameters.
+    functions = {target for target in targets if '[' not in target}
+    return list(dict.fromkeys(target for target in targets
+                              if '[' not in target or target.split('[', 1)[0] not in functions))
 
 
 def main():

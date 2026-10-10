@@ -44,6 +44,30 @@ class V2ProfileTests(unittest.TestCase):
             with self.subTest(nodes=nodes), self.assertRaises(ValueError):
                 validate_v2_profile({**self.profile, 'supplemental_pass_to_pass': nodes})
 
+    def test_truncated_parameter_selects_function_without_duplicate_collection(self):
+        task = {'FAIL_TO_PASS': ['tests/a.py::test_fix'], 'PASS_TO_PASS': [
+            'tests/a.py::TestLabels::test_label[op0-Exp(2',
+            'tests/a.py::TestLabels::test_label[op1-Exp(3',
+            'tests/a.py::TestLabels::test_label[complete]',
+            'tests/a.py::test_other[exact]']}
+        self.assertEqual(publisher_test_targets(task, ['tests/a.py']), [
+            'tests/a.py::test_fix', 'tests/a.py::TestLabels::test_label',
+            'tests/a.py::test_other[exact]'])
+
+    def test_function_expansion_does_not_relax_outcome_coverage(self):
+        from zenithsync.pytest_controls import compare_controls
+        key = 'tests/a.py::test_label[Exp(2'
+        nodes = [key + ' Z)]', 'tests/a.py::test_label[unlisted]']
+        document = {'collected': nodes, 'collection_errors': [], 'exitstatus': 0,
+                    'reports': [{'nodeid': node, 'when': phase, 'outcome': 'passed'}
+                                for node in nodes for phase in ('setup', 'call', 'teardown')]}
+        self.assertEqual(publisher_test_targets(
+            {'FAIL_TO_PASS': [], 'PASS_TO_PASS': [key]}, ['tests/a.py']),
+            ['tests/a.py::test_label'])
+        with self.assertRaisesRegex(ValueError, 'expectation coverage differs'):
+            compare_controls(document, document, {'FAIL_TO_PASS': [], 'PASS_TO_PASS': [key],
+                                                  'FAIL_TO_FAIL': [], 'PASS_TO_FAIL': []})
+
     def test_pytest_root_is_explicit_and_limited_to_repository(self):
         profile = {**self.profile, 'pytest_root': '/package'}
         self.assertEqual(validate_v2_profile(profile), profile)

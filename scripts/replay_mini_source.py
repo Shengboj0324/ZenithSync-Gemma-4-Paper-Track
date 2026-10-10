@@ -14,6 +14,7 @@ from zenithsync.container_cleanup import cleanup_owned_container
 from zenithsync.source_workspace import prepare_source_workspace
 from zenithsync.conversation import normalize_history
 from zenithsync.submission_reconciliation import scratch_cleanup_command
+from zenithsync.replay_correction import validate_correction_plan, verify_correction_result
 from zenithsync.session_resource_bundle import (
     DIRECTORY as SESSION_RESOURCE_DIRECTORY, load_session_resource_bundle, stage_session_resources)
 
@@ -31,6 +32,9 @@ def main():
     candidate_identity = file_record(args.candidate)
     required_profile = {'candidate', 'scratch_paths', 'terminal_command', 'source_root', 'python'}
     expected_profile = required_profile | ({'session_resources'} if args.session_resources else set())
+    correction = validate_correction_plan(profile['correction']) if 'correction' in profile else None
+    if correction is not None:
+        expected_profile.add('correction')
     if set(profile) != expected_profile:
         raise ValueError('Exact reviewed source replay profile required')
     resource_bindings = None
@@ -63,7 +67,7 @@ def main():
             'echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT && cat patch.txt',
             'echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT && cat /testbed/patch.txt'):
         raise ValueError('Unsupported source patch-export protocol')
-    if len(commands) > 40:
+    if len(commands) + (len(correction['commands']) if correction else 0) > 40:
         raise ValueError('Source replay exceeds qualification call ceiling')
     snapshot = load_json(args.snapshot / 'snapshot.json')
     verification = load_json(args.snapshot / 'verification.json')
@@ -95,6 +99,7 @@ def main():
                                                environment=environment))
     sources = {name: file_record(ROOT / name) for name in (
         'scripts/replay_mini_source.py', 'zenithsync/source_workspace.py',
+        'zenithsync/replay_correction.py',
         'zenithsync/session_resource_bundle.py', 'zenithsync/session_resource_replay.py',
         'zenithsync/submission_reconciliation.py', 'zenithsync/artifacts.py', 'zenithsync/contracts.py')}
     args.output.mkdir(parents=True, exist_ok=False)
@@ -139,10 +144,25 @@ def main():
 
         for row in commands[:-1]:
             invoke('run_command', {'command': row['command']}, source_index=row['source_index'])
+        if correction is not None:
+            source_export = manager.exec(cid, 'cat /workspace/patch.txt', timeout=10)
+            if source_export.exit_code or not source_export.stdout:
+                raise ValueError('Missing source patch before correction')
+            (args.output / 'source-intended.patch').write_text(source_export.stdout)
+            if file_record(args.output / 'source-intended.patch') != correction['source_patch']:
+                raise ValueError('Source patch differs from correction plan')
+            receipt['correction'] = correction
+            receipt['source_intended_patch'] = correction['source_patch']
+            receipt['adaptation'] = 'Original nonterminal commands followed by explicit assistant-authored correction commands, cleanup and submission; fresh observations throughout'
+            for row in correction['commands']:
+                result = invoke('run_command', {'command': row['command']}, adapter_authored=True)
+                verify_correction_result(result, row['expected_exit_code'])
         exported = manager.exec(cid, 'cat /workspace/patch.txt', timeout=10)
         if exported.exit_code or not exported.stdout or len(exported.stdout.encode()) > 2 * 1024**2:
             raise ValueError('Missing or invalid intended patch export')
         (args.output / 'intended.patch').write_text(exported.stdout)
+        if correction is not None and file_record(args.output / 'intended.patch') != correction['corrected_patch']:
+            raise ValueError('Final patch differs from reviewed correction')
         command = scratch_cleanup_command(python=profile['python'],
             scratch_paths=profile['scratch_paths'])
         result = invoke('run_command', {'command': command}, adapter_authored=True)
@@ -154,7 +174,9 @@ def main():
         (args.output / 'submitted.patch').write_text(ctx.submitted_patch)
         receipt.update(status='replayed_not_graded', tool_calls=ctx.tool_calls,
             patch=file_record(args.output / 'submitted.patch'), intended_patch=file_record(args.output / 'intended.patch'),
-            native_submission_equals_source_export=True)
+            native_submission_equals_source_export=correction is None)
+        if correction is not None:
+            receipt['native_submission_equals_corrected_export'] = True
         if file_record(args.candidate) != candidate_identity or any(
                 file_record(ROOT / name) != identity for name, identity in sources.items()):
             raise ValueError('Replay source changed during execution')

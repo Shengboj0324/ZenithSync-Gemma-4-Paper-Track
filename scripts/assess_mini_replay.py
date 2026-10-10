@@ -23,7 +23,7 @@ def main():
         map_identity = file_record(historical_map)
         args['historical_sources'] = load_json(historical_map)
     sources = {name: file_record(ROOT / name) for name in (
-        'scripts/assess_mini_replay.py', 'zenithsync/mini_replay_admission.py',
+        'scripts/assess_mini_replay.py', 'zenithsync/mini_replay_admission.py', 'zenithsync/replay_correction.py',
         'zenithsync/replay_history.py', 'zenithsync/training_batch.py',
         'zenithsync/pytest_controls.py', 'zenithsync/submission_reconciliation.py')}
     for name in ('zenithsync/resource_replay_binding.py', 'zenithsync/session_resource_bundle.py',

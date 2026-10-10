@@ -22,6 +22,8 @@ from zenithsync.artifacts import canonical_json,file_record
 from zenithsync.container_cleanup import cleanup_owned_container
 from zenithsync.source_workspace import prepare_source_workspace
 from zenithsync.trajectory_import import convert_swe_hero_history
+from zenithsync.replay_completion import validate_completion_plan
+from zenithsync.replay_correction import verify_correction_result
 
 INSTANCE='tornadoweb__tornado-34edd2e8020b42cd16c3dc9a8c0417b9fae1e6d4'
 TRACE='4d152574-6d53-4924-b9a6-c58d47a5d6d8'
@@ -41,12 +43,63 @@ def source_path(path, prefix=PREFIX):
     return relative
 
 
+NATIVE_COMMAND_SECONDS = 30
+
+
+def adapt_source_search(command, prefix):
+    """Map one path in a small read-only shell grammar without reserializing it.
+
+    Quotes, BRE escapes, pipes and find's escaped terminator remain byte-exact.
+    This is a replay compatibility grammar, not a general shell sandbox.
+    """
+    path = r'(?P<path>/[A-Za-z0-9_./-]+)'
+    phrase = r'[A-Za-z_][A-Za-z_0-9]*(?: [A-Za-z_0-9]+)*'
+    branch = r'[A-Za-z_][A-Za-z_0-9]*(?:\.\*[A-Za-z_0-9]+)?'
+    alternatives = branch + r'(?:\\\|' + branch + r')*'
+    quoted = lambda pattern: r'(?P<quote>["\'])' + pattern + r'(?P=quote)'
+    glob = r'[A-Za-z0-9_.*?-]+'
+    patterns = (
+        r'grep -n ' + quoted(phrase) + ' ' + path,
+        r'grep -n -A [1-9][0-9]? -B [1-9][0-9]? ' + quoted(alternatives) + ' ' + path,
+        r'grep -rn ' + quoted(alternatives) + ' ' + path,
+        r'find ' + path + r' -name ' + quoted(glob)
+        + r' \| grep -i [A-Za-z_][A-Za-z_0-9]* \| head -[1-9][0-9]?',
+        r'find ' + path + r' -name ' + quoted(glob)
+        + r' -exec grep -l "[A-Za-z0-9_]+" \{\} \\;',
+    )
+    for pattern in patterns:
+        match = re.fullmatch(pattern, command)
+        if match is None:
+            continue
+        original_path = match['path']
+        # source_path also accepts /workspace for editor compatibility; these
+        # shell forms require an explicit path under the original source root.
+        if original_path != prefix and not original_path.startswith(prefix + '/'):
+            raise ValueError('Search path outside source repository')
+        relative = source_path(original_path, prefix)
+        if command.startswith('grep ') and relative == '.':
+            raise ValueError('Standalone grep requires a source file')
+        mapped = '/workspace' + ('' if relative == '.' else '/' + relative)
+        start, end = match.span('path')
+        return command[:start] + mapped + command[end:]
+    return None
+
+
 def preflight(messages, prefix=PREFIX):
     actions=[]
     for index,message in enumerate(messages):
         for call in message.get('tool_calls',[]):
             fn=call['function'];name=fn['name'];args=fn['arguments']
             if name=='execute_bash':
+                shell_metadata = {}
+                if isinstance(args, dict) and set(args) == {'command', 'timeout'}:
+                    if type(args['timeout']) is not int or args['timeout'] != NATIVE_COMMAND_SECONDS:
+                        raise ValueError('Source timeout differs from the native command limit')
+                    shell_metadata['source_timeout_seconds'] = args['timeout']
+                    args = {'command': args['command']}
+                if (not isinstance(args, dict) or set(args) != {'command'}
+                        or not isinstance(args['command'], str)):
+                    raise ValueError('Unreviewed shell invocation profile')
                 if set(args)=={'command'} and isinstance(args['command'],str):
                     # This reviewed form has one literal identifier pattern and
                     # one source file. Reject shell syntax rather than reparse it
@@ -59,17 +112,21 @@ def preflight(messages, prefix=PREFIX):
                         if relative=='.':
                             raise ValueError('Standalone grep requires a source file')
                         command=shlex.join(['grep','-n',match['pattern'],'/workspace/'+relative])
-                        actions.append({'index':index,'kind':'shell','command':command})
+                        actions.append({'index':index,'kind':'shell','command':command, **shell_metadata})
                         continue
+                search = adapt_source_search(args['command'], prefix)
+                if search is not None:
+                    actions.append({'index':index,'kind':'shell','command':search, **shell_metadata})
+                    continue
                 if set(args)=={'command'} and args['command']=='python --version':
-                    actions.append({'index':index,'kind':'shell','command':args['command']})
+                    actions.append({'index':index,'kind':'shell','command':args['command'], **shell_metadata})
                     continue
                 if set(args)!={'command'} or not args['command'].startswith('cd '+prefix+' && '):
                     raise ValueError('Unreviewed shell invocation profile')
                 command=args['command'].replace('cd '+prefix+' && ','cd /workspace && ',1)
                 if prefix in command:
                     raise ValueError('Additional source-root substitution requires review')
-                actions.append({'index':index,'kind':'shell','command':command})
+                actions.append({'index':index,'kind':'shell','command':command, **shell_metadata})
             elif name=='str_replace_editor':
                 action=args['command'];path=source_path(args['path'],prefix)
                 allowed={'view':{'command','path','view_range'},
@@ -114,6 +171,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--profile',type=Path)
+    p.add_argument('--completion-plan',type=Path,
+                   help='Explicit hash-bound assistant actions before source terminal submission')
     p.add_argument('--source-shard',type=Path,default=ROOT/'artifacts/data/quarantine/swe-hero-001/data/train-00000-of-00014.parquet')
     p.add_argument('--source-intake',type=Path,default=ROOT/'evidence/data/swe-hero-intake-001/receipt.json')
     runtime=p.add_mutually_exclusive_group()
@@ -146,6 +205,16 @@ def main():
         raise ValueError('Teacher task linkage mismatch')
     converted=convert_swe_hero_history(matches[0]['trajectory'])
     actions=preflight(converted['messages'],profile['source_root'])
+    completion = None
+    completion_identity = None
+    if args.completion_plan is not None:
+        completion = validate_completion_plan(json.loads(args.completion_plan.read_text()))
+        completion_identity = file_record(args.completion_plan)
+        if (not actions or actions[-1]['kind'] != 'finish'
+                or sum(a['kind'] == 'finish' for a in actions) != 1):
+            raise ValueError('Completion requires one final source terminal')
+        if sum(a['kind'] not in ('think', 'finish') for a in actions) + len(completion['commands']) > profile['max_tool_calls']:
+            raise ValueError('Completion exceeds explicit native tool budget')
     from swegemma.context import SwegemmaContext
     from swegemma.sandbox import ContainerConfig,ContainerManager
     os.environ.setdefault('DOCKER_HOST',subprocess.check_output(
@@ -163,13 +232,18 @@ def main():
     manager.client.images.get(image)
     args.output.mkdir(parents=True,exist_ok=False)
     (args.output/'actions.json').write_bytes(canonical_json(actions))
+    if completion is not None and file_record(args.output/'actions.json') != completion['source_actions']:
+        raise ValueError('Completion plan source action identity mismatch')
     receipt={'source':identity,'trajectory_id':trace,'instance_id':instance,
         'profile':profile,'image':image,'script':file_record(Path(__file__)),
         'action_counts':dict(Counter(a['kind'] for a in actions)),
         'training_approved':False,'new_model_evaluated':False,
         'source_observations_reused':False,'status':'incomplete',
         'environment':environment,
-        'limits':{'tool_calls':profile['max_tool_calls'],'minutes':10,'command_seconds':30}}
+        'limits':{'tool_calls':profile['max_tool_calls'],'minutes':10,'command_seconds':NATIVE_COMMAND_SECONDS}}
+    if completion is not None:
+        receipt.update(completion_plan=completion, completion_plan_file=completion_identity,
+                       completion_module=file_record(ROOT/'zenithsync/replay_completion.py'))
     cid=None;events=[]
     try:
         cid=manager.start()
@@ -189,7 +263,7 @@ def main():
             if check.exit_code:
                 raise ValueError('Offline resource startup check failed: '+check.stderr)
         ctx=SwegemmaContext(docker_manager=manager,container_id=cid,task_id=trace,
-            repo=profile['repo'],max_tool_calls=profile['max_tool_calls'],max_time_minutes=10,max_exec_seconds=30,
+            repo=profile['repo'],max_tool_calls=profile['max_tool_calls'],max_time_minutes=10,max_exec_seconds=NATIVE_COMMAND_SECONDS,
             graph_dir='/nonexistent-fixture',embeddings_dir='/nonexistent-fixture')
         ctx.start_agent_session()
         raw_tools=ctx.create_tools()
@@ -208,6 +282,16 @@ def main():
             if kind=='think':
                 result={'status':'not_executed','reason':'teacher reasoning is not a native tool'}
             elif kind=='finish':
+                if completion is not None:
+                    for command in completion['commands']:
+                        completion_start=len(native_calls)
+                        observed=tools['run_command'](command=command['command'])
+                        events.append({'source_index':None,'adapter_authored':True,
+                            'kind':'completion','result':observed,
+                            'native_calls':native_calls[completion_start:]})
+                        (args.output/'events.json').write_bytes(canonical_json(events))
+                        verify_correction_result(observed,command['expected_exit_code'])
+                    native_start=len(native_calls)
                 result=tools['submit_patch']()
             elif kind=='shell':
                 result=tools['run_command'](command=action['command'])
@@ -236,6 +320,11 @@ def main():
             print({'source_index':action['index'],'kind':kind,'status':result['status']},flush=True)
         if not ctx.submitted_patch: raise ValueError('No submitted patch')
         (args.output/'submitted.patch').write_text(ctx.submitted_patch)
+        if completion is not None:
+            if file_record(args.completion_plan) != completion_identity:
+                raise ValueError('Completion plan changed during replay')
+            if file_record(args.output/'submitted.patch') != completion['final_patch']:
+                raise ValueError('Native submitted patch differs from completion plan')
         receipt.update(status='replayed_not_graded',patch=file_record(args.output/'submitted.patch'),
                        tool_calls=ctx.tool_calls)
     finally:
