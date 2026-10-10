@@ -2,7 +2,7 @@
 
 Updated October 9, 2026. **P1 is incomplete. Keep the Runpod GPU stopped.**
 No real training corpus is admitted and no learned coding-performance gain has
-been demonstrated. The latest completed local integration is corpus 018.
+been demonstrated. The latest completed local integration is corpus 019.
 
 This file is the current acceptance summary. Cycle details, failed attempts and
 superseded results are preserved in the [implementation journal](40-p1-implementation-journal.md).
@@ -14,35 +14,35 @@ cycle; do not append historical logs to this summary.
 
 | Requirement | Verified evidence | Remaining acceptance work |
 | --- | --- | --- |
-| Data supply | 15 quarantined examples, 15 tasks, 14 declared repository groups; 289,750 input and 90,869 supervised tokens | Abundant, diverse, approved data; the 3×50M processed-target-token plan is not supplied |
+| Data supply | 16 quarantined examples, 16 tasks, 15 declared repository groups; 314,028 input and 97,254 supervised tokens | Abundant, diverse, approved data; the 3×50M processed-target-token plan is not supplied |
 | Task alignment | Publisher controls and bounded semantic checks for selected candidates; Boltons derivative repairs the reproduced compatibility failure | Final content-bound review for every admitted task; passing finite cases is not universal correctness |
 | Attribution | Selected exact repository and dependency notices retained; teacher and assistant-derived actions distinguished | Complete source, observation, dependency and teacher-term review |
-| Split isolation | Lineage audit 008 resolves 14 declared groups, two historical names and four reserved names; no cross-boundary ID/network-root overlap | Freeze splits and review semantic duplicates, detached copies and historical lineage; current IDs do not prove independence |
+| Split isolation | Lineage refresh 009 is incomplete: six HTTP 403 responses; audit 008 is historical evidence | Freeze splits and review semantic duplicates, detached copies and historical lineage; current IDs do not prove independence |
 | Local training code | Latest CPU suite: 400 tests, 367 passed, 33 skipped | Skipped environments, full-model GPU corroboration and long-running stability |
-| Artifact ingestion | Corpus 018 uploaded to R2, restored into an empty directory and validated; schedules match byte-for-byte | Repeat with the final admitted bundle on the actual Runpod volume |
+| Artifact ingestion | Corpus 019 uploaded to R2, restored into an empty directory and validated; schedules match byte-for-byte | Repeat with the final admitted bundle on the actual Runpod volume |
 | GPU validation | Earlier single synthetic full-model update/reload only | Real-corpus long-sequence memory, throughput, checkpoint/resume and bounded failure handling |
 | Product performance | No demonstrated learned held-out gain | Train and compare against a frozen baseline on uncontaminated held-out tasks |
 
 ## Current corpus and evidence
 
-- [Assembly receipt](../evidence/data/training-corpus-assembly-018/receipt.json)
-- [R2 publish receipt](../evidence/data/training-corpus-publish-019/receipt.json)
-- [R2 restore receipt](../evidence/data/training-corpus-restore-018/receipt.json)
-- [Restored corpus inspection](../evidence/data/training-corpus-inspection-018/report.json)
-- [Integration and schedule equality check](../evidence/data/corpus018-integration-check-001/report.json)
-- [Explicit training rejection](../evidence/data/training-corpus-denial-017/report.json)
-- [Current repository lineage screen](../evidence/data/current-corpus-lineage-008/report.json)
-- [Latest CPU regression](../evidence/p1/replay-credential-screen-001/regression.json)
+- [Assembly receipt](../evidence/data/training-corpus-assembly-019/receipt.json)
+- [R2 publish receipt](../evidence/data/training-corpus-publish-020/receipt.json)
+- [R2 restore receipt](../evidence/data/training-corpus-restore-019/receipt.json)
+- [Restored corpus inspection](../evidence/data/training-corpus-inspection-019/report.json)
+- [Integration and schedule equality check](../evidence/data/corpus019-integration-check-001/report.json)
+- [Explicit training rejection](../evidence/data/training-corpus-denial-018/report.json)
+- [Current repository lineage screen](../evidence/data/current-corpus-lineage-009/report.json)
+- [Latest CPU regression](../evidence/p1/signac-search-regression-001/regression.json)
 - [Boltons derivative review](../evidence/data/boltons205-compat-review-001/report.json)
-- [Corpus integration evidence archived in R2](../evidence/data/corpus018-integration-publish-001/receipt.json)
+- [Corpus integration evidence archived in R2](../evidence/data/corpus019-integration-publish-001/receipt.json)
 
 Manifest SHA-256:
-`3c26a771de1a2d2f5a5f98b75d5a3cb6d5adcadb426754f89a6ca3a98f7f4109`.
+`9b9e31e7f98557d67d687c6328bf076f7c080e0ee6ad50e8767e497e102379c1`.
 Content SHA-256:
-`cda219ef9998fe0b138c6cbe4f86b843b1daaea24f420a1e5597d8c69c17f01d`.
-The restored bundle has 31 files and 3,216,759 bytes. Its one-epoch schedule uses
-seed 7401, 14 planned updates and a 9,216-supervised-token update cap. It consumes
-90,869 target tokens with zero overshoot. No optimizer steps are implied.
+`aaf4774bfa87b3fa978a1f5c656441b7ce83e3bac187951e574b76cba9edad9a`.
+The restored bundle has 33 files and 3,484,675 bytes. Its one-epoch schedule uses
+seed 7401, 16 planned updates and a 9,216-supervised-token update cap. It consumes
+97,254 target tokens with zero overshoot. No optimizer steps are implied.
 
 All four admission fields remain null: rights/attribution, split isolation,
 runtime qualification and task alignment. Training-purpose loading rejects with
