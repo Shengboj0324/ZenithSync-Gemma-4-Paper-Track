@@ -47,6 +47,23 @@ def preflight(messages, prefix=PREFIX):
         for call in message.get('tool_calls',[]):
             fn=call['function'];name=fn['name'];args=fn['arguments']
             if name=='execute_bash':
+                if set(args)=={'command'} and isinstance(args['command'],str):
+                    # This reviewed form has one literal identifier pattern and
+                    # one source file. Reject shell syntax rather than reparse it
+                    # into a different command or replace arbitrary substrings.
+                    match=re.fullmatch(
+                        r'grep -n (?P<quote>[\"\']?)(?P<pattern>[A-Za-z_][A-Za-z_0-9]*)'
+                        r'(?P=quote) (?P<path>/[A-Za-z0-9_./-]+)',args['command'])
+                    if match is not None:
+                        relative=source_path(match['path'],prefix)
+                        if relative=='.':
+                            raise ValueError('Standalone grep requires a source file')
+                        command=shlex.join(['grep','-n',match['pattern'],'/workspace/'+relative])
+                        actions.append({'index':index,'kind':'shell','command':command})
+                        continue
+                if set(args)=={'command'} and args['command']=='python --version':
+                    actions.append({'index':index,'kind':'shell','command':args['command']})
+                    continue
                 if set(args)!={'command'} or not args['command'].startswith('cd '+prefix+' && '):
                     raise ValueError('Unreviewed shell invocation profile')
                 command=args['command'].replace('cd '+prefix+' && ','cd /workspace && ',1)
@@ -78,7 +95,7 @@ def validate_profile(profile):
         raise ValueError('Exact replay profile fields required')
     if re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+',profile['repo']) is None:
         raise ValueError('Invalid repository')
-    if re.fullmatch(re.escape(profile['repo'].replace('/','__'))+r'-[0-9a-f]{40}',profile['instance_id']) is None:
+    if re.fullmatch(re.escape(profile['repo'].replace('/','__'))+r'-(?:[0-9a-f]{40}|[1-9][0-9]*)',profile['instance_id']) is None:
         raise ValueError('Instance/repository mismatch')
     if re.fullmatch(r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}',profile['trajectory_id']) is None:
         raise ValueError('Invalid trajectory ID')
@@ -97,6 +114,12 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--profile',type=Path)
+    p.add_argument('--source-shard',type=Path,default=ROOT/'artifacts/data/quarantine/swe-hero-001/data/train-00000-of-00014.parquet')
+    p.add_argument('--source-intake',type=Path,default=ROOT/'evidence/data/swe-hero-intake-001/receipt.json')
+    runtime=p.add_mutually_exclusive_group()
+    runtime.add_argument('--biolink-offline',action='store_true',help='Use inspected task-172 runtime and public schema replay')
+    runtime.add_argument('--conda-testbed',action='store_true',help='Use reviewed /opt/conda/envs/testbed runtime with no installer leftover')
+    runtime.add_argument('--miniconda-testbed',action='store_true',help='Use reviewed /opt/miniconda3/envs/testbed runtime with no installer leftover')
     args=p.parse_args()
     profile=validate_profile(json.loads(args.profile.read_text()) if args.profile else {
         'instance_id':INSTANCE,'trajectory_id':TRACE,'image':IMAGE,
@@ -107,18 +130,19 @@ def main():
                         'google-adk':'1.36.1','adk-eval-core':'0.1.0'}.items():
         if version(name)!=pinned: raise ValueError('Pinned native runtime required')
     import pyarrow.parquet as pq
-    shard=ROOT/'artifacts/data/quarantine/swe-hero-001/data/train-00000-of-00014.parquet'
-    intake=json.loads((ROOT/'evidence/data/swe-hero-intake-001/receipt.json').read_text())
+    shard=args.source_shard
+    intake=json.loads(args.source_intake.read_text())
     identity=file_record(shard)
     if (intake['dataset']!='nvidia/SWE-Hero-openhands-trajectories'
             or intake['revision']!='150bc119e52c647216fce285fd801f16b6fd745b'
-            or intake['downloaded']['data/train-00000-of-00014.parquet']!=identity):
+            or identity not in intake['downloaded'].values()):
         raise ValueError('Teacher provenance mismatch')
-    matches=[]
-    for batch in pq.ParquetFile(shard).iter_batches(batch_size=64,
-            columns=['instance_id','trajectory_id','trajectory']):
-        matches.extend(row for row in batch.to_pylist() if row['instance_id']==instance)
-    if len(matches)!=1 or matches[0]['trajectory_id']!=trace or file_record(shard)!=identity:
+    official=json.loads((ROOT/'evidence/p1/task-index-001/receipt.json').read_text())
+    if profile['repo'].casefold() in {r.casefold() for r in official['repo_counts']}:
+        raise ValueError('Reserved repository excluded before source body read')
+    matches=pq.read_table(shard,columns=['instance_id','trajectory_id','trajectory'],
+                         filters=[('trajectory_id','=',trace)]).to_pylist()
+    if len(matches)!=1 or matches[0]['instance_id']!=instance or file_record(shard)!=identity:
         raise ValueError('Teacher task linkage mismatch')
     converted=convert_swe_hero_history(matches[0]['trajectory'])
     actions=preflight(converted['messages'],profile['source_root'])
@@ -126,7 +150,16 @@ def main():
     from swegemma.sandbox import ContainerConfig,ContainerManager
     os.environ.setdefault('DOCKER_HOST',subprocess.check_output(
         ['docker','context','inspect','--format','{{.Endpoints.docker.Host}}'],text=True,timeout=15).strip())
-    manager=ContainerManager(ContainerConfig(image=image,reuse_containers=False))
+    environment={'TEST_TMPDIR':'/tmp'}
+    if args.biolink_offline or args.conda_testbed or args.miniconda_testbed:
+        runtime_bin='/opt/miniconda3/envs/testbed/bin' if args.miniconda_testbed else '/opt/conda/envs/testbed/bin'
+        environment.update(PATH=runtime_bin+':/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+                           PYTHONDONTWRITEBYTECODE='1')
+    if args.biolink_offline:
+        if instance!='biolink__biolink-model-toolkit-172':
+            raise ValueError('Biolink resource profile only qualified for task 172')
+        environment.update(PYTHONPATH='/opt/zenithsync-resource-replay')
+    manager=ContainerManager(ContainerConfig(image=image,reuse_containers=False,environment=environment))
     manager.client.images.get(image)
     args.output.mkdir(parents=True,exist_ok=False)
     (args.output/'actions.json').write_bytes(canonical_json(actions))
@@ -135,6 +168,7 @@ def main():
         'action_counts':dict(Counter(a['kind'] for a in actions)),
         'training_approved':False,'new_model_evaluated':False,
         'source_observations_reused':False,'status':'incomplete',
+        'environment':environment,
         'limits':{'tool_calls':profile['max_tool_calls'],'minutes':10,'command_seconds':30}}
     cid=None;events=[]
     try:
@@ -146,7 +180,14 @@ def main():
         if provenance['base_commit']!=profile['base_commit']:
             raise ValueError('Wrong source base')
         prepare_source_workspace(manager,cid,snapshot_commit=provenance['snapshot_commit'],
-                                 source_tree=provenance['source_tree'])
+                                 source_tree=provenance['source_tree'],installer_leftover=not (args.biolink_offline or args.conda_testbed or args.miniconda_testbed))
+        if args.biolink_offline:
+            from zenithsync.replay_resources import stage_resources
+            receipt['offline_resources']=stage_resources(manager,cid,
+                ROOT/'evidence/data/swe-rebench-biolink-resources-001',ROOT/'zenithsync/offline_resources.py')
+            check=manager.exec(cid,"python -c 'from bmt import Toolkit; assert Toolkit().get_model_version()==\"4.2.1\"'",timeout=30)
+            if check.exit_code:
+                raise ValueError('Offline resource startup check failed: '+check.stderr)
         ctx=SwegemmaContext(docker_manager=manager,container_id=cid,task_id=trace,
             repo=profile['repo'],max_tool_calls=profile['max_tool_calls'],max_time_minutes=10,max_exec_seconds=30,
             graph_dir='/nonexistent-fixture',embeddings_dir='/nonexistent-fixture')

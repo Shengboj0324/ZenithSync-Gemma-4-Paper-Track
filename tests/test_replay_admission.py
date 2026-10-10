@@ -87,6 +87,31 @@ class ReplayAdmissionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'token counts'):
             self.assess()
 
+    def test_full_nodeid_grading_requires_task_and_attempt_binding(self):
+        report = {'backend': 'swe_rebench_full_nodeid_reference', 'task': 'fixture',
+                  'attempt': self.record('attempt/receipt.json'),
+                  'inputs': {'patch': self.record('attempt/submitted.patch')},
+                  'grading': {'all_cases_match_reference': True, 'case_count': 1,
+                              'disagreements': []}}
+        self.write('grade/report.json', report)
+        self.assertTrue(self.assess()['mechanical_checks_passed'])
+        report['task'] = 'different'
+        self.write('grade/report.json', report)
+        with self.assertRaisesRegex(ValueError, 'task differs'):
+            self.assess()
+        report['task'] = 'fixture'
+        report['attempt'] = None
+        self.write('grade/report.json', report)
+        with self.assertRaisesRegex(ValueError, 'attempt identity'):
+            self.assess()
+
+    def test_unknown_backend_is_not_interpreted_as_legacy(self):
+        report = json.loads((self.root / 'grade/report.json').read_text())
+        report['backend'] = 'unqualified'
+        self.write('grade/report.json', report)
+        with self.assertRaisesRegex(ValueError, 'Unknown grading backend'):
+            self.assess()
+
 
 if __name__ == '__main__':
     unittest.main()

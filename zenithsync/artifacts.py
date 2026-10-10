@@ -52,7 +52,10 @@ def file_record(path: Path) -> dict:
         opened = os.fstat(stream.fileno())
         if (before.st_dev, before.st_ino) != (opened.st_dev, opened.st_ino):
             raise ValueError("file replaced during inventory")
-        while chunk := stream.read(1024 * 1024):
+        while True:
+            chunk = stream.read(1024 * 1024)
+            if not chunk:
+                break
             hasher.update(chunk)
             size += len(chunk)
         after = os.fstat(stream.fileno())

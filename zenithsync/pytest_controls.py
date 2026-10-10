@@ -37,7 +37,17 @@ def call_outcomes(document):
     return result
 
 
-def compare_controls(base, reference, expectations):
+def validate_supplemental_passes(nodes):
+    """Require individually declared full test identities, never inferred coverage."""
+    if (not isinstance(nodes, list)
+            or any(not isinstance(node, str) or not node or node.split() != [node]
+                   for node in nodes)
+            or len(set(nodes)) != len(nodes)):
+        raise ValueError('Unique explicit supplemental test identities required')
+    return nodes
+
+
+def compare_controls(base, reference, expectations, *, supplemental_pass_to_pass=None):
     """Require exact coverage and each publisher group's complete transition."""
     transitions = {'FAIL_TO_PASS': ('failed', 'passed'),
                    'PASS_TO_PASS': ('passed', 'passed'),
@@ -59,16 +69,28 @@ def compare_controls(base, reference, expectations):
     groups = {}
     for node in before:
         groups.setdefault(node.split()[0], []).append(node)
-    if set(groups) != set(expected):
+    supplemental = validate_supplemental_passes(
+        [] if supplemental_pass_to_pass is None else supplemental_pass_to_pass)
+    for node in supplemental:
+        if node in expected or groups.get(node) != [node]:
+            raise ValueError('Supplemental test must be a distinct exact collected identity')
+        if before[node] != 'passed' or after[node] != 'passed':
+            raise ValueError('Supplemental regression test must pass both controls')
+    if set(groups) != set(expected) | set(supplemental):
         raise ValueError('Publisher expectation coverage differs')
     for key, nodes in groups.items():
+        if key in supplemental:
+            continue
         if any((before[node], after[node]) != expected[key] for node in nodes):
             raise ValueError('Full test outcome contradicts publisher transition: ' + key)
-    return {'full_test_count': len(before), 'publisher_key_count': len(groups),
+    result = {'full_test_count': len(before), 'publisher_key_count': len(expected),
             'collision_groups': {key: sorted(nodes) for key, nodes in groups.items() if len(nodes) > 1},
             'base_passed': sum(value == 'passed' for value in before.values()),
             'reference_passed': sum(value == 'passed' for value in after.values()),
             'all_transitions_match': True, 'training_approved': False}
+    if supplemental:
+        result['supplemental_pass_to_pass'] = sorted(supplemental)
+    return result
 
 
 def compare_candidate(reference, candidate):

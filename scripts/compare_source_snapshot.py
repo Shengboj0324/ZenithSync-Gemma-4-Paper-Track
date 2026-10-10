@@ -33,19 +33,24 @@ sys.exit(test.returncode if diff.returncode == 0 else 99)
 '''
 
 
-def run_image(image, output, *, probe=PROBE, generated_grading_tests=False, patch_path=None):
+def run_image(image, output, *, probe=PROBE, generated_grading_tests=False, patch_path=None,
+              entrypoint='/usr/bin/python3'):
     # Require a content identity, never a mutable local tag.
     if re.fullmatch(r'(?:[a-z0-9_./-]+@)?sha256:[0-9a-f]{64}', image) is None:
         raise ValueError('Expected an image digest or local image ID')
+    if (not isinstance(entrypoint, str) or not entrypoint.startswith('/')
+            or re.fullmatch(r'/[A-Za-z0-9_./-]+', entrypoint) is None
+            or any(part in ('.', '..', '') for part in entrypoint.split('/')[1:])):
+        raise ValueError('Explicit absolute interpreter path required')
     output.mkdir(parents=True, exist_ok=False)
     name = 'zenithsync-source-tests-' + uuid.uuid4().hex
     create = ['docker', 'create', '--pull', 'never', '--name', name,
               '--platform', 'linux/amd64', '--network', 'none', '--cap-drop', 'ALL',
               '--security-opt', 'no-new-privileges', '--pids-limit', '128',
-              '--memory', '2g', '--cpus', '2', '--entrypoint', '/usr/bin/python3', image,
+              '--memory', '2g', '--cpus', '2', '--entrypoint', entrypoint, image,
               '/tmp/zenithsync-qualification-probe.py']
     subprocess.run(create, capture_output=True, check=True, timeout=30)
-    receipt = {'image': image, 'container': name, 'agent_executed': False,
+    receipt = {'image': image, 'container': name, 'entrypoint': entrypoint, 'agent_executed': False,
                'generated_grading_tests_executed': generated_grading_tests}
     try:
         # Stage source as a file: Linux limits a single argv entry to 128 KiB.

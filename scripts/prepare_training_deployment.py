@@ -25,6 +25,19 @@ FILES = [
     'zenithsync/training_pilot.py', 'zenithsync/training_state.py',
     'zenithsync/gpu_memory.py', 'configs/p1-training-pilot.json',
     'zenithsync/optimizer_checkpoint.py',
+    'zenithsync/training_corpus.py', 'zenithsync/splits.py',
+    'scripts/inspect_training_corpus.py',
+    'scripts/plan_corpus_updates.py', 'zenithsync/training_schedule.py',
+    'zenithsync/corpus_optimization.py',
+    'zenithsync/corpus_training.py',
+    'zenithsync/training_rng.py',
+    'zenithsync/checkpoint_storage.py',
+    'zenithsync/adapter_checkpoint.py',
+    'zenithsync/training_session.py',
+    'zenithsync/session_report.py',
+    'zenithsync/corpus_run.py', 'zenithsync/gemma_training.py',
+    'scripts/run_corpus_training.py', 'scripts/run_corpus_training_worker.py',
+    'configs/p1-corpus-qualification.json',
     'requirements/serving-linux-py312-httpfix.lock.txt',
     'requirements/training-peft-supplement.lock.txt',
     'evidence/p1/model-intake-001/model-manifest.json',
@@ -50,7 +63,9 @@ def main():
     env = {**os.environ, 'PYTHONPATH': '', 'PYTHONDONTWRITEBYTECODE': '1'}
     checks = []
     with tempfile.TemporaryDirectory() as isolated:
-        for script in ['run_p1_training.py', 'run_p1_training_worker.py']:
+        for script in ['run_p1_training.py', 'run_p1_training_worker.py',
+                       'inspect_training_corpus.py', 'plan_corpus_updates.py',
+                       'run_corpus_training.py', 'run_corpus_training_worker.py']:
             command = [sys.executable, '-I', '-B',
                        str((args.directory / 'scripts' / script).resolve()), '--help']
             result = subprocess.run(command, cwd=isolated, env=env, capture_output=True,

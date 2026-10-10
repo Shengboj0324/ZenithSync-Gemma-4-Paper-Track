@@ -838,3 +838,1755 @@ repair, and rejects added test files before execution. This establishes grader
 behavior only. Full suite: 217 tests, 195 passed, 22 skipped. Located three
 source trajectories for provenance/action review and subsequent native replay.
 Runpod remains unnecessary and stopped; training admission remains pending.
+
+
+### P1 teacher data screening — 2026-10-09
+
+Verified all three task-172 trajectories. Their 55/56/49 executable actions
+exceed the 40-call limit. Editor-only diagnostic projections distinguish one
+failing repair and one passing repair; the second trace needs state-divergence
+analysis. These are not full replays or training-admitted examples. Prioritize
+third-trace native replay, followed by independently validated shorter data.
+All work remains local; no Pod restart is needed.
+
+
+### P1 native Biolink replay integration — pending runtime result
+
+Implemented task-environment selection, pinned response staging, and explicit
+source-shard loading for native replay. Suite: 219 tests, 197 passed, 22 skipped.
+One local replay process is live but waiting on dependency reads before
+container startup (session 46435). Preserve and poll it; no duplicate run.
+No new training admission, replay completion, or GPU requirement is claimed.
+
+
+### P1 source-state discrepancy audit — 2026-10-09
+
+Isolated the second teacher trace's first replacement mismatch to one line's
+four-space indentation difference. Preserve source-state uncertainty and do
+not force the trace to apply. The original native replay process remains live
+in dependency loading; continue polling session 46435 before any retry.
+
+
+### P1 corpus-wide budget screening — 2026-10-09
+
+Completed static screening of all 34,196 non-reserved traces (73 excluded).
+4,507 fit estimated 40-call cost without currently detected adapter flags,
+covering 2,753 distinct issues across 913 repositories. This expands the
+replay-candidate pool; it does not admit training data or prove token sufficiency.
+The original Biolink replay session 46435 remains pending dependency imports.
+Continue that exact process, then prioritize additional candidates from the
+corpus-wide pool with issue-level isolation and independently graded outcomes.
+
+
+### P1 budget-first environment cohort — 2026-10-09
+
+Bound 2,621 image-backed, statically budget-fit SWE-rebench trajectories to
+1,575 issues / 902 repositories. Resolved eight deterministic image identities
+from this cohort without downloading layers. Prefer this pool for additional
+replays; it remains unqualified for training. Existing Biolink replay session
+46435 continues, with no duplicate workload or Runpod restart.
+
+
+### P1 replay retry after verified terminal failure
+
+Biolink replay-001 ended during resource hash validation; its container cleanup
+is verified. Both resources subsequently matched stable pinned hashes. Fresh
+replay-002 (session 88472) is now running; poll it before any further retry.
+Budget-cohort evidence R2 publication verified. Runpod remains stopped.
+
+
+### P1 native SWE-rebench success; admission still pending
+
+Rebuilt a self-contained native harness runtime to avoid workspace dependency
+read stalls; core pins and shared dependency versions retained, import-origin
+and dependency checks passed. Native Biolink replay-003 completed with fresh
+observations and a submitted patch that independently matches all 93 expected
+test outcomes. Both containers cleaned up. Its 48 charged calls exceed the
+40-call limit, so this remains compatibility evidence, not admitted training
+data or model performance. Next: audit native masks/context and accelerate
+qualification of budget-fit corpus candidates. Runpod remains stopped.
+
+
+### P1 native context and mask audit — 2026-10-09
+
+Linked Biolink replay, exact patch grading, reconstructed native history, and
+pinned-tokenizer masks. History: 26,118 input / 5,530 supervised tokens; input
+plus reserve 34,310 exceeds 32,768, and 48 calls exceeds 40. Admission checker
+correctly rejects both constraints. Extended grading-backend identity checks;
+full rerun 221 tests, 199 passed, 22 skipped. Keep this as compatibility evidence
+and pursue budget-fit corpus candidates; no GPU training is authorized by these
+results and Runpod remains stopped.
+
+
+### P1 budget-fit task triage — 2026-10-09
+
+Completed provenance-bound issue/environment extraction for eight budget-fit
+SWE-rebench tasks without reading solution/test patches. Reviewed test breadth,
+issue type and estimated call counts; prioritize nodebook AST repair (35 calls,
+1 new regression / 18 preserved tests) for the next environment qualification,
+then an encoding case. Counts are publisher declarations, not execution results.
+Do not equate static call fit with native token fit or corpus admission. Keep the
+full data goal unchanged; next work is local snapshot/evaluator qualification.
+Runpod remains stopped. Detailed comparison: document 37.
+
+
+### P1 second SWE-rebench evaluator qualification — 2026-10-09
+
+Nodebook original-image paired controls reproduce 19/19 expected transitions
+(18 base passes to 19 reference passes). Generalized evaluator input extraction
+and explicit execution profiles; Biolink regression still matches 93/93
+transitions. Full local suite: 201 passed, 22 skipped after metadata-guard
+failures were retained and stable reruns completed. No GPU used. Next qualify
+sanitized Nodebook source and replay/context, then expand corpus admission;
+original-image tests alone do not approve a training example.
+
+
+### P1 budget-fit native replay — 2026-10-09
+
+Nodebook second snapshot preserves its exact tracked tree and reproduces all
+19 original-image test transitions. First replay safely rejected a retained
+untracked issue file; declared cleanup was corrected and a new snapshot verified.
+The subsequent native teacher replay completed within 35/40 charged tool calls,
+submitted a hash-bound patch and cleaned up. Patch grading and native context
+admission remain pending. Added reusable snapshot verification and exact teacher
+selection; full suite 202 passed / 22 skipped. Runpod remains stopped.
+
+
+### P1 Nodebook mechanical candidate qualification — 2026-10-09
+
+Independent replay-patch grade matches 19/19 expected outcomes; empty-patch and
+unauthorized-file negative controls behave correctly. Pinned token audit yields
+17,353 input / 4,183 supervised tokens; with 8,192 reserve, context is 25,545 of
+32,768. Tool budget is 35/40. Linked mechanical admission passes. This remains
+unapproved training data pending rights, frozen split/duplicate checks, remaining
+source qualification and GPU runtime validation. Full suite 204 passed / 22
+skipped, followed by focused allowance checks and regrading. Keep Runpod stopped.
+Next advance corpus rights/isolation and assembly using this linked evidence.
+
+
+### P1 provenance and trainable candidate export — 2026-10-09
+
+Captured Nodebook tracked source and identified dependency notices; compared all
+four direct-read spans, retaining one truncated tool observation. Added an
+attribution record. Expanded identity isolation to the eight selected source
+repositories and four reserved repositories; no current declared fork-network
+or canonical-ID overlap. Semantic duplication and frozen splits remain open.
+Exported actual token/label arrays, matching prior audit hashes and collator
+counts, into quarantine for later corpus assembly. The GPU worker remains a
+synthetic fixture qualifier, not yet a production corpus trainer. Next implement
+corpus isolation/assembly and the real-data training path under explicit gates.
+Runpod remains stopped.
+
+
+### P1 real-data corpus loader and deployment preflight — 2026-10-09
+
+Implemented portable quarantine corpus assembly and a hash-bound loader. It
+validates token/audit identities, exact label/count accounting, aggregate bytes,
+no truncation, duplicate sequences and declared cross-split families. Separate
+content-bound rights/split/runtime receipts are required for training loads;
+these are consistency gates, not proofs of arbitrary receipt authenticity.
+Assembled one real Nodebook candidate (17,353 input / 4,183 supervised targets).
+Staged CLI inspection passes outside the repository, and training-purpose access
+is denied for the real quarantine corpus. Full suite: 212 passed, 22 skipped.
+The first source-bundle staging attempt rejected filesystem metadata drift on
+p1-training-pilot.json; stable rereads and a fresh bundle succeeded without
+weakening inventory guards. The GPU qualification worker is still fixture-based.
+Next: deterministic bounded real-data batching, token-weighted optimizer loop
+and resumable corpus state. Details and current limits are in document 38.
+# Corpus optimization progress — 2026-10-09
+
+Implemented whole-example deterministic schedules, exact supervised-target
+accounting, verified data-cursor resume, and single-device token-weighted
+gradient accumulation. Eight focused CPU tests passed, including bitwise
+deterministic optimizer/cursor resume. A reduced actual Gemma backend test passed
+loss, gradient and AdamW batch-equivalence checks. Repository suite: 243 tests,
+216 passed, 27 skipped. Four staged CLI imports passed. See document 38 and
+`evidence/p1/corpus-optimization-001` for scope and tolerances.
+
+No Pod restart or training campaign occurred. The real candidate remains
+quarantined. Next work is bounded corpus iteration and complete worker/checkpoint
+integration, followed by admitted data expansion and real-sequence GPU memory
+qualification. No full-scale readiness, accuracy gain or error-free guarantee is
+established by these CPU checks.
+# Indexed corpus progress — 2026-10-09
+
+Added an indexed corpus reader that validates all examples and split/admission
+invariants before exposing metadata, then rehashes token files on demand.
+The schedule CLI now avoids retaining all token arrays. Real Nodebook fetches
+and schedule/update files match the materialized implementation exactly.
+Twelve corpus tests pass; the full suite has 247 tests, 220 passed and 27 skipped.
+Four staged CLI imports pass. No GPU or optimizer execution was performed.
+
+This bounds retained token data to individual examples, not total process RSS:
+manifest metadata and per-example JSON decoding still consume memory. Next:
+connect indexed fetching to bounded training microbatches and complete resume
+checkpoints, then qualify full-model GPU behavior. Data remains quarantined.
+# Streamed optimizer integration — 2026-10-09
+
+Connected indexed training data to supervised-token-weighted accumulation with
+one complete example resident at a time. Exact metadata/target checks and
+end-of-stream validation precede the optimizer step. Synthetic admission fixtures
+verify numerical equivalence and error paths; weak-reference checks verify tensor
+release before fetching the next microbatch. Twenty-four focused tests passed,
+including reduced Gemma; four stream tests passed after the tensor-lifetime test
+was added. The repository run had 250 tests, 220 passed and 30 skipped.
+
+The corpus-update bridge is implemented, but the full worker/checkpoint/RNG
+integration remains open. Actual data remains quarantined, and no GPU was used.
+Full-model long-sequence memory and BF16/LoRA behavior require a later authorized
+GPU session after local integration is ready. See document 38 for limitations.
+# Stochastic resume progress — 2026-10-09
+
+Implemented global Python/NumPy/Torch RNG capture and validated restoration with
+runtime/determinism settings bound to the payload. CPU dropout training resumes
+with exact loss, weight and AdamW moment agreement after model/optimizer/cursor
+reconstruction. Eleven focused tests and four staged CLI imports pass. No GPU
+used. CUDA RNG recovery remains untested; custom generators and worker processes
+are out of scope for this helper.
+
+Next: atomically publish and restore a complete checkpoint from disk, connect
+recovery to the training worker, finish data admission/expansion and then qualify
+the real full-model training path on an explicitly restarted Pod. P1 is ongoing.
+# Durable storage progress — 2026-10-09
+
+Implemented no-overwrite atomic checkpoint publication, serialized-byte ceilings,
+fsync and same-descriptor hash-checked weights-only loading. A fresh subprocess
+restored synthetic model/AdamW/RNG state and reproduced the next dropout update
+exactly. Failure tests cover partial/tampered files, write exceptions, over-budget
+serialization, symlinks and FIFOs. Fifteen focused tests pass; staged CLI checks
+pass. The prior full suite ran 257 tests with 220 passed and 37 skipped.
+
+Next: bind adapter/frozen-base identity, corpus, schedule/cursor and configuration
+into the complete checkpoint contract, then wire worker save/resume. Actual
+network-volume durability, GPU behavior and real data training remain unqualified.
+The Pod was not restarted; the full P1 objective remains active.
+# Bound adapter recovery — 2026-10-09
+
+Implemented adapter-only checkpoint binding to base/corpus/config/schedule
+identities, frozen-state fingerprints, module modes, exact data cursor, AdamW
+and RNG state. CPU disk save/resume reproduces the remaining dropout schedule
+exactly. Incompatible identities, tensor/state/count/mode changes are rejected
+before parameter application. Eighteen focused tests pass; the repository suite
+ran 261 tests, 220 passed and 41 skipped. Four staged CLI imports pass.
+
+Next: connect these contracts into the actual training worker with finite run
+budgets, checkpoint publication and resume. Qualify PEFT/full-model restore,
+frozen-state scan cost, long-sequence memory and real data on GPU only after
+local integration and admission work are ready. No Pod restart or real training.
+# Budgeted training session — 2026-10-09
+
+Integrated indexed corpus fetching, deterministic schedules, streamed optimizer
+updates and bound checkpoint/resume into a reusable session loop. Update/time/
+sequence/checkpoint budgets are explicit. The committed cursor advances only
+after durable checkpoint publication. Five session tests cover exact resumed
+execution, preserved prior checkpoints after disk failure, input rejection and
+budget stops. Twenty-three focused tests pass; the repository suite ran 266 tests
+with 220 passed and 46 skipped. Four staged CLI import checks pass.
+
+Next: connect this loop to the full Gemma/PEFT worker, pinned runtime checks,
+volume verification, durable reports and hard deadline supervision. Real data
+remains quarantined; data expansion/admission and GPU qualification remain open.
+No Pod restart and no real-data optimization occurred.
+# Full corpus worker wiring — 2026-10-09
+
+Connected CPU admission/config preflight, exact Gemma LoRA attachment, the
+budgeted training loop, bound checkpoint resume, pinned runtime/volume/model
+checks and deadline supervision in new corpus-worker entrypoints. Added a
+proposed one-update qualification config. The real quarantined candidate is
+correctly rejected before loading a model. No Pod restart or real training.
+
+Reduced Gemma + PEFT update/restore passes, along with fourteen focused tests.
+Repository suite: 271 tests, 224 passed, 47 skipped. Six staged CLI imports pass.
+Full 31B GPU execution, supervisor end-to-end behavior with that worker,
+long-sequence memory, throughput and resume remain unverified. Next: review and
+test worker orchestration/error paths, complete corpus admission/expansion, and
+prepare a concrete GPU qualification only after those prerequisites are ready.
+# Supervisor evidence reconciliation — 2026-10-09
+
+Added independent schedule/checkpoint/metric/budget reconciliation before the
+supervisor accepts a session. Resume bindings are checked before worker launch;
+worker execution identity must match the supervisor's own calculation. Actual
+locally produced Torch checkpoints pass reconciliation, while altered reports,
+payloads, paths, bytes and unsupported stop reasons fail. Thirteen focused tests
+pass; full suite has 276 tests, 229 passed and 47 skipped. Six CLI imports pass.
+
+GPU execution remains pending. Next priorities are full worker failure-path
+coverage and data admission/expansion; CPU evidence is not a full-model readiness
+or repair-performance claim. The Pod remains unused.
+# Data expansion: Mailmerge controls — 2026-10-09
+
+Downloaded and probed the pinned Mailmerge-135 environment. The base/reference
+controls reproduce all 27 publisher transitions (26 versus 27 passing tests).
+The selected teacher has 37 shell/editor calls before native adaptation. The
+image exposes 906 reachable commits, so source isolation is mandatory before
+replay. No training approval or real optimizer update is claimed.
+
+**Mailmerge follow-up:** isolated exact-tree snapshot verified, 37-call native
+replay completed, and its patch matched all 27 reference tests. Untruncated
+history has 30,191 inputs / 7,415 targets; input plus the 8,192 output reserve
+exceeds the 32,768 context budget by 5,615, so admission remains denied. Source
+and selected dependency notices are retained. The runtime path aliases were
+verified and capture containment corrected. Regression: 277 tests, 230 passed,
+47 skipped. Next data work should evaluate the alternate trace or other tasks
+without weakening the declared context criterion.
+
+Next: bind the public solution commit, build/verify an exact-tree isolated source
+snapshot, replay and grade the selected trace, then evaluate native context length
+and rights/split admission. The Pod remains stopped; this work uses local CPU.
+
+
+### Mailmerge alternate trace: independent replay and context rejection
+
+Trace `8ac352d1-ec64-4e81-8999-778c27f6739c` was extracted from the pinned
+SWE-Hero shard 011, reviewed, and replayed against the same verified offline
+snapshot. All 37 charged shell/editor calls completed; the container was removed.
+The submitted patch changes only the CSV reader encoding to `utf-8-sig`.
+Independent grading matched all 27 reference outcomes, with zero disagreements.
+This is teacher replay evidence, not learned Gemma performance.
+
+The untruncated native history has 28,451 input tokens and 7,870 supervised
+targets. With the unchanged 8,192-token output reserve, total demand is 36,643:
+3,875 above the 32,768 limit. Assessment `swe-rebench-mailmerge-native-admission-002`
+rejects training admission. Both reviewed Mailmerge traces fail this policy;
+no reserve reduction or truncation was used. Rights and split admission remain
+separate, unfinished requirements. No training corpus admission is implied.
+
+This supersedes the earlier next-step note proposing the already completed
+Mailmerge snapshot/replay. Next acquisition work should select a different
+shorter candidate, preserving independent grading and the same context gate.
+The Runpod Pod remains stopped; all this work ran locally.
+
+
+### Complete source-token cost screening (local, no GPU)
+
+Implemented `scripts/screen_source_token_cost.py` and
+`scripts/merge_source_token_screens.py`. The screening binds census, cohort,
+reserved repository index, intake receipts, source shards and exact model
+tokenizer bytes before deserializing selected histories. All 14 shards now
+cover exactly 2,621 image-present candidates (1,575 tasks, 902 repositories).
+The merged result is `evidence/data/source-token-cost-full-001`.
+
+Ranking uses the token count of canonical converted source-message JSON with
+no truncation, padding or special tokens. This includes source observations
+and reasoning. It is NOT native replay context, a bound on native length, a
+quality score, or training admission. No token-fit threshold is inferred from
+this proxy. Native replay, independent grading, actual token masking and
+context admission remain mandatory. The sample remains cost-selected and
+cannot estimate unbiased agent performance.
+
+The eight shortest distinct repositories were bound to task records, their
+Linux amd64 image metadata resolved (no layer download), and their issue and
+environment records reviewed. Evidence: `source-token-shortlist-001`,
+`source-token-images-002`, `source-token-task-review-001`. Shortness alone is
+insufficient: dkey and mypy_extensions request version information/changes;
+Narwhals requests documentation despite four published fail-to-pass tests,
+which warrants inspecting evaluator relevance before use. Other candidates
+include optional dataframe mutation, decorator return propagation, logger
+optional arguments, debug-expression formatting and empty-file lint behavior.
+These are potential bootstrap examples, not evidence of industrial capability.
+
+Five selection tests cover reserved names and flags, linkage substitution,
+duplicates and shard boundaries. A real incomplete cohort was rejected before
+merge output. The first empty-shard run exposed an Arrow null-type issue;
+explicit string typing fixed it, and all empty shards subsequently completed.
+A source metadata change on first read stopped another attempt; the failure
+was retained and a fresh run passed unchanged byte-identity guards. Final CPU
+suite: 282 tests, 258 passed, 24 skipped in the isolated Torch environment.
+No CUDA/full-model capability follows from those results.
+
+Next: inspect task/evaluator relevance for a code-behavior candidate, then
+qualify its clean-source controls and replay. Expand task diversity and
+complexity alongside context feasibility; do not optimize training quality
+solely for shortness. The Pod remains stopped; P1 and corpus admission remain
+incomplete.
+
+
+### Task/evaluator alignment requirement and corpus schema v2
+
+The pinned task `narwhals-dev__narwhals-941` fails task-alignment review.
+Its request asks for README media links, but the evaluator adds dataframe
+column-selection assertions; all four published fail-to-pass cases exercise
+that behavior. The reference patch contains both documentation and indexing
+changes. Record `evidence/data/task-alignment-narwhals-001/review.json` binds
+these inputs and rejects all three corresponding candidates in the screened
+cohort. The oracle patches remain evaluator-only. This finding does not
+establish a dataset-wide error rate.
+
+Corpus schema v2 supersedes the earlier three-gate admission contract: it
+requires `task_alignment`, `rights_and_attribution`, `split_isolation`, and
+`runtime_qualification`. Alignment evidence must review the stated behavior,
+reference change and evaluator relevance for every included task, including
+incidental merge changes and missing test coverage. A green evaluator result
+is insufficient. Generic receipt validation enforces content identity and
+evidence presence; it does not automatically establish the semantic truth of
+a review. No genuine passing alignment receipt has been created yet.
+
+Schema v1 remains readable for inspection but cannot train, even if it carries
+legacy passed receipts. New assembly emits v2. The real Nodebook candidate was
+rebuilt as `artifacts/data/quarantine/training-corpus-002` and remains quarantine:
+17,353 input tokens / 4,183 supervised targets, one example. Its manifest hash
+is `f9b731e8af73f3e7597abc6c14dc4aeafaeee8e6cee0ffa94fe2de5b5d87fc5d`.
+The schema change alters corpus content identity; schedules and admission
+receipts must be regenerated and reviewed, never relabeled from v1.
+
+Actual v1 and v2 candidate training denials are retained in
+`evidence/p1/task-alignment-denial-001`. The current worker bundle passed all
+six isolated CLI imports in `evidence/p1/task-alignment-source-001`. Final
+CPU suite: 285 tests, 261 passed, 24 skipped. Tests include forged alignment
+bindings, omitted alignment gates and an otherwise admitted legacy corpus.
+These checks establish local enforcement, not semantic review accuracy or
+full-model/CUDA qualification. P1 remains active; no GPU was used.
+
+Next: select a substantive code-behavior candidate whose problem statement,
+reference patch and tests agree; perform paired controls and native replay.
+Continue rights, split and task review before any real admission or training.
+
+
+### Shortlist alignment review and Datetransform base inspection
+
+Reviewed the seven remaining shortlisted task/reference/test bundles; the
+inputs and decisions are in `source-token-alignment-inputs-001` and
+`task-alignment-shortlist-001`. Mypy_extensions task 57 is rejected for the
+same class of issue/evaluator mismatch: its request is a version update, but
+its added evaluator checks NoReturn deprecation. Three cohort traces are
+affected. Dkey task 18 is held: its reference queries `VersionInfo('mgen')`
+while exposing dkey version information, and its tests only assert attribute
+existence. This is insufficient evidence of correct version provenance.
+
+Pydbg, Ignite, flake8-fancy-header, easy-ptvsd and Datetransform have provisional
+static alignment, with narrow coverage limits explicitly recorded. None has
+received training approval. The findings are from a cost-selected eight-task
+shortlist; they cannot estimate a dataset-wide error rate.
+
+Datetransform task 2 was selected for further qualification: optional mutation
+is a concrete behavioral contract, with tests for the default copy behavior
+and explicit inplace=True. Its pinned image was pulled locally and probed
+without running task tests. The image checkout is
+`51571c772ad0939dd35f1e9788fbbabfd8117b88`, not the expected
+`33b75b1948cad92aa4edf91850887f27562b0632`. Read-only Git inspection confirms
+the expected commit exists and has tree
+`696e971b020003634b90ffa249380b5bead8fc50`. The only tracked differences
+between base and image HEAD are files `=1.0.0` and `=1.16.0`; the image HEAD
+commit is titled Environment setup changes. The original full Git history
+also contains the solution commits, so it is unsuitable as an agent workspace.
+
+Evidence: `datetransform-probe-001`, `datetransform-base-audit-001`. Both owned
+probe containers were removed. No repair score or environment compatibility
+claim was produced. Next: derive an explicitly bound baseline at the requested
+commit, verify the exact tree, then run base/reference controls and sanitize
+solution history before replay. Preserve the original image and all identity
+checks; do not reinterpret the setup commit as the official base.
+
+This cycle changed data-quality evidence and candidate selection, not training
+code. The Pod remains stopped; P1 is incomplete and no data was admitted.
+
+
+### Datetransform exact-base normalization and paired controls
+
+Implemented `zenithsync/source_base.py` and
+`scripts/prepare_rebench_baseline.py` for disposable evaluator containers whose
+image HEAD is an environment setup commit. The build requires a successful
+probe bound to the immutable parent image, the observed initial HEAD and clean
+tracked source. It performs a non-forced detached checkout, disables checkout
+hooks, verifies the target tree, and hashes every tracked file against Git
+blobs. Untracked files and solution history deliberately remain; the result
+is explicitly not an agent-approved workspace. The parent image is unchanged.
+
+Datetransform's derived baseline is
+`sha256:e5c7fa51e8347815c94030d656efecb882773209da57a6c7fd3c708c7fb651cd`.
+Readback preserves nine tracked files at commit
+`33b75b1948cad92aa4edf91850887f27562b0632`, tree
+`696e971b020003634b90ffa249380b5bead8fc50`. Evidence is in
+`datetransform-baseline-001`, `datetransform-baseline-readback-001`,
+`datetransform-baseline-input-001`, and `datetransform-controls-001`.
+
+Paired evaluator controls import `datetransform.transform` from the checkout
+and match all three published transitions by full test identity: base passes
+one and fails two, reference passes all three. Test execution did not modify
+the tracked diff, and owned control/readback containers were removed. This
+qualifies the narrow three-test evaluator behavior, not broad correctness or
+agent performance. No teacher replay or trained model ran in this cycle.
+
+New tests cover wrong initial HEAD, tracked edits, checkout-hook suppression,
+exact base restoration and preservation of unrelated untracked files. Final
+CPU suite: 288 tests, 264 passed, 24 skipped. Runtime code for the normalizer
+also executed successfully inside the real Linux baseline build.
+
+Next: bind the solution commit, sanitize reachable history and known oracle
+files while preserving the exact tree, independently verify the resulting
+workspace, repeat paired controls to check parity, then replay and grade a
+selected trajectory. Rights, split and semantic admission remain separate.
+No GPU was used; keep the Pod stopped. P1 remains incomplete.
+
+
+### Datetransform sanitized replay and two-example corpus integration
+
+Bound PR 2 solution head `82085ef8e7f17cce30732a179cf5cf280eaa1754` and merge
+`7331185d854f14734a33ee00a84367d33c2aada0` to the captured GitHub response.
+Snapshot builds now accept an explicit successful probe of the same pinned
+image to normalize a setup HEAD before sanitization. The original strict
+base requirement remains the default. Independent verification also checks
+that the former setup HEAD is inaccessible.
+
+Datetransform snapshot
+`sha256:5f0dad187211379bfa4e913571460b9ab47eb0264263b0d0472a35dced139d0c`
+preserves the nine tracked base files and has one parentless commit. Base,
+solution, merge and setup commits are inaccessible; declared oracle paths
+are absent. This audits the mounted filesystem, not inherited Docker layers.
+Paired controls on the snapshot match the qualified baseline exactly: one
+base pass and two base failures, three reference passes.
+
+Trace `2bd25bdd-8342-4fb7-99a8-6ef15a2ea5ff` was source-reviewed and replayed
+with fresh native observations, 27 charged calls, no executed teacher thoughts
+and successful disposable-container cleanup. Its submitted source-only patch
+adds `inplace=False` and copies the dataframe when false. Independent grading
+matched all three evaluator outcomes. These tests cover a narrow one-row date
+example, not general dataframe aliasing correctness or learned model behavior.
+
+The untruncated history contains 14,126 input tokens / 4,574 supervised targets.
+Adding the unchanged 8,192 output reserve gives 22,318, leaving 10,450 tokens
+under 32,768. `datetransform-native-admission-001` passes mechanical checks
+without approving training. Evidence uses the `datetransform-*` directories
+for source, snapshot, controls, replay, grade, history, tokens and admission.
+
+Assembled schema-v2 `artifacts/data/quarantine/training-corpus-003`: two real
+examples across two tasks/repositories, 31,479 input tokens and 8,757 supervised
+targets. Manifest SHA-256:
+`5c0fb2f37acf0d2b425f983c5db38316b15f97482231b4641371b4d8baf921ef`.
+A seed-7401, one-epoch dry schedule with an 8,192-target per-update ceiling
+produces two whole-example updates, zero target overshoot and no repetition.
+The real corpus is still rejected for training. Rights, split isolation, task
+alignment receipts and runtime admission remain unresolved. This tiny corpus
+is pipeline qualification material, not sufficient campaign data.
+
+Final CPU regression suite: 288 tests, 264 passed, 24 skipped; snapshot building,
+verification, controls and replay also ran locally in Linux containers. No
+GPU was used. Next: rights and complete admission review for these candidates,
+continued diverse corpus expansion, then full-model runtime qualification when
+local prerequisites justify restarting the Pod. P1 remains incomplete.
+
+
+### Rights capture compatibility and restored corpus validation
+
+Datetransform source capture preserves all nine tracked files and MIT license
+(Copyright 2020 Brandon Schabell). The Python 3.7 metadata path now uses the
+installed backport and compatible canonical path-containment checks. Selected
+notices were captured for pandas 1.3.5, NumPy 1.21.6, python-dateutil
+2.9.0.post0, pytz 2025.2 and six 1.17.0. Installed pytest 7.1.2 has no
+discoverable notice. Default capture still rejects this absence; an explicit
+inventory option preserves the missing-notice flag without approving rights.
+Both initial failures and a fresh default-denial check are retained.
+
+The matching pytest 7.1.2 upstream source archive was downloaded from PyPI,
+verified against its published SHA-256, and its LICENSE preserved separately.
+This supplements attribution evidence but does not prove installed Conda build
+identity or complete all dependency/observation rights review.
+
+The 83-file Datetransform replay archive was independently restored from R2.
+The restored two-example corpus validates at the exact original manifest hash;
+both the regenerated schedule and update stream match the original bytes.
+Counts remain 31,479 input / 8,757 supervised tokens and two dry updates.
+Training admission remains false. Evidence: `datetransform-replay-restore-001`,
+`training-corpus-restored-inspect-001`, `training-corpus-restored-schedule-001`.
+
+Current readiness is consolidated in document 39 and linked first from README.
+The latest CPU suite remains 288 tests, 264 passed, 24 skipped. No GPU was used.
+Next: complete attribution and split/admission evidence while expanding corpus
+coverage; do not treat two quarantined examples as sufficient campaign data.
+
+
+### Current repository identity and issue-duplicate audit
+
+Live GitHub metadata resolves Nodebook and Datetransform plus the four reserved
+repositories. No canonical-ID or declared fork-network-root overlap was found
+(`current-corpus-lineage-001`). Reserved task bodies were not read.
+
+New `audit_issue_duplicates.py` verifies the pinned candidate cohort and task
+shards, validates source metadata before reading candidate issue text, and
+records exact UTF-8 hashes separately from whitespace-normalized heuristics.
+It covered all 1,575 candidate tasks and found two exact duplicate pairs:
+Mobly 164/165 and Hidrokit 121/122. Whitespace screening found the same pairs.
+Neither pair includes the current two assembled tasks. Source text equality
+is a grouping/review signal, not proof of task equivalence; case and Unicode
+forms are deliberately not conflated.
+
+`current-corpus-split-review-001` binds the actual corpus, identity audit and
+fingerprint evidence to a validated draft grouping using fork-network IDs and
+exact issue hashes. No training admission or frozen split was created. This
+review does not exclude detached copies, semantic/patch duplication, vendored
+source, unknown hidden evaluation data or model-pretraining exposure. It cannot
+be interpreted as a dataset-wide independence guarantee.
+
+Four new tests cover exact-versus-whitespace equality, case/Unicode separation,
+order independence and duplicate/empty input rejection. The final CPU suite
+ran 292 tests: 268 passed, 24 skipped. Next: complete attribution and task
+review while expanding the qualified corpus, and resolve the final split before
+training. No GPU was used; P1 remains incomplete.
+
+
+### Native observation audit and direct-source attribution
+
+Added reusable replay observation inventory with exact text/result identities,
+root and wrapped command exit codes, explicit truncation flags, and unknown
+status when a flag is absent. It validates event ordering and charged-call
+counts against the completed replay receipt. It does not equate successful
+tool execution or printed test claims with correctness, and does not remove
+failed observations from the training history.
+
+Datetransform: 27 charged calls plus submission; 27 ok results and one error
+(the empty no-match grep result, exit 1). No explicit truncation is reported;
+20 responses have no truncation flag, including response types without file
+content. Nodebook: 35 charged calls plus submission; all report ok, but one
+source read is explicitly truncated and 31 responses have no truncation flag.
+Do not conflate full token serialization with full underlying observations.
+Evidence: `datetransform-observation-audit-001`, `nodebook-observation-audit-001`.
+
+All five Datetransform direct read_file observations match preserved base
+source or sequential unique edits under the native line rendering. Three
+unique edits were checked, including two in a temporary diagnostic script.
+The source attribution record and span hashes are in
+`datetransform-file-rights-001`. This closes direct-read byte correspondence
+for that trace, not arbitrary shell-output rights or semantic equivalence
+to the original teacher's observations. Shell diagnostics and conditioning
+fidelity remain explicit review obligations. No rights or training admission
+was granted.
+
+Six new tests cover missing versus explicit truncation flags, wrapped errors,
+ambiguous/boolean exit codes, event ordering and changed observation hashes.
+Final CPU suite: 298 tests, 274 passed, 24 skipped. The two-example corpus,
+labels and schedules are unchanged; no GPU was used. Next: complete remaining
+attribution and admission review, expand corpus coverage, and qualify GPU
+execution only after the exact candidate bundle is ready.
+
+
+### Task alignment coverage cycle — 2026-10-09
+
+Implemented exact task/repository review coverage in corpus admission, with
+negative tests for omitted, duplicate, foreign and unresolved reviews. Full CPU
+regression: 302 tests, 278 passed, 24 skipped. Worker source bundle and isolated
+CLI checks refreshed. Real corpus remains two quarantined examples with 8,757
+supervised tokens; no real approval or GPU training occurred. Next: complete
+semantic and rights reviews and expand the qualified corpus before GPU use.
+
+
+### Semantic probe and corpus exclusion cycle — 2026-10-09
+
+Executed base/candidate probes in exact local snapshot containers, no GPU.
+Nodebook passes its 19 publisher cases but misses annotation dependencies and
+leaks parameter scope in added counterexamples: exclude its trajectory.
+Datetransform passes 18 added copy/inplace/time/row-count cases versus 0 on base.
+Selection 003 and corpus 004 now contain only Datetransform: 14,126 input and
+4,574 supervised tokens, quarantine only. No teacher trajectory was rewritten
+to conceal a failure. Next: expand qualification, finish rights/admission and
+regenerate the schedule for the final approved corpus. Old schedules are stale.
+
+
+### Easy-ptvsd evaluator qualification — 2026-10-09
+
+Pinned image matches declared base commit. Original image retains seven Git
+commits and is evaluator-only pending sanitization. Base/reference controls
+match all four publisher outcomes: base 3 pass / 1 fail, reference 4 pass.
+Nineteen additional mocked-debugger checks give base 4/19 and reference 19/19;
+these cover return identity, forwarding, class/static methods, call order and
+exception identity. They test the publisher reference, not a teacher or model.
+Evidence: `evidence/data/easyptvsd-review-001/review.json`. Next: sanitize and
+replay shortest eligible trajectory, then grade, tokenize and review rights.
+Current assembled corpus remains one quarantined Datetransform example. No GPU.
+
+
+### Easy-ptvsd sanitized replay and integration — 2026-10-09
+
+Verified ten tracked files in an exact-tree snapshot with one parentless commit,
+no remotes, known oracle paths absent, and old base/head/merge commits inaccessible.
+Verification concerns the mounted filesystem, not inherited Docker layer bytes.
+Snapshot base/reference outcomes match original controls for all four test IDs.
+
+Shortest trace `a148d74a-1367-4d52-8c47-a73008f73e7e` replayed but failed the
+source-path restriction because its submitted patch retains `reproduce_issue.py`.
+Retained the failure and did not edit its patch. The alternate trace
+`40eb374a-0850-4770-8b29-61e6905e5c55` performs its own cleanup, submits only
+`easy_ptvsd.py`, and passes 4/4 independent evaluator outcomes and 19/19 added
+semantic probes. Replayed observations are fresh; original teacher conditioning
+on those observations is not established.
+
+Alternate history: 15,297 input / 4,527 supervised tokens; plus 8,192 reserve is
+23,489, below 32,768 by 9,279 tokens. Mechanical admission passes; training remains
+unapproved. Selection 004 and corpus 005 combine this trace with Datetransform:
+29,423 input / 9,101 supervised tokens. All four real admission gates remain
+unresolved. Next: attribution/rights, observation review, broader supply, updated
+split isolation and scheduling. No GPU used.
+
+
+### Easy-ptvsd attribution and restore cycle — 2026-10-09
+
+R2 replay archive restored (91 files); corpus 005 validates through indexed
+scheduling. Local and restored schedule/updates bytes match exactly: two
+whole-example updates, 9,101 supervised tokens, zero overshoot, one epoch.
+This is an inspection schedule, not training approval or GPU-fit evidence.
+
+Captured ten repository files including MIT LICENSE.md and pytest 8.3.3 notice.
+ptvsd 3.0.0 has no installed/archive standalone notice; captured its source
+headers and referenced Apache 2.0 text. All seven installed Python source files
+match the hash-verified PyPI archive. This does not certify the whole environment
+or exhaustive rights. Attribution review: evidence/data/easyptvsd-rights-review-001.
+
+Replay observation audit found five errors (missing issue reads, direct test
+import failure, grep no matches, reversed classmethod reproduction). None were
+concealed. Twenty-three calls have unspecified truncation status. Continue
+observation consistency/attribution and broader qualification; no GPU used.
+
+
+### Fancy-header branch counterexamples — 2026-10-09
+
+Pinned image matches declared base; publisher base/reference controls match
+13 expected outcomes (base 12 pass / 1 fail, reference 13 pass). Additional
+12-case source branch probes pass 8/12 on base, 12/12 on reference, and 11/12
+on each of three teacher source-edit reconstructions. Two traces suppress
+missing-header errors on nonempty inputs; the third suppresses invalid-header
+validation for docstring-only input with an empty body. All three are held.
+
+The separate docstring/body branch was tested with its explicit object contract,
+not a native newer-Python AST. These probes do not establish cross-version
+compatibility or reproduce teacher shell execution. Evidence and exact edits
+are retained at evidence/data/fancyheader-semantic-review-001 and
+evidence/data/fancyheader-branch-probes-001. Do not equate publisher Python 3.6
+passes with branch-complete repair quality. No new example added; corpus stays
+at two quarantined examples, 9,101 supervised tokens. Next: qualify another
+repository and continue corpus review. No GPU used.
+
+
+### Supply feasibility and broader qualification batch — 2026-10-09
+
+Verified census: 34,269 raw traces. Current cost-screened, image-present cohort:
+2,621 traces, 1,575 tasks, 902 repositories. These counts are not admission.
+Corpus 005 remains 9,101 supervised tokens, quarantine only. Under the current
+32,768 context cap and 8,192 output reserve, a complete example has at most
+24,576 input tokens and at most 24,575 causal supervised targets. Thus even
+before prompt/tool masks and quality losses, one trace per task in this cohort
+has a single-pass ceiling of 1,575 × 24,575 = 38,705,625 targets. All 2,621 traces
+have ceiling 64,411,075. Neither number is available training supply.
+
+A 50M-token candidate therefore requires expanding this cohort, multiple
+trajectories per task, repeated exposure, or some combination. Three candidates
+may reuse the same corpus; 150M processed targets are not 150M unique targets.
+Do not interpret repetitions as independent tasks or evidence. No acceptance
+rate is extrapolated from the deliberately chosen small reviewed subset.
+
+Added a deterministic 32-repository review batch: choose each unreviewed
+repository's shortest source-proxy trace, divide repositories into four cost
+rank strata, select eight per stratum by seeded hash ranking. This widens cost
+and repository coverage; it is not an unbiased coding benchmark or proof of
+native token fit. All 32 issue descriptions are extracted with pinned task
+shard identities. Evidence: evidence/data/qualification-batch-001. Next: review
+those tasks and qualify their runtime/trajectory evidence.
+
+Full CPU regression: 305 tests, 281 passed, 24 skipped. No GPU used.
+
+
+### Broad batch triage and NumPyro mathematical check — 2026-10-09
+
+Read all 32 issue descriptions; extracted identity-checked evaluator-only
+patches for all 32 and reviewed reference/test patches for ten. Reviews record
+specific missing tests and distinguish issue-only from patch-reviewed tasks.
+Priority batch: CRC, NumPyro, Verde, civisml-extensions, geomet, pandas-vet,
+hyp3-sdk, litecli. This adds state, tensor-rank, numerical, CV-alignment and
+parsing coverage; no examples are approved merely by selection.
+
+For NumPyro composition ranks, derived the minimum feasible input rank as
+max(0, max_i[d_i - sum_{j<i}(c_j-d_j)]). The reference's backward recurrence
+starts at the final domain rank and visits preceding transforms only. Exact
+source/reference functions were checked against forward feasibility and the
+closed form for 69,904 bounded abstract sequences: reference 0 disagreements,
+base 17,942. This is not JAX or full-task runtime validation.
+
+Held broad reference approval for sktime due to formula documentation/edge
+contract gaps and decode due to version/specification and coverage mismatch.
+Uvicorn trusted-proxy semantics and magnivore rounding require clarification
+from source/contracts before qualification. Corpus remains two quarantined
+examples, 9,101 supervised tokens. Evidence: qualification-batch-review-001
+and numpyro-compose-math-001. Next: runtime and teacher review for priority tasks.
+No GPU used.
+
+
+### CRC runtime and provenance qualification — 2026-10-09
+
+Resolved Nicoretti__crc-153 against the benchmark's merged solution commit
+7ac98da2c6df6bbb91e2793ac69fcf796f9dba14, rather than the unavailable PR head.
+The new snapshot independently preserves all 56 tracked files, has one
+parentless commit, and removes checked old commits and known oracle paths
+from its mounted filesystem. Inherited image layers remain outside this audit.
+
+Original controls could not import crc: its installed editable-path file points
+to /crc/src instead of /testbed/src. A diagnostic runner verifies the exact old
+path bytes, records their hashes, and applies the same path-only correction in
+four disposable offline containers. Original/snapshot base outcomes match
+exactly (11 passed, 6 failed); both reference runs pass all 17 cases. Source
+imports resolve to the checkout and tests leave tracked diffs unchanged.
+Evidence: evidence/data/crc-runtime-controls-002 and crc-snapshot-verify-002.
+Earlier failed attempts are retained. No teacher replay or corpus admission is
+claimed. Next: integrate the explicit runtime correction into the replay image,
+then test digest state preservation and updates interleaved with digest reads.
+Corpus remains two quarantined examples, 9,101 supervised tokens; Pod stopped.
+
+
+### CRC deep checks and native replay — 2026-10-09
+
+Added an independent bit-feedback CRC oracle over GF(2), cross-checked CRC32
+against zlib, and checked every 8-bit register state plus all split points of
+five bounded messages across 16 configurations and two implementations.
+Reference: 4,965 passed; base: 3,433 passed, 1,532 failed. These are dependent
+within-task checks, not independent performance samples. Continuation after
+reads is explicitly a stronger engineering invariant than the abstract single
+final-digest workflow. Scope and derivation: crc-semantic-probes-001/DERIVATION.md.
+
+Packaged the editable-path repair into a local derived image; independently
+verified unchanged source snapshot and reproduced all 17 publisher transitions.
+Build 003 failed because Docker interpreted the bare image ID as a registry
+name; retained that failure. Build 004 uses a local tag with parent identity
+checks before and after build; final runtime is pinned by content ID.
+
+Native replay of trace 888c60d0-0a64-4816-aa3b-6c0aaacbf89a completed with
+36 charged calls and fresh observations. Its patch retains final_verification.py
+and reproduce_issue.py outside the source allowance, so grading stopped before
+tests. No artificial cleanup, trimmed patch, training admission or candidate
+semantic pass is claimed. Evidence: crc-replay-001, crc-replay-grade-001,
+crc-qualification-review-001. The other reviewed CRC traces exceed the current
+40-call source-proxy budget. Move to the next priority task rather than change
+these acceptance rules for a preferred example. Corpus remains two quarantined
+examples / 9,101 supervised tokens. No GPU used; P1 remains incomplete.
+
+
+### NumPyro teacher mathematical screening — 2026-10-09
+
+Reviewed all three extracted NumPyro-1894 teacher source edits before downloading
+the 2.53 GB compressed image. Each adds a singleton special case while retaining
+the incorrect multi-transform recurrence. Exact edited functions disagree with
+independent forward feasibility and the closed-form rank oracle on 17,936 of
+69,904 bounded sequences per trace, despite zero singleton disagreements.
+For CorrCholeskyTransform followed by its inverse, all return input rank 2 where
+rank 1 is sufficient and minimal. The shortest trace changes its diagnostic
+assertion from 1 to 2; preserve that contradiction instead of training on its
+success claim. No native replay, JAX evaluation, tensor-value or Jacobian test
+is claimed. All three held for positive training; image metadata resolved but
+layers not downloaded. Evidence: numpyro-teacher-001, numpyro-teacher-math-001,
+numpyro-image-001. Next priority: Verde or civisml task qualification. Current
+corpus remains two quarantined examples / 9,101 targets, not training-approved.
+Pod remains stopped; P1 is incomplete.
+
+
+### Verde contract audit and civisml intake — 2026-10-09
+
+Verde-255 has an issue/evaluator API mismatch: the issue asks for `copy`; all
+three teachers implement it; reference/tests call `copy_jacobian`. Signature
+binding confirms each teacher rejects the evaluator keyword. After parameter
+normalization and docstring removal, all three executable function ASTs match
+the reference. Hold benchmark alignment, not mathematical correctness; no
+renaming, evaluator modification or invented successful replay. Numerical
+change-of-variable derivation and limitations are in verde-contract-review-001.
+
+Reviewed civisml-extensions-22 source edits, which cache CV splits to keep
+prediction rows aligned with target labels. Selected trajectory
+101cfa89-3239-48d5-a2bc-abbbaf09929d for the next native qualification: 40 source
+proxy actions and explicit cleanup of five diagnostic files. This is selection,
+not acceptance. Resolve deterministic changing-fold negative controls, unequal
+fold sizes and sample-weight indexing before admission. Image digest is pinned;
+1,432,048,066 compressed bytes, layers not downloaded. Evidence: civisml-review-001,
+civisml-teacher-001, civisml-image-001. Corpus unchanged; Pod stopped; P1 incomplete.
+
+
+### civisml runtime, deterministic controls and replay preflight — 2026-10-09
+
+Pinned runtime downloaded; Python 3.6.13 / sklearn 0.19.2 imports the task from
+/testbed. Sanitized snapshot independently preserves 22 tracked files, removes
+checked old commits and known oracle paths, and has one parentless commit.
+Original and snapshot controls match every publisher transition: base 53/54,
+reference 54/54. This one stochastic publisher regression is supplemented by a
+deterministic changing-fold mechanism check: base 0/12 aligned, reference and
+all three editor variants 12/12. Checks cover unequal folds, estimator column
+order, training weights, row coverage and meta parameters using real NumPy but
+controlled fitting/job doubles. No model-performance or independence claim.
+
+Cloud-offloaded local files blocked reads. Two owned processes were terminated
+only after identifying blocked reads and dataless files; source_snapshot.py and
+image metadata were restored byte-identically from manifest-verified archives.
+Other hydration races were rejected by inventory checks; successful retries use
+fresh paths. No integrity check was weakened. Evidence includes local restoration
+receipt and retained partial snapshot context; failed extraction attempts created
+no output directories. Successful inputs: civisml-input-004; snapshot build and
+verification: civisml-snapshot-002 / civisml-snapshot-verify-002; controls:
+civisml-controls-001 / civisml-snapshot-controls-002.
+
+Selected teacher replay stopped before container creation: action 8 uses an
+absolute-path grep invocation outside the adapter's reviewed shell form. Next:
+implement/test a narrow command mapping, then native replay, actual-patch grading,
+context audit and rights checks. No training example admitted. P1 remains
+incomplete; Pod stayed stopped. See civisml-replay-preflight-001 and
+civisml-alignment-probes-001 for explicit limitations.
+
+
+### Source grep adapter and civisml native replay — 2026-10-09
+
+Added a narrow standalone `grep -n` mapping for one literal identifier and one
+repository file. It accepts reviewed quoting forms and uses source_path plus
+shell-safe argument rendering; shell operators, extra files, traversal, metadata
+paths and unreviewed patterns reject. Tests compare actual match/no-match
+stdout, stderr and exits. Full CPU suite: 307 tests, 283 passed, 24 skipped.
+Initial suite had two hydration-related inventory rejections; both logs retained.
+
+Civisml replay 002 completed with 40 charged calls, fresh observations and only
+civismlext/stacking.py in the submitted patch. Actual patch passes 54/54 evaluator
+cases and 12/12 deterministic method-alignment cases (controlled estimator/job
+doubles, not concurrent fitting validation). Observation audit records two
+errors, one explicitly truncated output and 31 unspecified truncation statuses;
+these are preserved rather than relabeled successful.
+
+Untruncated native history has 84 messages / 41 exchanges, 40,688 input tokens
+and 10,867 supervised targets. With the 8,192 output reserve this needs 48,880
+context tokens, exceeding the current 32,768 limit by 16,112. Token export
+rejected; no tokens were silently dropped. Admission 004 holds this otherwise
+passing candidate for context fit; it is not added to the corpus. Next: assess
+an explicit, generally applicable observation-budget policy or select fitting
+trajectories; any changed replay needs fresh observations and requalification.
+Evidence: civisml-replay-002, civisml-grade-002, civisml-candidate-alignment-002,
+civisml-history-003, civisml-tokens-004, civisml-admission-004 and
+source-grep-regression-001. Corpus unchanged; P1 incomplete; Pod stopped.
+
+
+### Civisml context-policy analysis — 2026-10-09
+
+Verified swegemma 0.2.10's command cap (5,000 characters per stream), separate
+file limits, missing explicit command-truncation flags and duplicated error
+stream payloads. Counterfactual tokenization leaves all actions intact and caps
+tool payloads only in memory; no altered history/tokens were emitted for training.
+Command cap 1,024 plus file cap 2,000 still needs 33,681 tokens including reserve.
+Only the tested 512/2,000 policy fits (30,911 total), but information sufficiency
+and adaptive repair quality are unverified. Do not lower limits solely to admit
+this case. Current policy and corpus remain unchanged.
+
+A future generally applicable observation policy must preserve recoverable full
+outputs, explicitly report truncation, be checked against harness compatibility,
+and pass multi-task information/repair evaluation using fresh executions. Long
+assistant diagnostic scripts also contribute to cost. Evidence and decision:
+civisml-context-analysis-001. Continue independent fitting-data qualification;
+this is not a Runpod blocker. P1 remains incomplete; Pod remains stopped.
+
+
+### Geomet native qualification and context gate — 2026-10-09
+
+Reviewed three geomet-101 teacher repairs. All follow the issue's suggested
+truthiness-based SRID override. Bounded extracted-function probes cover six
+geometry types, five metadata conditions and omitted/None/positive overrides:
+base 60/90, reference and each teacher 90/90. Coordinates and input nonmutation
+are checked. Separate explicit-zero probes expose a difference: reference 30/30,
+teachers 0/30. Do not equate this with a valid-CRS claim; zero-domain contract
+remains unresolved. No projection/reprojection validity is asserted.
+
+Pinned image and sanitized snapshot qualify: 36 tracked files, one parentless
+commit, old commits/known oracle paths inaccessible in the mounted filesystem.
+Original/snapshot publisher controls agree: base 19/23, reference 23/23.
+Trace 8f942217-d0bf-4856-9387-3151dcc1df24 replays with 39 charged calls and
+explicit diagnostic cleanup. Submitted patch contains only geomet/esri.py,
+passes 23/23 tests, and yields exactly the source bytes used in semantic probes.
+Observation audit: two errors, two explicit truncations, 29 unspecified statuses.
+
+History: 82 messages / 40 exchanges; 34,811 input tokens, 8,494 targets.
+With reserve, context need is 43,003, so mechanical admission rejects it. No
+training token export or corpus addition. Evidence: geomet-precedence-probes-001,
+geomet-snapshot-verify-001, geomet-snapshot-controls-001, geomet-replay-001,
+geomet-grade-001, geomet-candidate-source-001, geomet-tokens-001, geomet-admission-001.
+
+Repeated context failures motivate an explicit turn-level SFT investigation:
+keep the full causal prefix through a selected assistant action, supervise only
+that action, and exclude later observations/outcomes. Such examples must be
+labeled partial trajectories, not complete successful episodes. Qualification
+must verify valid exchange boundaries, token/label identity, no duplicated target
+counting across overlapping prefixes, task-level split grouping and complete
+coverage accounting for omitted long-prefix actions. No observation cropping or
+teacher-action rewriting is authorized by this proposal. Compare usefulness
+before replacing the full-trajectory corpus format. Current corpus remains two
+quarantined examples / 9,101 targets; P1 incomplete; Pod stayed stopped.
+
+### Experimental action supervision audit — 2026-10-09
+
+Implemented `zenithsync/action_training.py` and `scripts/audit_action_training.py`.
+Each selected action receives its complete causal prefix, with every earlier
+assistant label masked. Future outcomes are excluded. Complete source histories
+must validate first; partial examples explicitly end at a pending tool call.
+The pinned native tokenizer verifies unchanged serialization, token identities,
+assistant spans and context boundaries. The audit additionally requires action
+labels to partition the full-history target positions exactly, without overlap.
+No token arrays are exported and no training admission is granted.
+
+| History | Fitting / all actions | Fitting / all unique targets | Repeated input tokens for fitting prefixes |
+| --- | ---: | ---: | ---: |
+| geomet | 24 / 40 | 4,921 / 8,494 | 344,145 |
+| civisml | 27 / 41 | 7,448 / 10,867 | 296,504 |
+| easyptvsd | 31 / 31 | 4,527 / 4,527 | 257,667 |
+| datetransform | 28 / 28 | 4,574 / 4,574 | 220,178 |
+
+All prefixes use input + 8,192 <= 32,768; no observation cropping. Evidence is
+`evidence/data/{geomet,civisml,easyptvsd,datetransform}-action-audit-002/report.json`.
+These are four source histories, not 140 independent tasks. Prefixes must retain
+the source task/repository split. Aggregate token counts do not create new unique
+data. All 140 actions partition 28,462 original targets; fitting prefixes cover
+110 actions / 21,470 targets. Late supervision remains missing from long cases.
+
+For the two already-fitting histories, 477,845 prefix input tokens replace
+29,423 full-history input tokens (about 16.24 times), with the same 9,101 targets.
+This is token-processing overhead, not a measured runtime multiplier. Do not
+replace full trajectories with this format by default. Conditional mathematical
+identity: if each shared position has identical causal model computation, the
+sum of per-action target losses equals the full-history target-loss sum when all
+actions are included. A token-weighted denominator is required; averaging action
+means changes the objective. Dropout, position-dependent kernels, sequence-length
+scaling and floating-point effects mean gradient equivalence has not been proved
+for the deployed model. Excluding long prefixes also changes the training set.
+
+CPU suite: 312 tests, 288 passed, 24 skipped. Five focused tests cover selection,
+causality, mutation isolation, masking and rejection boundaries; real-tokenizer
+checks cover the four histories above. The first datetransform audit rejected a
+file changed during cloud hydration; the unchanged stable receipt-bound retry
+passed. This check was not relaxed. Earlier audit-001 reports remain historical.
+Current corpus remains two quarantined examples / 9,101 targets. No GPU training
+or learned-gain claim. Pod remains stopped; P1 incomplete. Next work must address
+corpus supply and integration without treating partial coverage as completion.
+
+### Additional corpus pilot — 2026-10-09
+
+Pinned NVIDIA [Open-SWE-Traces](https://huggingface.co/datasets/nvidia/Open-SWE-Traces/tree/e192b26a43b8d09f156eeee781aef8e6bd5108ba)
+at `e192b26a43b8d09f156eeee781aef8e6bd5108ba`. The current card declares
+CC BY 4.0 and reports removal of Git-exploit trajectories from its earlier
+release. This is publisher evidence, not our independent exploit/rights audit.
+The [paper](https://arxiv.org/html/2606.16038v1) describes multilingual,
+multi-teacher distillation; its older corpus totals cannot stand in for the
+current pinned revision. Its reported 65,244 successes divided by 207,489 total
+trajectories is about 31.45%, not the nearby claimed 40.6%; the denominator for
+that rate is unclear. We will use row-level measured counts and preserve unknown
+outcomes rather than inherit that aggregate percentage.
+
+Acquired two bounded shards, each matched to publisher size and SHA-256:
+OpenHands/Qwen3.5-122B tail shard 16/17 (43,048,099 bytes) and
+mini-swe-agent/Qwen3.6-27B tail shard 21/22 (40,259,778 bytes), both SWE-rebench-V2.
+Cards and publisher inventories are preserved. Selection was the smallest file
+within each chosen framework/teacher/source, not random sampling. No population
+success or usability estimate follows from these samples.
+
+| Pilot | Rows | Repositories | Publisher resolved / unresolved / unknown | Python rows |
+| --- | ---: | ---: | --- | ---: |
+| OpenHands | 463 | 343 | 90 / 251 / 122 | 76 |
+| mini-swe-agent | 1,035 | 669 | 360 / 593 / 82 | 224 |
+
+Metadata projection reads no trajectory or patch bodies. Both shards contain one
+exact `Textualize/rich` row, reserved by the official task index. Exact reserved
+repository exclusion happens before subsequent body projection. No fork or
+semantic-duplicate clearance is claimed. The new schema still omits explicit
+tool-response IDs; do not silently treat it as native Gemma history.
+
+Inspected only publisher-positive Python histories outside exact reserved repos:
+26 OpenHands, 109 mini-swe-agent. All 26 OpenHands histories pass the existing
+single-pending response-link diagnostic after explicit projection excluding the
+reasoning field (zero reasoning characters in these inspected rows). None fit
+40 source shell/editor calls; the shortest has 54. For mini-swe-agent, 28 of 109
+have <=40 source bash calls; the shortest has 18. These proxies do not establish
+native charged calls, context fit, independent repair correctness or replay.
+No source commands were executed, no reference/model patches were read, and no
+training examples were admitted. These counts are not new independent tasks
+across all existing datasets; cross-source overlap remains to be measured.
+
+Extended the metadata auditor with an explicit Open-SWE-Traces schema branch.
+Two isolated-data-runtime tests cover both schemas, projection behavior, unknown
+labels and rejection of boolean/out-of-range/null outcomes. Evidence:
+`open-swe-{openhands,mini}-metadata-001`, `open-swe-pilot-screen-001`.
+
+Decision: investigate mini-swe-agent terminal/bash semantics and the pinned V2
+task/runtime join before bulk download. Do not expand the demonstrated expensive
+OpenHands tail-shard route without a broader metadata/token screen. Preserve the
+same replay, quality, attribution and split requirements. Current approved
+training supply has not increased; corpus 005 remains two quarantined examples.
+Pod remains stopped and P1 remains incomplete.
+
+Regression: 314 tests, 288 passed, 26 skipped in the CPU environment; the two
+new PyArrow-dependent tests separately passed in the isolated data runtime.
+
+### Mini-swe-agent serialization and V2 task join — 2026-10-09
+
+Added `zenithsync/mini_source_history.py`, a separate source serializer. It accepts
+only the inspected four-field message schema and single bash calls, validates
+command argument shape, preserves assistant text/reasoning and observation text,
+and infers response IDs only with one outstanding call. Parallel, orphan,
+interrupted and duplicate exchanges reject. Unknown fields and malformed
+arguments reject. A final unanswered bash call remains explicitly unanswered;
+its text is not proof of execution, submission or successful repair. No commands
+are run or rewritten by the converter.
+
+Pinned [SWE-rebench-V2](https://huggingface.co/datasets/nebius/SWE-rebench-V2/tree/10483de0f50fe5da545942705a76c6150171af7f)
+at `10483de0f50fe5da545942705a76c6150171af7f`. Acquired its 428,839,266-byte
+Parquet shard with publisher hash/size verification, plus card and LICENSE.
+Only task ID, repository, base commit, image tag, language and license metadata
+were projected for this join. No task problem bodies or reference patches were
+read during this operation. All 28 selected source histories joined uniquely by
+task ID with matching casefold repository names, excluding exact reserved repos.
+Image tags are source metadata, not verified runtime digests or executable tests.
+
+All 28 converted source histories pass the exact pinned Gemma rendering,
+token-identity and assistant-span checks. Sixteen fit input + 8,192 <= 32,768,
+with 99,359 source assistant targets in total. The other twelve are retained as
+context exclusions. All source assistant text is counted, including source
+reasoning embedded in content. The single bash schema, source prompts and
+observations differ from our native nine-tool interface, so these are not native
+training-token counts or new corpus admissions. No token arrays exported.
+Evidence: `evidence/data/mini-source-qualification-001/{receipt,token-report}.json`.
+
+The shortest fitting histories are werkzeug-2971 (11,198 input / 3,853 targets)
+and dbt-snowflake-716 (12,216 / 3,068). Select runtime/replay work by clear issue
+contracts and practical environment requirements, not length alone. Next:
+inspect source shell/session/terminal behavior against the native executor,
+pin candidate container digests, verify pristine source and independent grading,
+then replay with fresh observations and measure native token costs. Larger data
+acquisition remains conditional on this compatibility result.
+
+Four focused converter tests passed. Full CPU suite: 318 tests, 292 passed,
+26 skipped. The first source-token run failed because the evidence script name
+`tokenize.py` shadowed Python's standard library; it was renamed to
+`measure_source_tokens.py`, and all 28 real-history checks then completed.
+Failure and passing logs are retained. Current admitted supply has not increased;
+corpus 005 still contains two quarantined examples. Pod stayed stopped; P1 remains
+incomplete and no learned gain or GPU-fit claim is made.
+
+### Submission contract reconciliation — 2026-10-09
+
+Inspected source command sequences for fitting mini candidates, including
+werkzeug-2971, dbt-snowflake-716 and brutils-python-116. Their source finish reads
+an exported path-selected patch file. The pinned native submit_patch instead
+stages intent-to-add untracked files, captures a baseline diff, then strips
+protected files. Thus a source patch export and native submission are not
+interchangeable: scratch artifacts can enter the native diff.
+
+Added `zenithsync/submission_reconciliation.py`. The planner supports an explicit
+tracked-repair/untracked-scratch profile: the current tracked binary diff must
+already equal the intended patch byte-for-byte; the complete nonignored
+untracked inventory must exactly match individually reviewed scratch paths.
+It rejects staged changes, path traversal, duplicate paths, symlinks and changed
+repair bytes. Returned scratch records contain content hashes and sizes. It
+performs no cleanup, executes no source commands and grants no training approval.
+Scratch designation remains a semantic review responsibility, not a filename
+heuristic. The planner is a point-in-time check, not concurrent-writer protection.
+
+Four disposable-Git tests establish the artifact mismatch, exact patch equality
+after explicit fixture cleanup, mutation-free planning, and rejection boundaries.
+This is not a real task replay. Before integration, any cleanup must appear as
+an adapter-authored native action, with file identities rechecked immediately
+before deletion and actual post-cleanup native submitted patch equality checked.
+Do not call this source-teacher-authored behavior or silently change its repair.
+New-source-file and staged-change reconciliation remain unsupported.
+
+Pinned werkzeug-2971 registry metadata to
+`swerebenchv2/pallets-werkzeug@sha256:6ccc246ac36fe305dd00e85767d1a0d2ec1216d82792a6eac208c573dd7d5439`:
+Linux amd64, 781,021,260 compressed layer bytes. No layers downloaded or runtime
+verified. Evidence: `werkzeug-v2-image-001`, `submission-reconciliation-001`.
+Next: pristine V2 runtime/control qualification and actual native replay with
+explicit submission adaptation; do not accept source labels as repair proof.
+
+Full CPU retry: 322 tests, 296 passed, 26 skipped. Initial run had one failure
+and one error when macOS hydration changed inventory metadata for run_p1_server.py
+and model_intake.py. Stable rereads and the unchanged test suite then passed.
+Both logs retained; integrity checks were not relaxed. P1 remains incomplete,
+corpus 005 unchanged and quarantined, Pod stopped.
+
+### Werkzeug V2 original-image controls — 2026-10-09
+
+Pulled the pinned werkzeug-2971 image. Read-only offline inspection verifies
+HEAD `2139fa0b2cad96053f807384a6d04d8d09717802`, clean tracked/untracked status,
+Python 3.10.19 at `/usr/local/bin/python`, and package origin
+`/werkzeug/src/werkzeug/__init__.py`. The image contains 5,684 reachable commits;
+it is evaluator-only until sanitization. Registry digest remains
+`sha256:6ccc246ac36fe305dd00e85767d1a0d2ec1216d82792a6eac208c573dd7d5439`.
+
+Selected V2 task extraction is evaluator-only. Its problem requests increasing
+the PBKDF2 default to 1,000,000 iterations. Reference changes the constant and
+changelog; the test patch changes the expected default hash prefix. This is a
+historical task contract, not current password-storage guidance or a claim of
+cryptographic security. Source-teacher correctness still requires actual replay
+and additional relevant compatibility checks.
+
+Added `scripts/qualify_rebench_v2.py` with an explicit src-layout Python profile,
+exact task/registry bindings, reserved-repository exclusion and full test-node
+comparison. The shared disposable-container runner now accepts a validated
+absolute interpreter path; its default remains /usr/bin/python3. Existing
+source-bound historical receipts retain their old helper identity; any future
+requalification must use a correspondingly pinned implementation bundle.
+
+Original-image controls (final script, controls-002): base 11/12; reference 12/12;
+all 12 publisher outcome transitions match, no node-ID collisions. Both runs
+import from the declared source and leave their patched tracked diff unchanged.
+Containers were offline and cleanup succeeded. No sanitized image, teacher
+candidate grade or trained model result is claimed.
+
+Three profile/entrypoint tests pass. An initial negative test caught acceptance
+of an absolute test path; validation now rejects absolute, repeated-separator,
+traversal and ambiguous target lists before execution. Full CPU suite: 325 tests,
+299 passed, 26 skipped. Initial and final control directories are retained.
+
+The cloud-backed local V2 Parquet read timed out. Restored the previously
+published 53-file / 431,730,739-byte bundle from R2 into a local /tmp directory;
+restore completed with byte verification. Extraction then used that verified
+copy. This is an additional recovery check, not permission to delete originals.
+Evidence: mini-source-restore-001, werkzeug-v2-{probe,evaluator,profile}-001,
+werkzeug-v2-controls-002 and werkzeug-v2-source-001.
+
+Next: sanitize the V2 root layout, verify exact tree preservation and old-history
+removal, repeat paired controls, then replay the source actions and explicitly
+reconcile submission artifacts. P1 incomplete; current corpus unchanged and
+quarantined; Pod remains stopped.
+
+### Werkzeug V2 exact-tree snapshot — 2026-10-09
+
+Snapshot build/verification supports explicit source roots and interpreter paths;
+legacy /testbed and /usr/bin/python3 defaults remain. The first Werkzeug build
+rejected the ancestry precondition: both PR head and merge objects are absent in
+the publisher image, despite older history being retained. No check was disabled
+silently. Added explicit `already_absent` solution mode, requiring Git's quiet
+commit lookup to return exactly missing-object status with no output. Existing
+commits reject that mode; default ancestry behavior remains. Receipts explicitly
+set `solution_ancestry_verified: false`. Exact declared base and tracked tree
+verification still apply. Absence is not ancestry evidence.
+
+Build 002 produced local image
+`sha256:00b4cc4b5bdbc142374db2ea14e6387094e4fca157e3c50392f7dcb0c1ed1854`.
+Independent offline verification checks all 311 tracked files, their content,
+modes and aggregate manifest against the preserved base tree; one parentless
+commit remains, no remotes, no tracked changes. Original base, PR head and merge
+commits are inaccessible. Declared oracle paths at both /testbed and /werkzeug
+are absent. This covers the mounted filesystem, not arbitrary inherited layers
+or a universal absence-of-oracles claim.
+
+Re-ran original and sanitized-image controls with the same current evaluator:
+base 11/12 and reference 12/12 on each. Exact full-node-ID outcome maps agree
+between images in both roles. Sanitization has not changed these evaluator
+outcomes. This does not grade the teacher patch or establish learned performance.
+Evidence: werkzeug-v2-snapshot-002, werkzeug-v2-snapshot-verify-002,
+werkzeug-v2-controls-003, werkzeug-v2-snapshot-controls-001/original-parity.json.
+Failed build 001 remains preserved.
+
+Six source-snapshot tests pass, including rejection of present solutions in the
+new absence mode and preservation of exact source bytes. Full CPU suite:
+326 tests, 300 passed, 26 skipped. Next: qualify moving /werkzeug into native
+/workspace with dependency and /testbed aliases, replay the selected source
+commands, and test explicit scratch cleanup plus native patch equality. Source
+and native observations must remain distinguished. P1 incomplete; corpus still
+quarantined; Pod remained stopped.
+
+
+### P1 continuation: native V2 replay and independently graded candidate
+
+The selected Werkzeug mini-source trace completed offline native replay in
+werkzeug-v2-replay-001. Its 23 nonterminal source commands remained unchanged;
+the adapter then issued explicit scratch cleanup and native submit_patch.
+There were 24 charged commands and one submission. Four reviewed untracked
+scratch files were removed only after tracked diff and complete untracked-set
+checks. The submitted 1,103-byte patch exactly equals the source-exported patch
+(SHA-256 534f7a271cf231bb692cf9eda4dcff925c8eed7ee55629776a6d51dc7e74da4b).
+The owned container was removed. No model executed, and source observations
+were not reused. /werkzeug and /testbed resolve to native /workspace; the
+preexisting runtime cache was explicitly moved outside the source tree.
+
+Fresh isolated evaluation in werkzeug-v2-candidate-grade-002 verifies base
+11/12, reference 12/12, and candidate 12/12, with identical complete test-node
+coverage and no candidate/reference disagreements. Candidate execution receives
+only its patch and the evaluator test patch, not the reference solution. The
+allowance restricts candidate changes to src/werkzeug/security.py. Patch, replay,
+task and sanitized-image identities are bound and checked. This is one repair
+qualification result, not learned model performance or an independent statistical
+estimate. The initial grader preflight compared the replay snapshot receipt hash
+to the wrong snapshot file; it rejected before starting a container. That binding
+was corrected to receipt.json and both subsequent grading runs completed.
+
+Source command 11 attempts an editable reinstall in a shell pipeline. pip fails
+to fetch build dependencies offline, while the final tail command returns zero.
+The full failure text is retained in fresh observations. Neither the pipeline's
+zero status nor the passing final patch proves installation succeeded. Existing
+source imports remain qualified by independent evaluator origin checks.
+
+Latest CPU suite: 327 tests, 301 passed, 26 skipped. Candidate allowance tests
+reject traversal, metadata, test-file and duplicate allowances. These checks do
+not establish GPU readiness, semantic correctness beyond tested cases, or
+training admission. Native prompt reconstruction, token-budget audit, semantic
+compatibility probes and admission gates remain pending. The corpus remains
+quarantine-only. Keep Runpod stopped; no GPU training was started this cycle.
+
+
+### P1 continuation: portable adapted history and measured token candidate
+
+A portability audit found replay 001's cleanup depended on a support module
+installed only in its disposable container. It remains useful grading evidence,
+but is not the selected training-history replay. The new standalone cleanup
+command embeds the inspected planner and file-identity routine, requires only
+Python standard library and Git, reads the native baseline tag and patch export
+at execution time, and exposes deletion as an adapter-authored native action.
+No helper package is installed or imported on the replay target. Disposable Git
+tests confirm exact patch preservation without an installed project and rejection
+of unknown scratch files before deletion. Point-in-time checks still do not
+protect against concurrent malicious filesystem writers.
+
+Replay 002 completes 24 charged commands plus submission, with fresh tool
+observations and exact intended/native patch equality. Its independent grade 003
+again gives base 11/12, reference and candidate 12/12. The source offline install
+failure remains visible; no source observations or teacher reasoning are copied.
+
+build_mini_replay_history.py produces 52 messages / 25 exchanges. It verifies
+source command order and exact arguments, explicitly maps the two adapter-authored
+suffix actions, requires the reviewed standalone cleanup command, checks task,
+profile and patch identities, and excludes reserved repositories. History 002
+has identical history, mapping and tool bytes to history 001; its receipt adds
+explicit cleanup-profile validation. This is reconstructed conditioning, not an
+original teacher rollout or a newly generated independent example.
+
+Pinned Gemma token audit 002 exports quarantined token/label arrays after native
+nine-tool rendering and collator validation: 12,199 input tokens, 4,607 supervised
+tokens. With the planned 8,192 output reserve, 12,377 tokens remain below 32,768.
+The audit now checks history input identities again after encoding. A retained
+history-validation report binds the identical projection bytes and token report.
+No truncation, GPU fit claim, corpus admission, or learned gain is implied.
+
+Full CPU suite: 331 tests, 305 passed, 26 skipped. Two new history tests cover
+source-response exclusion, provenance and rejection of dropped, changed,
+reordered, misattributed or failed terminal actions. Two additional standalone
+cleanup tests use actual disposable Git repositories. The first history build
+rejected a cloud-backed protocol file whose metadata changed during hydration;
+a stable reread succeeded without relaxing file identity checks.
+
+Next: integrate V2 evidence with mechanical admission, independently probe task
+semantics and compatibility, resolve rights/split/runtime gates, and expand
+qualified task diversity. Three token candidates would still be radically
+insufficient for the planned training scale; this new candidate is not yet in
+the existing two-example quarantined corpus. Keep Runpod stopped. P1 incomplete.
+
+
+### P1 continuation: V2 consistency assessment and corpus 006 round trip
+
+Added a separate V2 mechanical assessment for portable mini-source replays. It
+reconstructs every native exchange and provenance mapping; binds task, profile,
+replay and grading inputs; verifies intended/submitted patch equality; recomputes
+full test-node comparisons from base, reference and candidate outcomes; checks
+execution cleanup and test exit statuses; and checks token/label hashes, causal
+label constraints, exact shifted-target counts and context/call budgets. It does
+not authenticate arbitrary receipts, rerun tokenization, or approve training.
+Five disposable-fixture tests exercise valid-but-unapproved evidence, exceeded
+budgets, patch mutation, concealed candidate failure and changed token labels.
+Werkzeug assessment 002 passes its mechanical checks with remaining gates intact.
+
+Assembled corpus 006 from the two prior exact candidates plus the portable
+Werkzeug candidate: three examples/tasks, 41,622 input and 13,708 supervised
+tokens. All four schema-v2 admission gates remain null. A direct training-purpose
+load fails with "Quarantine corpus cannot train" before any GPU work.
+Manifest SHA-256: 016a17c1d590600f85f9f132dfeb1ae1496a8e8578c1b369e5b83344ae189cf3.
+Content SHA-256: 9fcf14059899acd24d5dd00a3bfc894d793f21649d8dd4ac891acade8df9c318.
+
+The explicit dry-run schedule uses seed 7401, one epoch, 13,708 target tokens,
+and an 8,192-target update cap: three whole-example updates, zero overshoot.
+Published all seven corpus files (460,221 bytes) to R2 and restored them into a
+fresh /tmp directory. The restored loader reports the identical content hash,
+and schedule.json plus updates.jsonl are byte-identical to the local originals.
+This verifies the local R2 ingestion round trip, not execution on Runpod's volume.
+
+Initial candidate inspection and schedule 004 rejected cloud-hydration metadata
+changes. The failed schedule artifacts remain retained; stable rereads and fresh
+schedule 005 succeeded without weakened integrity checks. Latest CPU suite:
+336 tests, 310 passed, 26 skipped. Pod remains stopped. This is still a tiny
+quarantine corpus, far short of abundant approved data or the 3×50M-token plan.
+Next: independent Werkzeug semantic/compatibility checks, V2 rights and split
+review, and systematic expansion to additional source tasks. P1 incomplete.
+
+
+### P1 continuation: independent Werkzeug semantics and source review
+
+The issue's historical contract is a PBKDF2 default of 1,000,000 iterations.
+An evaluator-only probe independently checks that requirement and preserves
+explicit-parameter behavior, legacy 600,000-iteration hash verification, rejection
+of wrong passwords, and the unchanged scrypt default. Inputs include empty,
+ordinary, Unicode and embedded-NUL passwords. Low explicit counts are test cases,
+not recommended password settings.
+
+The small-count oracle implements the HMAC recurrence from
+[RFC 8018 section 5.2](https://www.rfc-editor.org/rfc/rfc8018.html#section-5.2):
+U1 = HMAC(P, S || BE32(i)); Uj = HMAC(P, U(j-1)); each output block is the XOR
+of all c values, and concatenated blocks are truncated to the requested byte
+length. It does not call the standard-library PBKDF2 function internally.
+Two known-answer vectors from [RFC 6070](https://www.rfc-editor.org/rfc/rfc6070.txt)
+and 324 matrix comparisons with hashlib calibrate the oracle, including multi-
+block output and truncation boundaries. Expensive historical/default checks use
+hashlib directly. Shared primitive implementations limit independence; this is
+not a cryptographic security proof.
+
+All three fresh offline runtimes pass 326 oracle-calibration checks. On 55 task
+semantic cases, base passes 48 and fails exactly the seven requested-default
+checks; reference and candidate pass all 55 with identical case outcomes.
+Calibration counts are separate from task-case counts. The deterministic cases
+are not independent statistical samples, and the result is not a learned agent
+success-rate gain. Probe execution leaves tracked source unchanged and owned
+containers are removed. Evidence: werkzeug-v2-semantic-probes-001.
+
+A separate exact-snapshot source capture compares candidate and reference ASTs
+for security.py, excluding only docstrings and source locations. They match;
+base and reference do not. The sole changed function docstring is
+ generate_password_hash, reflecting the new default. This equivalence excludes
+introspection and traceback/source-location behavior and does not establish the
+reference is universally correct. The reference also updates CHANGES.rst;
+the candidate patch does not claim to reproduce that changelog edit.
+Evidence: werkzeug-v2-source-review-001.
+
+Captured the snapshot's tracked LICENSE.txt and copied pinned Open-SWE-Traces
+and SWE-rebench-V2 cards plus the task dataset license into attribution evidence.
+Both dataset cards declare CC BY 4.0; repository notices remain separate. The
+attribution record lists all trajectory transformations and unresolved review
+items. No rights, split, runtime or task-alignment corpus gate is automatically
+approved. No product/training code changed in this cycle, so the previous full
+CPU result remains 310 passed / 26 skipped; the new evaluator probes are reported
+separately. Corpus 006 remains three quarantined examples. Pod stays stopped.
+
+
+### P1 continuation: pipdeptree candidate held after pinned type checks
+
+Reviewed mini-source candidate 168469d9-e93e-438b-9f73-120b2f6f6088 for
+ tox-dev__pipdeptree-310. The issue asks for consistent unconstrained dependency
+version serialization. Resolved the source image to immutable digest
+07746f257fa029380050e8b395ac372c3fd938a598fc05267f1f4dcf0d4c7e2d, acquired it
+locally, and verified its clean declared base
+06c2f9d518f8bd7d8fa7f3520e231cdf15f0cd7f (410 commits, expected src import).
+PR head and merge objects are absent. This image has not been sanitized for
+agent execution; no native teacher replay or publisher test grading occurred.
+
+The trace changes ReqPackage.as_dict to return dict[str, str] but leaves its
+abstract Package method returning dict[str, str | None]. Repository tox.ini
+pins mypy 1.7.1 and pyproject.toml enables strict checking. Prepared exact
+Linux/Python-3.10 mypy wheels (with explicitly pinned supporting packages),
+hash-checked them, and installed them only in an offline disposable evaluator.
+The original image and training/runtime environments were not modified.
+
+Full-source checks under the same checker and installed dependency environment:
+base and reference each have three existing errors; the source-observed teacher
+patch has those plus two new diagnostics: an incompatible override and an unused
+ignore in dag.py. To separate the override from preexisting dependency/type
+issues, extracted only the three relevant class method signatures from each
+patched source and checked them independently: base and reference pass; the
+teacher signature fails with the same override. This is a source-patch screen,
+not a fresh model-generated failure or proof the full reference CI passes.
+
+The type distinction is substantive: mutable dict value parameters are invariant,
+so dict[str, str] is not a subtype of dict[str, str | None] for this override.
+See the [mypy variance explanation](https://mypy.readthedocs.io/en/stable/common_issues.html#invariance-vs-covariance);
+the actual experiment used the repository's 1.7.1 pin, not current documentation's
+release. Runtime success on the reported JSON case would not remove this static
+contract regression. Evidence and decision: pipdeptree-v2-review-001/report.json.
+The candidate remains excluded from positive training data. Corpus 006 is
+unchanged at three quarantined examples / 13,708 supervised tokens.
+
+Added static_controls.py: bounded noncolored mypy output parsing, exact diagnostic
+multiplicity, path/code/message comparison across base/reference/candidate, and
+strict summary/exit-code consistency. Source line movements and diagnostic order
+do not count as new errors. Unknown output and checker infrastructure failures
+reject. Four tests cover new errors amid old ones, line/order invariance,
+duplicate multiplicity, and malformed/fatal/contradictory output. This comparison
+requires independently qualified equal environments and does not grant admission.
+
+Next: move to the next candidate and reuse the source/runtime checks; do not
+silently repair this teacher using the evaluator reference or relabel its
+publisher status as verified correctness. Preserve this counterexample for
+future negative-example or repair-recovery research with explicit provenance.
+Pod remains stopped; no GPU training started. P1 remains incomplete.
+
+
+Static-control cycle validation: full CPU suite 340 tests, 314 passed, 26 skipped.
+The initial run retained one error and one failure caused by cloud hydration
+changing run_p1_server.py and model_intake.py metadata during integrity reads.
+No checker was relaxed; after that run terminated, a fresh complete run passed.
+Both logs are retained in the archived evidence package.
+
+
+### Dynaconf recursive-equality screen (local, pre-admission)
+
+Pinned original image `sha256:d25a589823a03ab10900ae43aeda1c3845b78d97921702ad91138189ef0d0ad6`
+was tested offline at task base `b389b2bbb07b2abb92577e81384f7f939b05c5f5`.
+Compared base, publisher reference, and the exact source-observed teacher patch
+from message 51. This is evaluator screening, not native agent replay.
+
+Enumerated 202 distinct ordered expression trees of depth at most two using
+AND/OR and required-name leaves A/B. Across 40,804 ordered pairs per role,
+structural equality mismatches were base 39,800, reference 448, teacher 0.
+Registering two independently constructed copies of each tree retained 3, 74,
+and 202 entries respectively. Ordered structure is a deliberately conservative
+screening oracle; Boolean-equivalent trees need not be structurally equal.
+These are exhaustive finite cases, not independent statistical trials.
+
+A concrete reference collision is A AND (A AND B) versus A AND (A OR B).
+With A present and B absent, real Dynaconf validation rejects the first and
+accepts the second, yet the reference treats them as equal. All four truth-table
+rows were checked against those Boolean predicates. The teacher distinguishes
+them. This exposes a reference limitation; it does not establish universal
+correctness of the teacher or permission to train from evaluator information.
+
+Evidence: `evidence/data/dynaconf-v2-semantic-screen-001`, reproducible drivers in
+`evidence/data/dynaconf-v2-semantic-source-001`. All roles imported the repository
+package, left tracked source unchanged, and the owned offline container was
+removed. Native replay, publisher tests, lineage/snapshot qualification, token
+admission, and corpus gates remain pending. No training infrastructure changed.
+Corpus 006 remains three quarantined examples / 13,708 supervised tokens.
+Runpod stays stopped. P1 remains incomplete.
+
+
+### Dynaconf native qualification and historical evidence support
+
+Resolved the task's upstream pull request at https://github.com/dynaconf/dynaconf/pull/413.
+The old owner path now redirects to a different mirror repository, whose PR 413
+returns 404. Canonical upstream validator.py at the task base matches the pinned
+image byte-for-byte; this is file-level corroboration, not whole-repository proof.
+The original image is clean at the expected base, with 457 reachable commits;
+PR head and merge objects are absent. Two failed diagnostic runs are retained:
+the diagnostic used the same dictionary key for repository HEAD and PR head.
+Run 003 separates these fields and verifies the expected base correctly.
+
+Built and independently verified sanitized snapshot
+`sha256:4ddee414e4597204acde8b3ebca8cfb550ff1d0bfcafbba95c2b5d17f90acd5a`:
+511 tracked files preserved, one parentless commit, old base/head/merge objects
+inaccessible, known oracle files absent. This verifies the mounted filesystem,
+not inherited Docker layer contents. Original and snapshot publisher outcome
+maps match exactly: base 24/26, reference 26/26.
+
+Native replay 001 completed 26 charged tool calls plus submit_patch, yielding
+the exact source-observed patch. Candidate grading passed 26/26 publisher cases.
+History 001 contains 56 messages / 27 exchanges. Token audit 001 exported
+20,299 input and 6,870 supervised tokens; input plus 8,192 reserve is 28,491,
+below 32,768. Mechanical admission 001 passes without granting training approval.
+One broad source test command fails collection because optional dependencies
+are absent; this error is retained, not transformed into successful verification.
+Native replay is teacher trajectory reproduction, not a newly trained agent result.
+
+The qualifier now explicitly supports src and flat package layouts. Exact
+repository import origin and package-scoped candidate source allowances remain
+required. Historical evidence can explicitly map implementation files to an
+archived source copy with the original hash; mapping data, patches, or receipts
+is prohibited, and unused mappings reject. Existing Werkzeug evidence was
+successfully reassessed with its original archived qualifier in admission 005.
+Two prior attempts stopped on macOS cloud hydration metadata changes; after
+reading the files locally, the unchanged integrity checks passed. The archived
+code is checked as historical evidence; current reconstruction checks still run.
+
+Validation: 13 focused tests pass; complete CPU suite 344 tests, 318 passed,
+26 skipped. No GPU checks ran. Source lineage, snapshot, controls, replay,
+history, token, and admission evidence are under evidence/data/dynaconf-v2-*.
+Dynaconf remains pending final attribution/split/semantic review and assembly;
+corpus 006 is unchanged at three quarantined examples / 13,708 supervised tokens.
+P1 is incomplete; Runpod remains stopped.
+
+
+### Corpus 007: four-task quarantine integration
+
+Added the native Dynaconf replay to the quarantine assembly; preserved MIT
+repository notice, pinned CC-BY-4.0 dataset cards/license and transformation
+notes in dynaconf-v2-attribution-002. Dependency/observation rights and teacher
+service-term coverage remain unapproved. Attribution attempt 001 stopped on a
+cloud-file metadata change; checks were preserved and attempt 002 succeeded.
+
+Current assembly: four examples and four tasks, 61,921 input tokens and 20,578
+supervised tokens. Manifest SHA-256:
+`24b6b11a8a111174eac74631043d2804a32bb83b7584a152fc489a6dbcdd0610`.
+Content SHA-256: `0a0ac1667b6b6e4096f3aabc0a0c932f7da960d4fcc01e61b7e00f4ad4eb3f7c`.
+All four admission gates remain null. Direct purpose=training loading rejects
+with `Quarantine corpus cannot train`; no training ran.
+
+Fresh GitHub metadata resolves four source projects, the old Dynaconf mirror,
+and all four named reserved repositories. No repository-ID or declared
+fork-network overlap is found. The old URL resolves to dynaconf-mirror with fork=false; this metadata alone
+cannot establish historical independence.
+Dynaconf is explicitly grouped under canonical dynaconf/dynaconf in the corpus.
+Final semantic duplicate review, historical/detached-copy grouping, and frozen
+splits remain pending; reserved task bodies were not opened.
+
+Published all nine corpus files (684,444 bytes) to R2 and restored to an empty
+/tmp directory with verified hashes. Restored loader counts and content hash
+match. A one-epoch schedule, seed 7401, target 20,578 supervised tokens and
+8,192-token update cap produces four whole-example updates, zero overshoot.
+Schedule and updates files from restored data match original bytes exactly.
+Schedule attempt 006 stopped on cloud hydration of training_corpus.py; attempt
+007 completed with unchanged integrity checks. No optimizer or GPU ran.
+
+Evidence: training-corpus-assembly-007, publish-007, restore-007,
+restored-inspection-007, schedule-007, restored-schedule-006, denial-005, and
+current-corpus-lineage-002. Code was unchanged this cycle; integration was
+verified by actual assembly, rejection, transfer, restore and schedule replay.
+The latest code suite remains 318 passed / 26 skipped. Four quarantined examples
+are not sufficient for the planned 3x50M candidates; repeated exposure would
+not create additional independent tasks. Continue corpus qualification and
+admission review locally. Keep Runpod stopped. P1 remains incomplete.
+
+
+### Workalendar qualification and corpus 008
+
+Qualified peopledoc__workalendar-493, canonical workalendar/workalendar. Original
+image digest sha256:3837c3917cae0f429c4540fe570a3d9b68d70615e86995b9a2fc9ea62abebb41
+has clean task base 3fd9b831b308f1b0f7e1ca8fffc456ab6bdce56a, 1,008 reachable
+commits and no local PR head/merge objects. Sanitized snapshot
+sha256:5125f7b3193618806b0a734412dd43486b88fed20d94d49c6cc7467e4735076f
+preserves 177 tracked files exactly, one parentless commit, no old base/head/merge
+objects or declared oracle paths. Verification concerns the mounted filesystem,
+not inherited image layers. Original/snapshot publisher outcomes match exactly:
+base 8/11; reference 11/11.
+
+Native replay 002 completed 29 charged calls plus submit_patch; submitted bytes
+match the separately screened teacher patch. Candidate passed 11/11 publisher
+tests. Independent finite checks: base 0/18, reference 18/18, candidate 18/18.
+These cover exact registered/unknown lookups, warning category/count, registry
+nonmutation, subclass delegation and exception propagation, not calendar-date
+correctness or statistical generalization. An unmatched grep and nonexistent
+source-requested pytest node remain errors in the fresh native history. Pipelines
+that truncate test output are not treated as independent full-suite evidence.
+
+History 002 has 62 messages / 30 exchanges. Token audit 001: 20,149 input and
+7,312 supervised tokens; with 8,192 output reserve, 28,341 fits 32,768.
+Mechanical admission 002 passes, without training authorization. Captured the
+MIT repository notice and pinned dataset notices; dependency/observation rights
+and teacher service terms remain pending.
+
+Local Desktop cloud offloading delayed the existing runtime/profile processes.
+Explicit macOS materialization requests allowed them to resume; runtime 001
+then correctly rejected a metadata-changing integrity read. Fresh runtime 002
+passed. Similar integrity rejections preceded successful semantic-screen 002,
+replay 002, history 002, admission 002 and corpus-denial 007. No integrity check
+was relaxed; prior outputs/scripts are retained where written.
+
+Corpus 008: five tasks, 82,070 input / 27,890 supervised tokens. All admission
+gates remain null and purpose=training is rejected. Manifest SHA-256:
+4ced40b5cb89e799a845cd833ae7d34a0c291b170a6a8988f4a028f7e411bf45.
+Content SHA-256: b9b1451ea77f89f9a19d50dbc218976af0a8a456bc65f47cf6fcd6d731f626b9.
+Published 11 files / 905,531 bytes through publish-009; restored and validated
+through restore-008 / restored-inspection-008. One epoch, seed 7401, 8,192-target
+update cap: five whole-example updates, zero overshoot. Original schedule-008
+and restored-schedule-007 schedule/update bytes match exactly.
+
+Metadata-only lineage audit 003 resolves all five source projects, aliases and
+four reserved repositories without known ID/fork-network overlap. This excludes
+neither detached copies nor semantic duplicates. No held-out issue bodies read.
+No shared implementation changes this cycle; the prior 318-passed/26-skipped
+suite is unchanged, not newly rerun. Five quarantined examples remain far below
+the planned training supply. Continue local corpus expansion and gate review;
+Runpod remains stopped and P1 remains incomplete.
+
+
+### PennyLane 5716: independent numerical screen, interface gate still closed
+
+Selected the batched StronglyEntanglingLayers issue from 16 source-context-fitting
+candidates; mini-candidate-priorities-002 records current status and qualitative
+selection rationale. This task adds tensor-shape and quantum-circuit numerical
+coverage. It is not yet a sixth corpus example.
+
+Pinned original image sha256:b41317e4fdf7780cc28d1e5eed4a65e69159331091f6749fde7a92f29c5f4a94
+runs PennyLane 0.37.0-dev on Python 3.10.19 at clean base
+85ff62b9c9218f523ef7ff0535cde7cbf55ebb7b; 4,180 reachable commits,
+PR head/merge absent. Verified sanitized snapshot
+sha256:e60eb0ef6d062901bedc874d4c731c438b7182d707f06704c0382f8c62800f23
+preserves all 1,353 tracked files, one parentless commit, no accessible old
+base/head/merge objects or declared oracle paths. Mounted filesystem only;
+this does not audit inherited image layers.
+
+Independent dense-state oracle constructs RZ(omega) RY(theta) RZ(phi), Kronecker
+operators and explicit computational-basis CNOT permutations, without reusing
+the template/decomposition. Rotation convention follows
+https://docs.pennylane.ai/en/stable/code/api/pennylane.Rot.html; that current
+reference is not a claim about the installed version. Primitive gate calibration
+against the pinned runtime establishes matching conventions before comparison.
+Seed 5716; batch sizes absent/1/2/4, layer counts 1/2/3, wire counts 1/2/3:
+36 cases per version. Reference and source-observed teacher pass 36/36; base
+passes 15/36. Candidate maximum absolute state error is 3.554447978966673e-16,
+with required atol 1e-11 and rtol 0. Norms also checked. These are finite NumPy
+calculations, not independent statistical trials or universal correctness proof.
+
+Screen 002 initially supplied explicit zero ranges for one-wire circuits, which
+this constructor rejects. It therefore recorded 12 probe-input failures for
+both fixes. Screen 003 uses the supported default in these cases; both runs
+are preserved. Other failed attempts stopped on cloud-hydration metadata drift;
+none of the integrity checks was relaxed. Runtime 002 is the completed bound run.
+
+Full publisher-module controls collect 44 tests. Base: 29 pass, 12 fail,
+3 skip; reference: 41 pass, 3 skip. The strict grader rejects skipped controls.
+The skipped tests exercise JAX, TensorFlow, and Torch interfaces, including
+gradients; dependencies are absent. Dependency metadata, repository requirements,
+test source, and skip mechanism captured under pennylane5716-v2-dependencies-001.
+Do not drop these tests or equate 41 passing calls with fully qualified controls.
+Next: derive compatible pinned backend dependencies, install in a separately
+qualified offline runtime, and rerun complete controls and snapshot parity.
+Native source replay, token assessment, attribution and split review remain.
+
+Evidence: pennylane5716-v2-review-001, semantic-screen-003, controls-original-002,
+runtime-002, snapshot-verify-001. Shared implementation unchanged this cycle;
+prior code suite remains 318 passed / 26 skipped, not newly rerun. Corpus 008
+remains five quarantined tasks / 27,890 supervised tokens, all gates pending.
+Runpod stays stopped. P1 remains incomplete.
+
+
+### Corpus 009: PennyLane integration, still quarantined
+
+Six tasks now total 103,227 input / 35,029 supervised tokens. Manifest SHA-256:
+`066260151fe14e4778837b124235a25e013d650a3b542915daae79a5f52dd5b0`.
+Content SHA-256: `23531344ea84e04f3feb260d5ef9b0155f413974088a761837206f807a6a2b58`.
+All four admission gates remain null. Training-denial-008 confirms refusal.
+
+Publish-010 and restore-009 verified 13 files / 1,143,461 bytes. Restored
+inspection-009 validates all six examples. Schedule-010 and restored-schedule-008
+are byte-identical: seed 7401, one epoch, 35,029 supervised tokens, six
+whole-example updates, 8,192-target update cap, zero overshoot. No optimizer or
+GPU execution is implied. Failed schedule-009 stopped on cloud-hydration drift.
+
+PennyLane attribution-001 captures Apache-2.0 repository license, observed-file
+header and pinned dataset notices. Complete rights review remains pending.
+Lineage-004 resolves current canonical repository IDs and declared fork roots
+for six source projects, aliases and reserved evaluation repositories, with no
+overlap. Detached copies, semantic duplicates and historical forks remain outside
+that metadata screen. Native qualification archive verified: 341 files /
+1,988,275 bytes. Earlier backend wheel bundle and snapshot archive are also verified.
+
+Current suite: 323 passed / 26 skipped (349 total); focused control/admission
+suite: 25 passed. Real-corpus GPU training, held-out learned improvement, final
+rights/split approval, and abundant data supply remain unfulfilled. Pod remains
+stopped. Next: archive corpus integration evidence, then expand the qualified
+candidate pool without treating repeated exposure as new data.
+
+
+### Two additional positive-supervision exclusions
+
+Linkding 691 remains outside corpus 009 despite passing mechanical grading.
+Supervision-review-001 binds two exact unsupported claims to assistant tool-call
+commands, which the current loss mask labels: a mock-only test asserts external
+website access, and a permissive exception test claims success without proving
+its requirement. Preserve original evidence; do not silently sanitize the trace.
+A replacement trajectory or separately specified selective-supervision policy
+must be qualified before reconsideration. Its initial qualification archive is
+verified in R2: 147 files / 712,237 bytes.
+
+Scrapy 6897 is held for a reproduced source-candidate type regression. The pinned
+source tox.ini requires mypy 1.14.0 and Python 3.9. Exact extracted constructor
+bodies (with explicit external types) pass for base/reference; candidate fails
+with `Attribute "path" already defined [no-redef]`. Checker executed on local
+Python 3.13 with target 3.9; this is not a full repository or native CI run.
+The source command calls this edit a type-annotation fix, so it is unsuitable
+positive supervision without replacement. No native replay or publisher tests
+were performed for this candidate. See scrapy6897-v2-review-001 and the saved
+checker inputs/results. Priority review 003 records both exclusions. Corpus 009
+remains six quarantined examples / 35,029 supervised tokens; no GPU work started.
+
+
+### Kubernetes client 247: source test acceptance counterexample
+
+The source trace's index-28 integration-test function claims successful URL
+conversion whenever an exception lacks the substring "hostname is invalid".
+An isolated run of its exact class/function definitions accepts both a substitute
+that raises an unrelated RuntimeError and a no-op substitute. A negative control
+with the expected error substring is rejected. No network or repository code
+was executed; this establishes unsound test acceptance, not a broken URL fix.
+
+The candidate is held out of positive supervision because its success-printing
+code would become assistant-call training targets under unchanged replay policy.
+No native history or token arrays have been produced. Preserve the original
+trace and the executable counterexample; do not rewrite it to look successful.
+The evidence can support future error-analysis work, but is not automatically
+approved as negative training data or a preference pair. Priority review 004
+records the hold. Corpus 009 remains unchanged and Runpod remains stopped.

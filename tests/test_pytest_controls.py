@@ -63,3 +63,31 @@ class PairedControlTests(unittest.TestCase):
     def test_candidate_missing_test_is_not_a_partial_score(self):
         with self.assertRaises(ValueError):
             compare_candidate(self.reference, observation({'repair': 'passed'}))
+
+    def test_explicit_extra_regression_preserves_publisher_coverage(self):
+        base = observation({'repair': 'failed', 'backend': 'passed'})
+        reference = observation({'repair': 'passed', 'backend': 'passed'})
+        expected = {'FAIL_TO_PASS': ['repair'], 'PASS_TO_PASS': [],
+                    'FAIL_TO_FAIL': [], 'PASS_TO_FAIL': []}
+        result = compare_controls(base, reference, expected,
+                                  supplemental_pass_to_pass=['backend'])
+        self.assertEqual(result['full_test_count'], 2)
+        self.assertEqual(result['publisher_key_count'], 1)
+        self.assertEqual(result['supplemental_pass_to_pass'], ['backend'])
+        for extras in ([], ['missing'], ['repair'], ['backend', 'backend'], 'backend'):
+            with self.subTest(extras=extras), self.assertRaises(ValueError):
+                compare_controls(base, reference, expected, supplemental_pass_to_pass=extras)
+        for role in ('base', 'reference'):
+            failed = observation({'repair': 'failed' if role == 'base' else 'passed',
+                                  'backend': 'failed'})
+            with self.subTest(role=role), self.assertRaises(ValueError):
+                compare_controls(failed if role == 'base' else base,
+                                 failed if role == 'reference' else reference, expected,
+                                 supplemental_pass_to_pass=['backend'])
+
+    def test_supplemental_declaration_cannot_hide_parameter_groups(self):
+        expected = {'FAIL_TO_PASS': [], 'PASS_TO_PASS': [],
+                    'FAIL_TO_FAIL': [], 'PASS_TO_FAIL': []}
+        cases = observation({'backend[x one]': 'passed', 'backend[x two]': 'passed'})
+        with self.assertRaises(ValueError):
+            compare_controls(cases, cases, expected, supplemental_pass_to_pass=['backend[x'])

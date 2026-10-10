@@ -13,6 +13,15 @@ import shutil
 import subprocess
 
 
+def is_relative_to(path, parent):
+    """Path-component containment compatible with Python 3.7 task images."""
+    try:
+        path.relative_to(parent)
+    except ValueError:
+        return False
+    return True
+
+
 def git(repo, *args, data=None, check=True):
     env = {k: v for k, v in os.environ.items() if not k.startswith('GIT_')}
     env.update({'GIT_CONFIG_NOSYSTEM': '1', 'GIT_CONFIG_GLOBAL': os.devnull,
@@ -41,11 +50,11 @@ def tracked_snapshot(repo):
         path = repo / relative
         if path.is_symlink():
             resolved = path.resolve(strict=True)
-            if mode != '120000' or not resolved.is_relative_to(repo) or '.git' in resolved.relative_to(repo).parts:
+            if mode != '120000' or not is_relative_to(resolved, repo) or '.git' in resolved.relative_to(repo).parts:
                 raise ValueError('Tracked symlink escapes source tree or targets Git metadata')
             content = os.readlink(path).encode('utf-8')
         else:
-            if mode == '120000' or not path.is_file() or not path.resolve().is_relative_to(repo):
+            if mode == '120000' or not path.is_file() or not is_relative_to(path.resolve(), repo):
                 raise ValueError('Tracked file type or path mismatch')
             executable = bool(path.stat().st_mode & 0o111)
             if executable != (mode == '100755'):
@@ -70,7 +79,7 @@ def sanitize(repo, *, expected_base, solution, oracle_paths, solution_relation='
     repo = Path(repo).resolve(strict=True)
     if any(re.fullmatch('[0-9a-f]{40}', value) is None for value in (expected_base, solution)):
         raise ValueError('Expected full Git commit identities')
-    if solution_relation not in ('first_parent', 'ancestor') or expected_base == solution:
+    if solution_relation not in ('first_parent', 'ancestor', 'already_absent') or expected_base == solution:
         raise ValueError('Invalid solution relationship or identical base/solution')
     metadata = repo / '.git'
     if metadata.is_symlink() or not metadata.is_dir():
@@ -82,6 +91,10 @@ def sanitize(repo, *, expected_base, solution, oracle_paths, solution_relation='
     if solution_relation == 'first_parent':
         if git(repo, 'rev-parse', solution + '^').stdout.strip().decode() != expected_base:
             raise ValueError('Solution first parent differs from declared base')
+    elif solution_relation == 'already_absent':
+        absent = git(repo, 'rev-parse', '--verify', '--quiet', solution + '^{commit}', check=False)
+        if absent.returncode != 1 or absent.stdout or absent.stderr:
+            raise ValueError('Solution must be verifiably absent before sanitization')
     elif git(repo, 'merge-base', '--is-ancestor', expected_base, solution, check=False).returncode != 0:
         raise ValueError('Declared base is not an ancestor of solution')
     tree = git(repo, 'rev-parse', 'HEAD^{tree}').stdout.strip().decode()
@@ -94,9 +107,9 @@ def sanitize(repo, *, expected_base, solution, oracle_paths, solution_relation='
     for path in paths:
         if '..' in path.parts:
             raise ValueError('Parent traversal in oracle path')
-        if path == repo or path == metadata or repo.is_relative_to(path):
+        if path == repo or path == metadata or is_relative_to(repo, path):
             raise ValueError('Oracle removal would remove repository or metadata')
-        if any(file == path or file.is_relative_to(path) for file in tracked):
+        if any(file == path or is_relative_to(file, path) for file in tracked):
             raise ValueError('Oracle path overlaps preserved tracked source')
         if path.parent.resolve() != path.parent:
             raise ValueError('Oracle path has symlinked parent')
@@ -136,7 +149,8 @@ def sanitize(repo, *, expected_base, solution, oracle_paths, solution_relation='
     if any(path.exists() or path.is_symlink() for path in paths):
         raise ValueError('Known oracle path remains accessible')
     return {'schema_version': 1, 'base_commit': expected_base, 'source_tree': tree,
-            'snapshot_commit': commit, 'solution_relation': solution_relation, 'tracked_files': len(before),
+            'snapshot_commit': commit, 'solution_relation': solution_relation,
+            'solution_ancestry_verified': solution_relation != 'already_absent', 'tracked_files': len(before),
             'tracked_bytes': sum(row['size_bytes'] for row in before),
             'tracked_manifest_sha256': hashlib.sha256(json.dumps(before, sort_keys=True).encode()).hexdigest(),
             'exact_tree_preserved': True, 'known_oracles_removed': removed,

@@ -109,3 +109,34 @@ path handling bug, which was fixed by resolving and bounding the census director
 to this repository. The successful complete join rechecked every input shard.
 The earlier intermittent metadata-change cause remains unestablished; the strict
 hashing guard has not been weakened.
+
+
+### Full-corpus static replay-budget audit (2026-10-09)
+
+`scripts/audit_corpus_action_budget.py` now audits every pinned shard after
+verifying census/source identities and excluding reserved repository rows
+before trajectory-body deserialization. All 14 shards completed; failed local
+file-read/stability attempts remain recorded in batch directories 001/002.
+Fresh successful outputs were accepted only after stable hashes matched the
+original intake receipts. No stability check was disabled.
+
+`evidence/data/corpus-action-budget-full-001/report.json` reconciles the full
+34,269-row corpus: 73 reserved rows excluded, 34,196 serialization-valid traces
+screened. 4,674 fit the estimated 40 charged-call limit; 4,507 also have none
+of the currently detected adapter flags. These 4,507 traces cover 2,753 distinct
+repository/issue pairs and 913 repositories, not 4,507 independent issues.
+Budget-fit source breakdown: R2E-Gym 1,438; SWE-Gym-Raw 377; SWE-rebench 2,643;
+SWE-Gym 49. The count assumes one charged call per shell/editor action and
+excludes think and finish from that estimate, as in the existing replay planner.
+
+This is replay prioritization only. The flag detector is incomplete; no native
+context fit, correctness, rights clearance, fork/semantic isolation, training
+admission, or 150M-token corpus sufficiency is established. Select future
+replays from this broader pool, with repository/issue-level grouping, rather
+than repeatedly investing only in over-budget example trajectories.
+
+
+Full-corpus action-budget evidence is now R2-published and remotely hash-verified:
+58 files, 13,957,006 bytes. Receipt:
+`evidence/data/corpus-action-budget-publish-001/receipt.json`.
+This verifies storage of the static audit, not replay success or training admission.

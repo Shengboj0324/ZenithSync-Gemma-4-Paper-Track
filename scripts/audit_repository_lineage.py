@@ -33,8 +33,10 @@ def project_repository(obj):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--selection',type=Path,default=ROOT/'evidence/data/replay-selection-002/selected.json',
+                   help='Explicit metadata-only JSON list of selected repositories')
     args=p.parse_args()
-    selected_path=ROOT/'evidence/data/replay-selection-002/selected.json'
+    selected_path=args.selection
     selected=json.loads(selected_path.read_text())
     evaluation_path=ROOT/'evidence/p1/task-index-001/receipt.json'
     evaluation=json.loads(evaluation_path.read_text())

@@ -73,7 +73,7 @@ def capture_adamw_checkpoint(optimizer, named_parameters, *, completed_steps):
     return payload
 
 
-def restore_adamw_checkpoint(optimizer, named_parameters, payload):
+def validate_adamw_restore(optimizer, named_parameters, payload):
     """Reject identity or hyperparameter drift before mutating the optimizer."""
     import torch
 
@@ -88,4 +88,8 @@ def restore_adamw_checkpoint(optimizer, named_parameters, payload):
     saved = {key: value for key, value in payload['optimizer_state']['param_groups'][0].items() if key != 'params'}
     if current != saved:
         raise ValueError('Resume optimizer hyperparameters differ')
+
+
+def restore_adamw_checkpoint(optimizer, named_parameters, payload):
+    validate_adamw_restore(optimizer, named_parameters, payload)
     optimizer.load_state_dict(payload['optimizer_state'])

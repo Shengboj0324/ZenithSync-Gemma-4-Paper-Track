@@ -29,9 +29,15 @@ def assess_replay_bundle(*, attempt: Path, history: Path, grade: Path,
     data = {name: load_json(path) for name, path in paths.items() if name != 'patch'}
     replay, receipt = data['attempt'], data['history_receipt']
     grading, token_report = data['grade'], data['tokens']
+    backend = grading.get('backend', 'r2e_publisher_groups')
+    if backend not in ('r2e_publisher_groups', 'swe_rebench_full_nodeid_reference'):
+        raise ValueError('Unknown grading backend')
+    if backend == 'swe_rebench_full_nodeid_reference' and grading['task'] != replay['instance_id']:
+        raise ValueError('Graded task differs from replay')
+    graded_patch = grading['inputs']['patch'] if backend == 'swe_rebench_full_nodeid_reference' else grading['patch']
     for label, declared, actual in [
         ('replay patch', replay['patch'], identities['patch']),
-        ('graded patch', grading['patch'], identities['patch']),
+        ('graded patch', graded_patch, identities['patch']),
         ('graded attempt', grading['attempt'], identities['attempt']),
         ('history attempt', receipt['attempt'], identities['attempt']),
         ('history events', receipt['events'], identities['events']),
@@ -69,11 +75,14 @@ def assess_replay_bundle(*, attempt: Path, history: Path, grade: Path,
     if token_report['truncated'] is not False:
         raise ValueError('Truncated or unspecified tokenization rejected')
     result = grading['grading']
-    matches = result['all_cases_match_publisher_expectations']
+    match_key = ('all_cases_match_reference' if backend == 'swe_rebench_full_nodeid_reference'
+                 else 'all_cases_match_publisher_expectations')
+    matches = result[match_key]
     if type(matches) is not bool or type(result['case_count']) is not int or result['case_count'] <= 0:
         raise ValueError('Invalid grading result')
-    inconsistencies = any(result[key] for key in
-                          ('disagreements', 'missing_groups', 'unexpected_groups'))
+    consistency_keys = (('disagreements',) if backend == 'swe_rebench_full_nodeid_reference'
+                        else ('disagreements', 'missing_groups', 'unexpected_groups'))
+    inconsistencies = any(result[key] for key in consistency_keys)
     if matches and inconsistencies:
         raise ValueError('Contradictory grading summary')
     blockers = []
@@ -88,6 +97,7 @@ def assess_replay_bundle(*, attempt: Path, history: Path, grade: Path,
     return {
         'schema_version': 1, 'instance_id': replay['instance_id'],
         'trajectory_id': replay['trajectory_id'], 'identities': identities,
+        'grading_backend': backend,
         'policy': {'max_input_tokens': max_input_tokens, 'output_reserve': output_reserve,
                    'max_tool_calls': max_tool_calls},
         'input_tokens': input_count, 'supervised_tokens': supervised,

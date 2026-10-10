@@ -2,10 +2,17 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from zenithsync.source_snapshot import git, sanitize
+from zenithsync.source_snapshot import git, is_relative_to, sanitize
 
 
 class SourceSnapshotTests(unittest.TestCase):
+    def test_containment_uses_components_not_string_prefixes(self):
+        self.assertTrue(is_relative_to(Path('/repo/child'), Path('/repo')))
+        self.assertTrue(is_relative_to(Path('/repo'), Path('/repo')))
+        self.assertFalse(is_relative_to(Path('/repo-other/child'), Path('/repo')))
+        self.assertFalse(is_relative_to(Path('/other/repo'), Path('/repo')))
+        self.assertFalse(is_relative_to(Path('repo/child'), Path('/repo')))
+
     def fixture(self, root):
         root = root.resolve()
         repo = root / 'repo'
@@ -84,6 +91,24 @@ class SourceSnapshotTests(unittest.TestCase):
                          oracle_paths=[oracle], solution_relation='ancestor')
             self.assertTrue(oracle.exists())
             self.assertEqual(git(repo, 'cat-file', '-e', base).returncode, 0)
+
+    def test_already_absent_mode_is_explicit_and_never_claims_ancestry(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, base, present, oracle = self.fixture(Path(tmp))
+            with self.assertRaisesRegex(ValueError, 'verifiably absent'):
+                sanitize(repo, expected_base=base, solution=present,
+                         oracle_paths=[oracle], solution_relation='already_absent')
+            self.assertTrue(oracle.exists())
+            absent = 'f' * 40
+            with self.assertRaises(ValueError):
+                sanitize(repo, expected_base=base, solution=absent,
+                         oracle_paths=[oracle], solution_relation='ancestor')
+            result = sanitize(repo, expected_base=base, solution=absent,
+                              oracle_paths=[oracle], solution_relation='already_absent')
+            self.assertFalse(result['solution_ancestry_verified'])
+            self.assertTrue(result['exact_tree_preserved'])
+            self.assertEqual((repo / 'module.py').read_text(), 'value = 1\n')
+            self.assertNotEqual(git(repo, 'cat-file', '-e', present, check=False).returncode, 0)
 
 
 if __name__ == '__main__':

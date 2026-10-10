@@ -152,3 +152,138 @@ sequence includes those extra tokens or that this context fits training memory.
 Four new tests exercise exact boundaries, overflow, changed patches/mappings,
 contradictory grading and invalid boolean token counts. The local suite ran 190
 tests: 175 passed, 15 skipped. Skipped runtime checks are not passes.
+
+
+## Nodebook material and expanded identity checks — 2026-10-09
+
+Captured all 15 tracked Nodebook source files (78,891 bytes) from the qualified
+snapshot and its Apache 2.0 LICENSE with Copyright 2017 Stitch Fix. Captured
+installed notices for pytest-asyncio 0.24.0 (Apache 2.0), msgpack-python 0.5.6
+(Apache 2.0 notice, INADA Naoki), and pytest 8.3.3 (MIT, Holger Krekel and others),
+which appear in replay diagnostics. Source and dependency notice hashes are
+retained in `swe-rebench-nodebook-rights-material-001`.
+
+`nodebook-file-rights-001` (with the `swe-rebench-` prefix) matches all four direct
+read spans against the captured base or the sequentially applied unique edit.
+One read intentionally returns only lines 1–150 of a 349-line source file.
+Tokenization is untruncated, but that tool observation is truncated; keep the
+two properties distinct. All 22 native shell observations are inventoried;
+three are directory-view adaptations. This is not exhaustive shell-content
+rights clearance. The accompanying ATTRIBUTION.md preserves origin, notices,
+transformations and unresolved scope without changing raw evidence.
+
+The Apache 2.0 terms require preservation of applicable notices and notices of
+modified files; the CC BY terms require attribution and identifying changes.
+Sources rechecked: https://www.apache.org/licenses/LICENSE-2.0 and
+https://creativecommons.org/licenses/by/4.0/. No public redistribution or final
+rights approval is asserted by collecting these materials.
+
+Expanded `audit_repository_lineage.py` to accept an explicit metadata-only
+selection. `swe-rebench-budget-lineage-001` resolves all eight budget-cohort
+repositories plus all four reserved repositories: no canonical-ID or declared
+fork-network-root overlap. Reserved task bodies remain unread. Detached copies,
+semantic duplicates, historical relationships and model pretraining exposure
+are not excluded; a frozen split is still required.
+
+The Nodebook token auditor can now export the actual token/label arrays under
+`--export-tokens`. `swe-rebench-nodebook-token-candidate-001/tokens.json` is an
+unapproved candidate, with pinned tokenizer hashes and linked history/tools.
+Its token and label hashes exactly match the earlier independent count audit;
+the training collator validates 17,353 input positions and 4,183 supervised
+next-token targets with no truncation or label-count disagreement. The current
+GPU worker still uses a synthetic qualification fixture; it has not yet been
+converted into a full corpus trainer. Candidate export is a preparation step,
+not evidence of a trained agent or a sufficient 150M-token campaign.
+
+
+### Rights capture compatibility and restored corpus validation
+
+Datetransform source capture preserves all nine tracked files and MIT license
+(Copyright 2020 Brandon Schabell). The Python 3.7 metadata path now uses the
+installed backport and compatible canonical path-containment checks. Selected
+notices were captured for pandas 1.3.5, NumPy 1.21.6, python-dateutil
+2.9.0.post0, pytz 2025.2 and six 1.17.0. Installed pytest 7.1.2 has no
+discoverable notice. Default capture still rejects this absence; an explicit
+inventory option preserves the missing-notice flag without approving rights.
+Both initial failures and a fresh default-denial check are retained.
+
+The matching pytest 7.1.2 upstream source archive was downloaded from PyPI,
+verified against its published SHA-256, and its LICENSE preserved separately.
+This supplements attribution evidence but does not prove installed Conda build
+identity or complete all dependency/observation rights review.
+
+The 83-file Datetransform replay archive was independently restored from R2.
+The restored two-example corpus validates at the exact original manifest hash;
+both the regenerated schedule and update stream match the original bytes.
+Counts remain 31,479 input / 8,757 supervised tokens and two dry updates.
+Training admission remains false. Evidence: `datetransform-replay-restore-001`,
+`training-corpus-restored-inspect-001`, `training-corpus-restored-schedule-001`.
+
+Current readiness is consolidated in document 39 and linked first from README.
+The latest CPU suite remains 288 tests, 264 passed, 24 skipped. No GPU was used.
+Next: complete attribution and split/admission evidence while expanding corpus
+coverage; do not treat two quarantined examples as sufficient campaign data.
+
+
+### Current repository identity and issue-duplicate audit
+
+Live GitHub metadata resolves Nodebook and Datetransform plus the four reserved
+repositories. No canonical-ID or declared fork-network-root overlap was found
+(`current-corpus-lineage-001`). Reserved task bodies were not read.
+
+New `audit_issue_duplicates.py` verifies the pinned candidate cohort and task
+shards, validates source metadata before reading candidate issue text, and
+records exact UTF-8 hashes separately from whitespace-normalized heuristics.
+It covered all 1,575 candidate tasks and found two exact duplicate pairs:
+Mobly 164/165 and Hidrokit 121/122. Whitespace screening found the same pairs.
+Neither pair includes the current two assembled tasks. Source text equality
+is a grouping/review signal, not proof of task equivalence; case and Unicode
+forms are deliberately not conflated.
+
+`current-corpus-split-review-001` binds the actual corpus, identity audit and
+fingerprint evidence to a validated draft grouping using fork-network IDs and
+exact issue hashes. No training admission or frozen split was created. This
+review does not exclude detached copies, semantic/patch duplication, vendored
+source, unknown hidden evaluation data or model-pretraining exposure. It cannot
+be interpreted as a dataset-wide independence guarantee.
+
+Four new tests cover exact-versus-whitespace equality, case/Unicode separation,
+order independence and duplicate/empty input rejection. The final CPU suite
+ran 292 tests: 268 passed, 24 skipped. Next: complete attribution and task
+review while expanding the qualified corpus, and resolve the final split before
+training. No GPU was used; P1 remains incomplete.
+
+
+### Native observation audit and direct-source attribution
+
+Added reusable replay observation inventory with exact text/result identities,
+root and wrapped command exit codes, explicit truncation flags, and unknown
+status when a flag is absent. It validates event ordering and charged-call
+counts against the completed replay receipt. It does not equate successful
+tool execution or printed test claims with correctness, and does not remove
+failed observations from the training history.
+
+Datetransform: 27 charged calls plus submission; 27 ok results and one error
+(the empty no-match grep result, exit 1). No explicit truncation is reported;
+20 responses have no truncation flag, including response types without file
+content. Nodebook: 35 charged calls plus submission; all report ok, but one
+source read is explicitly truncated and 31 responses have no truncation flag.
+Do not conflate full token serialization with full underlying observations.
+Evidence: `datetransform-observation-audit-001`, `nodebook-observation-audit-001`.
+
+All five Datetransform direct read_file observations match preserved base
+source or sequential unique edits under the native line rendering. Three
+unique edits were checked, including two in a temporary diagnostic script.
+The source attribution record and span hashes are in
+`datetransform-file-rights-001`. This closes direct-read byte correspondence
+for that trace, not arbitrary shell-output rights or semantic equivalence
+to the original teacher's observations. Shell diagnostics and conditioning
+fidelity remain explicit review obligations. No rights or training admission
+was granted.
+
+Six new tests cover missing versus explicit truncation flags, wrapped errors,
+ambiguous/boolean exit codes, event ordering and changed observation hashes.
+Final CPU suite: 298 tests, 274 passed, 24 skipped. The two-example corpus,
+labels and schedules are unchanged; no GPU was used. Next: complete remaining
+attribution and admission review, expand corpus coverage, and qualify GPU
+execution only after the exact candidate bundle is ready.

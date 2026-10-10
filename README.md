@@ -4,12 +4,13 @@ Joint research and execution plan for the Google Gemma 4 Developer Agent Competi
 
 **Adopted direction:** build a complete, trainable Gemma-powered repository engineering agent first, using the competition's supported runtime. Measure its failure profile, train targeted adapters, and add specialist capabilities only when their benefit is demonstrated. The discarded debugging/product hypotheses no longer gate core implementation. Research novelty remains unproved; documents 15–18 are historical evidence, not the current product mandate.
 
-**Status, October 8:** P0 is accepted within its recorded scope; P1 remains partially qualified. A corrected local Requests evaluation records 321 passing tests plus one failure before the generated patch and 322 passing tests after it, with two skips in both cases; hidden-grader parity and broad agent reliability remain unproven. The full Gemma checkpoint also passed one synthetic LoRA update and fresh adapter reload on the H100, with unchanged frozen state and zero reload logit difference. This is compatibility evidence, not a trained competition candidate or a coding-performance gain. Model/R2 recovery is verified. See the [training qualification](docs/32-full-checkpoint-gpu-qualification.md) and [P1 acceptance checklist](docs/26-p1-acceptance-checklist.md).
+**Status, October 9:** P1 remains incomplete. The current assembly contains six quarantined examples and 35,029 supervised tokens (Datetransform, easy-ptvsd, Werkzeug, Dynaconf, Workalendar, and PennyLane); Nodebook remains excluded; none is approved for training. R2 restore, corpus validation and byte-identical deterministic scheduling have been verified for the current assembly. Local training/checkpoint tests and the earlier single synthetic H100 update establish limited implementation compatibility, not full-corpus GPU readiness or a learned coding-performance gain. Keep the Pod stopped while local admission and corpus work continue. See the [current P1 readiness summary](docs/39-p1-current-readiness.md), [recorded H100 qualification](docs/32-full-checkpoint-gpu-qualification.md), and [P1 acceptance checklist](docs/26-p1-acceptance-checklist.md).
 
 ## Reading order
 
 | Document | Purpose |
 | --- | --- |
+| [Current P1 readiness](docs/39-p1-current-readiness.md) | Current evidence, open admission requirements and the next GPU decision |
 | [Pinned public data intake](docs/33-public-data-intake.md) | Acquired shard, measured metadata, conversion gaps and quarantine gates |
 | [Full-checkpoint training qualification](docs/32-full-checkpoint-gpu-qualification.md) | Actual H100 update/reload evidence, memory measurements and remaining long-run gates |
 | [P1 requirements audit](docs/28-p1-requirements-audit.md) | Published phase exit evidence, broader open obligations and measured resource limits |
@@ -55,13 +56,13 @@ The code track currently allows one submission per day and two final selections.
 
 ## First actions for the next round
 
-1. Resolve eligibility, team availability, GPU access, and the cost ceiling.
-2. Use the retrieved, hashed official harness; stage development tasks and audit their validity before baseline evaluation.
-3. Reproduce and package the official baseline; measure full-run time and graph-tool functionality on target-equivalent hardware.
-4. Freeze evaluation partitions before inspecting reference fixes for method development; complete the nearest-prior-art review before asserting novelty.
-5. Use measured failures to choose between reasoning, retrieval, recovery, and tuning interventions; keep a stable code champion throughout.
+1. Complete evidence-backed rights, task-alignment and split review for candidate data; expand beyond the two assembled examples.
+2. Preserve reserved evaluation isolation and reject issue/evaluator mismatches before replay admission.
+3. Qualify the exact admitted corpus and worker bundle locally, including restored bytes, labels, schedule and resume state.
+4. Ask the user to restart Runpod only when the next bounded full-model qualification session is ready; measure long-sequence memory and full-model resume before campaign training.
+5. Compare trained candidates against a frozen baseline and held-out evaluation before claiming gains or novelty.
 
-Both submissions remain planned. The earlier reproduction pilot used hosted Codex inference; P1 subsequently used the user's existing Runpod GPU. Model training and competition submission have not started. Competition rule acceptance was confirmed in the authenticated Chrome session on October 7.
+Both submissions remain planned. The earlier reproduction pilot used hosted Codex inference; P1 subsequently used the user's existing Runpod GPU. Full-corpus post-training and competition submission have not started; a synthetic single-update training qualification has run. Competition rule acceptance was confirmed in the authenticated Chrome session on October 7.
 
 ## Run the foundation checks
 

@@ -22,6 +22,13 @@ from pathlib import Path
 items=[];reports=[];collection_errors=[]
 resource_events=[]
 def pytest_configure(config):
+    session_cache=Path('/audit/session_resources.json')
+    if session_cache.exists():
+        import base64
+        from session_resource_replay import install_session_resource_replay
+        data=json.loads(session_cache.read_text())
+        install_session_resource_replay({url:dict(record,body=base64.b64decode(record['body'],validate=True))
+            for url,record in data.items()},resource_events)
     cache=Path('/audit/resources.json')
     if cache.exists():
         import base64
@@ -63,15 +70,19 @@ try:
             git('apply',*options,'--check',str(patch));git('apply',*options,str(patch))
         if name=='candidate':
             changed=git('diff','--name-only','HEAD','--').decode().splitlines()
-            if any(path!='bmt/toolkit.py' for path in changed):
+            if any(path not in ALLOWED_PATHS for path in changed):
                 raise RuntimeError('Candidate changes outside task-specific source allowance')
-    python='/opt/conda/envs/testbed/bin/python'
-    origin=subprocess.run([python,'-c','import bmt; print(bmt.__file__)'],cwd='/testbed',
+    python=PYTHON
+    origin=subprocess.run([python,'-c','import importlib; print(importlib.import_module('+repr(MODULE)+').__file__)'],cwd='/testbed',
                           capture_output=True,text=True,timeout=30)
     result['import']={'returncode':origin.returncode,'stdout':origin.stdout.strip(),'stderr':origin.stderr}
-    if origin.returncode or origin.stdout.strip()!='/testbed/bmt/__init__.py':
+    if origin.returncode or origin.stdout.strip()!=EXPECTED_ORIGIN:
         raise RuntimeError('Module does not import from task checkout')
     (out/'audit_plugin.py').write_text(PLUGIN)
+    if globals().get('SESSION_RESOURCE_PAYLOAD'):
+        import zlib
+        (out/'session_resources.json').write_bytes(zlib.decompress(base64.b64decode(SESSION_RESOURCE_PAYLOAD)))
+        (out/'session_resource_replay.py').write_text(SESSION_RESOURCE_ADAPTER)
     if RESOURCE_PAYLOAD:
         import zlib
         (out/'resources.json').write_bytes(zlib.decompress(base64.b64decode(RESOURCE_PAYLOAD)))
@@ -82,7 +93,7 @@ try:
     with (out/'pytest.log').open('w') as log:
         test=subprocess.run([python,'-m','pytest','--no-header','-rA','--tb=line','--color=no',
             '-p','no:cacheprovider','-W','ignore::DeprecationWarning','-p','audit_plugin',
-            '--junitxml=/audit/junit.xml','tests/unit/test_toolkit.py'],cwd='/testbed',env=env,
+            '--junitxml=/audit/junit.xml',*TEST_TARGETS],cwd='/testbed',env=env,
             stdout=log,stderr=subprocess.STDOUT,timeout=240)
     result['pytest_exit']=test.returncode
     result['tracked_diff_unchanged_by_tests']=hashlib.sha256(git('diff','--binary','HEAD','--')).hexdigest()==before
@@ -164,6 +175,9 @@ def main():
     results = {}
     for role in (('candidate',) if args.candidate_patch else ('base', 'reference')):
         probe = ('BASE='+repr(base)+'\nTREE='+repr(tree)+'\nROLE='+repr(role)
+                 +'\nPYTHON="/opt/conda/envs/testbed/bin/python"\nMODULE="bmt"'
+                 +'\nEXPECTED_ORIGIN="/testbed/bmt/__init__.py"'
+                 +'\nALLOWED_PATHS=["bmt/toolkit.py"]\nTEST_TARGETS=["tests/unit/test_toolkit.py"]'
                  +'\nPATCHES='+repr(patches)+'\nPLUGIN='+repr(PLUGIN)
                  +'\nRESOURCE_PAYLOAD='+repr(resource_payload)
                  +'\nRESOURCE_ADAPTER='+repr(adapter_path.read_text())+'\n'+PROBE)
