@@ -5,28 +5,28 @@ state; documents 12, 35, 37 and 38 retain detailed development history.
 
 | Requirement | Current evidence | Remaining work |
 | --- | --- | --- |
-| Corpus supply | Twelve quarantined examples across eleven repository groups; 222,446 input / 71,444 supervised tokens | Abundant, diverse, approved corpus; the 3×50M plan is not supplied |
+| Corpus supply | Fourteen quarantined examples across thirteen repository groups; 270,026 input / 84,503 supervised tokens | Abundant, diverse, approved corpus; the 3×50M plan is not supplied |
 | Repair fidelity | Nodebook excluded; Datetransform has added semantic probes; Werkzeug portable replay matches reference on 12/12 publisher tests and 55/55 additional semantic cases | Broader tasks and stronger coverage; teacher replay is not learned performance |
 | Task quality | Narwhals and mypy_extensions mismatches recorded; Dkey held; pipdeptree teacher held for a reproduced type-override regression | Task-by-task alignment evidence for every admitted task |
 | Rights | Exact repository notices and selected dependency notices captured; pytest upstream 7.1.2 notice recovered | Complete observation/dependency attribution review; installed Conda build equivalence is not established |
-| Evaluation isolation | Prior repository ID/fork audit covers eight source projects and aliases; statsmodels and Numkit identity resolution remains incomplete; final grouping review pending | Frozen complete splits, semantic and detached-copy review for the final corpus |
-| Local training implementation | CPU loss/gradient, optimizer, checkpoint, RNG and scheduling tests; latest suite 361 passed / 33 skipped, plus seven focused Session replay tests passed in the requests-enabled environment | GPU/full-model corroboration and long-running stability |
-| Remote ingestion | Corpus 015 published and restored from R2; twelve examples validate; schedule and updates match original bytes | Repeat on the actual Runpod volume with the final admitted bundle |
+| Evaluation isolation | Current ID/fork audit resolves all 13 corpus repository groups, two historical names and four reserved repositories; no cross-boundary ID/network-root overlaps. The old Dynaconf name resolves to a distinct mirror, not an identical repository ID. | Frozen complete splits, semantic and detached-copy review for the final corpus |
+| Local training implementation | CPU loss/gradient, optimizer, checkpoint, RNG and scheduling tests; latest suite 367 passed / 33 skipped, plus seven focused Session replay tests passed in the requests-enabled environment | GPU/full-model corroboration and long-running stability |
+| Remote ingestion | Corpus 017 published and restored from R2; fourteen examples validate; schedule and updates match original bytes | Repeat on the actual Runpod volume with the final admitted bundle |
 | GPU qualification | Earlier single synthetic full-model update/reload only | Real-corpus long-sequence memory, checkpoint/resume, throughput and bounded failure handling |
 | Product performance | No demonstrated learned held-out gain | Train, evaluate and compare against the frozen baseline |
 
 ## Current artifacts
 
-- [Current eleven-example quarantine assembly](../evidence/data/training-corpus-assembly-014/receipt.json)
+- [Current fourteen-example quarantine assembly](../evidence/data/training-corpus-assembly-017/receipt.json)
 - [Semantic probe results](../evidence/data/current-corpus-semantic-probes-001/report.json)
 - [Candidate review and exclusion](../evidence/data/current-corpus-semantic-probes-001/review.json)
-- [Current R2 restore receipt](../evidence/data/training-corpus-restore-014/receipt.json)
-- [Restored corpus inspection](../evidence/data/training-corpus-restored-inspection-014/report.json)
-- [Byte-identical restored schedule](../evidence/data/training-corpus-restored-schedule-013/comparison.json)
+- [Current R2 restore receipt](../evidence/data/training-corpus-restore-017/receipt.json)
+- [Restored corpus inspection](../evidence/data/training-corpus-inspection-017/report.json)
+- [Byte-identical restored schedule](../evidence/data/corpus017-integration-check-001/report.json)
 - [Werkzeug independent semantic probes](../evidence/data/werkzeug-v2-semantic-probes-001/report.json)
 - [Werkzeug computational AST comparison and notice capture](../evidence/data/werkzeug-v2-source-review-001/report.json)
 - [Werkzeug V2 mechanical assessment](../evidence/data/werkzeug-v2-admission-002/report.json)
-- [Quarantined corpus training denial](../evidence/data/training-corpus-denial-013/report.json)
+- [Quarantined corpus training denial](../evidence/data/training-corpus-denial-016/report.json)
 - [Datetransform mechanical assessment](../evidence/data/datetransform-native-admission-001/report.json)
 - [Selected dependency notices and explicit gaps](../evidence/data/datetransform-rights-material-003/report.json)
 - [Matching upstream pytest release notice](../evidence/data/datetransform-pytest-upstream-notice-001/receipt.json)
@@ -2259,3 +2259,304 @@ Corpus 015 additions. Next: review source observations and add explicitly
 attributed assertions where printed checks are insufficient, then verify patch
 alignment and decide quarantine assembly. No training admission or GPU fit is
 established; the Pod remains stopped.
+
+
+## Corpus 016: Optuna completion integration
+
+The current quarantine assembly contains **13 tasks across 12 declared repository
+groups, 243,213 input tokens and 77,114 supervised tokens**. The Optuna history
+uses a completion-derived identity and explicitly attributes the added assertions.
+Its final patch remains byte-identical to the original native submission and
+produces the independently tested candidate source. Errors 32 and 46 remain
+visible; the obsolete ValueError test is not relabeled as passing.
+
+Actual package checks verify 12 supported values without warnings and 8
+unsupported values with UserWarning. An in-memory study visits all six members
+of `{1,2} × {-1,0,1}` once and attains the independently enumerated minimum of
+`x²+y² = 1`. This is finite exhaustive coverage of that grid, not a proof of
+persistent storage, distributed optimization or arbitrary Python types.
+Four source-created scratch files are verified absent. The completed history
+contains 20,767 input and 5,670 supervised tokens, without truncation.
+
+Corpus manifest SHA-256:
+`480acac8206c6b68355799ba1bfef71e87f89f9c2fa642c2659a3298050f3709`.
+Content SHA-256:
+`17d76bdaaa3dbfb2f7da81e454bf10b445aea3a416a0770a4b77368351e41de0`.
+Publish-017 and restore-016 verify **27 files / 2,705,581 bytes**. Inspection-016
+validates the restored corpus. Schedule-017 and restored-schedule-015 are
+byte-identical: seed 7401, one epoch, 12 planned updates, 77,114 supervised tokens,
+zero overshoot and a 9,216-target update cap. No optimizer update was executed.
+Denial-015 retains `Quarantine corpus cannot train`; all admission gates are null.
+
+Evidence: `optuna3545-observation-review-001`, `optuna3545-native-replay-002`,
+`optuna3545-native-history-002`, `optuna3545-tokens-002`,
+`training-corpus-selection-015`, `training-corpus-assembly-016` and
+`corpus016-integration-check-001`, under `evidence/data`.
+Earlier Corpus 015 entries describe the previous assembly.
+
+Next: expand diverse qualified supply and resolve identity, attribution,
+dependency notices and admission. These 77,114 targets do not supply the planned
+50M-token candidates. Full-model GPU readiness and learned coding gains remain
+unproven. The Pod stays stopped.
+
+
+## Next-cohort semantic screening: units, ordering and equality
+
+Three explicit candidates from qualification-batch-current-002 were extracted
+with pinned task/teacher lineage and evaluator-only patches. Base source files
+and licenses were fetched at exact base commits. The executable screen is
+`evidence/data/qualification-triage-source-002/review.py`; its result is
+`qualification-triage-002/report.json`.
+
+- **Climlab 188: hold original teacher.** Its edited longitude-selection branch
+  treats the documented degree input as radians. Five of six concrete degree
+  inputs disagree with conversion to radians; base and reference match all six.
+  The composition test alone can pass under either unit convention and is not
+  sufficient to protect the existing input contract. This is extracted-branch
+  evidence, not full package/xarray execution.
+- **Boltons 205: hold for numeric-type contract review.** Actual extracted keys
+  show teacher and reference both correctly order 0.2/0.9/0.7; the baseline
+  truncates them. The teacher preserves order between 2^53 and 2^53+1 while the
+  reference float conversion collapses them, but the teacher raises TypeError
+  for numeric string '2', accepted previously. Queue backend execution and an
+  explicit accepted-type decision remain necessary.
+- **CloudEvents 172: advance to isolated runtime review.** Eight actual-method
+  cases agree between teacher/reference and reproduce baseline attribute errors.
+  The minimal carrier deliberately does not exercise the real constructor or
+  serialization. Static preflight accepts all 38 charged source actions; no
+  shell form is held. The pinned image has 17 layers / 1,348,086,486 compressed
+  bytes; layers have not been pulled or runtime-qualified in this screen.
+
+These candidates are not additions to Corpus 016. No model performance is
+measured and no admission gate is opened. Next: CloudEvents source isolation,
+paired full-package controls and native observations; preserve both other
+holds rather than infer correctness from passing narrow tests. Pod remains stopped.
+
+
+## CloudEvents 172: verified squash-merge provenance and paired controls
+
+The pinned image matches declared base
+`f39b964209babfbcd6a17502b9873cd87df7e6f0` and initially exposes 143 commits.
+The live PR-head object is absent. Initial snapshot-build-001 correctly rejected
+its ancestry. Inspection found local squash merge
+`ad111ae89ae0ec77f7ba98adaabe3ffcdc3a5325`; merge-verification-002 confirms its
+single parent is the declared base and all three changed files exactly match
+the publisher's reference plus test patches. The initial verification omitted
+the changed test file and failed; both attempts remain retained.
+
+Snapshot-build-002 / snapshot-verify-002 preserve all 71 tracked files, leave one
+parentless commit, and confirm old base/solution objects and declared oracle
+paths inaccessible. Scope is mounted filesystem only, not inherited image
+layers. Image ID:
+`sha256:49e414e9143d2ea496a4f23c8281eb9051c28975cbb78a9eaf7732168408b58a`.
+
+Controls-001 execute all 26 publisher HTTP CloudEvent cases with exact full
+parameter identities: baseline **18 pass / 8 fail**, reference and candidate
+**26 pass**, no candidate/reference disagreements. Source import origin,
+unchanged tracked patch after tests and cleanup of all three containers are
+verified. This is the complete selected test file, not the full repository.
+
+Native replay and observation review are the next gate; the source includes an
+installer attempt that may fail in the offline runtime. Preserve its real
+outcome. Corpus 016 is unchanged and all training admission remains closed.
+Evidence resides under the `cloudevents172-` prefix in `evidence/data`.
+
+
+### CloudEvents native replay and token audit
+
+`cloudevents172-native-replay-001` completes 38 charged source calls and submits
+one 470-byte source patch, SHA-256
+`2b492863db15ee67aae93bb4a8db490d028ed91e32baf7523d4bbf2f9d240723`.
+Container cleanup succeeds. Errors at source indices 16, 18 and 36 are retained,
+including the failed offline Sanic installation and pre-fix reproduction.
+No whole-repository test success is claimed.
+
+`cloudevents172-native-history-003` and `cloudevents172-tokens-003` verify
+**25,495 input / 6,339 supervised tokens** without truncation. Earlier history
+and token attempts stopped on cloud-file hydration metadata changes; their logs
+and partial outputs are retained. Integrity checks were not relaxed.
+
+Next: content review of source assertions, patch-to-controls alignment and any
+explicitly attributed completion needed before quarantine selection. This is not
+a Corpus 016 addition or training approval. GPU/full-model readiness remains
+unproven; the Pod remains stopped.
+
+
+## Corpus 017: CloudEvents finite-relation completion integration
+
+The current quarantine assembly contains **14 tasks across 13 declared repository
+groups, 270,026 input tokens and 84,503 supervised tokens**. The CloudEvents
+history explicitly attributes the added completion; the source-only patch is
+unchanged and produces the independently tested candidate bytes. Source errors
+16, 18 and 36 remain visible, including the failed offline installer.
+
+The actual constructor creates 32 events with explicit IDs/timestamps across
+both spec versions and a subclass without a comparison override. All 1,024
+ordered pairs match independently assigned equivalence classes. Exhaustive
+checking of 32,768 triples covers 512 true transitivity antecedents; 512 ordinary
+non-event directional comparisons also pass. A foreign class override produces
+asymmetric cross-type equality, explicitly refuting a universal symmetry claim.
+The source's untested transitivity heading and nonexistent `__req__` terminology
+are corrected in the separately attributed completion. These finite results do
+not prove equality axioms for arbitrary payloads or overrides.
+
+Completed history: **26,813 input / 7,389 supervised tokens**, no truncation,
+39 charged calls plus submission, six scratch files verified absent.
+Corpus manifest SHA-256:
+`c56ec783fae55397de271abb64312ecc40513e2e586b4b51a1eb64f6baec9a36`.
+Content SHA-256:
+`495829aa7bdb97d64afdd994bac06d76978e7402e5e7fbd3201fce13d26de754`.
+Publish-018 and restore-017 verify **29 files / 2,998,210 bytes**. Inspection-017
+validates the restored corpus. Schedule-019 and restored-schedule-016 are
+byte-identical: seed 7401, one epoch, 13 planned updates, 84,503 supervised tokens,
+zero overshoot and a 9,216-target update cap. Failed schedule-018 is retained;
+it stopped on source-file hydration metadata drift. No optimizer update ran.
+Denial-016 preserves `Quarantine corpus cannot train`; all four gates remain null.
+
+Evidence: `cloudevents172-observation-review-001`,
+`cloudevents172-native-replay-002`, `cloudevents172-native-history-004`,
+`cloudevents172-tokens-004`, `training-corpus-selection-016`,
+`training-corpus-assembly-017`, and `corpus017-integration-check-001`.
+Earlier Corpus 016 entries describe the previous assembly.
+
+Next: expand diverse qualified supply and resolve identity, attribution,
+dependency notices and admission. The corpus is still far below the planned
+training scale; repeated exposure does not add unique evidence. Full-model GPU
+readiness and learned coding gains remain unproven. Keep the Pod stopped.
+
+### Corpus 017: current identity and tracked-notice evidence
+
+The metadata-only lineage audit 007 resolves 15 source names and all four
+reserved repository names. No cross-boundary repository-ID or declared
+fork-network-root overlap was found. This screen does not establish historical
+independence or exclude detached copies, vendoring or semantic duplication.
+No reserved evaluation task bodies were read.
+
+Workalendar's historical and current names share repository ID 14559169.
+The historical `rochacbruno/dynaconf` URL resolves to
+`rochacbruno/dynaconf-mirror`, ID 841020260, whereas `dynaconf/dynaconf` has ID
+40736676. The `historical_aliases` field in identity-binding-001 means URL
+resolution only. Provenance-review-001 makes this distinction explicit. Keep
+both Dynaconf names in one conservative split family pending content and
+historical-lineage review; distinct current IDs are not evidence of independent
+training and evaluation material.
+
+Captured and hash-verified eight tracked license files from five qualified
+images: four Statsmodels notices and one each for Numkit, emcee, Optuna and
+CloudEvents. The original texts and snapshot/runtime bindings are retained in
+`corpus017-notice-capture-001` and the corresponding `*-tracked-notices-001`
+directories. This basename-based capture does not cover every embedded notice,
+dependency, observation, or teacher service term and does not approve training.
+The review driver is `corpus017-provenance-source-001/verify.py`; it validates
+receipt and notice hashes and records both repository identity comparisons.
+
+Corpus 017 remains 14 quarantined examples, 13 declared repository groups and
+84,503 supervised tokens; all admission gates remain unchanged. No model
+training or new GPU validation ran. Expand qualified supply and complete rights,
+split and observation review before GPU admission. The Pod remains stopped.
+
+### Boltons 205: stateful exact-order review, still not admitted
+
+Expanded the earlier lambda-only screen to execute the complete, inspected
+`queueutils.py` source for the base, teacher and publisher-reference variants.
+Both heap and sorted-list backends were checked against a separate dictionary
+oracle: choose the greatest exact `Fraction` priority, breaking ties by the
+oldest surviving insertion counter. Re-adding a task resets that counter.
+The seed-7401 sequences cover add/update, remove (including missing tasks),
+peek/pop, length, final draining and empty-queue defaults. These are deterministic
+finite tests, not independent statistical samples or a universal proof.
+
+For each variant/backend/type family, 250 traces start with two insertions,
+then 40 mixed operations and a final drain. Teacher: 0 failing traces out of
+1,500. Base: 245/250 float traces and 247/250 fraction traces fail per backend;
+large integers pass. Reference: ordinary floats pass, but 207/250 large-integer
+and 200/250 fraction traces fail per backend. Float conversion merges distinct
+exact priorities (including adjacent integers beyond 2^53); the teacher avoids
+that precision loss. Each failing trace stops at its first mismatch.
+
+Numeric string `'2'` remains accepted by base/reference and rejected by teacher
+with TypeError. That is a compatibility difference requiring an explicit task
+contract decision, not evidence that either implementation is universally
+correct. The source teacher's reproduction/edge-case scripts also contain
+printed comparisons that are not assertions; native replay and completion
+review remain necessary.
+
+Evidence: `boltons205-stateful-source-001/verify.py` and
+`boltons205-stateful-review-001/report.json`. Execution uses the standalone
+module's optional-import fallbacks (built-in list), not the publisher image or
+full package. No NaN, infinity or concurrency claim is made. This candidate
+remains outside corpus 017; no admission gates or training totals changed.
+
+### Source issue credential indicators
+
+Added `zenithsync/source_credentials.py` and the bounded, hash-bound
+`scripts/screen_issue_credentials.py` CLI. It scans issue text for selected
+credential-shaped authorization literals, GitHub token prefixes, AWS access-key
+IDs and private-key headers. Diagnostics contain rule names and Unicode
+character positions, never matched values or issue snippets. It does not contact
+credential providers, validate credentials, automatically redact trajectories,
+or certify absence of secrets. Other credential formats and other text fields
+remain outside this screen's coverage.
+
+Screening the 32-row current qualification issue batch found one flagged row
+(index 3, GIScience/openrouteservice-py issue 67), with two authorization-literal
+occurrences. Hold that candidate pending content review and an explicitly
+attributed sanitization decision; do not replay the pasted credential or use it
+for network requests. Raw provenance remains quarantined. Evidence is
+`qualification-credential-screen-001/report.json`; the corpus is unchanged.
+Four focused tests cover formats, safe diagnostics, Unicode locations, short
+placeholders and deterministic ordering. The first broader suite failed two
+file-identity checks during macOS cloud hydration; its log is retained under
+`evidence/p1/source-credential-regression-001/failed-hydration.log`.
+
+Fresh rerun: 398 tests, 365 passed, 33 skipped, no failures. No integrity check
+was weakened. GPU and skipped-environment claims remain unverified.
+
+
+### Credential indicators enforced before native replay
+
+Native teacher replay now scans the decoded source message tree before command
+adaptation or container creation. It checks prompt/observation strings and nested
+action arguments, including separate authorization header key/value fields.
+Detected indicators reject with a value-free error. The gate does not rewrite
+source trajectories and has no implicit bypass; a reviewed sanitized derivative
+would require its own provenance. Only the documented pattern families are
+covered. A pass is not absence-of-secrets certification or training admission.
+
+Real 32-issue batch validation through the replay preflight rejects the one
+previously flagged issue before any execution; 31 have no known indicators.
+Nine focused credential/search tests pass. Full CPU suite: 400 tests, 367 passed,
+33 skipped, no failures. Evidence is `evidence/p1/replay-credential-screen-001`.
+The former replay helper is preserved under
+`artifacts/official/source-replay-before-credential-screen-001`; historical native
+receipts still refer to their original implementation. Future replay receipts
+record the screening module hash. No new native task qualification or training
+was performed; corpus 017 and all admission gates remain unchanged.
+
+### Boltons 205: isolated runtime and native replay
+
+Pinned the publisher image by registry digest and checked its declared source
+base. Snapshot 001 preserves all 112 tracked files exactly, has one parentless
+commit and no accessible original base/solution objects or declared oracle paths.
+Verification concerns the mounted filesystem; inherited image layers are not
+an oracle-removal guarantee. Both publisher queue tests fail on base and pass
+on reference and candidate; all transitions match, and module origin is the
+checked-out package. This remains a two-test publisher control, supplemented by
+the separately scoped exact-order probes above.
+
+Native replay 001 rejected an incorrect profile base (snapshot ID supplied where
+original base provenance was required); its receipt and cleanup are preserved.
+Profile 002 corrects that field without changing the snapshot or replay checks.
+An earlier missing intake-path invocation is also retained. Native replay 002
+completed 29 charged tool calls plus submission, zero tool-error events and
+verified cleanup. Its 459-byte patch hashes to
+`e841d054ff94365dc4958b0587a78b2cbfd6ce3d276ba6f9405bee83733a3266`.
+Applying it and the evaluated candidate patch to the exact source produces
+identical bytes. Three temporary source scripts are absent from the submitted
+patch. No observation-level acceptance is inferred from successful commands.
+
+Evidence: `boltons205-runtime-resolution-001`, `boltons205-snapshot-verify-001`,
+`boltons205-controls-001`, `boltons205-native-002` and
+`boltons205-native-alignment-001`. The candidate remains outside corpus 017
+pending explicit numeric-string compatibility, observation and attribution
+review. No GPU usage, model training or new full-suite claim is made.

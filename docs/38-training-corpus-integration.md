@@ -740,3 +740,85 @@ Next: finish archival of the runtime evidence, expand diverse qualified supply,
 and resolve attribution, repository identity and admission. The corpus remains
 far below the planned training scale. GPU memory fit and learned coding gains
 remain unproven. Keep the Pod stopped during this local work.
+
+
+## Corpus 016: Optuna completion integration
+
+The current quarantine assembly contains **13 tasks across 12 declared repository
+groups, 243,213 input tokens and 77,114 supervised tokens**. The Optuna history
+uses a completion-derived identity and explicitly attributes the added assertions.
+Its final patch remains byte-identical to the original native submission and
+produces the independently tested candidate source. Errors 32 and 46 remain
+visible; the obsolete ValueError test is not relabeled as passing.
+
+Actual package checks verify 12 supported values without warnings and 8
+unsupported values with UserWarning. An in-memory study visits all six members
+of `{1,2} × {-1,0,1}` once and attains the independently enumerated minimum of
+`x²+y² = 1`. This is finite exhaustive coverage of that grid, not a proof of
+persistent storage, distributed optimization or arbitrary Python types.
+Four source-created scratch files are verified absent. The completed history
+contains 20,767 input and 5,670 supervised tokens, without truncation.
+
+Corpus manifest SHA-256:
+`480acac8206c6b68355799ba1bfef71e87f89f9c2fa642c2659a3298050f3709`.
+Content SHA-256:
+`17d76bdaaa3dbfb2f7da81e454bf10b445aea3a416a0770a4b77368351e41de0`.
+Publish-017 and restore-016 verify **27 files / 2,705,581 bytes**. Inspection-016
+validates the restored corpus. Schedule-017 and restored-schedule-015 are
+byte-identical: seed 7401, one epoch, 12 planned updates, 77,114 supervised tokens,
+zero overshoot and a 9,216-target update cap. No optimizer update was executed.
+Denial-015 retains `Quarantine corpus cannot train`; all admission gates are null.
+
+Evidence: `optuna3545-observation-review-001`, `optuna3545-native-replay-002`,
+`optuna3545-native-history-002`, `optuna3545-tokens-002`,
+`training-corpus-selection-015`, `training-corpus-assembly-016` and
+`corpus016-integration-check-001`, under `evidence/data`.
+Earlier Corpus 015 entries describe the previous assembly.
+
+Next: expand diverse qualified supply and resolve identity, attribution,
+dependency notices and admission. These 77,114 targets do not supply the planned
+50M-token candidates. Full-model GPU readiness and learned coding gains remain
+unproven. The Pod stays stopped.
+
+
+## Corpus 017: CloudEvents finite-relation completion integration
+
+The current quarantine assembly contains **14 tasks across 13 declared repository
+groups, 270,026 input tokens and 84,503 supervised tokens**. The CloudEvents
+history explicitly attributes the added completion; the source-only patch is
+unchanged and produces the independently tested candidate bytes. Source errors
+16, 18 and 36 remain visible, including the failed offline installer.
+
+The actual constructor creates 32 events with explicit IDs/timestamps across
+both spec versions and a subclass without a comparison override. All 1,024
+ordered pairs match independently assigned equivalence classes. Exhaustive
+checking of 32,768 triples covers 512 true transitivity antecedents; 512 ordinary
+non-event directional comparisons also pass. A foreign class override produces
+asymmetric cross-type equality, explicitly refuting a universal symmetry claim.
+The source's untested transitivity heading and nonexistent `__req__` terminology
+are corrected in the separately attributed completion. These finite results do
+not prove equality axioms for arbitrary payloads or overrides.
+
+Completed history: **26,813 input / 7,389 supervised tokens**, no truncation,
+39 charged calls plus submission, six scratch files verified absent.
+Corpus manifest SHA-256:
+`c56ec783fae55397de271abb64312ecc40513e2e586b4b51a1eb64f6baec9a36`.
+Content SHA-256:
+`495829aa7bdb97d64afdd994bac06d76978e7402e5e7fbd3201fce13d26de754`.
+Publish-018 and restore-017 verify **29 files / 2,998,210 bytes**. Inspection-017
+validates the restored corpus. Schedule-019 and restored-schedule-016 are
+byte-identical: seed 7401, one epoch, 13 planned updates, 84,503 supervised tokens,
+zero overshoot and a 9,216-target update cap. Failed schedule-018 is retained;
+it stopped on source-file hydration metadata drift. No optimizer update ran.
+Denial-016 preserves `Quarantine corpus cannot train`; all four gates remain null.
+
+Evidence: `cloudevents172-observation-review-001`,
+`cloudevents172-native-replay-002`, `cloudevents172-native-history-004`,
+`cloudevents172-tokens-004`, `training-corpus-selection-016`,
+`training-corpus-assembly-017`, and `corpus017-integration-check-001`.
+Earlier Corpus 016 entries describe the previous assembly.
+
+Next: expand diverse qualified supply and resolve identity, attribution,
+dependency notices and admission. The corpus is still far below the planned
+training scale; repeated exposure does not add unique evidence. Full-model GPU
+readiness and learned coding gains remain unproven. Keep the Pod stopped.

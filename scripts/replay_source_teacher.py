@@ -23,6 +23,7 @@ from zenithsync.container_cleanup import cleanup_owned_container
 from zenithsync.source_workspace import prepare_source_workspace
 from zenithsync.trajectory_import import convert_swe_hero_history
 from zenithsync.replay_completion import validate_completion_plan
+from zenithsync.source_credentials import require_no_credential_indicators
 from zenithsync.replay_correction import verify_correction_result
 
 INSTANCE='tornadoweb__tornado-34edd2e8020b42cd16c3dc9a8c0417b9fae1e6d4'
@@ -86,6 +87,7 @@ def adapt_source_search(command, prefix):
 
 
 def preflight(messages, prefix=PREFIX):
+    require_no_credential_indicators(messages)
     actions=[]
     for index,message in enumerate(messages):
         for call in message.get('tool_calls',[]):
@@ -235,6 +237,7 @@ def main():
     if completion is not None and file_record(args.output/'actions.json') != completion['source_actions']:
         raise ValueError('Completion plan source action identity mismatch')
     receipt={'source':identity,'trajectory_id':trace,'instance_id':instance,
+        'credential_screen_source':file_record(ROOT/'zenithsync/source_credentials.py'),
         'profile':profile,'image':image,'script':file_record(Path(__file__)),
         'action_counts':dict(Counter(a['kind'] for a in actions)),
         'training_approved':False,'new_model_evaluated':False,
