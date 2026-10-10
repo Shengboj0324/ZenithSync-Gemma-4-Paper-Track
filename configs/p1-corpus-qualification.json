@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "seed": 7401,
+  "learning_rate": 0.0001,
+  "max_updates": 1,
+  "max_seconds": 900,
+  "max_sequence_tokens": 32768,
+  "max_checkpoint_bytes": 536870912,
+  "max_session_checkpoint_bytes": 1073741824,
+  "max_corpus_bytes": 1073741824,
+  "max_example_bytes": 16777216
+}
