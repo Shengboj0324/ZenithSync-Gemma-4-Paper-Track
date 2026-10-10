@@ -15,6 +15,8 @@ class SourceSearchReplayTests(unittest.TestCase):
             f'grep -rn "GridSampler.*Categorical\\|CategoricalDistribution" {root}/grid.py',
             f'find {root} -name "*.py" | grep -i grid | head -10',
             f'find {root} -name "*.py" -exec grep -l "3534" {{}} \\;',
+            f'find {root} -name "*test*" | grep -E "(cli|find|shell)" | head -10',
+            f'find {root} -name "*.py" -exec grep -l "signac find\\|find.*command" {{}} \\;',
         ]
 
     def test_real_shell_execution_parity_including_no_matches(self):
@@ -23,15 +25,18 @@ class SourceSearchReplayTests(unittest.TestCase):
             mapped = Path(temporary)/'mapped'
             text = ('# Choices for a categorical distribution\n'
                     '# ValueError\n# invalid\n# unsupported\n'
-                    '# GridSampler uses CategoricalDistribution\n# 3534\n')
+                    '# GridSampler uses CategoricalDistribution\n# 3534\n'
+                    '# signac find\n# find any command\n')
             for directory in (source, mapped):
                 directory.mkdir()
                 (directory/'grid.py').write_text(text)
                 (directory/'other.txt').write_text('3534\n')
+                (directory/'test_cli.py').write_text(text)
             for present in (True, False):
                 if not present:
                     for directory in (source, mapped):
                         (directory/'grid.py').write_text('# no matching text\n')
+                        (directory/'test_cli.py').write_text('# no matching text\n')
                 for command in self.commands(str(source)):
                     with self.subTest(command=command, present=present):
                         adapted = adapt_source_search(command, str(source))
@@ -57,6 +62,8 @@ class SourceSearchReplayTests(unittest.TestCase):
             f'grep -n "$HOME" {root}/grid.py',
             f'find {root} -name "*.py" -exec rm {{}} \\;',
             f'find {root} -name "*.py" -delete',
+            f'find {root} -name "*.py" | grep -E "(cli|$(pwd))" | head -10',
+            f'find {root} -name "*.py" -exec grep -l "signac find\\|`pwd`" {{}} \\;',
         ]
         for command in invalid:
             self.assertIsNone(adapt_source_search(command, root))

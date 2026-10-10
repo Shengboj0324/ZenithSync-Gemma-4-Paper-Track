@@ -1,5 +1,9 @@
 # Continuous implementation and acceptance plan
 
+For current acceptance status, see [Current P1 readiness](39-p1-current-readiness.md).
+Append new cycle records to the [implementation journal](40-p1-implementation-journal.md);
+the historical cycle records in this plan remain preserved.
+
 Updated October 8, 2026. **Living plan; user adopted a foundation-first, trainable Gemma agent. P0 is accepted within its recorded scope. P1 has real GPU inference and submitted-patch evidence, but is not fully accepted; training has not started.** Codex owns implementation, mathematical design, engineering, tests, analysis, and evidence preparation. The entrant supplies account access, eligibility decisions, and resource authorization. This document governs cycle cadence; [platform specification and handoff](19-agent-platform-and-model-handoff.md) governs the current build, [joint strategy](11-code-track-and-joint-strategy.md) governs competition constraints, and [evaluation protocol](05-evaluation-protocol.md) governs experiments.
 
 The objective is a reproducible, competitive repair agent with defensible research results. Mathematical sophistication must improve a justified objective or explain observed behavior. No fabricated results, task-specific answer lookup, leaked reference patches, or cosmetic chat interface presented as a working system. Explicit configuration constants and clearly labeled synthetic test fixtures are legitimate; hardcoded benchmark outcomes are not.
@@ -2992,3 +2996,29 @@ Next: expand diverse qualified supply and resolve identity, attribution,
 dependency notices and admission. The corpus is still far below the planned
 training scale; repeated exposure does not add unique evidence. Full-model GPU
 readiness and learned coding gains remain unproven. Keep the Pod stopped.
+
+
+### Corpus 018: fifteen-task quarantine integration
+
+Added only the explicitly attributed Boltons compatibility derivative. Current
+assembly: **15 examples, 15 tasks, 14 repository groups, 289,750 input tokens and
+90,869 supervised tokens**. Manifest SHA-256:
+`3c26a771de1a2d2f5a5f98b75d5a3cb6d5adcadb426754f89a6ca3a98f7f4109`.
+Content SHA-256:
+`cda219ef9998fe0b138c6cbe4f86b843b1daaea24f420a1e5597d8c69c17f01d`.
+All four admission gates remain null; training-purpose loading explicitly rejects
+with `Quarantine corpus cannot train`.
+
+Published and restored 31 files / 3,216,759 bytes through R2. Restored token and
+content identities match. Original and restored schedule/update files are
+byte-identical: seed 7401, one epoch, 14 planned updates, 9,216 target-token update
+cap, 90,869 targets and zero overshoot. This is a schedule, not optimizer execution.
+Lineage audit 008 resolves all 14 declared repository groups, two historical
+names and four reserved names, with no cross-boundary ID/network-root overlap.
+Detached copies, semantic duplication and hidden evaluation independence remain
+unproven; the Dynaconf mirror distinction remains explicit. No evaluation bodies
+were read. Evidence binding: `corpus018-integration-check-001/report.json`.
+
+The 3x50M processed-target-token campaigns are still not supplied by an abundant,
+approved corpus. No training or GPU use occurred. Continue diverse qualification,
+attribution and split review; keep the Pod stopped.

@@ -57,6 +57,8 @@ def adapt_source_search(command, prefix):
     phrase = r'[A-Za-z_][A-Za-z_0-9]*(?: [A-Za-z_0-9]+)*'
     branch = r'[A-Za-z_][A-Za-z_0-9]*(?:\.\*[A-Za-z_0-9]+)?'
     alternatives = branch + r'(?:\\\|' + branch + r')*'
+    find_branch = branch + r'(?: [A-Za-z_0-9]+)*'
+    find_alternatives = find_branch + r'(?:\\\|' + find_branch + r')*'
     quoted = lambda pattern: r'(?P<quote>["\'])' + pattern + r'(?P=quote)'
     glob = r'[A-Za-z0-9_.*?-]+'
     patterns = (
@@ -67,6 +69,10 @@ def adapt_source_search(command, prefix):
         + r' \| grep -i [A-Za-z_][A-Za-z_0-9]* \| head -[1-9][0-9]?',
         r'find ' + path + r' -name ' + quoted(glob)
         + r' -exec grep -l "[A-Za-z0-9_]+" \{\} \\;',
+        r'find ' + path + r' -name ' + quoted(glob)
+        + r' \| grep -E "\([A-Za-z_]+(?:\|[A-Za-z_]+)+\)" \| head -[1-9][0-9]?',
+        r'find ' + path + r' -name ' + quoted(glob)
+        + r' -exec grep -l "' + find_alternatives + r'" \{\} \\;',
     )
     for pattern in patterns:
         match = re.fullmatch(pattern, command)
